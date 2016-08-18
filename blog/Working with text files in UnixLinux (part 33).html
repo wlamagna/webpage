@@ -1,0 +1,14 @@
+<html>
+<head>
+<title>Working with text files in UnixLinux (part 33)</title>
+<link rel="stylesheet" type="text/css" href="css/blogstyle.css">
+</head>
+<body>
+<script language="javascript">
+window.parent.document.title = "Working with text files in UnixLinux (part 33)";
+</script>
+<div id="section"><p id="postTitle">Working with text files in UnixLinux (part 33)</p>
+<p><span style="font-family: Verdana,sans-serif;">Another complex combination.&nbsp; To list line numbers on a file the cat command has an option, but the &quot;nl&quot; command has multiple formating options, something that the &quot;cat&quot; command doesnt.</span><br style="font-family: Verdana,sans-serif;" /><br style="font-family: Verdana,sans-serif;" /><span style="font-family: Verdana,sans-serif;">The -n specifies a format and &quot;rz&quot; right justifies with not leading zeros.</span><br /><br /><span style="font-family: &quot;Courier New&quot;,Courier,monospace;">cat sourcefile.php | nl -n rz</span><br /><br /><span style="font-family: Verdana,sans-serif;">To see the last 3 lines of any text file use tail:</span><br /><span style="font-family: &quot;Courier New&quot;,Courier,monospace;">cat sourcefile.php | tail -n1</span><br /><br /><span style="font-family: Verdana,sans-serif;">To see how many lines a file has, combine them both:</span><br /><span style="font-family: &quot;Courier New&quot;,Courier,monospace;">cat sourcefile.php | nl -n rz | tail -n1</span><div style="clear: both;"></div>
+<b>Published: Monday, September 28, 2009</b>
+<hr>
+</body></html>

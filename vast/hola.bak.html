@@ -1,0 +1,214 @@
+<html>
+
+<head>
+<script src="jquery.js"></script>
+<script language="javascript">
+var flag = 1;
+var items_mandar = "";
+function graficar(ancho, alto, segx, segy, intra_seg) {
+	var c=document.getElementById("myCanvas");
+	var ctx=c.getContext("2d");
+	if (flag) {
+		flag = 0;
+		c.addEventListener("click", function(e) {
+	 		devolver_item(ancho, alto, segx, segy, intra_seg, e.pageX - c.offsetLeft, e.pageY - c.offsetTop, items_mandar);
+		}, false);
+	}
+	var p1 = (ancho / segx);
+	var p2 = (alto / segy);
+	var p3 = (p1 / intra_seg);
+	var i, j;
+	ctx.beginPath();
+	ctx.lineWidth=0.5;
+	ctx.strokeStyle="Black";
+	// Grafico lineas verticales
+	for (i=0; i<=(ancho+1); i=i+p1) {
+		ctx.moveTo(i,0);
+		ctx.lineTo(i,alto);
+	}
+	// segmentos verticales
+	for (i=0; i<=(alto+1); i=i+p2) {
+		ctx.moveTo(0,i);
+		ctx.lineTo(ancho,i);
+	}
+	ctx.stroke();
+
+//	ctx.beginPath();
+//	ctx.strokeStyle="Orange";
+/*	for (i=0; i<ancho; i=i+p1) {
+		for (j=i; j<(i+p1); j=j+p3) {
+			ctx.moveTo(j, 0);
+			ctx.lineTo(j, alto);
+		}
+	}
+	ctx.stroke();
+*/
+}
+
+<!-- ancho,alto, segmentos x, segmentos y, fila (persona), --!>
+function poner(ancho, alto, segx, segy, intra_seg, fila, bloque, item, intensidad, co) {
+	var c=document.getElementById("myCanvas");
+	var ctx=c.getContext("2d");
+	var p1 = (ancho / segx);
+	var p2 = (alto / segy);
+	var p3 = (p1 / intra_seg);
+	var p4 = (ancho / (segx * intra_seg));
+	var x = (((bloque-1)*p1)+(p3*(item-1)));
+	var y = (fila-1)*p2;
+	ctx.globalAlpha=intensidad;
+	ctx.fillStyle = co;
+	ctx.beginPath();
+	ctx.fillRect(x,y,p4,p2);
+	ctx.globalAlpha=1;
+}
+
+function devolver_item(ancho, alto, segx, segy, intra_seg, posx, posy) {
+	var c=document.getElementById("myCanvas");
+	var ctx=c.getContext("2d");
+	var lugar_x = ((posx*segx)/ancho)+1;
+	var lugar_y = ((posy*segy)/alto)+1;
+
+	var p1 = (ancho / segx);
+	var p2 = (alto / segy);
+	var p3 = (p1 / intra_seg);
+	var p4 = (ancho / (segx * intra_seg));
+	//var x = (((bloque-1)*p1)+(p3*(item-1)));
+	//var y = (fila-1)*p2;
+	var sub_x = posx-((parseInt(lugar_x)-1)*p1);
+	var segmento_x = parseInt((sub_x / p3))+1;
+
+	var sub_y = posy-((parseInt(lugar_y)-1)*p2);
+	var segmento_y = parseInt((sub_y / p4)) + 1;
+	window.open('hola2.html?hora=' + segmento_x + '&dia=' + segmento_y + "&i=" + items_mandar, '_blank');
+}
+
+
+function agregar(sel, ancho, alto, segx, segy, intra_seg , c) {
+	$.getJSON( "data/test" + sel + ".json", function( data ) {
+		var maximo = 0;
+		$.each(data, function(key, val) {
+			if (val > maximo) {
+				maximo = val;
+			}
+		});
+		var intensidad = 0;
+		$.each(data, function(key, val) {
+			var res = key.split(",");
+			// <!-- ancho,alto, segmentos x, segmentos y, fila, bloque horizontal, item dentro del bloque--!>
+			intensidad = (val/maximo);
+			poner(ancho, alto, segx, segy, intra_seg, (res[0]-5), res[1], res[2], intensidad, c);
+		});
+	});
+}
+
+function contar() {
+	var i = 1;
+	var c=document.getElementById("myCanvas");
+	var ctx=c.getContext("2d");
+
+	ctx.clearRect(0, 0, c.width, c.height);
+	graficar(1300, 200, 24, 14, 10);
+
+var colores = [
+'#8dd3c7',
+'#ffffb3',
+'#bebada',
+'#fb8072',
+'#80b1d3',
+'#fdb462',
+'#b3de69',
+'#fccde5',
+'#d9d9d9',
+'#bc80bd',
+'#ccebc5',
+'#ffed6f',
+'#a6cee3',
+'#1f78b4',
+'#b2df8a',
+'#33a02c',
+'#fb9a99',
+'#e31a1c',
+'#fdbf6f',
+'#ff7f00',
+'#cab2d6',
+'#6a3d9a',
+'#ffff99',
+'#b15928',
+'#a50026',
+'#d73027',
+'#f46d43',
+'#fdae61',
+'#fee08b',
+'#ffffbf',
+'#d9ef8b',
+'#a6d96a',
+'#66bd63',
+'#1a9850',
+'#106830',
+'#ffffff',
+'#ff0000',
+'#00ff00',
+'#0000ff' ];
+	items_mandar = "";
+	for(i = 1; i < 40; i++) {
+		if (document.getElementById(i).checked) {
+			agregar(i, 1300, 200, 24, 14, 10, colores[(i-1)]);
+			items_mandar = i + "," + items_mandar;
+		}
+	}
+}
+</script>
+</head>
+<!-- ancho, alto, segmentos x, segmentos y, intra_segments x  --!>
+<body onload="graficar(1300, 200, 24, 14, 10)">
+
+<canvas id="myCanvas" width="1300" height="200" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+<br />
+<table border=1><tr><td>
+<input type="checkbox" id="1" onClick="contar();">Bean There Done That<br />
+<input type="checkbox" id="2" onClick="contar();">Abila Scrapyard<br />
+<input type="checkbox" id="3" onClick="contar();">Albert's Fine Clothing<br />
+<input type="checkbox" id="4" onClick="contar();">Coffee Shack<br />
+<input type="checkbox" id="5" onClick="contar();">Kronos Mart<br />
+<input type="checkbox" id="6" onClick="contar();">Roberts and Sons<br />
+<input type="checkbox" id="7" onClick="contar();">General Grocer<br />
+<input type="checkbox" id="8" onClick="contar();">Carlys Coffe<br />
+<input type="checkbox" id="9" onClick="contar();">Gelatogalore<br />
+</td><td>
+<input type="checkbox" id="10" onClick="contar();">Kronos Capitol<br />
+<input type="checkbox" id="11" onClick="contar();">Maximum Iron and Steel<br />
+<input type="checkbox" id="12" onClick="contar();">Abila Airport<br />
+<input type="checkbox" id="13" onClick="contar();">Ouzeri Elian<br />
+<input type="checkbox" id="14" onClick="contar();">Cups Joe<br />
+<input type="checkbox" id="15" onClick="contar();">Abila Hospital<br />
+<input type="checkbox" id="19" onClick="contar();">Guy's Gyros<br />
+<input type="checkbox" id="16" onClick="contar();">Carlyle Chemical<br />
+<input type="checkbox" id="17" onClick="contar();">Nationwide Refinery<br />
+<input type="checkbox" id="18" onClick="contar();">Coffee Cameleon<br />
+</td><td>
+<input type="checkbox" id="22" onClick="contar();">Katerina's Cafe<br />
+<input type="checkbox" id="20" onClick="contar();">Brew've Been Served<br />
+<input type="checkbox" id="21" onClick="contar();">Frydos Autosupply n' More<br />
+<input type="checkbox" id="23" onClick="contar();">U-Pump<br />
+<input type="checkbox" id="24" onClick="contar();">Jack's Magical Beans<br />
+<input type="checkbox" id="25" onClick="contar();">Hallowed Grounds<br />
+<input type="checkbox" id="28" onClick="contar();">Chostus Hotel<br />
+<input type="checkbox" id="26" onClick="contar();">Ahaggo Museum<br />
+<input type="checkbox" id="27" onClick="contar();">Desafio Golf Course<br />
+</td><td>
+<input type="checkbox" id="29" onClick="contar();">Frank's Fuel<br />
+<input type="checkbox" id="30" onClick="contar();">Brewed Awakenings<br />
+<input type="checkbox" id="31" onClick="contar();">Daily Dealz<br />
+<input type="checkbox" id="32" onClick="contar();">Hippokampos<br />
+<input type="checkbox" id="33" onClick="contar();">Kalami Kafenion<br />
+<input type="checkbox" id="34" onClick="contar();">Shoppers' Delight<br />
+<input type="checkbox" id="35" onClick="contar();">Abila Zacharo<br />
+<input type="checkbox" id="36" onClick="contar();">Octavio's Office Supplies<br />
+<input type="checkbox" id="37" onClick="contar();">GasTech<br />
+<input type="checkbox" id="38" onClick="contar();">Dancin Dolphin<br />
+<input type="checkbox" id="39" onClick="contar();">Stewart and Sons Fabrication<br />
+</td></tr></table>
+
+</body>
+</html>

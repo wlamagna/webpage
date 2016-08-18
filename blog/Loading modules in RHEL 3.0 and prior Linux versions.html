@@ -1,0 +1,14 @@
+<html>
+<head>
+<title>Loading modules in RHEL 3.0 and prior Linux versions</title>
+<link rel="stylesheet" type="text/css" href="css/blogstyle.css">
+</head>
+<body>
+<script language="javascript">
+window.parent.document.title = "Loading modules in RHEL 3.0 and prior Linux versions";
+</script>
+<div id="section"><p id="postTitle">Loading modules in RHEL 3.0 and prior Linux versions</p>
+<p> In RHEL 3.0 when you install a new module you may be tempted to put them in the file modules.conf. This may not work, because the modules are not in the initrd boot image.<br /><br />The solution is to create a new file called /etc/rc.modules which loads the modules, this file do not exist by default, but if you see the file /etc/rc.d/rc.sysinit there you are going to see that it checks for the existence of the file, and if it exists, it executes it:<br /><br /><span style="font-family: courier new;"># Load modules (for backward compatibility with VARs)</span><br /><span style="font-family: courier new;">if [ -f /etc/rc.modules ]; then</span><br /><span style="font-family: courier new;"> /etc/rc.modules</span><br /><span style="font-family: courier new;">fi</span><br /><br />This is the procedure to create the file:<br /><br /><span style="font-family:courier new;">echo &quot;modprobe qla2300&quot; &gt;&gt; /etc/rc.modules</span><br /><span style="font-family:courier new;">echo &quot;modprobe qla2300_conf&quot; &gt;&gt; /etc/rc.modules</span><br /><span style="font-family:courier new;">chmod 700 /etc/rc.modules</span><div style="clear: both;"></div>
+<b>Published: Saturday, June 14, 2008</b>
+<hr>
+</body></html>

@@ -1,0 +1,40 @@
+<html>
+<head>
+<title>Install Libreoffice on Debian</title>
+<link rel="stylesheet" type="text/css" href="css/blogstyle.css">
+</head>
+<body>
+<script language="javascript">
+window.parent.document.title = "Install Libreoffice on Debian";
+</script>
+<div id="section"><p id="postTitle">Install Libreoffice on Debian</p>
+<p>
+Go to <a href="http://www.libreoffice.org/" target="_new">Libreoffice Webpage</a> and download
+the libreoffice package, in my case it was:<br />
+<pre>
+wget http://download.documentfoundation.org/libreoffice/stable/4.4.7/deb/x86_64/LibreOffice_4.4.7_Linux_x86-64_deb.tar.gz
+tar zxvf LibreOffice_4.4.7_Linux_x86-64_deb.tar.gz
+cd LibreOffice_4.4.7.2_Linux_x86-64_deb/
+cd DEBS
+dpkg -i *.deb
+
+---- START OUTPUT ----
+Selecting previously unselected package libobasis4.4-base.
+(Reading database ... 155812 files and directories currently installed.)
+Preparing to unpack libobasis4.4-base_4.4.7.2-2_amd64.deb ...
+Unpacking libobasis4.4-base (4.4.7.2-2) ...
+Selecting previously unselected package libobasis4.4-calc.
+Preparing to unpack libobasis4.4-calc_4.4.7.2-2_amd64.deb ...
+Unpacking libobasis4.4-calc (4.4.7.2-2) ...
+Selecting previously unselected package libobasis4.4-core.
+Preparing to unpack libobasis4.4-core_4.4.7.2-2_amd64.deb ...
+Unpacking libobasis4.4-core (4.4.7.2-2) ...
+...
+---- END OUTPUT ----
+</pre>
+
+
+
+<b>Published: Friday, February 5, 2016</b>
+<hr>
+</body></html>

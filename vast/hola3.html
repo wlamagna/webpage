@@ -1,0 +1,655 @@
+<html>
+
+<head>
+<script src="jquery.js"></script>
+<script language="javascript">
+
+var colores = [
+'#8dd3c7',
+'#ffffb3',
+'#bebada',
+'#fb8072',
+'#80b1d3',
+'#fdb462',
+'#b3de69',
+'#fccde5',
+'#d9d9d9',
+'#bc80bd',
+'#ccebc5',
+'#ffed6f',
+'#a6cee3',
+'#1f78b4',
+'#b2df8a',
+'#33a02c',
+'#fb9a99',
+'#e31a1c',
+'#fdbf6f',
+'#ff7f00',
+'#cab2d6',
+'#6a3d9a',
+'#f2f229',
+'#a15928',
+'#a50026',
+'#fa100b',
+'#aa6140',
+'#0dae61',
+'#fee08b',
+'#ff2fbf',
+'#d9ef8b',
+'#a6d96a',
+'#66bd63',
+'#1a9850',
+'#106830',
+'#f2ff2f',
+'#ff0000',
+'#00ff00',
+'#A00303',
+'#A00303',
+'#0000ff' ];
+
+var flag = 0;
+var items_mandar_s1 = [];
+var items_mandar_s2 = [];
+var data_points_s1 = [];
+var data_points_s2 = [];
+
+var data_points_p1 = [];
+var data_points_p2 = [];
+var items_mandar_p1 = [];
+var items_mandar_p2 = [];
+
+var ancho_places_g = 500;
+var alto_places_g = 8000;
+var items_y = 7;
+//var sub_items_y = 144;
+var sub_items_y = 288;
+var items_x = 45;
+var sub_items_x = 1;
+
+function label_ids (ancho, alto, segx, segy, intra_seg_vert, intra_seg_hor, cnv_name) {
+	var c=document.getElementById(cnv_name);
+	c.width = ancho;
+	c.height = 23;
+	var ctx=c.getContext("2d");
+	// ancho de cada segmento vertical
+	var p1 = parseInt(ancho / segx);
+	// alto de cada segmento horizontal
+	var p2 = parseInt(alto / segy);
+	var p3 = parseInt(p1 / intra_seg_vert);
+	// alto de cada sub segmento horizontal
+	var p4 = parseInt(alto / (segy*intra_seg_hor));
+	// correccion de p2 por puntos decimales:
+	p2 = (p4*intra_seg_hor);
+
+	var num = 1;
+	for (i=1; i<=(p1*segx)+1; i+=p1) {
+		if (num % 2) {
+			ctx.fillText(num, i,10);
+		} else {
+			ctx.fillText(num, i,20);
+		}
+		num += 1;
+	}
+}	
+
+
+function graficar(ancho, alto, segx, segy, intra_seg_vert, intra_seg_hor, cnv_name) {
+	var c=document.getElementById(cnv_name);
+	c.width = ancho;
+	c.height = alto;
+	var ctx=c.getContext("2d");
+	if (flag < 2) {
+		flag += 1;
+		c.addEventListener("mousemove", function(e) {
+	 		devolver_item(ancho, alto, segx, segy, intra_seg_vert, intra_seg_hor, e.pageX - c.offsetLeft, e.pageY - c.offsetTop, cnv_name);
+		}, true);
+		c.addEventListener("click", function(e) {
+	 		devolver_item(ancho, alto, segx, segy, intra_seg_vert, intra_seg_hor, e.pageX - c.offsetLeft, e.pageY - c.offsetTop, cnv_name);
+		}, false);
+	}
+
+	// ancho de cada segmento vertical
+	var p1 = parseInt(ancho / segx);
+	// alto de cada segmento horizontal
+	var p2 = parseInt(alto / segy);
+	var p3 = parseInt(p1 / intra_seg_vert);
+	// alto de cada sub segmento horizontal
+	var p4 = parseInt(alto / (segy*intra_seg_hor));
+	// correccion de p2 por puntos decimales:
+	p2 = (p4*intra_seg_hor);
+	c.height = (p2*segy)+20;
+
+	ctx.lineWidth=2;
+	ctx.moveTo((segx*p1),0);
+	ctx.lineTo((segx*p1),alto);
+	ctx.stroke();
+	var i, j;
+	// Grafico lineas verticales
+	ctx.lineWidth=0.1;
+	for (i=1; i<=(p1*segx)+1; i+=p1) {
+		ctx.moveTo(i,0);
+		ctx.lineTo(i,(p2*segy));
+		
+	}
+	ctx.stroke();
+
+	// segmentos horizontales
+	ctx.lineWidth=0.2;
+	for (i=0; i<=(p2*segy); i+=p2) {
+		ctx.moveTo(0,i);
+		ctx.lineTo((p1*segx),i);
+	}
+	ctx.stroke();
+
+	ctx.beginPath();
+	ctx.lineWidth=0.3;
+	for (i=0; i<(p2*segy); i+=p2) {
+		// sub segmentos horizontales
+		for (j=i; j<(i+p2); j+=p4) {
+//			ctx.moveTo(0,j);
+//			ctx.lineTo((p1*segx),j);
+		}
+	}
+//	ctx.stroke();
+
+	// Intra segmentos verticales
+	ctx.lineWidth=0.1;
+	for (i=0; i<(p1*segx); i+=p1) {
+		for (j=(i+p3); j<(p3*intra_seg_hor); j+=p3) {
+			ctx.moveTo(j,0);
+			ctx.lineTo(j,(p2*segy));
+		}
+	}
+	ctx.stroke();	
+}
+
+<!-- ancho,alto, segmentos x, segmentos y, fila (persona), --!>
+<!-- (ancho_places_g, alto_places_g, items_x, items_y, sub_items_x, sub_items_y, (id_car-5), res[1], res[2], intensidad, c, 'myCanvas'); --!>
+function poner(ancho, alto, segx, segy, intra_seg_x, intra_seg_y, pos_segm_x, pos_sub_segm_x, pos_segm_y, pos_sub_segm_y,intensidad, co, can_name_o) {
+	var c=document.getElementById(can_name_o);
+	var ctx=c.getContext("2d");
+
+	var p1 = parseInt(ancho / segx);
+	var p2 = parseInt(alto / segy);
+	var p3 = parseInt(p1 / intra_seg_x);
+	var p4 = parseInt(p2 / intra_seg_y);
+
+	// correccion de p2 por puntos decimales:
+	p2 = (p4*intra_seg_y);
+	var x = parseInt((pos_segm_x*p1)+(p3*pos_sub_segm_x))+1;
+	var y = parseInt((pos_segm_y*p2)+(pos_sub_segm_y*p4));
+//console.log(pos_segm_x + "," + pos_segm_y + "," + pos_sub_segm_y + ":" + x + ":" + y);
+	ctx.globalAlpha=intensidad;
+	ctx.fillStyle = co;
+	ctx.beginPath();
+	ctx.fillRect(x,y,p3,p4);
+	ctx.globalAlpha=1;
+	ctx.stroke();
+}
+
+<!-- (ancho_places_g, alto_places_g, items_x, items_y, sub_items_x, sub_items_y, (id_car-5), res[1], res[2], intensidad, c, 'myCanvas'); --!>
+function poner_p(ancho, alto, segx, segy, intra_seg_x, intra_seg_y, pos_segm_x, pos_sub_segm_x, pos_segm_y, pos_sub_segm_y,intensidad, co, can_name_o) {
+	var c=document.getElementById(can_name_o);
+	var ctx=c.getContext("2d");
+
+	var p1 = parseInt(ancho / segx);
+	var p2 = parseInt(alto / segy);
+	var p3 = parseInt(p1 / intra_seg_x);
+	var p4 = parseInt(p2 / intra_seg_y);
+
+	// correccion de p2 por puntos decimales:
+	p2 = (p4*intra_seg_y);
+
+	var x = parseInt((pos_segm_x*p1)+(p3*pos_sub_segm_x))+(p3/2);
+	var y = parseInt((pos_segm_y*p2)+(pos_sub_segm_y*p4));
+	ctx.globalAlpha=intensidad;
+	ctx.fillStyle = co;
+	ctx.beginPath();
+if (pos_segm_x == 43) {
+	ctx.arc(x,y,12,0, 2*Math.PI, false);
+} else {
+	ctx.arc(x,y,8,0, 2*Math.PI, false);
+}
+	ctx.fill();
+	ctx.globalAlpha=1;
+	ctx.stroke();
+}
+
+function ir_a_magico_lugar(replace, place, fecha) {
+	var fecha_partes = fecha.split(",");
+	top.frames['tiempo'].tl.getBand(0).setCenterVisibleDate(new Date(2014, 0, fecha_partes[0], fecha_partes[2], fecha_partes[3], 0));
+	if (replace) {
+		top.frames['tiempo'].eventSource.clear();
+	}
+	top.frames['tiempo'].tl.loadXML("data/place_purchase" + place + ".xml?k=" + Math.random(), function(xml, url) { top.frames['tiempo'].eventSource.loadXML(xml, url); });
+	//top.frames['tiempo'].tl.loadXML("data/where" + place + ".xml?k=" + Math.random(), function(xml, url) { top.frames['tiempo'].eventSource.loadXML(xml, url); });
+}
+
+
+function devolver_item(ancho, alto, segx, segy, intra_seg_vert, intra_seg_hor, posx, posy, cnv_name) {
+	var c=document.getElementById(cnv_name);
+	var ctx=c.getContext("2d");
+	// ancho de cada segmento vertical
+	var p1 = parseInt(ancho / segx);
+	// alto de cada segmento horizontal
+	var p2 = parseInt(alto / segy);
+	var p3 = parseInt(p1 / intra_seg_vert);
+	// alto de cada sub segmento horizontal
+	var p4 = parseInt(alto / (segy*intra_seg_hor));
+	// correccion de p2 por puntos decimales:
+	p2 = (p4*intra_seg_hor);
+	var parte_vertical = posx-((parseInt(intra_seg_vert)-1)*p1);
+	var sub_parte_vertical = parseInt((parte_vertical / p3));
+	var parte_horizontal = parseInt(posy/p2);
+	var x_sub_parte_horizontal = posy-(parte_horizontal*p2);
+	var sub_parte_horizontal = parseInt(x_sub_parte_horizontal/p4);	
+	var buscar_cliqueado = parte_horizontal + "," + sub_parte_horizontal +","+sub_parte_vertical;
+	if (cnv_name == "myCanvas") {
+		// Ver si cliquea un rectangulito (representa presencia en un lugar)
+		var p = items_mandar_s1.indexOf(buscar_cliqueado);
+		// p : indice de "4,96,0" por ejemplo
+		// 4,96,0 : dia, sub partecita del dia (1 a 288), barra horizontal
+		var texto = "";
+		var place = "";
+		if (p > 0) {
+			texto = data_points_s1[p].name;
+			place = data_points_s1[p].place;
+		}
+		// Ver si tambien cliquea un circulo (representa las compras)
+		var p1 = items_mandar_p1.indexOf(buscar_cliqueado);
+		if (p1 > 0) {
+			// Si cliquea en ambos, un rectangulo y un circulo
+			// sumo el contenido de ambos.
+			place = data_points_p1[p1].place;
+			if (p >0) {
+				texto = texto + "<br />";
+			}
+			texto = texto + data_points_p1[p1].name;
+		}
+		if ((p1 > 0) || (p >0 ) ) {
+			var text_parts = texto.split(":");
+			var dias_parts = text_parts[1].split("/");
+			$('#tooltip').html(texto + "<br /><b onClick=\"ir_a_magico_lugar(1," + place + ",'" + dias_parts[0] + ",1," + text_parts[2] + "," + text_parts[3] + "');\">more</b> <b onClick=\"ir_a_magico_lugar(0," + place + ",'" + dias_parts[0] + ",1," + text_parts[2] + "," + text_parts[3] + "');\">add</b>");
+			var mousex = posx + 10; //Get X coordinates
+			var mousey = posy + 10; //Get Y coordinates
+			$('#tooltip').css({ top: posy, left: mousex });
+			$('#tooltip').show();
+		} else {
+			$('#tooltip').hide();
+		}
+	} else {
+		var q = items_mandar_s2.indexOf(buscar_cliqueado);
+		var texto = "";
+		var place = "";
+		if (q > 0) {
+			texto = data_points_s2[q].name;
+			place = data_points_s2[q].place;
+		}
+		var p2 = items_mandar_p2.indexOf(buscar_cliqueado);
+		if (p2 > 0) {
+			place = data_points_p2[p2].place;
+			if (q > 0) {
+				texto = texto + "<br />";
+			}
+			texto = texto + data_points_p2[p2].name;
+		}
+		if ((q >0) || (p2 >0)) {
+			var text_parts = texto.split(":");
+			var dias_parts = text_parts[1].split("/");
+			//$('#tooltip').html(texto);
+			$('#tooltip').html(texto + "<br /><b onClick=\"ir_a_magico_lugar(1," + place + ",'" + dias_parts[0] + ",1," + text_parts[2] + "," + text_parts[3] + "');\">more</b> <b onClick=\"ir_a_magico_lugar(0," + place + ",'" + dias_parts[0] + ",1," + text_parts[2] + "," + text_parts[3] + "');\">add</b>");
+			var mousex = posx + 290; //Get X coordinates
+        		var mousey = posy + 20; //Get Y coordinates
+			$('#tooltip').css({ top: posy, left: mousex });
+			$('#tooltip').show();
+		} else {
+			$('#tooltip').hide();
+		}
+	}
+
+}
+
+function ponercompras (sel, ancho, alto, segx, segy, intra_seg_x, intra_seg_y, c) {
+	items_mandar_p1 = [];
+	items_mandar_p2 = [];
+	items_mandar_s1 = [];
+	items_mandar_s2 = [];
+	data_points_s1 = [];
+	data_points_s2 = [];
+	data_points_p1 = [];
+	data_points_p2 = [];
+	$.getJSON( "data/purchase" + sel + ".json" + "?" + Math.random(), function( data ) {
+		var intensidad = 0;
+		$.each(data, function(key, val) {
+			var res = key.split(",");
+			// <!-- ancho,alto, segmentos x, segmentos y, fila, bloque horizontal, item dentro del bloque--!>
+			intensidad = 0.3;
+			//var masdata = val.split(",");
+			// poner: ancho, alto, segmentos x, segmentos y, 
+			//poner(ancho_places_g, alto_places_g, items_x, items_y, sub_items_x, sub_items_y, 0, 0, 1, 1, 1, '#ff0000', 'myCanvas');
+			//var minuto_lugar = (res[1]*6)+parseInt(res[2]/6);
+			//var minuto_lugar = (res[1]*6)+parseInt((res[2]*6)/60);
+			var minuto_lugar = (res[1]*12)+parseInt(res[2]/12);
+			var id_car = parseInt(res[3]);
+			if (id_car > 100) {
+				id_car -= 65;
+			}
+			if (parseInt(res[0]) < 13) {
+				// dia,segmento de minuto (1-144),persona
+				// ancho, alto, segx, segy, intra_seg_x, intra_seg_y, 
+				// pos_segm_x, pos_sub_segm_x, pos_segm_y, pos_sub_segm_y,
+				// intensidad, co, can_name
+				var indice = (res[0]-6) + "," + minuto_lugar + "," + (id_car-1);
+				items_mandar_p1.push(indice);
+				data_points_p1.push({id: indice, name: val + " $." + res[4] + " [" + res[3] + "] in <br />" + res[5] + ":" + res[0] + "/Jan:" + res[1] +":" + res[2], place: sel });
+				poner_p(ancho_places_g, alto_places_g, items_x, items_y, sub_items_x, sub_items_y, id_car-1, 0, (res[0]-6), minuto_lugar, intensidad, c, 'myCanvas');
+			} else {
+				var indice = (res[0]-13) + "," + minuto_lugar + "," + (id_car-1);
+				items_mandar_p2.push(indice);
+				data_points_p2.push({id: indice, name: val + " $." + res[4] + " [" + res[3] + "] in <br />" + res[5] + ":" + res[0] + "/Jan:" + res[1] +":" + res[2], place: sel });
+				poner_p(ancho_places_g, alto_places_g, items_x, items_y, sub_items_x, sub_items_y, id_car-1, 0, (res[0]-13), minuto_lugar, intensidad,c, 'myCanvas2');
+			}
+		});
+	});
+
+}
+// agregar: id del json, ancho, alto, segmentox x, segmentos y, intra_seg_x, intra_seg_y, color
+function agregar(sel, ancho, alto, segx, segy, intra_seg_x, intra_seg_y , c) {
+	$.getJSON( "data/place" + sel + ".json" + "?" + Math.random(), function( data ) {
+		var maximo = 0;
+		$.each(data, function(key, val) {
+			if (val > maximo) {
+				maximo = val;
+			}
+		});
+
+		var intensidad = 0;
+		$.each(data, function(key, val) {
+			var res = key.split(",");
+			// <!-- ancho,alto, segmentos x, segmentos y, fila, bloque horizontal, item dentro del bloque--!>
+			intensidad = (val/maximo);
+			intensidad = 0.6;
+			//var masdata = val.split(",");
+			// poner: ancho, alto, segmentos x, segmentos y, 
+			//poner(ancho_places_g, alto_places_g, items_x, items_y, sub_items_x, sub_items_y, 0, 0, 1, 1, 1, '#ff0000', 'myCanvas');
+			//var minuto_lugar = (res[1]*6)+parseInt(res[2]/6);
+			//var minuto_lugar = (res[1]*6)+parseInt((res[2]*6)/60);
+			//var minuto_lugar = (res[1]*12)+parseInt(res[2]/12);
+			var minuto_lugar = parseInt((parseInt(res[1]*60)+parseInt(res[2]))/5);
+//console.log(minuto_lugar + "," + res[1] + ":" + res[2]);
+			var id_car = parseInt(res[3]);
+			if (id_car > 100) {
+				id_car -= 65;
+			}
+			if (parseInt(res[0]) < 13) {
+				// dia,segmento de minuto (1-144),persona
+				// ancho, alto, segx, segy, intra_seg_x, intra_seg_y, 
+				// pos_segm_x, pos_sub_segm_x, pos_segm_y, pos_sub_segm_y,
+				// intensidad, co, can_name
+				var indice = (res[0]-6) + "," + minuto_lugar + "," + (id_car-1);
+				items_mandar_s1.push(indice);
+			data_points_s1.push({id: indice, name: val + "." + res[4] + " [" + res[3] + "] in <br />" + res[5] + ":" + res[0] + "/Jan:" + res[1] +":" + res[2], place: sel });
+				poner(ancho_places_g, alto_places_g, items_x, items_y, sub_items_x, sub_items_y, id_car-1, 0, (res[0]-6), minuto_lugar, intensidad, c, 'myCanvas');
+			} else {
+				var indice = (res[0]-13) + "," + minuto_lugar + "," + (id_car-1);
+				items_mandar_s2.push(indice);
+			data_points_s2.push({id: indice, name: val + "." + res[4] + " [" + res[3] + "] in <br />" + res[5] + ":" + res[0] + "/Jan:" + res[1] +":" + res[2], place: sel });
+				poner(ancho_places_g, alto_places_g, items_x, items_y, sub_items_x, sub_items_y, id_car-1, 0, (res[0]-13), minuto_lugar, intensidad,c, 'myCanvas2');
+			}
+		});
+	});
+}
+
+function contar() {
+	var c=document.getElementById("myCanvas");
+	var ctx=c.getContext("2d");
+
+	ctx.clearRect(0, 0, c.width, c.height);
+	graficar(ancho_places_g, alto_places_g, items_x, items_y, sub_items_x, sub_items_y, 'myCanvas');
+	graficar(ancho_places_g, alto_places_g, items_x, items_y, sub_items_x, sub_items_y, 'myCanvas2');	
+	label_ids(ancho_places_g-3, alto_places_g, items_x, items_y, sub_items_x, sub_items_y, 'numla');
+	label_ids(ancho_places_g-3, alto_places_g, items_x, items_y, sub_items_x, sub_items_y, 'numla2');
+
+	//var minuto_lugar = (1*6)+parseInt(12/6);
+	//var intensidad = 1;
+	//var c = "#FF0000";
+	//poner(ancho_places_g, alto_places_g, items_x, items_y, sub_items_x, sub_items_y, 0, 0, 1, 1, intensidad, c, 'myCanvas');
+	// sel, ancho, alto, segx, segy, intra_seg_x, intra_seg_y , c)
+	var i;
+	for(i = 1; i < 42; i++) {
+                if (document.getElementById(i).checked) {
+			agregar(i, ancho_places_g, alto_places_g, items_x, items_y, sub_items_x, sub_items_y , colores[(i-1)]);
+			ponercompras(i, ancho_places_g, alto_places_g, items_x, items_y, sub_items_x, sub_items_y , colores[(i-1)]);
+		}
+	}
+
+	for(i = 42; i < 77; i++) {
+                if (document.getElementById(i).checked) {
+			agregar(i, ancho_places_g, alto_places_g, items_x, items_y, sub_items_x, sub_items_y , colores[(i-40)]);
+		}
+	}
+	for(i = 77; i < 93; i++) {
+                if (document.getElementById(i).checked) {
+			agregar(i, ancho_places_g, alto_places_g, items_x, items_y, sub_items_x, sub_items_y , colores[(i-77)]);
+		}
+	}
+
+
+
+//	for(i = 1; i < 42; i++) {
+//		ponercompras(i, ancho_places_g, alto_places_g, items_x, items_y, sub_items_x, sub_items_y , colores[(i-1)]);
+//	}
+//	ponercompras(1, ancho_places_g, alto_places_g, items_x, items_y, sub_items_x, sub_items_y , colores[0]);
+}
+
+function inicializacion() {
+	contar();
+	var i = 1;
+//Color a los lugares
+	for (i=0; i< 42; i++) {
+		$("#c" + (i+1)).css('background-color',colores[(i)]);
+	}
+// Color a los domicilios
+	for (i=42; i< 77; i++) {
+		$("#c" + i).css('background-color',colores[(i-40)]);
+	}
+
+// Color a los desconocidos
+	for (i=77; i< 94; i++) {
+		$("#c" + i).css('background-color',colores[(i-77)]);
+	}
+}
+
+function clickall_mails() {
+	//top.frames['tiempo'].tl.loadXML("data/mails.xml?k=" + Math.random(), function(xml, url) { top.frames['tiempo'].eventSource.loadXML(xml, url); });
+	var dato = $('#fromto').val();
+	top.frames['tiempo'].tl.loadXML("/cgi-bin/bringmails.pl?d=" + dato + "&k=" + Math.random(), function(xml, url) { top.frames['tiempo'].eventSource.loadXML(xml, url); });
+}
+
+
+function clickall(c) {
+	var i = 0;
+	for(i = 1; i < 42; i++) {
+		if (c) {
+                	document.getElementById(i).checked = 1;
+		} else {
+                	document.getElementById(i).checked = 0;
+		}
+	}
+	contar();	
+}
+
+function clickall_home(c) {
+	var i = 0;
+	for(i = 42; i < 77; i++) {
+		if (c) {
+                	document.getElementById(i).checked = 1;
+		} else {
+                	document.getElementById(i).checked = 0;
+		}
+	}
+	contar();	
+}
+
+function clickall_none(c) {
+	var i = 0;
+	for(i = 77; i < 94; i++) {
+		if (c) {
+                	document.getElementById(i).checked = 1;
+		} else {
+                	document.getElementById(i).checked = 0;
+		}
+	}
+	contar();	
+}
+
+
+
+
+</script>
+</head>
+<!-- ancho, alto, segmentos x, segmentos y, intra_segments x  --!>
+<body onload="inicializacion();">
+<style type="text/css">
+#tooltip {
+	display:none;
+	position:absolute;
+	border:1px solid #333;
+	background-color:#161616;
+	border-radius:5px;
+	padding:10px;
+	color:#fff;
+	font-size:12px Arial;
+}
+</style>
+<div id="tooltip">Contenido del Tooltip 1</div>
+
+<canvas id="myCanvas">Your browser does not support the HTML5 canvas tag.</canvas>
+<canvas id="myCanvas2">Your browser does not support the HTML5 canvas tag.</canvas>
+<div id="ppmenu" style="position: absolute; font-size: 10px; right:110px;top: 0px; height: 500px; overflow: scroll; width: 230px; border: 1px solid black;">
+<div id="c1"><input type="checkbox" id="1" onClick="contar();">Bean There Done That</div>
+<div id="c2"><input type="checkbox" id="2" onClick="contar();">Abila Scrapyard</div>
+<div id="c3"><input type="checkbox" id="3" onClick="contar();">Albert's Fine Clothing</div>
+<div id="c4"><input type="checkbox" id="4" onClick="contar();">Coffee Shack</div>
+<div id="c5"><input type="checkbox" id="5" onClick="contar();">Kronos Mart<br /></div>
+<div id="c6"><input type="checkbox" id="6" onClick="contar();">Roberts and Sons<br /></div>
+<div id="c7"><input type="checkbox" id="7" onClick="contar();">General Grocer<br /></div>
+<div id="c8"><input type="checkbox" id="8" onClick="contar();">Carlys Coffe<br /></div>
+<div id="c9"><input type="checkbox" id="9" onClick="contar();">Gelatogalore<br /></div>
+<div id="c10"><input type="checkbox" id="10" onClick="contar();">Kronos Capitol<br /></div>
+<div id="c11"><input type="checkbox" id="11" onClick="contar();">Maximum Iron and Steel<br /></div>
+<div id="c12"><input type="checkbox" id="12" onClick="contar();">Abila Airport<br /></div>
+<div id="c13"><input type="checkbox" id="13" onClick="contar();">Ouzeri Elian<br /></div>
+<div id="c14"><input type="checkbox" id="14" onClick="contar();">Cups Joe<br /></div>
+<div id="c15"><input type="checkbox" id="15" onClick="contar();">Abila Hospital<br /></div>
+<div id="c16"><input type="checkbox" id="16" onClick="contar();">Carlyle Chemical<br /></div>
+<div id="c17"><input type="checkbox" id="17" onClick="contar();">Nationwide Refinery<br /></div>
+<div id="c18"><input type="checkbox" id="18" onClick="contar();">Coffee Cameleon<br /></div>
+<div id="c19"><input type="checkbox" id="19" onClick="contar();">Guy's Gyros<br /></div>
+<div id="c20"><input type="checkbox" id="20" onClick="contar();">Brew've Been Served<br /></div>
+<div id="c21"><input type="checkbox" id="21" onClick="contar();">Frydos Autosupply n' More<br /></div>
+<div id="c22"><input type="checkbox" id="22" onClick="contar();">Katerina's Cafe<br /></div>
+<div id="c23"><input type="checkbox" id="23" onClick="contar();">U-Pump<br /></div>
+<div id="c24"><input type="checkbox" id="24" onClick="contar();">Jack's Magical Beans<br /></div>
+<div id="c25"><input type="checkbox" id="25" onClick="contar();">Hallowed Grounds<br /></div>
+<div id="c28"><input type="checkbox" id="28" onClick="contar();">Chostus Hotel<br /></div>
+<div id="c26"><input type="checkbox" id="26" onClick="contar();">Ahaggo Museum<br /></div>
+<div id="c27"><input type="checkbox" id="27" onClick="contar();">Desafio Golf Course<br /></div>
+<div id="c29"><input type="checkbox" id="29" onClick="contar();">Frank's Fuel<br /></div>
+<div id="c30"><input type="checkbox" id="30" onClick="contar();">Brewed Awakenings<br /></div>
+<div id="c31"><input type="checkbox" id="31" onClick="contar();">Daily Dealz<br /></div>
+<div id="c32"><input type="checkbox" id="32" onClick="contar();">Hippokampos<br /></div>
+<div id="c33"><input type="checkbox" id="33" onClick="contar();">Kalami Kafenion<br /></div>
+<div id="c34"><input type="checkbox" id="34" onClick="contar();">Shoppers' Delight<br /></div>
+<div id="c35"><input type="checkbox" id="35" onClick="contar();">Abila Zacharo<br /></div>
+<div id="c36"><input type="checkbox" id="36" onClick="contar();">Octavio's Office Supplies<br /></div>
+<div id="c37"><input type="checkbox" id="37" onClick="contar();">GasTech<br /></div>
+<div id="c38"><input type="checkbox" id="38" onClick="contar();">Dancin Dolphin<br /></div>
+<div id="c39"><input type="checkbox" id="39" onClick="contar();">Stewart and Sons Fabrication<br /></div>
+<div id="c40"><input type="checkbox" id="40" onClick="contar();">Kronos Pipe and Irrigation<br /></div>
+<div id="c41"><input type="checkbox" id="41" onClick="contar();">Meeting Place<br /></div>
+<hr />
+<div id="c42"><input type="checkbox" id="42" onClick="contar();">Alcazar,Lucas - Evzonon / Arkadou<br /></div>
+<div id="c43"><input type="checkbox" id="43" onClick="contar();">Azada,Lars - Ketallinias / Delfon<br /></div>
+<div id="c44"><input type="checkbox" id="44" onClick="contar();">Balas,Felix - Ithakis / Dentro<br /></div>
+<div id="c45"><input type="checkbox" id="45" onClick="contar();">Barranco,Ingrid - Brada / Polvo<br /></div>
+<div id="c46"><input type="checkbox" id="46" onClick="contar();">Baza,Isak - Profitou Ilia / Artakis<br /></div>
+<div id="c47"><input type="checkbox" id="47" onClick="contar();">Bergen,Linnea - Achilleos / Madeg<br /></div>
+<div id="c48"><input type="checkbox" id="48" onClick="contar();">Borrasca,Isande - Darluniau / Spetson<br /></div>
+<div id="c49"><input type="checkbox" id="49" onClick="contar();">Calixto,Nils - Artakis / Lumen<br /></div>
+<div id="c50"><input type="checkbox" id="50" onClick="contar();">Calzas,Axel - Finiatur / Carnero<br /></div>
+<div id="c51"><input type="checkbox" id="51" onClick="contar();">Campo-Corrente,Ada - Blant / Nia<br /></div>
+<div id="c52"><input type="checkbox" id="52" onClick="contar();">Cazar,Gustav - Omirou / Darluniau<br /></div>
+<div id="c53"><input type="checkbox" id="53" onClick="contar();">Dedos,Lidelse - Karanteg / Agentes<br /></div>
+<div id="c54"><input type="checkbox" id="54" onClick="contar();">Bodrogi,Loreto - Edessis / Karanteg<br /></div>
+<div id="c55"><input type="checkbox" id="55" onClick="contar();">Vann,Isia - Edessis / Karanteg<br /></div>
+<div id="c56"><input type="checkbox" id="56" onClick="contar();">Flecha,Sven - Karanteg / Acera<br /></div>
+<div id="c57"><input type="checkbox" id="57" onClick="contar();">Frente,Birgitta - Karanteg / Agentes<br /></div>
+<div id="c58"><input type="checkbox" id="58" onClick="contar();">Frente,Vira - Limnou / Derwen<br /></div>
+<div id="c59"><input type="checkbox" id="59" onClick="contar();">Fusil,Stenig - Kritis / Pefkon<br /></div>
+<div id="c60"><input type="checkbox" id="60" onClick="contar();">Cocinaro,Hideki - Pefkon / Kasnesi<br /></div>
+<div id="c61"><input type="checkbox" id="61" onClick="contar();">Ferro,Inga - Edessis / Karanteg<br /></div>
+<div id="c62"><input type="checkbox" id="62" onClick="contar();">Vann,Edvard - Florinis / Sina<br /></div>
+<div id="c63"><input type="checkbox" id="63" onClick="contar();">Osvaldo,Hennie - Edessis / Karanteg<br /></div>
+<div id="c64"><input type="checkbox" id="64" onClick="contar();">Orilla,Kare - Gounaraki / Aveny<br /></div>
+<div id="c65"><input type="checkbox" id="65" onClick="contar();">Ovan,Bertrand - Achilleos / Madeg<br /></div>
+<div id="c66"><input type="checkbox" id="66" onClick="contar();">Resumir,Felix - Eleftherias / Livid<br /></div>
+<div id="c67"><input type="checkbox" id="67" onClick="contar();">Onda,Marin - Gounaraki / Barabla<br /></div>
+<div id="c68"><input type="checkbox" id="68" onClick="contar();">Nubarron,Adra - Achilleos / Madeg<br /></div>
+<div id="c69"><input type="checkbox" id="69" onClick="contar();">Mies,Minke - Karanteg / Acera<br /></div>
+<div id="c70"><input type="checkbox" id="70" onClick="contar();">Lagos,Varja - Eleftherias / Livit<br /></div>
+<div id="c71"><input type="checkbox" id="71" onClick="contar();">Herrero,Kanon - Eleftherias / Livit<br /></div>
+<div id="c72"><input type="checkbox" id="72" onClick="contar();">Sanjorge Jr.,Sten - Rist / Niovis<br /></div>
+<div id="c73"><input type="checkbox" id="73" onClick="contar();">Strum,Orhan - Utmana / Bairn<br /></div>
+<div id="c74"><input type="checkbox" id="74" onClick="contar();">Tempestad,Brand - Karanteg / Acera<br /></div>
+<div id="c75"><input type="checkbox" id="75" onClick="contar();">Vasco-Pais,Willem - Utmana / Billar<br /></div>
+<div id="c76"><input type="checkbox" id="76" onClick="contar();">Orilla,Elsa - Barabla / Spetson<br /></div>
+<hr />
+<div id="c77"><input type="checkbox" id="77" onClick="contar();">Undefined77 - Undefined<br /></div>
+<div id="c78"><input type="checkbox" id="78" onClick="contar();">Undefined78 - Undefined<br /></div>
+<div id="c79"><input type="checkbox" id="79" onClick="contar();">Undefined79 - Undefined<br /></div>
+<div id="c80"><input type="checkbox" id="80" onClick="contar();">Undefined80 - Undefined<br /></div>
+<div id="c81"><input type="checkbox" id="81" onClick="contar();">Undefined81 - Undefined<br /></div>
+<div id="c82"><input type="checkbox" id="82" onClick="contar();">Undefined82 - Undefined<br /></div>
+<div id="c83"><input type="checkbox" id="83" onClick="contar();">Undefined83 - Undefined<br /></div>
+<div id="c84"><input type="checkbox" id="84" onClick="contar();">Undefined84 - Undefined<br /></div>
+<div id="c85"><input type="checkbox" id="85" onClick="contar();">Undefined85 - Undefined<br /></div>
+<div id="c86"><input type="checkbox" id="86" onClick="contar();">Undefined86 - Undefined<br /></div>
+<div id="c87"><input type="checkbox" id="87" onClick="contar();">Undefined87 - Undefined<br /></div>
+<div id="c88"><input type="checkbox" id="88" onClick="contar();">Undefined88 - Undefined<br /></div>
+<div id="c89"><input type="checkbox" id="89" onClick="contar();">Undefined89 - Undefined<br /></div>
+<div id="c90"><input type="checkbox" id="90" onClick="contar();">Undefined90 - Undefined<br /></div>
+<div id="c91"><input type="checkbox" id="91" onClick="contar();">Undefined91 - Undefined<br /></div>
+<div id="c92"><input type="checkbox" id="92" onClick="contar();">Undefined92 - Undefined<br /></div>
+<div id="c93"><input type="checkbox" id="93" onClick="contar();">Undefined93 - Undefined<br /></div>
+
+</div>
+<div id="bbtn" style="position: absolute; font-size: 10px; right: 10px; top: 0px; width: 100px;">
+<input type="button" value="All Business" onClick="clickall(1);" />
+<input type="button" value="Clear Business" onClick="clickall(0);" />
+
+<input type="button" value="All Homes" onClick="clickall_home(1);" />
+<input type="button" value="Clear Homes" onClick="clickall_home(0);" />
+
+<input type="button" value="All Informal" onClick="clickall_none(1);" />
+<input type="button" value="Clear Informal" onClick="clickall_none(0);" />
+<hr>
+<input type="text" id="fromto" style="width: 60px;" /><br />
+<input type="checkbox" id="from" />from
+<input type="checkbox" id="to" />to
+<input type="button" value="Mails" onClick="clickall_mails();" />
+</div>
+<canvas style="position: absolute; top: 0px; left: 8px;" id="numla"></canvas>
+<canvas style="position: absolute; top: 0px; left: 513px;" id="numla2"></canvas>
+<script language="javascript">
+$(window).scroll( function() {
+	var kk = $('body').scrollTop();
+	$('#ppmenu').css('top', kk);
+	$('#ppmenu2').css('top', kk);
+	$('#numla').css('top', kk);
+	$('#numla2').css('top', kk);
+	$('#bbtn').css('top', kk);
+});
+</script>
+</body>
+</html>

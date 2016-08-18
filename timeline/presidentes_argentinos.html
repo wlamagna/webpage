@@ -1,0 +1,106 @@
+<html>
+  <head>
+    <title>Presidentes Argentinos</title> 
+    <script src="timeline/timeline_ajax/simile-ajax-api.js?bundle=true" type="text/javascript"></script>
+    <script src="timeline/timeline_js/timeline-api.js?bundle=true" type="text/javascript"></script>
+    <link rel='stylesheet' href='common.css' type='text/css' /> <!-- load your css after Timeline's -->
+    <link rel='stylesheet' href='styles.css' type='text/css' /> <!-- load your css after Timeline's -->
+    <script>
+        var tl;
+        function onLoad() {
+            var eventSource = new Timeline.DefaultEventSource(0);
+            
+            // Example of changing the theme from the defaults
+            // The default theme is defined in 
+            // http://simile-widgets.googlecode.com/svn/timeline/tags/latest/src/webapp/api/scripts/themes.js
+            var theme = Timeline.ClassicTheme.create();
+            theme.event.bubble.width = 350;
+            theme.event.bubble.height = 300;
+            var zones = [
+		{ start: "Sun Jan 1 1826 00:00:00 GMT-0300",
+                  end:     "Jul 22 2016 00:00:00 GMT-0300",
+                  magnify:  1,
+                  unit:     Timeline.DateTime.YEAR
+                }];
+
+		var zones2 = [{ 
+			start: "Sun Jan 1 1826 00:00:00 GMT-0300", 
+                  	end:   "Jul 22 2016 00:00:00 GMT-0300",
+			magnify:  0.8,
+                  unit:     Timeline.DateTime.DECADE
+                }];
+ 
+            var d = Timeline.DateTime.parseGregorianDateTime("2010")
+
+           var bandInfos = [
+                Timeline.createHotZoneBandInfo({
+                    width:          "80%", 
+                    intervalUnit:   Timeline.DateTime.YEAR,
+                    intervalPixels: 40,
+                    zones:          zones,
+                    eventSource:    eventSource,
+                    date:           d,
+                    timeZone:       -3,
+                    theme:          theme
+                }),
+                Timeline.createHotZoneBandInfo({
+                    width:          "20%", 
+                    intervalUnit:   Timeline.DateTime.DECADE,
+                    intervalPixels: 40,
+                    zones:          zones2, 
+                    eventSource:    eventSource,
+                    date:           d, 
+                    timeZone:       -3,
+                    overview:       true,
+                    theme:          theme
+                })
+            ];
+
+            bandInfos[1].syncWith = 0;
+            bandInfos[1].highlight = true;
+
+            tl = Timeline.create(document.getElementById("tl"), bandInfos, Timeline.HORIZONTAL);
+            // Adding the date to the url stops browser caching of data during testing or if
+            // the data source is a dynamic query...
+
+	    tl.loadXML("presidentes_argentinos.xml?" + (new Date().getTime()), function(xml, url) {
+                eventSource.loadXML(xml, url);
+            });
+
+            //tl.loadJSON("test.js?"+ (new Date().getTime()), function(json, url) {
+             //   eventSource.loadJSON(json, url);
+            //});
+        }
+        var resizeTimerID = null;
+        function onResize() {
+            if (resizeTimerID == null) {
+                resizeTimerID = window.setTimeout(function() {
+                    resizeTimerID = null;
+                    tl.layout();
+                }, 500);
+            }
+        }
+    </script>
+
+    <style type="text/css">
+      /* These css rules are used to modify the display of events with classname attribute */
+      /* In a production system, the rules should be in an external css file to enable     */
+      /* shared use and caching                                                            */
+      .special_event {font-variant: small-caps; font-weight: bold;}
+    </style>
+  </head>
+  <body onload="onLoad();" onresize="onResize();">
+    <div id="content">
+      <script>Timeline.writeVersion('tl_ver')</script>
+      <div id="tl" class="timeline-default" style="height: 400px;"></div>
+    </div>
+
+
+Buscar Termino: <input type="text" name="termino" /> o A&ntilde;os: <input type="text" name="year" value="2015,2016" />
+<input type="button" value="Traer" />
+
+
+
+
+  </body>
+</html>

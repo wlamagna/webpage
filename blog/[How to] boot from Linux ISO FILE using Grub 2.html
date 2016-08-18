@@ -1,0 +1,14 @@
+<html>
+<head>
+<title>[How to] boot from Linux ISO FILE using Grub 2</title>
+<link rel="stylesheet" type="text/css" href="css/blogstyle.css">
+</head>
+<body>
+<script language="javascript">
+window.parent.document.title = "[How to] boot from Linux ISO FILE using Grub 2";
+</script>
+<div id="section"><p id="postTitle">[How to] boot from Linux ISO FILE using Grub 2</p>
+<p> Edit <b>/etc/grub.d/40_custom</b> and add the below entry<br /><br /><div style="font-family: &quot;Courier New&quot;,Courier,monospace;">menuentry &quot;Karmic Live CD (sdaX)&quot; {<br /></div><div style="font-family: &quot;Courier New&quot;,Courier,monospace;">loopback loop (hd0,X)/my-ISO/ubuntu-9.10-desktop-i386.iso<br /></div><div class="para" style="font-family: &quot;Courier New&quot;,Courier,monospace;">linux (loop)/casper/vmlinuz boot=casper iso-scan/filename=/my-ISO/ubuntu-9.10-de<wbr />sktop-i386.iso<br /> initrd (loop)/casper/initrd.lz<br /> }<br /></div><div class="para"><br /></div><div class="para"><b style="font-family: Arial,Helvetica,sans-serif;"><a href="#">Keep reading</a></b><br /></div><div style="clear: both;"></div>
+<b>Published: Wednesday, December 02, 2009</b>
+<hr>
+</body></html>

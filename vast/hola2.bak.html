@@ -1,0 +1,258 @@
+<html>
+
+<head>
+<script src="jquery.js"></script>
+<script language="javascript">
+var flag = 1;
+var items_mandar = "";
+
+var ancho_places_g = 500;
+var alto_places_g = 4000;
+var items_y = 7;
+var sub_items_y = 144;
+var items_x = 40;
+var sub_items_x = 1;
+
+function graficar(ancho, alto, segx, segy, intra_seg_vert, intra_seg_hor, cnv_name) {
+	var c=document.getElementById(cnv_name);
+	c.width = ancho;
+	c.height = alto;
+	var ctx=c.getContext("2d");
+/*	if (flag) {
+		flag = 0;
+		c.addEventListener("click", function(e) {
+	 		devolver_item(ancho, alto, segx, segy, intra_seg_vert, e.pageX - c.offsetLeft, e.pageY - c.offsetTop, items_mandar);
+		}, false);
+	}
+*/
+	// ancho de cada segmento vertical
+	var p1 = parseInt(ancho / segx);
+	// alto de cada segmento horizontal
+	var p2 = parseInt(alto / segy);
+	var p3 = parseInt(p1 / intra_seg_vert);
+	// alto de cada sub segmento horizontal
+	var p4 = parseInt(alto / (segy*intra_seg_hor));
+	// correccion de p2 por puntos decimales:
+	p2 = (p4*intra_seg_hor);
+	c.height = (p2*segy)+20;
+
+	var i, j;
+	// Grafico lineas verticales
+	ctx.lineWidth=1;
+	for (i=1; i<=(p1*segx)+1; i+=p1) {
+		ctx.moveTo(i,0);
+		ctx.lineTo(i,(p2*segy));
+	}
+	ctx.stroke();
+	// segmentos horizontales
+	ctx.lineWidth=2;
+	for (i=0; i<=(p2*segy); i+=p2) {
+		ctx.moveTo(0,i);
+		ctx.lineTo((p1*segx),i);
+	}
+	ctx.stroke();
+
+	ctx.beginPath();
+	ctx.lineWidth=0.3;
+	for (i=0; i<(p2*segy); i+=p2) {
+		// sub segmentos horizontales
+		for (j=i; j<(i+p2); j+=p4) {
+			ctx.moveTo(0,j);
+			ctx.lineTo((p1*segx),j);
+		}
+	}
+	ctx.stroke();
+
+	// Intra segmentos verticales
+	ctx.lineWidth=0.1;
+	for (i=0; i<(p1*segx); i+=p1) {
+		for (j=(i+p3); j<(p3*intra_seg_hor); j+=p3) {
+			ctx.moveTo(j,0);
+			ctx.lineTo(j,(p2*segy));
+		}
+	}
+	ctx.stroke();	
+}
+
+<!-- ancho,alto, segmentos x, segmentos y, fila (persona), --!>
+<!-- (ancho_places_g, alto_places_g, items_x, items_y, sub_items_x, sub_items_y, (res[3]-5), res[1], res[2], intensidad, c, 'myCanvas'); --!>
+function poner(ancho, alto, segx, segy, intra_seg_x, intra_seg_y, pos_segm_x, pos_sub_segm_x, pos_segm_y, pos_sub_segm_y,intensidad, co, can_name) {
+
+	var c=document.getElementById(can_name);
+	var ctx=c.getContext("2d");
+
+	var p1 = parseInt(ancho / segx);
+	var p2 = parseInt(alto / segy);
+	var p3 = parseInt(p1 / intra_seg_x);
+	var p4 = parseInt(p2 / intra_seg_y);
+	var x = parseInt((pos_segm_x*p1)+(p3*pos_sub_segm_x));
+	var y = parseInt((pos_segm_y*p2)+(pos_sub_segm_y*p4));
+	ctx.globalAlpha=intensidad;
+	ctx.fillStyle = co;
+	ctx.beginPath();
+	ctx.fillRect(x,y,p3,p4);
+	ctx.globalAlpha=1;
+}
+
+
+function devolver_item(ancho, alto, segx, segy, intra_seg, posx, posy) {
+	var c=document.getElementById("myCanvas");
+	var ctx=c.getContext("2d");
+	var lugar_x = ((posx*segx)/ancho)+1;
+	var lugar_y = ((posy*segy)/alto)+1;
+
+	var p1 = (ancho / segx);
+	var p2 = (alto / segy);
+	var p3 = (p1 / intra_seg);
+	var p4 = (ancho / (segx * intra_seg));
+	//var x = (((bloque-1)*p1)+(p3*(item-1)));
+	//var y = (fila-1)*p2;
+	var sub_x = posx-((parseInt(lugar_x)-1)*p1);
+	var segmento_x = parseInt((sub_x / p3))+1;
+
+	var sub_y = posy-((parseInt(lugar_y)-1)*p2);
+	var segmento_y = parseInt((sub_y / p4)) + 1;
+	window.open('hola2.html?hora=' + segmento_x + '&dia=' + segmento_y + "&i=" + items_mandar, '_blank');
+}
+
+// agregar: id del json, ancho, alto, segmentox x, segmentos y, intra_seg_x, intra_seg_y, color
+function agregar(sel, ancho, alto, segx, segy, intra_seg_x, intra_seg_y , c) {
+	$.getJSON( "data/place" + sel + ".json" + "?" + Math.random(), function( data ) {
+		var maximo = 0;
+		$.each(data, function(key, val) {
+			if (val > maximo) {
+				maximo = val;
+			}
+		});
+		var intensidad = 0;
+		$.each(data, function(key, val) {
+			var res = key.split(",");
+			// <!-- ancho,alto, segmentos x, segmentos y, fila, bloque horizontal, item dentro del bloque--!>
+			intensidad = (val/maximo);
+			// poner: ancho, alto, segmentos x, segmentos y, 
+			//poner(ancho, alto, segx, segy, intra_seg_x, intra_seg_y, (res[3]-5), res[1], res[2], intensidad, c, 'myCanvas');
+			//poner(ancho_places_g, alto_places_g, items_x, items_y, sub_items_x, sub_items_y, 0, 0, 1, 1, 1, '#ff0000', 'myCanvas');
+			if (res[0] < 13) {
+			// ancho, alto, segx, segy, intra_seg_x, intra_seg_y, 
+			// pos_segm_x, pos_sub_segm_x, pos_segm_y, pos_sub_segm_y,
+			// intensidad, co, can_name
+				poner(ancho_places_g, alto_places_g, items_x, items_y, sub_items_x, sub_items_y, res[3], 0, (res[0]-6), res[1]*6, intensidad, '#ff0000', 'myCanvas');
+			} else {
+				poner(ancho_places_g, alto_places_g, items_x, items_y, sub_items_x, sub_items_y, res[3], 0, (res[0]-13), res[1]*6, intensidad, '#ff0000', 'myCanvas2');
+			}
+		});
+	});
+
+
+
+}
+
+function contar() {
+	var c=document.getElementById("myCanvas");
+	var ctx=c.getContext("2d");
+
+	ctx.clearRect(0, 0, c.width, c.height);
+	graficar(ancho_places_g, alto_places_g, items_x, items_y, sub_items_x, sub_items_y, 'myCanvas');
+	graficar(ancho_places_g, alto_places_g, items_x, items_y, sub_items_x, sub_items_y, 'myCanvas2');	
+
+var colores = [
+'#8dd3c7',
+'#ffffb3',
+'#bebada',
+'#fb8072',
+'#80b1d3',
+'#fdb462',
+'#b3de69',
+'#fccde5',
+'#d9d9d9',
+'#bc80bd',
+'#ccebc5',
+'#ffed6f',
+'#a6cee3',
+'#1f78b4',
+'#b2df8a',
+'#33a02c',
+'#fb9a99',
+'#e31a1c',
+'#fdbf6f',
+'#ff7f00',
+'#cab2d6',
+'#6a3d9a',
+'#ffff99',
+'#b15928',
+'#a50026',
+'#d73027',
+'#f46d43',
+'#fdae61',
+'#fee08b',
+'#ffffbf',
+'#d9ef8b',
+'#a6d96a',
+'#66bd63',
+'#1a9850',
+'#106830',
+'#ffffff',
+'#ff0000',
+'#00ff00',
+'#0000ff' ];
+	var elob = document.getElementById("place");
+	var idx = (elob.selectedIndex+1);
+	// sel, ancho, alto, segx, segy, intra_seg_x, intra_seg_y , c)
+	agregar(idx, ancho_places_g, alto_places_g, items_x, items_y, sub_items_x, sub_items_y , colores[(idx-1)]);
+}
+
+function inicializacion() {
+	contar();
+	//ancho, alto, segx, segy, intra_seg_x, intra_seg_y, pos_segm_x, pos_sub_segm_x, pos_segm_y, pos_sub_segm_y,intensidad, co, can_name
+}
+
+</script>
+</head>
+<!-- ancho, alto, segmentos x, segmentos y, intra_segments x  --!>
+<body onload="inicializacion();">
+<canvas id="myCanvas">Your browser does not support the HTML5 canvas tag.</canvas>
+<canvas id="myCanvas2">Your browser does not support the HTML5 canvas tag.</canvas>
+<select name="place" id="place" style="position: absolute; top: 0px;" onChange="contar(this);">
+<option value="1">Bean There Done That</option>
+<option value="2">Abila Scrapyard</option>
+<option value="3">Albert's Fine Clothing</option>
+<option value="4">Coffee Shack</option>
+<option value="5">Kronos Mart</option>
+<option value="6">Roberts and Sons</option>
+<option value="7">General Grocer</option>
+<option value="8">Carlys Coffe</option>
+<option value="9">Gelatogalore</option>
+<option value="10">Kronos Capitol</option>
+<option value="11">Maximum Iron and Steel</option>
+<option value="12">Abila Airport</option>
+<option value="13">Ouzeri Elian</option>
+<option value="14">Cups Joe</option>
+<option value="15">Abila Hospital</option>
+<option value="19">Guy's Gyros</option>
+<option value="16">Carlyle Chemical</option>
+<option value="17">Nationwide Refinery</option>
+<option value="18">Coffee Cameleon</option>
+<option value="22">Katerina's Cafe</option>
+<option value="20">Brew've Been Served</option>
+<option value="21">Frydos Autosupply n' More</option>
+<option value="23">U-Pump</option>
+<option value="24">Jack's Magical Beans</option>
+<option value="25">Hallowed Grounds</option>
+<option value="28">Chostus Hotel</option>
+<option value="26">Ahaggo Museum</option>
+<option value="27">Desafio Golf Course</option>
+<option value="29">Frank's Fuel</option>
+<option value="30">Brewed Awakenings</option>
+<option value="31">Daily Dealz</option>
+<option value="32">Hippokampos</option>
+<option value="33">Kalami Kafenion</option>
+<option value="34">Shoppers' Delight</option>
+<option value="35">Abila Zacharo</option>
+<option value="36">Octavio's Office Supplies</option>
+<option value="37">GasTech</option>
+<option value="38">Dancin Dolphin</option>
+<option value="39">Stewart and Sons Fabrication</option>
+</select>
+
+</body>
+</html>

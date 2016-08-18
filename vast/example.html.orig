@@ -1,0 +1,224 @@
+<html>
+  <head>
+    <title>SIMILE Widgets | Timeline</title>
+	<script src="/timeline/timeline_ajax/simile-ajax-api.js?bundle=true" type="text/javascript"></script>
+	<script src="/timeline/timeline_js/timeline-api.js?bundle=true" type="text/javascript"></script>
+	<script>
+        var tl;
+        function onLoad() {
+            var eventSource = new Timeline.DefaultEventSource();
+            var zones = [
+		{   start:    "Thu Sep 2 1982 00:00:00 GMT+0300",
+                    end:      "Mon Oct 04 1982 00:00:00 GMT+0300",
+                    magnify:  20,
+                    unit:     Timeline.DateTime.DAY
+                },
+                {   start:    "Mon Oct 04 1982 00:00:00 GMT+0300",
+		    end:      "Thu May 03 1984 00:00:00 GMT+0300",
+                    magnify:  1,
+                    unit:     Timeline.DateTime.YEAR
+                }, 
+                {   start:    "Thu May 03 1984 00:00:00 GMT+0300",
+		    end:      "Sat May 05 1984 00:00:00 GMT+0300",
+                    magnify:  20,
+                    unit:     Timeline.DateTime.DAY
+                },
+                {   start:    "Sat May 05 1984 00:00:00 GMT+0300",
+		    end:      "Fri Dec 11 1992 00:00:00 GMT+0300",
+			magnify:  10,
+			unit:     Timeline.DateTime.YEAR
+                },
+                {   start:    "Fri Dec 11 1992 00:00:00 GMT+0300",
+		    end:      "Jan 01 2002 00:00:00 GMT+0300",
+			magnify:  1,
+			unit:     Timeline.DateTime.MONTH
+                },
+                {   start:    "Jan 01 2002 00:00:00 GMT+0300",
+		    end:      "Jan 01 2005 00:00:00 GMT+0300",
+			magnify:  1,
+			unit:     Timeline.DateTime.MONTH
+                },
+                {   start:    "Jan 01 2005 00:00:00 GMT+0300",
+		    end:      "Tue Jan 21 2014 00:00:00 GMT+0300",
+			magnify:  3,
+			unit:     Timeline.DateTime.MONTH
+                }
+		];
+            var zones2 = [
+                {   start:    "Thu Sep 2 1982 00:00:00 GMT+0300",
+                    end:      "Mon Oct 04 1982 00:00:00 GMT+0300",
+			magnify:  30,
+                    unit:     Timeline.DateTime.YEAR
+                },
+                {   start:    "Sat May 05 1984 00:00:00 GMT+0300",
+		    end:      "Jan 01 2002 00:00:00 GMT+0300",
+                    magnify:  12,
+                    unit:     Timeline.DateTime.YEAR
+                },
+                {   start:    "Jan 01 2002 00:00:00 GMT+0300",
+		    end:      "Jan 01 2005 00:00:00 GMT+0300",
+                    magnify:  12,
+                    unit:     Timeline.DateTime.YEAR
+                },
+                {   start:    "Jan 01 2005 00:00:00 GMT+0300",
+		    end:      "Tue Jan 21 2014 00:00:00 GMT+0300",
+                    magnify:  12,
+                    unit:     Timeline.DateTime.YEAR
+                }
+            ];
+
+            var theme = Timeline.ClassicTheme.create();
+            theme.event.bubble.width = 750;
+            
+            var date = "Tue Oct 22 2013 00:00:00 GMT+0300";
+            var bandInfos = [
+                Timeline.createHotZoneBandInfo({
+                    width:          "80%", 
+                    intervalUnit:   Timeline.DateTime.MONTH,
+                    intervalPixels: 100,
+                    zones:          zones,
+                    eventSource:    eventSource,
+                    date:           date,
+                    timeZone:       +0,
+			theme: theme
+                }),
+                Timeline.createHotZoneBandInfo({
+                    width:          "20%", 
+                    intervalUnit:   Timeline.DateTime.YEAR,
+                    intervalPixels: 5,
+                    zones:          zones2, 
+                    eventSource:    eventSource,
+                    date:           date, 
+                    timeZone:       +0,
+                    overview:       true,
+			theme: theme
+                })
+            ];
+            bandInfos[1].syncWith = 0;
+            bandInfos[1].highlight = true;
+		//bandInfos[1].eventPainter.setLayout(bandInfos[0].eventPainter.getLayout());
+		for (var i = 0; i < bandInfos.length; i++) {
+		bandInfos[i].decorators = [
+
+			new Timeline.SpanHighlightDecorator({
+			startDate:	"Jun 15 2001 00:00:00 GMT+0300",
+			endDate:       "Jun 16 2001 00:00:00 GMT+0300",
+			color:      "#FF0000",
+			opacity:    50,
+			startLabel: "Cesare Nespola Dies",
+			theme:      theme
+			}),
+
+			new Timeline.SpanHighlightDecorator({
+			startDate:	"Fri Jun 19 2009 00:00:00 GMT+0300",
+			endDate:       "Sat Jun 20 2009 00:00:00 GMT+0300",
+			color:      "#FF0000",
+			opacity:    50,
+			startLabel: "Elian Karel dies",
+			theme:      theme
+			}),
+
+			new Timeline.SpanHighlightDecorator({
+			startDate:	"Jun 19 2010 00:00:00 GMT+0300",
+			endDate:       "Jun 20 2010 00:00:00 GMT+0300",
+			color:      "#FF0000",
+			opacity:    50,
+			theme:      theme
+			}),
+
+			new Timeline.SpanHighlightDecorator({
+			startDate:	"Jun 19 2011 00:00:00 GMT+0300",
+			endDate:       "Jun 20 2011 00:00:00 GMT+0300",
+			color:      "#FF0000",
+			opacity:    50,
+			theme:      theme
+			}),
+
+			new Timeline.SpanHighlightDecorator({
+			startDate:	"Jun 19 2012 00:00:00 GMT+0300",
+			endDate:       "Jun 20 2012 00:00:00 GMT+0300",
+			color:      "#FF0000",
+			opacity:    50,
+			theme:      theme
+			}),
+
+			new Timeline.SpanHighlightDecorator({
+			startDate:	"Jun 19 2013 00:00:00 GMT+0300",
+			endDate:       "Jun 20 2013 00:00:00 GMT+0300",
+			color:      "#FF0000",
+			opacity:    50,
+			theme:      theme
+			}),
+
+			new Timeline.SpanHighlightDecorator({
+			startDate:	"Jun 19 2014 00:00:00 GMT+0300",
+			endDate:       "Jun 20 2014 00:00:00 GMT+0300",
+			color:      "#FF0000",
+			opacity:    50,
+			theme:      theme
+			})
+
+
+
+
+		];
+		}
+            tl = Timeline.create(document.getElementById("tl"), bandInfos, Timeline.HORIZONTAL);
+            tl.loadXML("/monet.xml?k=" + Math.random(), function(xml, url) { eventSource.loadXML(xml, url); });
+        }
+
+        var resizeTimerID = null;
+        function onResize() {
+            if (resizeTimerID == null) {
+                resizeTimerID = window.setTimeout(function() {
+                    resizeTimerID = null;
+                    tl.layout();
+                }, 500);
+            }
+        }
+        function themeSwitch(){
+          var timeline = document.getElementById('tl');		
+          timeline.className = (timeline.className.indexOf('dark-theme') != -1) ? timeline.className.replace('dark-theme', '') : timeline.className += ' dark-theme';
+
+        }
+    </script>
+    <style type="text/css">
+        .t-highlight1 { background-color: #ccf; }
+        .p-highlight1 { background-color: #fcc; }
+
+        .timeline-highlight-label-start .label_t-highlight1 { color: #f00; }
+        .timeline-highlight-label-end .label_t-highlight1 { color: #aaf; }
+
+        .timeline-band-events .important { color: #f00; }
+        .timeline-band-events .small-important { background: #c00; }
+        /*---------------------------------*/
+        .dark-theme { color: #eee; }
+        .dark-theme .timeline-band-0 .timeline-ether-bg { background-color: #333 }
+        .dark-theme .timeline-band-1 .timeline-ether-bg { background-color: #111 }
+        .dark-theme .timeline-band-2 .timeline-ether-bg { background-color: #222 }
+        .dark-theme .timeline-band-3 .timeline-ether-bg { background-color: #444 }
+
+        .dark-theme .t-highlight1 { background-color: #003; }
+        .dark-theme .p-highlight1 { background-color: #300; }
+
+        .dark-theme .timeline-highlight-label-start .label_t-highlight1 { color: #f00; }
+        .dark-theme .timeline-highlight-label-end .label_t-highlight1 { color: #115; }
+
+        .dark-theme .timeline-band-events .important { color: #c00; }
+        .dark-theme .timeline-band-events .small-important { background: #c00; }
+
+        .dark-theme .timeline-date-label-em { color: #fff; }
+        .dark-theme .timeline-ether-lines { border-color: #555; border-style: solid; }
+        .dark-theme .timeline-ether-highlight { background: #555; }
+        .dark-theme .timeline-event-tape,
+        .dark-theme .timeline-small-event-tape { background: #f60; }
+        .dark-theme .timeline-ether-weekends { background: #111; }
+    </style>
+  </head>
+  <body onload="onLoad();" onresize="onResize();">
+    <div id="content">
+	<div id="tl" class="timeline-default" style="height: 500px; margin-top: 20px; margin-bottom: 50px; font-size: 10px;">"></div>
+    </div>
+  </body>
+</html>
+

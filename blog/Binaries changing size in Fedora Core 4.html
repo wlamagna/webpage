@@ -1,0 +1,14 @@
+<html>
+<head>
+<title>Binaries changing size in Fedora Core 4</title>
+<link rel="stylesheet" type="text/css" href="css/blogstyle.css">
+</head>
+<body>
+<script language="javascript">
+window.parent.document.title = "Binaries changing size in Fedora Core 4";
+</script>
+<div id="section"><p id="postTitle">Binaries changing size in Fedora Core 4</p>
+<p><span style=";font-family:arial;font-size:85%;">I think that it is probably this cause, the yum.cron running daily at 4:03. This &quot;yum&quot; program that updates the system files automaticaly. It is strange that the updated rpm&#39;s do not appear as the new rpm version, that it just updates the binaries and not the rpm package... That is how it looks like, so i will investigate further, for this night, i will check if the binaries change without the &quot;yum&quot;. Just in case, the machine was scanned with F-PROT for Linux and all is fine with it.<br /><br />12/11/05 I chmod -x /etc/cron.daily/yum.conf and the problem continues, today i will try out if it is a cron.daily job or something else.<br /><br />12/11/05 18:00: The cause was found. The &quot;prelink&quot; binary and cron.daily script is the cause. The prelink program in Linux modifies the ELF shared libraries and ELF dynamicaly linked binaries to run faster.<br /></span><div style="clear: both;"></div>
+<b>Published: Thursday, November 10, 2005</b>
+<hr>
+</body></html>

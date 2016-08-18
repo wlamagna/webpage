@@ -1,0 +1,14 @@
+<html>
+<head>
+<title>Measure download  upload with multiple interfaces</title>
+<link rel="stylesheet" type="text/css" href="css/blogstyle.css">
+</head>
+<body>
+<script language="javascript">
+window.parent.document.title = "Measure download  upload with multiple interfaces";
+</script>
+<div id="section"><p id="postTitle">Measure download  upload with multiple interfaces</p>
+<p> You need to measure the download or upload speed of one interface, supposing you have multiple in your gateway. I use the utility curl to measure this metrics, because curl permits to specify the interface from where i want to download or upload the files.<br /><br />This shows the download speed through the interface eth1 from the site ftp.serverlinux.blogspot.com<br /><span style="font-size:85%;"><span style="font-family: courier new;">curl --interface eth1 -w &#39;\t%{speed_download}\n&#39; --disable-epsv -u user:pass ftp://ftp.serverlinux.blogspot.com/bigfile.iso &gt; out.iso</span><br /></span><br />This shows the upload speed through the interface eth1 to site ftp.serverlinux.blogspot.com<br /><span style="font-size:85%;"><span style="font-family: courier new;">curl --interface eth1 -w &#39;\t%{speed_upload}\n&#39; -T out.iso --disable-epsv -u user:pass ftp://ftp.serverlinux.blogpost.com/incoming/</span></span><br /><br />The upload and download speeds are measures in kbytes.<br /><br />Thanks to linux.com for their help:<br /><span style="font-size:85%;"><span style="font-family: courier new;">http://www.linux.com/article.pl?sid=06/10/10/1824245</span></span><div style="clear: both;"></div>
+<b>Published: Tuesday, June 12, 2007</b>
+<hr>
+</body></html>

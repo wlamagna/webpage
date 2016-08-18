@@ -1,0 +1,14 @@
+<html>
+<head>
+<title>Print the processes cpu usage and memory</title>
+<link rel="stylesheet" type="text/css" href="css/blogstyle.css">
+</head>
+<body>
+<script language="javascript">
+window.parent.document.title = "Print the processes cpu usage and memory";
+</script>
+<div id="section"><p id="postTitle">Print the processes cpu usage and memory</p>
+<p> In linuxforum was asked this and i found it interesting to resolve, he needed to list the processes ordered by CPU and memory usage in Linux. My resolution was this:<br /><br /><span style="font-family: courier new;">ps -eo pcpu,pid,user,args,pmem | sort -k 1 -r | head -10</span><br /><br />And if you want to have a terminal listing it you can use this line:<br /><br /><span style="font-family: courier new;">for i in `seq 1 10`; do ps -eo pcpu,pid,user,args,pmem | sort -k 1 -r | head -10; sleep 1; clear; done</span><br /><br />I hope it was usefull. <div style="clear: both;"></div>
+<b>Published: Thursday, May 31, 2007</b>
+<hr>
+</body></html>
