@@ -7,43 +7,37 @@
 <script language="javascript">
 window.parent.document.title = "Server Linux Devops Blog from Walter Lamagna";
 </script>
-<div id="section"><p id="postTitle">Headless Linux Server with X Fluxbox and Lightdm</p>
+<div id="section"><p id="postTitle">Installing Apache from scratch</p>
 <p>
-Hi, here is a very short list telling about how you can have
-very easily a server withoug a monitor connected and manage it
-with just few resources... a short post but without waste!<br /><br />
-
-<b>Install headless lightdm with fluxbox and vnc</b><br />
+<u>1) A required library:</u><br />
 <pre>
-apt-get install lightdm
-apt-get install fluxbox
-apt-get install x11vnc
-apt-get install xvfb
-apt-get remove xserver-xorg-video*
-</pre>
-
-Now, you setup the SSH Server and connect creating a tunnel.<br /><br />
-
-Once connected, in the Headless Server you type:
-<br /><br />
-<pre>
-x11vnc -localhost -create -env FD_PROG=/usr/bin/fluxbox \
-        -env X11VNC_FINDDISPLAY_ALWAYS_FAILS=1 \
-        -env X11VNC_CREATE_GEOM=${1:-1024x768x16} \
-        -gone 'killall Xvfb' \
-        -bg -nopw
+apt-get install libpcre++-dev
 </pre>
 <br />
-And once the vnc server starts, you connect from your client through
-a tunnel.<br /><br />
+<u>2) Obtain the sources:</u><br />
 <pre>
-vncviewer localhost:5900
-</pre>
+wget "http://apache.dattatec.com//httpd/httpd-2.4.18.tar.bz2"
+tar jxvf httpd-2.4.18.tar.bz2
+wget "http://mirrors.nxnethosting.com/apache//apr/apr-1.5.2.tar.gz"
+wget http://apache.dattatec.com//apr/apr-util-1.5.4.tar.gz
 
-These steps have worked in Debian 8.0 Jessie.
-<br />
- 
-<b>Published: Thuesday, February 23, 2016</b>
+cd httpd-2.4.18/srclib
+tar zxvf ../../apr-1.5.2.tar.gz
+
+tar zxvf ../../apr-util-1.5.4.tar.gz
+
+ln -s apr-1.5.2/ apr
+ln -s apr-util-1.5.4/ apr-util
+
+cd ..
+
+./configure --enable-ssl --prefix=/usr/local/apache2/ --enable-so --with-included-apr --enable-rewrite --enable-rewrite --enable-proxy --enable-cgi
+
+make
+</pre>
+</div>
+<div style="clear: both;"></div>
+<b>Published: Thursday, August 25, 2016</b>
 <hr>
 <div id="section"><p id="postTitle">Installing Matlab R2013 8.01 on Linux Headless Xvfb using lightdm and fluxbox</p>
 <p>
@@ -153,6 +147,44 @@ Finished
  
 <b>Published: Thuesday, February 23, 2016</b>
 <hr>
+<div id="section"><p id="postTitle">Headless Linux Server with X Fluxbox and Lightdm</p>
+<p>
+Hi, here is a very short list telling about how you can have
+very easily a server withoug a monitor connected and manage it
+with just few resources... a short post but without waste!<br /><br />
+
+<b>Install headless lightdm with fluxbox and vnc</b><br />
+<pre>
+apt-get install lightdm
+apt-get install fluxbox
+apt-get install x11vnc
+apt-get install xvfb
+apt-get remove xserver-xorg-video*
+</pre>
+
+Now, you setup the SSH Server and connect creating a tunnel.<br /><br />
+
+Once connected, in the Headless Server you type:
+<br /><br />
+<pre>
+x11vnc -localhost -create -env FD_PROG=/usr/bin/fluxbox \
+        -env X11VNC_FINDDISPLAY_ALWAYS_FAILS=1 \
+        -env X11VNC_CREATE_GEOM=${1:-1024x768x16} \
+        -gone 'killall Xvfb' \
+        -bg -nopw
+</pre>
+<br />
+And once the vnc server starts, you connect from your client through
+a tunnel.<br /><br />
+<pre>
+vncviewer localhost:5900
+</pre>
+
+These steps have worked in Debian 8.0 Jessie.
+<br />
+ 
+<b>Published: Thuesday, February 23, 2016</b>
+<hr>
 <div id="section"><p id="postTitle">Compile keepass 2.0.2 on Debian Linux Jeesie</p>
 <p>
 KeepassX webpage states: "KeePassX is an application for people with extremly high demands on secure personal data management. It has a light interface, is cross platform and published under the terms of the GNU General Public License."<br /><br />
@@ -218,28 +250,6 @@ Unpacking libobasis4.4-core (4.4.7.2-2) ...
 
 <b>Published: Friday, February 5, 2016</b>
 <hr>
-<div id="section"><p id="postTitle">Debian 8 Post Install Cleanup</p>
-<p>In this <a href="http://blog.wallves.com/Some%20linux%20firewall%20tips.html">short article</a> i share some short
-but powerfull firewall logging tip.  And <a href="http://blog.wallves.com/Secure%20Debian%20Post%20Install%20configuration.html">
-here</a> security related post install removals for Debian.<br />
-What is next? Lets keep cleaning and removing software!<br /><br />
-
-Almost with Debian 8 these uninstalls haven't caused any issues with other programs,
-but check what it is uninstalling first !  These recommendations are for server oriented
-installations and not so much for workstations, but you can do it if you know
-what you are doing.<br /><br />
-
-
-<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #888888">apt-get remove exim4-*</span>
-<span style="color: #888888">apt-get remove tracker</span>
-<span style="color: #888888">apt-get remove gnome-online-miners</span>
-</pre></div>
-
-
-
-<div style="clear: both;"></div>
-<b>Published: Monday, October 12, 2015</b>
-<hr>
 <div id="section"><p id="postTitle">Secure Debian Post Install configuration</p>
 <p>In this <a href="http://blog.wallves.com/Some%20linux%20firewall%20tips.html">short article</a> i share some short
 but powerfull firewall logging tip.  Now i tell a little about some Debian post installation instructions i would
@@ -296,7 +306,37 @@ Now you would have a clearner list of network listening services.<br />
 <div style="clear: both;"></div>
 <b>Published: Monday, October 12, 2015</b>
 <hr>
-<div id="section"><p id="postTitle">Some linux firewall tips</p>
+<div id="section"><p id="postTitle">Debian 8 Post Install Cleanup</p>
+<p>In this <a href="http://blog.wallves.com/Some%20linux%20firewall%20tips.html">short article</a> i share some short
+but powerfull firewall logging tip.  And <a href="http://blog.wallves.com/Secure%20Debian%20Post%20Install%20configuration.html">
+here</a> security related post install removals for Debian.<br />
+What is next? Lets keep cleaning and removing software!<br /><br />
+
+Almost with Debian 8 these uninstalls haven't caused any issues with other programs,
+but check what it is uninstalling first !  These recommendations are for server oriented
+installations and not so much for workstations, but you can do it if you know
+what you are doing.<br /><br />
+
+
+<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #888888">apt-get remove exim4-*</span>
+<span style="color: #888888">apt-get remove tracker</span>
+<span style="color: #888888">apt-get remove gnome-online-miners</span>
+</pre></div>
+
+
+
+<div style="clear: both;"></div>
+<b>Published: Monday, October 12, 2015</b>
+<hr>
+<div id="section"><script type="text/javascript">
+google_ad_client = "ca-pub-1655368661140826";
+google_ad_slot = "5799356291";
+google_ad_width = 728;
+google_ad_height = 90;
+</script>
+<!-- blog_linux_1 -->
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script><p id="postTitle">Some linux firewall tips</p>
 <p>The overconnected world needs some extra knowledge about protecting yourself from anti-democracy financed cyber-bandits,
 so here some small but powerfull firewall setup tips:<br />
 <br />
@@ -330,31 +370,5 @@ so here some small but powerfull firewall setup tips:<br />
 
 <div style="clear: both;"></div>
 <b>Published: Sunday, October 11, 2015</b>
-<hr>
-<div id="section"><script type="text/javascript">
-google_ad_client = "ca-pub-1655368661140826";
-google_ad_slot = "5799356291";
-google_ad_width = 728;
-google_ad_height = 90;
-</script>
-<!-- blog_linux_1 -->
-<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-</script><p id="postTitle">Firefox starts a server on port 1900</p>
-<p> I observed this kind of packets being filtered in my place:<br /><br /><b>
-<pre>
-Mar 17 13:13:21 reserved kernel: [15070.046566] UDP/OUT: IN= OUT=eth1 SRC=10.10.10.176 DST=239.255.255.250 LEN=122 TOS=0x00 PREC=0x00 TTL=1 ID=17655 DF PROTO=UDP SPT=1900 DPT=1900 LEN=102
-</pre>
-<br /><br /><br />
-And for just one moment, because it starts and stops very quicky i found this:
-<br /><br /><br />
-<pre>
-root@reserved:~# netstat --listen -np
-Active Internet connections (only servers)
-Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
-udp        0      0 0.0.0.0:1900            0.0.0.0:*                           5615/firefox
-</pre>
-<br />
-To disable this go to about:config and then set<br /> loop.enabled -&gt; false<br /><br /> loop.rooms.enabled -&gt; false<br /><br /> Good luck. <div style="clear: both;"></div>
-<b>Published: Tuesday, March 17, 2015</b>
 <hr>
 </body></html>
