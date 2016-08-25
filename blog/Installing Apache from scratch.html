@@ -9,13 +9,14 @@ window.parent.document.title = "Installing Apache from scratch";
 </script>
 <div id="section"><p id="postTitle">Installing Apache from scratch</p>
 <p>
-<div style="text-align: justify;">
-### Installing httpd apache
+<u>1) A required library:</u><br />
+<pre>
 apt-get install libpcre++-dev
-
+</pre>
+<br />
+<pre>
 wget "http://apache.dattatec.com//httpd/httpd-2.4.18.tar.bz2"
 tar jxvf httpd-2.4.18.tar.bz2
-
 wget "http://mirrors.nxnethosting.com/apache//apr/apr-1.5.2.tar.gz"
 wget http://apache.dattatec.com//apr/apr-util-1.5.4.tar.gz
 
@@ -32,6 +33,7 @@ cd ..
 ./configure --enable-ssl --prefix=/usr/local/apache2/ --enable-so --with-included-apr --enable-rewrite --enable-rewrite --enable-proxy --enable-cgi
 
 make
+</pre>
 </div>
 <div style="clear: both;"></div>
 <b>Published: Thursday, August 25, 2016</b>
