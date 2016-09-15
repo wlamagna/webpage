@@ -7,28 +7,6 @@
 <script language="javascript">
 window.parent.document.title = "Year 2015";
 </script>
-<div id="section"><p id="postTitle">Debian 8 Post Install Cleanup</p>
-<p>In this <a href="http://blog.wallves.com/Some%20linux%20firewall%20tips.html">short article</a> i share some short
-but powerfull firewall logging tip.  And <a href="http://blog.wallves.com/Secure%20Debian%20Post%20Install%20configuration.html">
-here</a> security related post install removals for Debian.<br />
-What is next? Lets keep cleaning and removing software!<br /><br />
-
-Almost with Debian 8 these uninstalls haven't caused any issues with other programs,
-but check what it is uninstalling first !  These recommendations are for server oriented
-installations and not so much for workstations, but you can do it if you know
-what you are doing.<br /><br />
-
-<pre>
-apt-get remove exim4-*</span>
-<span style="color: #888888">apt-get remove tracker</span>
-<span style="color: #888888">apt-get remove gnome-online-miners</span>
-</pre>
-
-
-<div style="clear: both;"></div>
-<b>Published: Monday, October 12, 2015</b>
-<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;<a href="tag_linux">linux</a>&nbsp;
-<hr>
 <div id="section"><p id="postTitle">Secure Debian Post Install configuration</p>
 <p>In this <a href="http://blog.wallves.com/Some%20linux%20firewall%20tips.html">short article</a> i share some short
 but powerfull firewall logging tip.  Now i tell a little about some Debian post installation instructions i would
@@ -84,7 +62,29 @@ Now you would have a clearner list of network listening services.<br />
 
 <div style="clear: both;"></div>
 <b>Published: Monday, October 12, 2015</b>
-<a href="tag_linux">linux</a>&nbsp;<a href="tag_debian">debian</a>&nbsp;
+<a href="tag_linux">linux</a>&nbsp;<a href="tag_security">security</a>&nbsp;
+<hr>
+<div id="section"><p id="postTitle">Debian 8 Post Install Cleanup</p>
+<p>In this <a href="http://blog.wallves.com/Some%20linux%20firewall%20tips.html">short article</a> i share some short
+but powerfull firewall logging tip.  And <a href="http://blog.wallves.com/Secure%20Debian%20Post%20Install%20configuration.html">
+here</a> security related post install removals for Debian.<br />
+What is next? Lets keep cleaning and removing software!<br /><br />
+
+Almost with Debian 8 these uninstalls haven't caused any issues with other programs,
+but check what it is uninstalling first !  These recommendations are for server oriented
+installations and not so much for workstations, but you can do it if you know
+what you are doing.<br /><br />
+
+<pre>
+apt-get remove exim4-*</span>
+<span style="color: #888888">apt-get remove tracker</span>
+<span style="color: #888888">apt-get remove gnome-online-miners</span>
+</pre>
+
+
+<div style="clear: both;"></div>
+<b>Published: Monday, October 12, 2015</b>
+<a href="tag_security">security</a>&nbsp;
 <hr>
 <div id="section"><p id="postTitle">Some linux firewall tips</p>
 <p>The overconnected world needs some extra knowledge about protecting yourself from anti-democracy financed cyber-bandits,
@@ -120,7 +120,7 @@ so here some small but powerfull firewall setup tips:<br />
 
 <div style="clear: both;"></div>
 <b>Published: Sunday, October 11, 2015</b>
-<a href="tag_linux">linux</a>&nbsp;<a href="tag_debian">debian</a>&nbsp;
+<a href="tag_security">security</a>&nbsp;<a href="tag_linux">linux</a>&nbsp;
 <hr>
 <div id="section"><p id="postTitle">Firefox starts a server on port 1900</p>
 <p> I observed this kind of packets being filtered in my place:<br /><br /><b>
@@ -139,7 +139,7 @@ udp        0      0 0.0.0.0:1900            0.0.0.0:*                           
 <br />
 To disable this go to about:config and then set<br /> loop.enabled -&gt; false<br /><br /> loop.rooms.enabled -&gt; false<br /><br /> Good luck. <div style="clear: both;"></div>
 <b>Published: Tuesday, March 17, 2015</b>
-<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;<a href="tag_linux">linux</a>&nbsp;
+<a href="tag_security">security</a>&nbsp;
 <hr>
 <div id="section"><p id="postTitle">Compile keepass 0.4.3 on Debian Linux wheezy</p>
 <p> I have switched from Ubuntu to Debian, and am happy i did so.

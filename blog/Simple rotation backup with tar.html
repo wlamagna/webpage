@@ -10,6 +10,6 @@ window.parent.document.title = "Simple rotation backup with tar";
 <div id="section"><p id="postTitle">Simple rotation backup with tar</p>
 <p> To do a simple backup in a few lines, that mantains a history of the past 7 days, you can use this simple script:<br /><br /><span style="font-size:85%;"><span style="font-family: courier new;">#!/bin/bash</span><br /><span style="font-family: courier new;"># fecha has a formated date</span><br /><span style="font-family: courier new;">fecha=`date +&quot;%d-%m-%Y&quot;`</span><br /><span style="font-family: courier new;"># Backup and gzip the directory</span><br /><span style="font-family: courier new;">tar zcvf /backups/trunk-$fecha.tgz /var/www/repository</span><br /><span style="font-family: courier new;"># Rotate the logs, delete older than 7 days</span><br /><span style="font-family: courier new;">find /backups/ -mtime +7 -exec rm {} \; </span></span><br /><br />You are invited to post your little, simple though usefull scripts. <div style="clear: both;"></div>
 <b>Published: Saturday, August 26, 2006</b>
-<a href="tag_linux">linux</a>&nbsp;<a href="tag_debian">debian</a>&nbsp;
+
 <hr>
 </body></html>

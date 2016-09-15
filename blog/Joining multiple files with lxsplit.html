@@ -10,6 +10,6 @@ window.parent.document.title = "Joining multiple files with lxsplit";
 <div id="section"><p id="postTitle">Joining multiple files with lxsplit</p>
 <p> I downloaded multiple files, they were splitted so i had to join them back.&nbsp; The files are commonly splitted to make it easier to download and to minimize the damage if the connection gets lost,<br /> of course, we are not considering a normal FTP or SSH with resume capabilities.<br /><br /><b>1) First install the lxsplit</b><br /> yum install lxsplit<br /><br /><b>2) Now it is time for some scripting:</b><br /><br /> for i in $(seq 1 9); do lxsplit -j M.part$i.rar.001; done<br /><br /> for i in $(seq 10 19); do lxsplit -j M.part$i.rar.001; done<br /><br /> And that is all.<br /> Happy new year for everybody. <div style="clear: both;"></div>
 <b>Published: Saturday, January 02, 2010</b>
-<a href="tag_linux">linux</a>&nbsp;<a href="tag_debian">debian</a>&nbsp;
+
 <hr>
 </body></html>

@@ -10,6 +10,6 @@ window.parent.document.title = "Error No Package Matching glibc.x86_64";
 <div id="section"><p id="postTitle">Error No Package Matching glibc.x86_64</p>
 <p> In Centos 5.1 and Fedora is a bug reported here:<br />https://bugzilla.redhat.com/show_bug.cgi?id=228430<br /><br />The work arround is this:<br />vi /etc/yum.repos.d/CentOS-Base.repo<br /><br />Add this repository:<br /><span style="font-size:85%;"><span style="font-family: courier new;">[c5-base32]</span><br /><span style="font-family: courier new;">name=CentOS-5</span><br /><span style="font-family: courier new;">mirrorlist=http://mirrorlist.centos.org/?release=5&amp;arch=$i386&amp;repo=os</span><br /><span style="font-family: courier new;">gpgcheck=0</span><br /><span style="font-family: courier new;">enabled=0</span><br /><span style="font-family: courier new;">gpgkey=http://mirror.centos.org/centos/RPM-GPG-KEY-centos5</span></span><br /><br /><br />And then:<br /><span style="font-size:85%;"><span style="font-family: courier new;">yum install glibc glibc.i386 --enablerepo=c532*</span></span><div style="clear: both;"></div>
 <b>Published: Saturday, February 09, 2008</b>
-<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;<a href="tag_linux">linux</a>&nbsp;
+
 <hr>
 </body></html>

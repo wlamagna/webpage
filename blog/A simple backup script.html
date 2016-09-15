@@ -10,6 +10,6 @@ window.parent.document.title = "A simple backup script";
 <div id="section"><p id="postTitle">A simple backup script</p>
 <p> I am need to modify files frequently and always need a backup to rollback if i need to.&nbsp; One old way to do this was doing a copy of the actual file to a file with a new extension like &quot;.orig&quot;.<br /><br /> But as a passionate that i am, i need something better, so i created a simple but effective backup script:<br /><br /> 1) Create a script and place it in /usr/bin so all the users can access it.<br /><div style="font-family: &quot;Courier New&quot;,Courier,monospace;">#!/bin/bash<br /> FILENAME=$1<br /> NUM=`date +%s`<br /> echo &quot;Copying $FILENAME to $FILENAME.$NUM&quot;;<br /> cp $FILENAME $FILENAME.$NUM;</div><br /> 2) Then setup an environment variable for your shell, i am working with bash so i use the &quot;alias&quot; in the .bashrc startup script, but depending on the shell you are using, it will differ.<br /><div style="font-family: &quot;Courier New&quot;,Courier,monospace;">alias backup=&#39;/usr/bin/backupScript.bash&#39;</div><br /> That is all ;-) <div style="clear: both;"></div>
 <b>Published: Monday, September 07, 2009</b>
-<a href="tag_linux">linux</a>&nbsp;<a href="tag_debian">debian</a>&nbsp;
+
 <hr>
 </body></html>

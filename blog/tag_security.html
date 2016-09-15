@@ -43,6 +43,63 @@ make install
 <b>Published: Saturday, February 20, 2016</b>
 <a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;<a href="tag_linux">linux</a>&nbsp;
 <hr>
+<div id="section"><p id="postTitle">Secure Debian Post Install configuration</p>
+<p>In this <a href="http://blog.wallves.com/Some%20linux%20firewall%20tips.html">short article</a> i share some short
+but powerfull firewall logging tip.  Now i tell a little about some Debian post installation instructions i would
+commonly recommend.
+<br />
+Download the last stable Debian from <a href="https://www.debian.org/CD/http-ftp/#stable">here</a><br /><br />
+
+When you just install the last Debian you may have something more or less like this:<br />
+
+<pre>
+root@host1:~# netstat --listen -np
+<span style="color: #888888">Active Internet connections (only servers)</span>
+<span style="color: #888888">Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name</span>
+<span style="color: #888888">tcp        0      0 0.0.0.0:111             0.0.0.0:*               LISTEN      397/rpcbind     </span>
+<span style="color: #888888">tcp        0      0 127.0.0.1:631           0.0.0.0:*               LISTEN      445/cupsd       </span>
+<span style="color: #888888">tcp        0      0 127.0.0.1:25            0.0.0.0:*               LISTEN      696/exim4       </span>
+<span style="color: #888888">tcp        0      0 0.0.0.0:38845           0.0.0.0:*               LISTEN      406/rpc.statd   </span>
+<span style="color: #888888">tcp6       0      0 :::111                  :::*                    LISTEN      397/rpcbind     </span>
+<span style="color: #888888">tcp6       0      0 :::48180                :::*                    LISTEN      406/rpc.statd   </span>
+<span style="color: #888888">tcp6       0      0 ::1:631                 :::*                    LISTEN      445/cupsd       </span>
+<span style="color: #888888">tcp6       0      0 ::1:25                  :::*                    LISTEN      696/exim4       </span>
+<span style="color: #888888">udp        0      0 0.0.0.0:996             0.0.0.0:*                           397/rpcbind     </span>
+<span style="color: #888888">udp        0      0 0.0.0.0:5353            0.0.0.0:*                           427/avahi-daemon: r</span>
+<span style="color: #888888">udp        0      0 127.0.0.1:1006          0.0.0.0:*                           406/rpc.statd   </span>
+<span style="color: #888888">udp        0      0 0.0.0.0:42504           0.0.0.0:*                           427/avahi-daemon: r</span>
+<span style="color: #888888">udp        0      0 0.0.0.0:68              0.0.0.0:*                           356/dhclient    </span>
+<span style="color: #888888">udp        0      0 0.0.0.0:50762           0.0.0.0:*                           356/dhclient    </span>
+<span style="color: #888888">udp        0      0 0.0.0.0:111             0.0.0.0:*                           397/rpcbind     </span>
+<span style="color: #888888">udp        0      0 0.0.0.0:631             0.0.0.0:*                           448/cups-browsed</span>
+<span style="color: #888888">udp        0      0 0.0.0.0:49788           0.0.0.0:*                           406/rpc.statd   </span>
+<span style="color: #888888">udp6       0      0 :::996                  :::*                                397/rpcbind     </span>
+<span style="color: #888888">udp6       0      0 :::5353                 :::*                                427/avahi-daemon: r</span>
+<span style="color: #888888">udp6       0      0 :::59218                :::*                                406/rpc.statd   </span>
+<span style="color: #888888">udp6       0      0 :::14952                :::*                                356/dhclient    </span>
+<span style="color: #888888">udp6       0      0 :::111                  :::*                                397/rpcbind     </span>
+<span style="color: #888888">udp6       0      0 :::60837                :::*                                427/avahi-daemon: r</span>
+</pre>
+
+If you are a security conscious administrator, then you agree here is work do to.  Not only to have a safer
+workplace, also to reduce the cpu and memory usage!<br /><br />
+
+<pre>
+apt-get remove exim4-*</span>
+<span style="color: #888888">apt-get remove rpcbind</span>
+<span style="color: #888888">apt-get remove avahi-daemon</span>
+<span style="color: #888888">apt-get remove cups</span>
+<span style="color: #888888">apt-get remove cups-browsed</span>
+<span style="color: #888888">apt-get remove cups-daemon</span>
+</pre></div>
+
+Now you would have a clearner list of network listening services.<br />
+
+
+<div style="clear: both;"></div>
+<b>Published: Monday, October 12, 2015</b>
+<a href="tag_linux">linux</a>&nbsp;<a href="tag_security">security</a>&nbsp;
+<hr>
 <div id="section"><p id="postTitle">Debian 8 Post Install Cleanup</p>
 <p>In this <a href="http://blog.wallves.com/Some%20linux%20firewall%20tips.html">short article</a> i share some short
 but powerfull firewall logging tip.  And <a href="http://blog.wallves.com/Secure%20Debian%20Post%20Install%20configuration.html">
@@ -63,7 +120,43 @@ apt-get remove exim4-*</span>
 
 <div style="clear: both;"></div>
 <b>Published: Monday, October 12, 2015</b>
-<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;<a href="tag_linux">linux</a>&nbsp;
+<a href="tag_security">security</a>&nbsp;
+<hr>
+<div id="section"><p id="postTitle">Some linux firewall tips</p>
+<p>The overconnected world needs some extra knowledge about protecting yourself from anti-democracy financed cyber-bandits,
+so here some small but powerfull firewall setup tips:<br />
+<br />
+<b><u>Firewall setup:</u></b>
+<pre>
+<span style="color: #888888">iptables -F </span>
+<span style="color: #888888">iptables -P INPUT DROP </span>
+<span style="color: #888888">iptables -P OUTPUT DROP </span>
+<span style="color: #888888">iptables -P FORWARD DROP </span>
+<span style="color: #888888"># There is no return once you know these logging lines: </span>
+<span style="color: #888888">iptables -A INPUT -p icmp -m limit -j LOG --log-prefix &quot;ICMP/IN: &quot; </span>
+<span style="color: #888888">iptables -A OUTPUT -p icmp -m limit -j LOG --log-prefix &quot;ICMP/OUT: &quot; </span>
+<span style="color: #888888">iptables -A INPUT -p tcp -m limit -j LOG --log-prefix &quot;TCP/IN: &quot; </span>
+<span style="color: #888888">iptables -A OUTPUT -p tcp -m limit -j LOG --log-prefix &quot;TCP/OUT: &quot; </span>
+<span style="color: #888888">iptables -A INPUT -p udp -m limit -j LOG --log-prefix &quot;UDP/OUT: &quot; </span>
+<span style="color: #888888">iptables -A OUTPUT -p udp -m limit -j LOG --log-prefix &quot;UDP/OUT: &quot; </span>
+</pre>
+<br />
+<b><u>Syslog setup, typically /etc/rsyslog.d/iptables.conf</u></b><br />
+<pre>
+:msg,contains,&quot;ICMP/IN:&quot; /var/log/iptables.log</span>
+<span style="color: #888888">:msg,contains,&quot;ICMP/OUT:&quot; /var/log/iptables.log</span>
+<span style="color: #888888">:msg,contains,&quot;TCP/IN:&quot; /var/log/iptables.log</span>
+<span style="color: #888888">:msg,contains,&quot;TCP/OUT:&quot; /var/log/iptables.log</span>
+<span style="color: #888888">:msg,contains,&quot;UDP/IN:&quot; /var/log/iptables.log</span>
+<span style="color: #888888">:msg,contains,&quot;UDP/OUT:&quot; /var/log/iptables.log</span>
+</pre></div>
+<br />
+<b><u>Restarting service</u></b><br />
+/etc/init.d/rsyslog restart
+
+<div style="clear: both;"></div>
+<b>Published: Sunday, October 11, 2015</b>
+<a href="tag_security">security</a>&nbsp;<a href="tag_linux">linux</a>&nbsp;
 <hr>
 <div id="section"><p id="postTitle">Firefox starts a server on port 1900</p>
 <p> I observed this kind of packets being filtered in my place:<br /><br /><b>
@@ -82,7 +175,7 @@ udp        0      0 0.0.0.0:1900            0.0.0.0:*                           
 <br />
 To disable this go to about:config and then set<br /> loop.enabled -&gt; false<br /><br /> loop.rooms.enabled -&gt; false<br /><br /> Good luck. <div style="clear: both;"></div>
 <b>Published: Tuesday, March 17, 2015</b>
-<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;<a href="tag_linux">linux</a>&nbsp;
+<a href="tag_security">security</a>&nbsp;
 <hr>
 <div id="section"><p id="postTitle">Compile keepass 0.4.3 on Debian Linux wheezy</p>
 <p> I have switched from Ubuntu to Debian, and am happy i did so.
@@ -150,188 +243,6 @@ And it should look like:
 
 <div style="clear: both;"></div>
 <b>Published: Wednesday, March 11, 2015</b>
-<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;<a href="tag_linux">linux</a>&nbsp;
-<hr>
-<div id="section"><p id="postTitle">fb conflicting fb hw usage inteldrmfb vs VESA VGA - removing generic driver</p>
-<p><br /><br /> After upgrading to Ubuntu 14.04.1 the machine hung after s very short passage through an attempt to start the graphical interface.&nbsp;&nbsp; With some luck, i pressed ctrl+alt+f1 to be on the terminal and avoided to use the graphics, hence avoided the crash.&nbsp; But i would recommend you to just start with a live cd and mount the filesystem.<br /><br /> I found this in the /var/log/kern.log .<br /><br /> After googling and looking at a lot of suggestions, what worked for me was:<br /><br /> apt-get install nvidia-331<br /> apt-get remove xserver-xorg-video-nouveau<br /><br /> vi /etc/modprobe.d/nvidia-graphics-drivers.conf<br /><br /> blacklist nouveau<br /> blacklist lbm-nouveau<br /> blacklist nvidia-173<br /> blacklist nvidia-96<br /> alias nvidia nvidia-current<br /><br /> This will do it (or most likely should).&nbsp; Then you may have issues with the desktop that do not starts.. but that may be another story. <div style="clear: both;"></div>
-<b>Published: Sunday, October 12, 2014</b>
-<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;<a href="tag_linux">linux</a>&nbsp;
-<hr>
-<div id="section"><p id="postTitle">Creating a RAMFS</p>
-<p> With the previous method i found it slow for being a ram disk, i read that ramfs does no swapping, i want to test it:<br /><br /><pre>mount -t ramfs -o size=50m ramfs /ramcache</pre> <pre>&nbsp;</pre> <pre><br></pre> <pre>This is a good resource:</pre> <pre>http://www.thegeekstuff.com/2008/11/overview-of-ramfs-and-tmpfs-on-linux/ </pre><div style="clear: both;"></div>
-<b>Published: Tuesday, June 12, 2012</b>
-<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;<a href="tag_linux">linux</a>&nbsp;
-<hr>
-<div id="section"><p id="postTitle">glib lotus notes java memory corruption</p>
-<p><br /><br />Today i updated some packets related to IBM lotus notes and a problem with libraries caused a great and long investigation process to have lotus notes back.<br /><br /><br />I tried lot of things: reinstalling, purging the packets, installing the same version again... nothing worked. Today i found the solution <a href="#">here</a>.<br /><br /><br />It says:<br /><br /><b>[...]&nbsp;</b>After some research I found the problem: libnuma. If this lib exists in the system the Notes Client loads data forever.<b> [...]</b><br /><br /><br />the solution is:<br /> apt-get remove libnuma1<br /><br /><br /><br /><br /><br /><span class="comment-body" data-li-comment-text="">Standard disclosure: this is my opinion and not necessarily that of my employer or anyone else.</span><div style="clear: both;"></div>
-<b>Published: Tuesday, April 24, 2012</b>
-<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;<a href="tag_linux">linux</a>&nbsp;
-<hr>
-<div id="section"><p id="postTitle">Decision Trees with r project on Linux</p>
-<p><div style="text-align: center;"><u><b>Chaid Trees with R Project on Linux</b></u></div><br /> Start R and install Partykit:<br /> $ R<br /> &gt; install.packages(&quot;partykit&quot;)<br /><br /> On a command line download the chaid sources:<br /> svn checkout svn://svn.r-forge.r-project.org/svnroot/chaid/<br /><br /> $ cd chaid<br /> $ R CMD INSTALL pkg/<br /><br /> On R:<br /> &gt; library(&quot;CHAID&quot;)<br /> Loading required package: partykit<br />Loading required package: grid<br /><br /><br /><br /> Chaid project:<br /> http://r-forge.r-project.org/scm/?group_id=343 <div style="clear: both;"></div>
-<b>Published: Monday, February 27, 2012</b>
-<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;<a href="tag_linux">linux</a>&nbsp;
-<hr>
-<div id="section"><p id="postTitle">Datamining with Linux</p>
-<p><div style="font-family: Arial,Helvetica,sans-serif;"><span style="font-size: large;">I&#39;m currently doing the Datamining Specialist course and i try to use open source solutions, and if not open source, linux solutions... because i am a unix user.</span></div><br /> This is a list of software i recommend to try, i am studying some features and they are<br /> all great:<br /><br /><a href="#">WEKA</a> (http://www.cs.waikato.ac.nz/ml/weka/)<br /><div style="text-align: justify;">Weka is a collection of machine learning algorithms for data mining tasks. The algorithms can either be applied directly to a dataset or called from your own Java code. Weka contains tools for data pre-processing, classification, regression, clustering, association rules, and visualization. It is also well-suited for developing new machine learning schemes.</div><br /><a href="#">The R Project for Statistical Computing</a> (http://www.r-project.org/)<br /> R is a free software environment for statistical computing and graphics.<br /><br /><a href="#">Matlab</a> (http://www.mathworks.com/)<br /> This is a commercial software that can be used to create models of artificial neural networks and any kind of math problems.<br /><br /><a href="#">dTree</a> ( http://www.aispace.org/dTree/)<br /> This tool demonstrates how to build a decision tree using a training data set and then use the tree to classify unseen examples in a test data set.<br /><br /> If you know some other soft, please post it and i&#39;ll try it. <div style="clear: both;"></div>
-<b>Published: Thursday, June 03, 2010</b>
-<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;<a href="tag_linux">linux</a>&nbsp;
-<hr>
-<div id="section"><p id="postTitle">Errors compiling VMware Server on Fedora 12</p>
-<p> Hi! Today i downloaded vmware server to use it on my Linux workstation.&nbsp; I am using Fedora 12 with the latest kernel update so i had not much hope to compile the vmware kernel modules without some troubleshooting.<br /><br /> After solving the problems, here i share the solutions i hope to help you.&nbsp; If you find it useful, remember that you can Invite me a kaffee ! :)<br /><br /> 1. Download the latest VMware workstation (It is free)<br /> https://www.vmware.com/tryvmware/p/activate.php?p=server20&amp;lp=1&amp;ext=1<br /><br /> Note: I downloaded the rpm version.<br /><br /> 2. Install it:<br /> yum install VMware-server-2.0.2-203138.i386.rpm<br /><br /> 3. Try to compile the modules:<br /> vmware-config.pl<br /><br /> Ok.. in this moment a lot of warnings and errors appear between them, errors with vmnet, vmci, etc...<br /><br /> make[1]: Leaving directory `/usr/src/kernels/2.6.32.10-90.fc12.i686&#39;<br /> Unable to build the vmnet module.<br /><br /><br /> Unable to build the vmci module.<br /><br /> 4. Patch the modules:<br /><br /> - Download from http://www.erdemap.com/store/2.6.32.10-90.fc12.vmmon.tar.gz<br /> wget http://www.erdemap.com/store/2.6.32.10-90.fc12.vmmon.tar.gz<br /><br /> 5. unzip &amp; untar it.<br /> 6. execute the patch shell script *inspect it first, it is very VERY basic*<br /> 7. After installing the patches, execute the vmware-config.pl<br /><br /> Starting VMware services:<br /> &nbsp;&nbsp; Virtual machine monitor&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [&nbsp; OK&nbsp; ]<br /> &nbsp;&nbsp; Virtual ethernet&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [&nbsp; OK&nbsp; ]<br /> &nbsp;&nbsp; Bridged networking on /dev/vmnet0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [&nbsp; OK&nbsp; ]<br /> &nbsp;&nbsp; Host-only networking on /dev/vmnet1 (background)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [&nbsp; OK&nbsp; ]<br /> &nbsp;&nbsp; DHCP server on /dev/vmnet1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [&nbsp; OK&nbsp; ]<br /> &nbsp;&nbsp; Host-only networking on /dev/vmnet8 (background)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [&nbsp; OK&nbsp; ]<br /> &nbsp;&nbsp; DHCP server on /dev/vmnet8&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [&nbsp; OK&nbsp; ]<br /> &nbsp;&nbsp; NAT service on /dev/vmnet8&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [&nbsp; OK&nbsp; ]<br /> &nbsp;&nbsp; VMware Server Authentication Daemon (background)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [&nbsp; OK&nbsp; ]<br /> &nbsp;&nbsp; Shared Memory Available&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [&nbsp; OK&nbsp; ]<br /> Starting VMware management services:<br /> &nbsp;&nbsp; VMware Server Host Agent (background)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [&nbsp; OK&nbsp; ]<br /> &nbsp;&nbsp; VMware Virtual Infrastructure Web Access<br /> Starting VMware autostart virtual machines:<br /><br /><strong>If you need more help and you want to get in touch with me</strong><br /><strong style="font-weight: normal;">Why</strong> not <a href="#">contact me</a> ;-) <div style="clear: both;"></div>
-<b>Published: Saturday, April 03, 2010</b>
-<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;<a href="tag_linux">linux</a>&nbsp;
-<hr>
-<div id="section"><p id="postTitle">Five Easy Ways to Secure Your Linux System</p>
-<p> On the heels of last week&rsquo;s entry on using DenyHosts, and Nikto the week before that; I thought it appropriate to continue in the security vein with five more simple techniques that you can use to protect your systems. These include using account locking, limiting cron use, using DENY access to services, refusing root SSH logins and changing SSHD&rsquo;s default port.<br /><br /><a href="#">Keep reading..</a><br /><br /><div style="text-align: center;">&nbsp;Account Locking</div><div style="text-align: center;">&nbsp;Cron Restriction</div><div style="text-align: center;">&nbsp;Deny, Deny, Deny</div><div style="text-align: center;">&nbsp;Deny SSH by Root</div><div style="text-align: center;">&nbsp;Change the Default Port</div><div style="clear: both;"></div>
-<b>Published: Tuesday, March 30, 2010</b>
-<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;<a href="tag_linux">linux</a>&nbsp;
-<hr>
-<div id="section"><p id="postTitle">Error compiling cairomm</p>
-<p> While compiling cairomm i got this error:<br /><br /><span style="font-family: &quot;Courier New&quot;,Courier,monospace;">configure.ac:37: error: possibly undefined macro: AC_DISABLE_STATIC</span><br style="font-family: &quot;Courier New&quot;,Courier,monospace;" /><span style="font-family: &quot;Courier New&quot;,Courier,monospace;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; If this token and others are legitimate, please use m4_pattern_allow.</span><br style="font-family: &quot;Courier New&quot;,Courier,monospace;" /><span style="font-family: &quot;Courier New&quot;,Courier,monospace;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; See the Autoconf documentation.</span><br style="font-family: &quot;Courier New&quot;,Courier,monospace;" /><span style="font-family: &quot;Courier New&quot;,Courier,monospace;">configure.ac:38: error: possibly undefined macro: AC_LIBTOOL_WIN32_DLL</span><br style="font-family: &quot;Courier New&quot;,Courier,monospace;" /><span style="font-family: &quot;Courier New&quot;,Courier,monospace;">configure.ac:39: error: possibly undefined macro: AC_PROG_LIBTOOL</span><br style="font-family: &quot;Courier New&quot;,Courier,monospace;" /><span style="font-family: &quot;Courier New&quot;,Courier,monospace;">autoreconf: /usr/bin/autoconf failed with exit status: 1</span><br /><br /> Solution:<br /> Install libtool:<br /><br /><pre><code>[root@dyn854450 ~]# yum install libtool</code></pre><div style="clear: both;"></div>
-<b>Published: Friday, February 26, 2010</b>
-<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;<a href="tag_linux">linux</a>&nbsp;
-<hr>
-<div id="section"><p id="postTitle">Fedora Debian FreeBSD OpenBSD OpenSolaris Benchmarks</p>
-<p><div style="text-align: justify;">With Debian GNU/kFreeBSD using the FreeBSD 7.2 kernel, we threw the full FreeBSD 7.2 operating system into the comparison mix. FreeBSD 8.0 was added in since that is the latest FreeBSD stable release at this time. OpenBSD 4.6 was used as another *BSD comparison while OpenSolaris 2009.06 was used to represent some Sun Solaris numbers. Fedora 12 provides a look at some of the latest Linux packages available more so than the Debian snapshot from 2010-01-14. The 64-bit versions of all operating systems were used during this testing process.<br /></div><br /><a href="#">+ keep reading... </a><div style="clear: both;"></div>
-<b>Published: Tuesday, January 26, 2010</b>
-<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;<a href="tag_linux">linux</a>&nbsp;
-<hr>
-<div id="section"><p id="postTitle">Fixing Your Holiday Photos With GIMP</p>
-<p><div style="font-family: Arial,Helvetica,sans-serif;"><span style="font-size: small;">The holidays are such a great time for getting together with family and friends.I bet you take a camera along. Or better yet, maybe there&#39;s a shiny new camera waiting for you under the tree. I know I take lots of photos over the holiday season.</span><br /></div><div style="font-family: Arial,Helvetica,sans-serif;"><br /></div><div style="font-family: Arial,Helvetica,sans-serif;"><span style="font-size: small;">But you know what? A lot of my photos don&#39;t come out very good. Shooting conditions at those family get-togethers sometimes aren&#39;t the best, and you&#39;re probably distracted by watching Uncle Albert trying to sneak another...</span><br /></div><div style="font-family: Arial,Helvetica,sans-serif;"><br /></div><span style="font-family: Arial,Helvetica,sans-serif; font-size: small;"><a href="#">+ Keep reading..&nbsp;</a></span><span style="font-family: Verdana,Arial,Helvetica; font-size: x-small;"><span style="font-family: Verdana,Arial,Helvetica; font-size: x-small;"><br /></span></span><div style="clear: both;"></div>
-<b>Published: Wednesday, December 30, 2009</b>
-<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;<a href="tag_linux">linux</a>&nbsp;
-<hr>
-<div id="section"><p id="postTitle">Free database firewall protects PostgreSQL and MySQL</p>
-<p><div style="font-family: Arial,Helvetica,sans-serif; text-align: justify;">GreenSQL is run as a proxy between applications and database servers. It actively analyses the incoming SQL commands and can then act on the results according to the selected mode. Simulation mode blocks nothing but records the analysis in GreenSQL&#39;s own database and notifies the administrator of suspicious queries. Blocking mode on the other hand uses the database and it&#39;s heuristic engine to find and block suspicious queries.<br /></div><br /><a href="#">Read full article here...</a><br /><br /> GreenSQL is available as binaries to <a href="#">download</a> for CentOS 5.4, Debian 5.0, Fedora 12, Ubuntu 8.10 and 9.04, and as GPL2 licensed source code. <div style="clear: both;"></div>
-<b>Published: Friday, December 04, 2009</b>
-<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;<a href="tag_linux">linux</a>&nbsp;
-<hr>
-<div id="section"><p id="postTitle">Creating an Ad-Hoc Network Between Two Open-Suse Installed Computers</p>
-<p> Lately my wireless router broke down and i sent it to be repaired. But the problems started to arise because without a wireless router i wasn&rsquo;t able to share my Internet connection.<br /><br /><b style="font-family: Arial,Helvetica,sans-serif;"><a href="#">Keep reading</a></b><div style="clear: both;"></div>
-<b>Published: Wednesday, December 02, 2009</b>
-<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;<a href="tag_linux">linux</a>&nbsp;
-<hr>
-<div id="section"><p id="postTitle">Does encrypted lvm increase server security</p>
-<p><h1>Encrypted root With LVM on Fedora 8</h1><h2>Overview</h2>This recipe details how you can install F8 (and most likely also F7 and CentOS 5) on a system such that everything except /boot is encrypted. This recipe makes use of your full disc (no unused space is left after it&#39;s completed), and doesn&#39;t require booting into a Live DVD (important because many of my machines don&#39;t have DVD drives on them, many don&#39;t even have CD drives). It also does not require a second hard drive.<br /><br /> Stories abound about laptops being lost, and data possibly exposed because of it. I&#39;m also concerned about someone breaking into my house and stealing our backup server, and through that exposing sensitive or confidential client data for many of our customers. I&#39;m actually not that worried about the loss of the machines, they&#39;re cheap computers and data on our home backup server is duplicated at our facility. So, I like to run <span style="font-size: small;">encrypted file-systems.&nbsp; <br /></span><br /><h1><span style="font-size: small;"><a href="#">Keep reading here..</a></span><br /></h1><div style="clear: both;"></div>
-<b>Published: Wednesday, November 18, 2009</b>
-<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;<a href="tag_linux">linux</a>&nbsp;
-<hr>
-<div id="section"><p id="postTitle">Creating Virtual IP Addresses on Linux</p>
-<p> Virtual IP addresses (or VIPs) allow you to use multiple IPs on a single physical network interface. Creating virtual IP addresses is often done to allow webservers to host multiple SSL encrypted web sites on a single webserver or to allow cluster suites to communicate on a dedicated IP address. This article will cover the two primary means of creating virtual IPs on a Linux host.<br /><br /><span style="font-weight: bold;"><span style="font-family: courier new;">ifconfig</span></span><br /><br /> The first and most common method employed is to use the Linux command &#39;ifconfig&#39; to create a VIP in the following manner, assuming that the interface being used is <span style="font-family: courier new;">eth1</span>.<br /><br /><span style="font-family: courier new;"># ifconfig eth1:0 192.168.1.28</span><br /><br /><span style="font-family: courier new;"><span style="font-family: Verdana,sans-serif;">Keep reading </span><a href="#" style="font-family: Verdana,sans-serif;">here</a><br /></span><div style="clear: both;"></div>
-<b>Published: Thursday, November 05, 2009</b>
-<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;<a href="tag_linux">linux</a>&nbsp;
-<hr>
-<div id="section"><p id="postTitle">Download TTYSnoop - Install TTYSnoop</p>
-<p><h2>Download ttysnoop and then <a href="#">install it</a></h2><table border="0"><caption class="hidecss">Download for all available architectures</caption><tbody><tr><th>Architecture<br /></th><th>Package Size<br /></th><th>Installed Size<br /></th><th>Files<br /></th></tr><tr><th><a href="#">alpha</a><br /></th><td class="size">18.1&nbsp;kB<br /></td><td class="size">116&nbsp;kB<br /></td><td><br /> [<a href="#">list of files</a>]<br /></td></tr><tr><th><a href="#">amd64</a><br /></th><td class="size">16.8&nbsp;kB<br /></td><td class="size">108&nbsp;kB<br /></td><td><br /> [<a href="#">list of files</a>]<br /></td></tr><tr><th><a href="#">armel</a><br /></th><td class="size">15.1&nbsp;kB<br /></td><td class="size">104&nbsp;kB<br /></td><td><br /> [<a href="#">list of files</a>]<br /></td></tr><tr><th><a href="#">avr32</a> <b>(unofficial port)</b><br /></th><td class="size">15.0&nbsp;kB<br /></td><td class="size">104&nbsp;kB<br /></td><td><br /> [<a href="#">list of files</a>]<br /></td></tr><tr><th><a href="#">hppa</a><br /></th><td class="size">17.2&nbsp;kB<br /></td><td class="size">108&nbsp;kB<br /></td><td><br /> [<a href="#">list of files</a>]<br /></td></tr><tr><th><a href="#">hurd-i386</a><br /></th><td class="size">15.6&nbsp;kB<br /></td><td class="size">104&nbsp;kB<br /></td><td><br /> [<a href="#">list of files</a>]<br /></td></tr><tr><th><a href="#">i386</a><br /></th><td class="size">15.5&nbsp;kB<br /></td><td class="size">52&nbsp;kB<br /></td><td><br /> [<a href="#">list of files</a>]<br /></td></tr><tr><th><a href="#">ia64</a><br /></th><td class="size">21.3&nbsp;kB<br /></td><td class="size">128&nbsp;kB<br /></td><td><br /> [<a href="#">list of files</a>]<br /></td></tr><tr><th><a href="#">kfreebsd-amd64</a><br /></th><td class="size">17.0&nbsp;kB<br /></td><td class="size">68&nbsp;kB<br /></td><td><br /> [<a href="#">list of files</a>]<br /></td></tr><tr><th><a href="#">kfreebsd-i386</a><br /></th><td class="size">15.3&nbsp;kB<br /></td><td class="size">62&nbsp;kB<br /></td><td><br /> [<a href="#">list of files</a>]<br /></td></tr><tr><th><a href="#">m68k</a> <b>(unofficial port)</b><br /></th><td class="size">15.6&nbsp;kB<br /></td><td class="size">104&nbsp;kB<br /></td><td><br /> [<a href="#">list of files</a>]<br /></td></tr><tr><th><a href="#">mips</a><br /></th><td class="size">17.3&nbsp;kB<br /></td><td class="size">108&nbsp;kB<br /></td><td><br /> [<a href="#">list of files</a>]<br /></td></tr><tr><th><a href="#">mipsel</a><br /></th><td class="size">17.3&nbsp;kB<br /></td><td class="size">108&nbsp;kB<br /></td><td><br /> [<a href="#">list of files</a>]<br /></td></tr><tr><th><a href="#">powerpc</a><br /></th><td class="size">16.1&nbsp;kB<br /></td><td class="size">104&nbsp;kB<br /></td><td><br /> [<a href="#">list of files</a>]<br /></td></tr><tr><th><a href="#">s390</a><br /></th><td class="size">16.8&nbsp;kB<br /></td><td class="size">108&nbsp;kB<br /></td><td>[<a href="#">list of files</a>]<br /></td></tr><tr><th><a href="#">sparc</a><br /></th><td class="size">15.4&nbsp;kB<br /></td><td class="size">104&nbsp;kB<br /></td><td><br /> [<a href="#">list of files</a>]<br /></td></tr></tbody></table><div style="clear: both;"></div>
-<b>Published: Wednesday, November 04, 2009</b>
-<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;<a href="tag_linux">linux</a>&nbsp;
-<hr>
-<div id="section"><p id="postTitle">Error while compiling php on a 64 bits machine</p>
-<p> You are getting this error :<br /><br />checking for MySQL UNIX socket location... /var/lib/mysql/mysql.sock<br />configure: error: Cannot find libmysqlclient under /usr.<br />Note that the MySQL client library is not bundled anymore!<br /><br />To resolve it i did this:<br />cd /usr/lib/<br />ln -s ../lib64/mysql<br /><br />Now go to the php directory and compile --with-mysql. <div style="clear: both;"></div>
-<b>Published: Wednesday, August 19, 2009</b>
-<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;<a href="tag_linux">linux</a>&nbsp;
-<hr>
-<div id="section"><p id="postTitle">Creating a VIP on Linux</p>
-<p> If you want to have two or more ip addresses on one physical interface, in Linux, there are many ways to do it, but to have a change permanent you have to do these steps on Redhat Linux and probably other distros:<br /><br />Make a copy from the physical interface startup config file:<br />cp /etc/sysconfig/network-scripts/ifcfg-eth0 /etc/sysconfig/network-scripts/ifcfg-eth0:0<br /><br />Modify the /etc/sysconfig/network-scripts/ifcfg-eth0:0<br /><span style="font-family: courier new;">DEVICE=eth0</span><br /><span style="font-family: courier new;">BOOTPROTO=static</span><br /><span style="font-family: courier new;">HWADDR=00:53:52:A2:43:43</span><br /><span style="font-family: courier new;">IPADDR=192.168.100.30</span><br /><span style="font-family: courier new;">NETMASK=255.255.255.0</span><br /><span style="font-family: courier new;">ONBOOT=yes</span><br /><span style="font-family: courier new;">TYPE=Ethernet</span><br /><span style="font-family: courier new;">MACADDR=00:53:52:A2:43:43</span><br /><br />Finaly, do a :<br /><span style="font-family: courier new;"># ifup eth0:0</span><div style="clear: both;"></div>
-<b>Published: Tuesday, March 17, 2009</b>
-<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;<a href="tag_linux">linux</a>&nbsp;
-<hr>
-<div id="section"><p id="postTitle">Error with PHP and Mysql</p>
-<p><span style="font-size:85%;"><span style="font-family:courier new;">skipping incompatible /usr/lib/mysql/libmysqlclient.so when searching for -lmysqlclient<br /><br /><span style="font-weight: bold;font-family:arial;">Seems that this errors come because of incompatibility between i386 and x64.</span><br /><span style="font-weight: bold;font-family:arial;"></span><br /># cd /usr/lib/mysql<br /># ln -s ../../lib64/mysql/libmysqlclient.so<br /><br /><span style="font-weight: bold;font-family:arial;">If this do not works, you can patch the Makefile to use the x64 version of the</span><br /><span style="font-weight: bold;font-family:arial;">libraries instead of the x32:</span><br /><br /># sed -i -e &#39;s@-L/usr/lib/mysql@-L/usr/lib64/mysql@g&#39; Makefile<br /><br /><br /></span></span><div style="clear: both;"></div>
-<b>Published: Friday, December 12, 2008</b>
-<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;<a href="tag_linux">linux</a>&nbsp;
-<hr>
-<div id="section"><p id="postTitle">Error starting snmp on Centos.</p>
-<p><span style="font-size:85%;"><span style="font-family:arial;">/usr/sbin/snmpd: symbol lookup error: /usr/sbin/snmpd: undefined symbol: smux_snmp_select_list_get_length</span><br /></span><br /><span style="font-family:courier new;">Resolution:</span><br /><span style="font-weight: bold;font-family:courier new;">yum update net-snmp-libs</span><div style="clear: both;"></div>
-<b>Published: Friday, December 12, 2008</b>
-<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;<a href="tag_linux">linux</a>&nbsp;
-<hr>
-<div id="section"><p id="postTitle">Forcing logrotation with logrotate</p>
-<p> In my previous post i explained how to setup a simple logrotation (<a href="#">http://serverlinux.blogspot.com/2006/02/logrotate-in-linux.html</a>), now i would like to show a simple but usefull command that forces the logrotation, independent of the normal execution.<br /><br /># logrotate -f /etc/logrotate.conf<br /><br />For more information, see &quot;man logrotate&quot;. LOGROTATE(8). <div style="clear: both;"></div>
-<b>Published: Tuesday, June 24, 2008</b>
-<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;<a href="tag_linux">linux</a>&nbsp;
-<hr>
-<div id="section"><p id="postTitle">Find out the php.ini location in your LAMP setup</p>
-<p> In the command line write:<br /><br />echo &quot;&lt;?php phpinfo(); ?&gt;&quot; | php | grep php.ini <div style="clear: both;"></div>
-<b>Published: Saturday, June 21, 2008</b>
-<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;<a href="tag_linux">linux</a>&nbsp;
-<hr>
-<div id="section"><p id="postTitle">Creating a complete LAMP solution in Centos Linux</p>
-<p>Download Apache: httpd-2.2.9.tgz<br />
-Download PHP: php-5.2.6.tgz<br /><br />
-Uncompress and compile Apache:<br />
-<pre>
-./configure --with-pgsql --with-apxs2=/usr/local/apache/bin/apxs --with-xml --disable-dom --without-pear --with-pgsql --with-gd --with-zlib --enable-sockets
-</pre>
-<br />
-Uncompress and compile PHP:<br />
-<pre>
-./configure --with-pgsql --with-apxs2=/usr/local/apache/bin/apxs --with-xml --disable-dom --without-pear --with-pgsql --with-gd --with-zlib --enable-sockets --with-mysql
-</pre>
-<br /><br />
-If you get this message:<br />
-<pre>
-If configure fails try --with-jpeg-dir==[dir]
-configure: error: libpng.(a|so) not found.
-</pre>
-<br /><br />
-Do the following:<br />
-Download libpng-1.2.29.tar.bz2 from http://www.libpng.org/pub/png/libpng.html<br />
-Uncompress and:<br />
-<pre>
-cd libpng-1.2.29
-cp scripts/makefile.linux Makefile
-make prefix=/usr && make install
-</pre>
-Download http://www.zlib.net/zlib-1.2.3.tar.gz, uncompress it, then:
-<pre>
-cd zlib-1.2.3
-./configure --prefix=/usr && make && make install
-</pre>
-<br /><br />
-To add jpeg support to PHP, download jpegsrc.v6b.tar.gz from ftp://ftp.uu.net/graphics/jpeg/
-<br />
-Uncompress it and: 
-<pre>
-[jpeg-6b]# ./configure --prefix=/usr && make && make install
-</pre>
-Now configure PHP with jpeg and postgresql support:
-<pre>
-./configure --with-pg --with-apxs2=/usr/local/apache/bin/apxs --disable-dom --without-pear --with-pgsql --with-gd --with-zlib --enable-sockets --with-jpeg-dir=../jpeg-6b/
-</pre>
-<div style="clear: both;"></div>
-<b>Published: Wednesday, June 18, 2008</b>
-<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;<a href="tag_linux">linux</a>&nbsp;
-<hr>
-<div id="section"><p id="postTitle">Error No Package Matching glibc.x86_64</p>
-<p> In Centos 5.1 and Fedora is a bug reported here:<br />https://bugzilla.redhat.com/show_bug.cgi?id=228430<br /><br />The work arround is this:<br />vi /etc/yum.repos.d/CentOS-Base.repo<br /><br />Add this repository:<br /><span style="font-size:85%;"><span style="font-family: courier new;">[c5-base32]</span><br /><span style="font-family: courier new;">name=CentOS-5</span><br /><span style="font-family: courier new;">mirrorlist=http://mirrorlist.centos.org/?release=5&amp;arch=$i386&amp;repo=os</span><br /><span style="font-family: courier new;">gpgcheck=0</span><br /><span style="font-family: courier new;">enabled=0</span><br /><span style="font-family: courier new;">gpgkey=http://mirror.centos.org/centos/RPM-GPG-KEY-centos5</span></span><br /><br /><br />And then:<br /><span style="font-size:85%;"><span style="font-family: courier new;">yum install glibc glibc.i386 --enablerepo=c532*</span></span><div style="clear: both;"></div>
-<b>Published: Saturday, February 09, 2008</b>
-<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;<a href="tag_linux">linux</a>&nbsp;
-<hr>
-<div id="section"><p id="postTitle">First notes about Minix Source code.</p>
-<p> I hope not to loose the path with this post, it is about Minix Source code which i am studying for curiosity, but would also be applicable to Linux kernel source code. It is about some conventions used while coding header files in C.<br /><br />In some headers i find this:<br /><span style="font-size:100%;">PUBLIC char *t_stack[TOT_STACK_SPACE / sizeof(char *)];<br />PRIVATE int mini_send() {...};<br />EXTERN struct proc proc[NR_TASKS + NR_PROCS];</span><br /><br />These words are not from C, they are macros declared in a header src/include/minix/const.h file, like this:<br /><span style="font-size:100%;"><span style="font-family: arial;">#define EXTERN extern /* used in *.h files */</span><br /><span style="font-family: arial;">#define PRIVATE static /* PRIVATE x limits the scope of x */</span><br /><span style="font-family: arial;">#define PUBLIC /* PUBLIC is the opposite of PRIVATE */</span></span><br /><br /><span style="font-weight: bold;">The extern keyword</span><br />C permits to link together various modules already compiled, for better management possibilities and time reduction in big projects. The global variables have to be declared just one time. So, a solution is to declare all the global variables in one of the files, and in the other files where this variable is required, use the &quot;extern&quot; declaration. The &quot;extern&quot; work gives the compiler the information to know the types and names of the global variables, without creating a new storage.<br /><br /><span style="font-weight: bold;">The static keyword</span><br />The static variables have different effects when they are local or global.<br /><span style="font-weight: bold; font-style: italic;">Static local variables:</span><br />When the static modifier is applied to a local variable, the compiler creates a permanent storage for it. The difference between a local static variable and a global one, is that the local static variable is only known in the block in which it is declared. It is a variable that whoes value remains between the function calls.<br />Example:<br />adding (void ) {<br /> static int age;<br /> age = age + 1;<br /> return age;<br />}<br /><br />The variable age keeps existing between calls to the function, which returns always a new number.<br /><span style="font-weight: bold; font-style: italic;">Static global variables</span><br />This variables are only known in the file where they where declared, this means that though the variable is global, the other files are not going to see it, nor modify its content directly. <div style="clear: both;"></div>
-<b>Published: Friday, January 04, 2008</b>
-<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;<a href="tag_linux">linux</a>&nbsp;
-<hr>
-<div id="section"><p id="postTitle">Discovering Ubuntu</p>
-<p> In Ubuntu i got this error while installing apache:<span style=";font-family:courier new;font-size:85%;"><br />configure: error: C compiler cannot create executables</span><br />Resolved it with this:<br /><span style=";font-family:courier new;font-size:85%;">apt-get install libc6-dev g++ gcc<br /><br />No recognized SSL/TLS toolkit detected<br />Resolved with:<br /></span><span style="font-size:85%;"><span style="font-family: courier new;">apt-get install openssl libssl-dev</span></span><div style="clear: both;"></div>
-<b>Published: Friday, December 21, 2007</b>
-<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;<a href="tag_linux">linux</a>&nbsp;
-<hr>
-<div id="section"><p id="postTitle">Create cool custom functions with Linux</p>
-<p> This section today is dedicated to the cool functions a System Administrator can create to make its life easier. I will give two examples i found very usefull.<br /><br /><span style="font-size:78%;"><span style="font-family:courier new;">$ tip() { lynx -cfg=/dev/null -dump &quot;http://www.ugu.com/sui/ugu/show?tip.today&quot; | sed -n &#39;/Unix Tip #/,/generously/p&#39; }</span><br /></span><span style="font-size:78%;"><br /><span style="font-family:courier new;">$ trans() {lynx -cfg=/dev/null -dump &quot;http://spanishdict.com/1AS.cfm?e=$1&quot; | sed -n &#39;/Spanish Word/,/Spanish Word:/p&#39; }<br /><br />Yoy call these functions this way:<br /><br />$ tip<br />Thanks to www.ugu.com<br /><br />$ trans traducir<br />Spanish Word English Word<br />traducir [9]to translate<br /><span style=";font-family:georgia;font-size:100%;"><span style="font-weight: bold;">And to see the defined functions type:</span></span><br />$ set<br /><br />Please, share with your comment some helpfulness scripts ;)<br /><br /></span></span><div style="clear: both;"></div>
-<b>Published: Friday, August 17, 2007</b>
-<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;<a href="tag_linux">linux</a>&nbsp;
-<hr>
-<div id="section"><p id="postTitle">Configure ttysnoop with SSH in Suse Or Redhat Linux</p>
-<p> This time a nice administrator tool called TTYSNOOP, it permits to watch what other persons are doing in other terminals. Usefull for security people.<br /><br /><span style="font-weight: bold;">Steps:</span><br />1) Download openssh from http://openbsd.md5.com.ar/pub/OpenBSD/OpenSSH/portable/<br />wget http://openbsd.md5.com.ar/pub/OpenBSD/OpenSSH/portable/openssh-4.6p1.tar.gz<br />2) Uncompress it<br />tar zxvf openssh-4.6p1.tar.gz<br />3) Compile it, you have to set the &quot;login&quot; program that ssh has to use !<br />cd openssh-4.6p1<br />export LOGIN_PROGRAM=&quot;/sbin/foo_login&quot;<br />cd openssh-4.6p1<br />./configure --prefix=/usr --sysconfdir=/etc/ssh --without-zlib-version-check --with-pam --with-tcp-wrappers<br />make<br />make install<br /><br />4) Modify the sshd_config file, should be located in /etc/ssh/sshd_config and change these variables:<br /><span style="font-family:courier new;">PasswordAuthentication yes</span><br /><span style="font-family:courier new;">UseLogin yes</span><b><br /><br />Compile ttysnoop<br /></b>5) Download ttysnoop from http://freshmeat.net/redir/ttysnoop26/<br /><span style="font-size:85%;"><span style="font-family:courier new;">wget http://freshmeat.net/redir/ttysnoop26/50871/url_tgz/ttysnoop-0.12d.k26.tar.gz</span><br /><span style="font-family:courier new;">6) tar xzvf ttysnoop-0.12d.k26.tar.gz</span><br /><span style="font-family:courier new;">7) cd ttysnoop-0.12d.k26</span><br /><span style="font-family:courier new;">8) make</span><br /><span style="font-family:courier new;">9) make install</span></span><br /><br />10) Copy the new login from ttysnoop:<br /><span style="font-size:85%;"><span style="font-family:courier new;">cp ttysnoops /sbin/foo_login</span></span><br />11) This directory is not created, you have to do it:<br /><span style="font-size:85%;"><span style="font-family:courier new;">mkdir /var/spool/ttysnoop</span></span><br /><br />12) copy snooptab.dist to /etc<br /><span style="font-size:85%;"><span style="font-family:courier new;">cp snooptab.dist /etc/snooptab</span></span><br /><br />13) Edit /etc/snooptab<br />Comment all lines except:<br /><span style="font-size:85%;"><span style="font-family:courier new;">* socket login /bin/login</span></span><br /><br />Now you can use it:<br /><span style="font-size:85%;"><span style="font-family: courier new;">#w</span><br /><span style="font-family: courier new;">wlamagna pts/1 192.168.2.20 16:51 0.00s 1:42 0.01s login -- wlamagna</span><br /><span style="font-family: courier new;"><br /><span style="font-size:100%;"><span style="font-family: times new roman;">In another terminal write this to snoop terminal 1.</span></span><br />#ttysnoop 1<br /><br /></span><br /></span>Now you are ready to use ttysnoop :-) Please leave your comment with experiences. <div style="clear: both;"></div>
-<b>Published: Wednesday, April 25, 2007</b>
-<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;<a href="tag_linux">linux</a>&nbsp;
-<hr>
-<div id="section"><p id="postTitle">Deleting Apache semaphores</p>
-<p> Apache generates semaphores, when it can not create more semaphores this error appears:<br /><br /><span style="font-size:85%;"><span style="font-family: courier new;">[Wed Jan 31 07:07:07 2007] [crit] (28)No space left on device:</span><br /><span style="font-family: courier new;">mod_rewrite: could not create_rewrite: could not create rewrite_log_lock</span><br /><span style="font-family: courier new;">Configuration Failed</span></span><br /><br />This is resolved deleting the semaphores.<br />List the semaphores:<br /><span style="font-size:85%;"><span style="font-family: courier new;">#ipcs -s | grep apache</span></span><br /><br />Delete the semaphores:<br /><span style="font-size:85%;"><span style="font-family: courier new;">#ipcs -s | grep apache | perl -e &#39;while () { @a=split(/\s+/); print `ipcrm sem $a[1]`}&#39;</span></span><div style="clear: both;"></div>
-<b>Published: Tuesday, March 13, 2007</b>
 <a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;<a href="tag_linux">linux</a>&nbsp;
 <hr>
 </body></html>

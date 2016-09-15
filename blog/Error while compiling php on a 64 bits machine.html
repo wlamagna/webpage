@@ -10,6 +10,6 @@ window.parent.document.title = "Error while compiling php on a 64 bits machine";
 <div id="section"><p id="postTitle">Error while compiling php on a 64 bits machine</p>
 <p> You are getting this error :<br /><br />checking for MySQL UNIX socket location... /var/lib/mysql/mysql.sock<br />configure: error: Cannot find libmysqlclient under /usr.<br />Note that the MySQL client library is not bundled anymore!<br /><br />To resolve it i did this:<br />cd /usr/lib/<br />ln -s ../lib64/mysql<br /><br />Now go to the php directory and compile --with-mysql. <div style="clear: both;"></div>
 <b>Published: Wednesday, August 19, 2009</b>
-<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;<a href="tag_linux">linux</a>&nbsp;
+
 <hr>
 </body></html>
