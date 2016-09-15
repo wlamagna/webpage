@@ -3,12 +3,13 @@
 <title>Deleting Apache semaphores</title>
 <link rel="stylesheet" type="text/css" href="css/blogstyle.css">
 </head>
-<body>
+<body style="margin:20;padding:0;">
 <script language="javascript">
 window.parent.document.title = "Deleting Apache semaphores";
 </script>
 <div id="section"><p id="postTitle">Deleting Apache semaphores</p>
 <p> Apache generates semaphores, when it can not create more semaphores this error appears:<br /><br /><span style="font-size:85%;"><span style="font-family: courier new;">[Wed Jan 31 07:07:07 2007] [crit] (28)No space left on device:</span><br /><span style="font-family: courier new;">mod_rewrite: could not create_rewrite: could not create rewrite_log_lock</span><br /><span style="font-family: courier new;">Configuration Failed</span></span><br /><br />This is resolved deleting the semaphores.<br />List the semaphores:<br /><span style="font-size:85%;"><span style="font-family: courier new;">#ipcs -s | grep apache</span></span><br /><br />Delete the semaphores:<br /><span style="font-size:85%;"><span style="font-family: courier new;">#ipcs -s | grep apache | perl -e &#39;while () { @a=split(/\s+/); print `ipcrm sem $a[1]`}&#39;</span></span><div style="clear: both;"></div>
 <b>Published: Tuesday, March 13, 2007</b>
+<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;<a href="tag_linux">linux</a>&nbsp;
 <hr>
 </body></html>

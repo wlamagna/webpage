@@ -3,12 +3,13 @@
 <title>Installing the famous LAMP - in FC4</title>
 <link rel="stylesheet" type="text/css" href="css/blogstyle.css">
 </head>
-<body>
+<body style="margin:20;padding:0;">
 <script language="javascript">
 window.parent.document.title = "Installing the famous LAMP - in FC4";
 </script>
 <div id="section"><p id="postTitle">Installing the famous LAMP - in FC4</p>
 <p> Installing in Linux an Apache web server with PHP that accesses Mysql and compresses zlib is easy, <span style="font-weight: bold; color: rgb(51, 51, 255);font-size:100%;"><span style="font-family:courier new;">These are the basic steps:</span></span><br /><br /><span style="color: rgb(0, 153, 0);font-size:85%;"><span style="font-family:arial;">1) Download httpd-2.2.2 and php-4.4.6</span><br /><span style="font-family:arial;">2) Install Mysql in /usr/local/mysql (from rpm or sources)</span><br /><span style="font-family:arial;">3) tar zxvf httpd-2.2.2.tgz</span><br /><span style="font-family:arial;">4) cd httpd-2.2.2<br />5) ./configure --enable-ssl --prefix=/usr/local/apache2/ --enable-so --with-included-apr --enable-rewrite</span></span><br /><span style="color: rgb(0, 153, 0);font-size:85%;"><span style="font-family:arial;">6) make<br />7) make install<br /></span> <span style="font-family:arial;"></span><span style="font-family:arial;">8) cd ..</span><br /><span style="font-family:arial;">9) cd php-4.4.6</span><br /><span style="font-family:arial;">10) ./configure --with-mysql --with-apxs2=/usr/local/apache2/bin/apxs --with-xml --disable-dom --without-pear --with-pgsql --with-gd --with-zlib --enable-sockets</span><br /><span style="font-family:arial;">11) make</span><br /><span style="font-family:arial;">12) make install &amp;&amp; cp php.ini-dist /usr/local/lib/php.ini</span><br /><span style="font-family:arial;"><br />I recommend to read the INSTALL and README of both packages, they have usefull information.<br />Configure the </span></span><span style="color: rgb(0, 153, 0);font-size:85%;"><span style="font-family:arial;">/usr/local/lib/php.ini file because it could have security issues (ready my previous post about php security).<br /><br />Add this entry to httpd.conf:<br />AddType application/x-httpd-php .php .phtml<br /><br />Thanks<br />Walter<br /></span></span><div style="clear: both;"></div>
 <b>Published: Wednesday, March 22, 2006</b>
+<a href="tag_linux">linux</a>&nbsp;<a href="tag_admin">admin</a>&nbsp;<a href="tag_apache">apache</a>&nbsp;
 <hr>
 </body></html>

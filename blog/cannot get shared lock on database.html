@@ -3,12 +3,13 @@
 <title>cannot get shared lock on database</title>
 <link rel="stylesheet" type="text/css" href="css/blogstyle.css">
 </head>
-<body>
+<body style="margin:20;padding:0;">
 <script language="javascript">
 window.parent.document.title = "cannot get shared lock on database";
 </script>
 <div id="section"><p id="postTitle">cannot get shared lock on database</p>
 <p> To resolve this i had to look which were the process taking the database:<br /><br /><div style="font-family: &quot;Courier New&quot;,Courier,monospace;">lsof | grep /var/lib/rpm/packages.rpm<br /></div><br /> And then killed it with the SIGKILL signal. <div style="clear: both;"></div>
 <b>Published: Monday, October 26, 2009</b>
+
 <hr>
 </body></html>

@@ -3,12 +3,13 @@
 <title>Creating a VIP on Linux</title>
 <link rel="stylesheet" type="text/css" href="css/blogstyle.css">
 </head>
-<body>
+<body style="margin:20;padding:0;">
 <script language="javascript">
 window.parent.document.title = "Creating a VIP on Linux";
 </script>
 <div id="section"><p id="postTitle">Creating a VIP on Linux</p>
 <p> If you want to have two or more ip addresses on one physical interface, in Linux, there are many ways to do it, but to have a change permanent you have to do these steps on Redhat Linux and probably other distros:<br /><br />Make a copy from the physical interface startup config file:<br />cp /etc/sysconfig/network-scripts/ifcfg-eth0 /etc/sysconfig/network-scripts/ifcfg-eth0:0<br /><br />Modify the /etc/sysconfig/network-scripts/ifcfg-eth0:0<br /><span style="font-family: courier new;">DEVICE=eth0</span><br /><span style="font-family: courier new;">BOOTPROTO=static</span><br /><span style="font-family: courier new;">HWADDR=00:53:52:A2:43:43</span><br /><span style="font-family: courier new;">IPADDR=192.168.100.30</span><br /><span style="font-family: courier new;">NETMASK=255.255.255.0</span><br /><span style="font-family: courier new;">ONBOOT=yes</span><br /><span style="font-family: courier new;">TYPE=Ethernet</span><br /><span style="font-family: courier new;">MACADDR=00:53:52:A2:43:43</span><br /><br />Finaly, do a :<br /><span style="font-family: courier new;"># ifup eth0:0</span><div style="clear: both;"></div>
 <b>Published: Tuesday, March 17, 2009</b>
+<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;<a href="tag_linux">linux</a>&nbsp;
 <hr>
 </body></html>

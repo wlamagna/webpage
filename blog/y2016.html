@@ -1,0 +1,309 @@
+<html>
+<head>
+<title>Year 2016</title>
+<link rel="stylesheet" type="text/css" href="css/blogstyle.css">
+</head>
+<body style="margin:20;padding:0;">
+<script language="javascript">
+window.parent.document.title = "Year 2016";
+</script>
+<div id="section"><p id="postTitle">Installing Apache from scratch</p>
+<p>
+<u>1) A required library:</u><br />
+<pre>
+apt-get install libpcre++-dev
+</pre>
+<br />
+<u>2) Obtain the sources:</u><br />
+<pre>
+wget "http://apache.dattatec.com//httpd/httpd-2.4.18.tar.bz2"
+tar jxvf httpd-2.4.18.tar.bz2
+wget "http://mirrors.nxnethosting.com/apache//apr/apr-1.5.2.tar.gz"
+wget http://apache.dattatec.com//apr/apr-util-1.5.4.tar.gz
+
+cd httpd-2.4.18/srclib
+tar zxvf ../../apr-1.5.2.tar.gz
+
+tar zxvf ../../apr-util-1.5.4.tar.gz
+
+ln -s apr-1.5.2/ apr
+ln -s apr-util-1.5.4/ apr-util
+
+cd ..
+
+./configure --enable-ssl --prefix=/usr/local/apache2/ --enable-so --with-included-apr --enable-rewrite --enable-rewrite --enable-proxy --enable-cgi
+
+make
+</pre>
+</div>
+<div style="clear: both;"></div>
+<b>Published: Thursday, August 25, 2016</b>
+<a href="tag_linux">linux</a>&nbsp;<a href="tag_admin">admin</a>&nbsp;<a href="tag_apache">apache</a>&nbsp;
+<hr>
+<div id="section"><p id="postTitle">Unziping large files in linux copied from windows</p>
+<p>
+<br />
+<b>
+In Windows 7 i created a large ZIP file (around 15 Gigas). I wanted to
+move it to a linux machine and unzip it there.  But once in the linux 
+machine, it produced this error:
+
+
+<pre>
+unzip Windows\ 7\ Clone.zip                          
+Archive:  Windows 7 Clone.zip
+warning [Windows 7 Clone.zip]:  15415149290 extra bytes at beginning or within zipfile
+  (attempting to process anyway)
+error [Windows 7 Clone.zip]:  start of central directory not found;
+  zipfile corrupt.
+  (please check that you have transferred or created the zipfile in the
+  appropriate BINARY mode and that you have compiled UnZip properly)
+</pre>
+
+After trying some things i resolved it like this:<br />
+
+<pre>
+7za x Windows\ 7\ Clone.zip
+
+7-Zip (A) [64] 9.20  Copyright (c) 1999-2010 Igor Pavlov  2010-11-18
+p7zip Version 9.20 (locale=en_US.UTF-8,Utf16=on,HugeFiles=on,4 CPUs)
+
+Processing archive: Windows 7 Clone.zip
+
+Extracting  Windows 7 Clone/Windows 7 Clone.vbox
+</pre>
+
+<div style="clear: both;"></div>
+<b>Published: Thursday, August 25, 2016</b>
+<a href="tag_linux">linux</a>&nbsp;<a href="tag_admin">admin</a>&nbsp;
+<hr>
+<div id="section"><p id="postTitle">Installing latex with some usefull complements in Debian Linux</p>
+<p>
+<pre>
+apt-get install texlive texlive-math-extra texlive-science
+</pre>
+# Provides program.sty: <br />
+<pre>
+apt-get install texlive-latex-extra
+</pre>
+
+<div style="clear: both;"></div>
+<b>Published: Thursday, August 25, 2016</b>
+<a href="tag_linux">linux</a>&nbsp;<a href="tag_debian">debian</a>&nbsp;
+<hr>
+<div id="section"><p id="postTitle">Installing Matlab R2013 8.01 on Linux Headless Xvfb using lightdm and fluxbox</p>
+<p>
+Good, you are a Matlab user like me, but.. why are you willing to install it on a 
+headless linux workstation ?  I thought i was the only person in the world doing that
+but you reading this proves i am not alone...<br /><br />
+
+<u>1) Well you mounted the iso image:</u><br />
+<pre>
+mount -o loop Matlab801_MacUnix.iso /mnt/cd
+</pre>
+<br />
+
+<u>2) And tried to install but.... you are getting this</u><br />
+<pre>
+java.lang.InternalError: Can't connect to X11 window server using ':20.0' as the value of the DISPLAY variable.
+        at sun.awt.X11GraphicsEnvironment.initDisplay(Native Method)
+        at sun.awt.X11GraphicsEnvironment.access$100(Unknown Source)
+        at sun.awt.X11GraphicsEnvironment$1.run(Unknown Source)
+        at java.security.AccessController.doPrivileged(Native Method)
+        at sun.awt.X11GraphicsEnvironment.(Unknown Source)
+        at java.lang.Class.forName0(Native Method)
+        at java.lang.Class.forName(Unknown Source)
+</pre>
+<br />
+<u>3) OPS! this should not be difficult you think...</u><br />
+<pre>
+<b>You try this...</b><br />
+install_linux -mode silent<br /><br />
+<b>And this... </b><br /> 
+install_linux -javahome /opt/java -mode silent<br />
+<b>And your DISPLAY variable is logically correct! because ... </b><br />
+printenv | grep DISPLAY<br />
+DISPLAY=:20.0<br />
+<br />
+</pre>
+<br />
+The error message keeps displaying:<br />
+<pre>
+Error: The application encountered an unexpected error and needs to close.  You may want to try re-installing your product(s).  More information can be found at /tmp/mathworks_root.log
+</pre>
+<br />
+And you are able to run any other X application, starting from xclock... but the Matlab install do not wants to start.<br />
+Do not worry, it is not all lost.<br />
+First, you will have to modify the install_linux shell script, but the image is readonly, so you will have to do a trick:
+<br />
+<u>4) First create a directory</u><br />
+<pre>
+mkdir /mnt/tmpcd
+cd /mnt/tmpcd
+</pre>
+<br />
+<u>5)  Copy there the install_linux script</u><br />
+<pre>
+cp /mnt/cd install_linux /mnt/tmpcd
+</pre>
+
+<u>6) Modify this line:</u><br />
+<pre>
+java_cmd="$java_exe -Xmx512m $XTRAFLAGS -Djava.ext.dirs=$JAR_SEARCH_PATH $JAVA_LAUNCH_TARGET -root \"$ROOT\" -tmpdir \"$TEMP_DIR\" -inputFile '$ROOT/install_ini_linux.txt' $arglist"
+#
+#And add this: "-Djava.awt.headless=true" It should look like this:
+#
+java_cmd="$java_exe -Xmx512m $XTRAFLAGS -Djava.awt.headless=true -Djava.ext.dirs=$JAR_SEARCH_PATH $JAVA_LAUNCH_TARGET -root \"$ROOT\" -tmpdir \"$TEMP_DIR\" -inputFile '$ROOT/install_ini_linux.txt' $arglist"
+</pre><br />
+<u>7) Now create a link to all the other files, i did it like this</u><br />
+<pre>
+# Being in /mnt/tmpcd
+for i in /mnt/cd/*; do ln -s $i; done
+</pre>
+<br />
+<u>8) Now you are ready! install it.</u><br />
+<pre>
+(Feb 23, 2016 15:36:37) Installing Product: Simulink Report Generator 3.14
+(Feb 23, 2016 15:36:38) Installing Product: Simulink Verification and Validation 3.5
+(Feb 23, 2016 15:36:38) Installing Product: Stateflow 8.1
+(Feb 23, 2016 15:36:39) Installing Product: Statistics Toolbox 8.2
+(Feb 23, 2016 15:36:40) Installing Product: Symbolic Math Toolbox 5.10
+(Feb 23, 2016 15:36:57) Installing Product: System Identification Toolbox 8.2
+(Feb 23, 2016 15:37:06) Installing Product: SystemTest 2.6.5
+(Feb 23, 2016 15:37:09) Installing Product: Wavelet Toolbox 4.11
+(Feb 23, 2016 15:37:26) Notes:
+Your installation may require additional configuration steps.
+
+1. The following products require a supported compiler:
+
+MATLAB Compiler 4.18.1
+MATLAB Builder JA 2.2.6
+Stateflow 8.1
+Simulink Coder 8.4
+MATLAB Coder 2.4
+
+2. Simulink requires a C compiler for simulation acceleration, model reference, and MATLAB Function Block capabilities. It is recommended that you install a supported compiler on your machine.
+
+3. To accelerate computations with the following products, a supported compiler is required:
+
+SimBiology 4.3
+Fixed-Point Designer 4.0
+(Feb 23, 2016 15:37:26) Exiting with status 0
+(Feb 23, 2016 15:37:26) End - Successful.
+Finished
+</pre>
+
+
+
+
+ 
+<b>Published: Thuesday, February 23, 2016</b>
+<a href="tag_headless">headless</a>&nbsp;<a href="tag_fluxbox">fluxbox</a>&nbsp;<a href="tag_lightdm">lightdm</a>&nbsp;
+<hr>
+<div id="section"><p id="postTitle">Headless Linux Server with X Fluxbox and Lightdm</p>
+<p>
+Hi, here is a very short list telling about how you can have
+very easily a server withoug a monitor connected and manage it
+with just few resources... a short post but without waste!<br /><br />
+
+<b>Install headless lightdm with fluxbox and vnc</b><br />
+<pre>
+apt-get install lightdm
+apt-get install fluxbox
+apt-get install x11vnc
+apt-get install xvfb
+apt-get remove xserver-xorg-video*
+</pre>
+
+Now, you setup the SSH Server and connect creating a tunnel.<br /><br />
+
+Once connected, in the Headless Server you type:
+<br /><br />
+<pre>
+x11vnc -localhost -create -env FD_PROG=/usr/bin/fluxbox \
+        -env X11VNC_FINDDISPLAY_ALWAYS_FAILS=1 \
+        -env X11VNC_CREATE_GEOM=${1:-1024x768x16} \
+        -gone 'killall Xvfb' \
+        -bg -nopw
+</pre>
+<br />
+And once the vnc server starts, you connect from your client through
+a tunnel.<br /><br />
+<pre>
+vncviewer localhost:5900
+</pre>
+
+These steps have worked in Debian 8.0 Jessie.
+<br />
+ 
+<b>Published: Thuesday, February 23, 2016</b>
+<a href="tag_headless">headless</a>&nbsp;<a href="tag_fluxbox">fluxbox</a>&nbsp;<a href="tag_lightdm">lightdm</a>&nbsp;
+<hr>
+<div id="section"><p id="postTitle">Compile keepass 2.0.2 on Debian Linux Jeesie</p>
+<p>
+KeepassX webpage states: "KeePassX is an application for people with extremly high demands on secure personal data management. It has a light interface, is cross platform and published under the terms of the GNU General Public License."<br /><br />
+These steps have been executed in Debian Linux 8.2.0 Jeesie but for an experienced System Administrator/Hacker this should be trivial.<br /><br />
+Some time ago i explained 
+<a href="Compile%20keepass%200.4.3%20on%20Debian%20Linux%20wheezy.html">how to install KeepassX 0.4.3</a>
+but a newer version is available and i wanted to have it.<br /><br />
+
+First you should have these packages installed:<br />
+<pre>
+apt-get install cmake
+apt-get install g++
+apt-get install libqt4-core
+apt-get install libqt4-dev
+apt-get install libgcrypt-dev
+apt-get install zlib1g zlib1g-dev
+</pre>
+<br />
+Now you can download the latest keepassX package and compile it:<br />
+<pre>
+wget https://www.keepassx.org/releases/2.0.2/keepassx-2.0.2.tar.gz
+tar zxvf keepassx-2.0.2.tar.gz
+cd keepassx-2.0.2
+mkdir build
+cd build
+cmake -DCMAKE_INSTALL_PREFIX=/usr/local ..
+</pre>
+<br />As root:<br />
+<pre>
+make install
+</pre>
+<br />
+ 
+<b>Published: Saturday, February 20, 2016</b>
+<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;<a href="tag_linux">linux</a>&nbsp;
+<hr>
+<div id="section"><p id="postTitle">Install Libreoffice on Debian</p>
+<p>
+Go to <a href="http://www.libreoffice.org/" target="_new">Libreoffice Webpage</a> and download
+the libreoffice package, in my case it was:<br />
+<pre>
+wget http://download.documentfoundation.org/libreoffice/stable/4.4.7/deb/x86_64/LibreOffice_4.4.7_Linux_x86-64_deb.tar.gz
+tar zxvf LibreOffice_4.4.7_Linux_x86-64_deb.tar.gz
+cd LibreOffice_4.4.7.2_Linux_x86-64_deb/
+cd DEBS
+dpkg -i *.deb
+
+---- START OUTPUT ----
+Selecting previously unselected package libobasis4.4-base.
+(Reading database ... 155812 files and directories currently installed.)
+Preparing to unpack libobasis4.4-base_4.4.7.2-2_amd64.deb ...
+Unpacking libobasis4.4-base (4.4.7.2-2) ...
+Selecting previously unselected package libobasis4.4-calc.
+Preparing to unpack libobasis4.4-calc_4.4.7.2-2_amd64.deb ...
+Unpacking libobasis4.4-calc (4.4.7.2-2) ...
+Selecting previously unselected package libobasis4.4-core.
+Preparing to unpack libobasis4.4-core_4.4.7.2-2_amd64.deb ...
+Unpacking libobasis4.4-core (4.4.7.2-2) ...
+...
+---- END OUTPUT ----
+</pre>
+
+
+
+<b>Published: Friday, February 5, 2016</b>
+<a href="tag_headless">headless</a>&nbsp;<a href="tag_fluxbox">fluxbox</a>&nbsp;<a href="tag_lightdm">lightdm</a>&nbsp;
+<hr>
+</body></html>

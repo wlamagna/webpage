@@ -3,12 +3,13 @@
 <title>Installing FluxBox on RHEL or Fedora</title>
 <link rel="stylesheet" type="text/css" href="css/blogstyle.css">
 </head>
-<body>
+<body style="margin:20;padding:0;">
 <script language="javascript">
 window.parent.document.title = "Installing FluxBox on RHEL or Fedora";
 </script>
 <div id="section"><p id="postTitle">Installing FluxBox on RHEL or Fedora</p>
 <p> Fluxbox is a lightweight desktop for linux, i want to test it.<br /><br />First, download Fluxbox.<br /><span style=";font-family:courier new;font-size:85%;">wget http://newrpms.sunsite.dk/apt/redhat/en/i386/fc3/RPMS.newrpms/fluxbox-0.9.13-1.rhfc3.nr.i386.rpm<br /></span><br />If while installing it, you get this errors:<br />Error: Missing Dependency: libImlib2.so.1 is needed by package fluxbox<br />Error: Missing Dependency: pyxdg is needed by package fluxbox<br /><br />Get the required packages:<br /><span style=";font-family:courier new;font-size:85%;">wget http://hany.sk/mirror/fedora/releases/8/Everything/x86_64/os/Packages/imlib2-1.4.0-3.fc8.i386.rpm<br />yum install imlib2-1.4.0-3.fc8.i386.rpm</span><br /><span style=";font-family:courier new;font-size:85%;">wget ftp://ftp.univie.ac.at/systems/linux/dag/redhat/el5/en/x86_64/RPMS.dag/python-xdg-0.15-1.el5.rf.noarch.rpm</span><br /><span style=";font-family:courier new;font-size:85%;">yum install python-xdg-0.15-1.el5.rf.noarch.rpm</span><br /><br />Now install fluxbox:<br /><span style=";font-family:courier new;font-size:85%;">yum install fluxbox-0.9.13-1.rhfc3.nr.i386.rpm<br /><br />You also need Xorg:<br />yum install xorg-x11-xinit<br />yum install xorg-x11-server-Xorg<br />yum install sytem-config-display<br /><br />And dont forget to install all the fonts, else you wouldnt see anything<br />yum install xorg-x11-fonts*<br /><br /></span><div style="clear: both;"></div>
 <b>Published: Saturday, February 09, 2008</b>
+<a href="tag_linux">linux</a>&nbsp;<a href="tag_admin">admin</a>&nbsp;<a href="tag_apache">apache</a>&nbsp;
 <hr>
 </body></html>

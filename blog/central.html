@@ -3,25 +3,46 @@
 <title>Server Linux Devops Blog from Walter Lamagna</title>
 <link rel="stylesheet" type="text/css" href="css/blogstyle.css">
 </head>
-<body>
+<body style="margin:20;padding:0;">
 <script language="javascript">
 window.parent.document.title = "Server Linux Devops Blog from Walter Lamagna";
 </script>
-<div id="section"><p id="postTitle">Installing latex with some usefull complements in Debian Linux</p>
+<div id="section"><p id="postTitle">Installing Apache from scratch</p>
 <p>
+<u>1) A required library:</u><br />
 <pre>
-apt-get install texlive texlive-math-extra texlive-science
+apt-get install libpcre++-dev
 </pre>
-# Provides program.sty: <br />
+<br />
+<u>2) Obtain the sources:</u><br />
 <pre>
-apt-get install texlive-latex-extra
-</pre>
+wget "http://apache.dattatec.com//httpd/httpd-2.4.18.tar.bz2"
+tar jxvf httpd-2.4.18.tar.bz2
+wget "http://mirrors.nxnethosting.com/apache//apr/apr-1.5.2.tar.gz"
+wget http://apache.dattatec.com//apr/apr-util-1.5.4.tar.gz
 
+cd httpd-2.4.18/srclib
+tar zxvf ../../apr-1.5.2.tar.gz
+
+tar zxvf ../../apr-util-1.5.4.tar.gz
+
+ln -s apr-1.5.2/ apr
+ln -s apr-util-1.5.4/ apr-util
+
+cd ..
+
+./configure --enable-ssl --prefix=/usr/local/apache2/ --enable-so --with-included-apr --enable-rewrite --enable-rewrite --enable-proxy --enable-cgi
+
+make
+</pre>
+</div>
 <div style="clear: both;"></div>
 <b>Published: Thursday, August 25, 2016</b>
+<a href="tag_linux">linux</a>&nbsp;<a href="tag_admin">admin</a>&nbsp;<a href="tag_apache">apache</a>&nbsp;
 <hr>
-<div id="section"><p id="postTitle">Installing latex with some usefull complements in Debian Linux</p>
+<div id="section"><p id="postTitle">Unziping large files in linux copied from windows</p>
 <p>
+<br />
 <b>
 In Windows 7 i created a large ZIP file (around 15 Gigas). I wanted to
 move it to a linux machine and unzip it there.  But once in the linux 
@@ -54,38 +75,21 @@ Extracting  Windows 7 Clone/Windows 7 Clone.vbox
 
 <div style="clear: both;"></div>
 <b>Published: Thursday, August 25, 2016</b>
+<a href="tag_linux">linux</a>&nbsp;<a href="tag_admin">admin</a>&nbsp;
 <hr>
-<div id="section"><p id="postTitle">Installing Apache from scratch</p>
+<div id="section"><p id="postTitle">Installing latex with some usefull complements in Debian Linux</p>
 <p>
-<u>1) A required library:</u><br />
 <pre>
-apt-get install libpcre++-dev
+apt-get install texlive texlive-math-extra texlive-science
 </pre>
-<br />
-<u>2) Obtain the sources:</u><br />
+# Provides program.sty: <br />
 <pre>
-wget "http://apache.dattatec.com//httpd/httpd-2.4.18.tar.bz2"
-tar jxvf httpd-2.4.18.tar.bz2
-wget "http://mirrors.nxnethosting.com/apache//apr/apr-1.5.2.tar.gz"
-wget http://apache.dattatec.com//apr/apr-util-1.5.4.tar.gz
-
-cd httpd-2.4.18/srclib
-tar zxvf ../../apr-1.5.2.tar.gz
-
-tar zxvf ../../apr-util-1.5.4.tar.gz
-
-ln -s apr-1.5.2/ apr
-ln -s apr-util-1.5.4/ apr-util
-
-cd ..
-
-./configure --enable-ssl --prefix=/usr/local/apache2/ --enable-so --with-included-apr --enable-rewrite --enable-rewrite --enable-proxy --enable-cgi
-
-make
+apt-get install texlive-latex-extra
 </pre>
-</div>
+
 <div style="clear: both;"></div>
 <b>Published: Thursday, August 25, 2016</b>
+<a href="tag_linux">linux</a>&nbsp;<a href="tag_debian">debian</a>&nbsp;
 <hr>
 <div id="section"><p id="postTitle">Installing Matlab R2013 8.01 on Linux Headless Xvfb using lightdm and fluxbox</p>
 <p>
@@ -194,6 +198,7 @@ Finished
 
  
 <b>Published: Thuesday, February 23, 2016</b>
+<a href="tag_headless">headless</a>&nbsp;<a href="tag_fluxbox">fluxbox</a>&nbsp;<a href="tag_lightdm">lightdm</a>&nbsp;
 <hr>
 <div id="section"><p id="postTitle">Headless Linux Server with X Fluxbox and Lightdm</p>
 <p>
@@ -232,6 +237,7 @@ These steps have worked in Debian 8.0 Jessie.
 <br />
  
 <b>Published: Thuesday, February 23, 2016</b>
+<a href="tag_headless">headless</a>&nbsp;<a href="tag_fluxbox">fluxbox</a>&nbsp;<a href="tag_lightdm">lightdm</a>&nbsp;
 <hr>
 <div id="section"><p id="postTitle">Compile keepass 2.0.2 on Debian Linux Jeesie</p>
 <p>
@@ -267,6 +273,7 @@ make install
 <br />
  
 <b>Published: Saturday, February 20, 2016</b>
+<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;<a href="tag_linux">linux</a>&nbsp;
 <hr>
 <div id="section"><p id="postTitle">Install Libreoffice on Debian</p>
 <p>
@@ -297,69 +304,34 @@ Unpacking libobasis4.4-core (4.4.7.2-2) ...
 
 
 <b>Published: Friday, February 5, 2016</b>
+<a href="tag_headless">headless</a>&nbsp;<a href="tag_fluxbox">fluxbox</a>&nbsp;<a href="tag_lightdm">lightdm</a>&nbsp;
 <hr>
 <div id="section"><script type="text/javascript">
 google_ad_client = "ca-pub-1655368661140826";
 google_ad_slot = "5799356291";
 google_ad_width = 728;
 google_ad_height = 90;
-</script>
-<!-- blog_linux_1 -->
-<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-</script><p id="postTitle">Secure Debian Post Install configuration</p>
+</script><!-- blog_linux_1 --><script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script><p id="postTitle">Debian 8 Post Install Cleanup</p>
 <p>In this <a href="http://blog.wallves.com/Some%20linux%20firewall%20tips.html">short article</a> i share some short
-but powerfull firewall logging tip.  Now i tell a little about some Debian post installation instructions i would
-commonly recommend.
-<br />
-Download the last stable Debian from <a href="https://www.debian.org/CD/http-ftp/#stable">here</a><br /><br />
+but powerfull firewall logging tip.  And <a href="http://blog.wallves.com/Secure%20Debian%20Post%20Install%20configuration.html">
+here</a> security related post install removals for Debian.<br />
+What is next? Lets keep cleaning and removing software!<br /><br />
 
-When you just install the last Debian you may have something more or less like this:<br />
-
-<pre>
-root@host1:~# netstat --listen -np
-<span style="color: #888888">Active Internet connections (only servers)</span>
-<span style="color: #888888">Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name</span>
-<span style="color: #888888">tcp        0      0 0.0.0.0:111             0.0.0.0:*               LISTEN      397/rpcbind     </span>
-<span style="color: #888888">tcp        0      0 127.0.0.1:631           0.0.0.0:*               LISTEN      445/cupsd       </span>
-<span style="color: #888888">tcp        0      0 127.0.0.1:25            0.0.0.0:*               LISTEN      696/exim4       </span>
-<span style="color: #888888">tcp        0      0 0.0.0.0:38845           0.0.0.0:*               LISTEN      406/rpc.statd   </span>
-<span style="color: #888888">tcp6       0      0 :::111                  :::*                    LISTEN      397/rpcbind     </span>
-<span style="color: #888888">tcp6       0      0 :::48180                :::*                    LISTEN      406/rpc.statd   </span>
-<span style="color: #888888">tcp6       0      0 ::1:631                 :::*                    LISTEN      445/cupsd       </span>
-<span style="color: #888888">tcp6       0      0 ::1:25                  :::*                    LISTEN      696/exim4       </span>
-<span style="color: #888888">udp        0      0 0.0.0.0:996             0.0.0.0:*                           397/rpcbind     </span>
-<span style="color: #888888">udp        0      0 0.0.0.0:5353            0.0.0.0:*                           427/avahi-daemon: r</span>
-<span style="color: #888888">udp        0      0 127.0.0.1:1006          0.0.0.0:*                           406/rpc.statd   </span>
-<span style="color: #888888">udp        0      0 0.0.0.0:42504           0.0.0.0:*                           427/avahi-daemon: r</span>
-<span style="color: #888888">udp        0      0 0.0.0.0:68              0.0.0.0:*                           356/dhclient    </span>
-<span style="color: #888888">udp        0      0 0.0.0.0:50762           0.0.0.0:*                           356/dhclient    </span>
-<span style="color: #888888">udp        0      0 0.0.0.0:111             0.0.0.0:*                           397/rpcbind     </span>
-<span style="color: #888888">udp        0      0 0.0.0.0:631             0.0.0.0:*                           448/cups-browsed</span>
-<span style="color: #888888">udp        0      0 0.0.0.0:49788           0.0.0.0:*                           406/rpc.statd   </span>
-<span style="color: #888888">udp6       0      0 :::996                  :::*                                397/rpcbind     </span>
-<span style="color: #888888">udp6       0      0 :::5353                 :::*                                427/avahi-daemon: r</span>
-<span style="color: #888888">udp6       0      0 :::59218                :::*                                406/rpc.statd   </span>
-<span style="color: #888888">udp6       0      0 :::14952                :::*                                356/dhclient    </span>
-<span style="color: #888888">udp6       0      0 :::111                  :::*                                397/rpcbind     </span>
-<span style="color: #888888">udp6       0      0 :::60837                :::*                                427/avahi-daemon: r</span>
-</pre>
-
-If you are a security conscious administrator, then you agree here is work do to.  Not only to have a safer
-workplace, also to reduce the cpu and memory usage!<br /><br />
+Almost with Debian 8 these uninstalls haven't caused any issues with other programs,
+but check what it is uninstalling first !  These recommendations are for server oriented
+installations and not so much for workstations, but you can do it if you know
+what you are doing.<br /><br />
 
 <pre>
 apt-get remove exim4-*</span>
-<span style="color: #888888">apt-get remove rpcbind</span>
-<span style="color: #888888">apt-get remove avahi-daemon</span>
-<span style="color: #888888">apt-get remove cups</span>
-<span style="color: #888888">apt-get remove cups-browsed</span>
-<span style="color: #888888">apt-get remove cups-daemon</span>
-</pre></div>
-
-Now you would have a clearner list of network listening services.<br />
+<span style="color: #888888">apt-get remove tracker</span>
+<span style="color: #888888">apt-get remove gnome-online-miners</span>
+</pre>
 
 
 <div style="clear: both;"></div>
 <b>Published: Monday, October 12, 2015</b>
+<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;<a href="tag_linux">linux</a>&nbsp;
 <hr>
 </body></html>

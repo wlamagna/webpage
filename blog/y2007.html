@@ -1,0 +1,105 @@
+<html>
+<head>
+<title>Year 2007</title>
+<link rel="stylesheet" type="text/css" href="css/blogstyle.css">
+</head>
+<body style="margin:20;padding:0;">
+<script language="javascript">
+window.parent.document.title = "Year 2007";
+</script>
+<div id="section"><p id="postTitle">Discovering Ubuntu</p>
+<p> In Ubuntu i got this error while installing apache:<span style=";font-family:courier new;font-size:85%;"><br />configure: error: C compiler cannot create executables</span><br />Resolved it with this:<br /><span style=";font-family:courier new;font-size:85%;">apt-get install libc6-dev g++ gcc<br /><br />No recognized SSL/TLS toolkit detected<br />Resolved with:<br /></span><span style="font-size:85%;"><span style="font-family: courier new;">apt-get install openssl libssl-dev</span></span><div style="clear: both;"></div>
+<b>Published: Friday, December 21, 2007</b>
+<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;<a href="tag_linux">linux</a>&nbsp;
+<hr>
+<div id="section"><p id="postTitle">Setup Wifi with Broadcom in Linux</p>
+<p> Finally i could resolve it and have setup my Broadcom BCM4318 card with Linux using WPA :-) and i would like to share it with everybody who have been following the blog ;-)<br /><br />First, i have set it up with Kubuntu, i am learning at the moment Ubuntu, it is important to be updated and this distribution has given a really good experience, it replaced Windows.<br />The Card is this:<br /><span style="font-size:85%;">06:05.0 Network controller: Broadcom Corporation BCM4318 [AirForce One 54g] 802.11g Wireless LAN Controller (rev 02)</span><br />Kubuntu detects this card and you just download the driver from Internet, everything is very automated, something that i am not used to as Unix Administrator.<br /><br />Then create /etc/wpa_supplicant.conf<br />ctrl_interface=/var/run/wpa_supplicant<br /><br /><span style="font-size:85%;">network={<br /> ssid=&quot;changeit&quot;<br /> psk=&quot;mypassword&quot;<br /> proto=WPA RSN<br /> key_mgmt=WPA-PSK<br /> pairwise=TKIP CCMP<br /> group=TKIP CCMP<br /> priority=5<br />}</span><br /><br />Edit /etc/network/interfaces<br /><span style="font-size:85%;"><span style="font-family: courier new;">auto eth1</span><br /><span style="font-family: courier new;">iface eth1 inet dhcp</span><br /><span style="font-family: courier new;">wireless-essid linux</span><br /><span style="font-family: courier new;">pre-up wpa_supplicant -Bw -Dwext -ieth1 -c/etc/wpa_supplicant.conf</span><br /><span style="font-family: courier new;">post-down killall -q wpa_supplicant</span><br /><br /><span style="font-size:100%;">And finally:</span><br />ifdown eth1<br />ifup eth1<br /><br /><span style="font-size:100%;">This can be improved for WPA2 or replace the password in the file with an encrypted password, but i leave that for you.</span><br /></span><div style="clear: both;"></div>
+<b>Published: Friday, December 21, 2007</b>
+<a href="tag_linux">linux</a>&nbsp;<a href="tag_debian">debian</a>&nbsp;
+<hr>
+<div id="section"><p id="postTitle">How to resume a download in Linux</p>
+<p> If you are downloading a large file, of several Gigas and your, or the orthers connection gets lost, and you think that you have to download it again from the beginning, dont worry, it is possible to resume the download with some tools.<br /><br />If the file is not so big, (less than 2 Gigas), you can use &quot;wget&quot;<br /><span style="font-size:85%;"><span style="font-family: courier new;"># wget -c ftp://user:password@ftp.serverlinux.blogspot.com/incoming/*</span></span><br /><br />But, as i said, you could be downloading the DVD from Solaris o Centos 5, in this cases wget it is not usefull because it has a limit of the file size. In this cases use Curl:<br /><br /><span style="font-size:85%;"><span style="font-family: courier new;"># curl -C - -O --disable-epsv -u user:password ftp://ftp.usf.edu/pub/centos/5.0/isos/x86_64/CentOS-5.0-x86_64-bin-DVD.iso</span><br /></span><br />Let your opinion ! ;-) <div style="clear: both;"></div>
+<b>Published: Wednesday, October 31, 2007</b>
+<a href="tag_headless">headless</a>&nbsp;<a href="tag_fluxbox">fluxbox</a>&nbsp;<a href="tag_lightdm">lightdm</a>&nbsp;
+<hr>
+<div id="section"><p id="postTitle">Create cool custom functions with Linux</p>
+<p> This section today is dedicated to the cool functions a System Administrator can create to make its life easier. I will give two examples i found very usefull.<br /><br /><span style="font-size:78%;"><span style="font-family:courier new;">$ tip() { lynx -cfg=/dev/null -dump &quot;http://www.ugu.com/sui/ugu/show?tip.today&quot; | sed -n &#39;/Unix Tip #/,/generously/p&#39; }</span><br /></span><span style="font-size:78%;"><br /><span style="font-family:courier new;">$ trans() {lynx -cfg=/dev/null -dump &quot;http://spanishdict.com/1AS.cfm?e=$1&quot; | sed -n &#39;/Spanish Word/,/Spanish Word:/p&#39; }<br /><br />Yoy call these functions this way:<br /><br />$ tip<br />Thanks to www.ugu.com<br /><br />$ trans traducir<br />Spanish Word English Word<br />traducir [9]to translate<br /><span style=";font-family:georgia;font-size:100%;"><span style="font-weight: bold;">And to see the defined functions type:</span></span><br />$ set<br /><br />Please, share with your comment some helpfulness scripts ;)<br /><br /></span></span><div style="clear: both;"></div>
+<b>Published: Friday, August 17, 2007</b>
+<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;<a href="tag_linux">linux</a>&nbsp;
+<hr>
+<div id="section"><p id="postTitle">Post install in Fedora Core 6 and Fedora 7</p>
+<p><span style="font-weight: bold;">Fedora 7 really rocks. I recommend to install the livna repository and these packages after the normal installation.<br /><br /></span><span style="font-size:85%;"><span style="font-family:courier new;"># rpm -ivh http://rpm.livna.org/livna-release-6.rpm</span></span><br />Install the mp3&#39;s plugins<br /><span style=";font-family:courier new;font-size:85%;"> # yum install gstreamer-plugins-ugly</span><br />Install totem-xine and firefox plugin<br /><span style="font-size:85%;"><span style="font-family:courier new;"> # yum install totem-xine totem-xine-mozplugin</span><br /><span style="font-family:courier new;"># yum install ffmpeg gstreamer-ffmpeg sox lame faad2 mjpegtools xine-lib-extras-nonfree</span><br /></span><span style="font-size:85%;"><span style="font-size:100%;"><br />Install the plugins to see mpeg videos in Linux</span><br /></span><pre class="tightenable top bottom" style="font-family:courier new;"><span style="font-size:85%;">yum install libdvdread<br />yum install libdvdcss<br />yum install libdvdnav<br />yum install xine-lib-extras-nonfree<br />yum install xine-lib<br />yum install mplayer<br /><br /><span style="font-size:100%;"><span style="font-family: arial;">For security reasons i recommend to turnoff these services that come enabled by default:<br /><span style="font-size:85%;"><br /></span></span></span><span style="font-size:85%;"><span style="font-family: courier new;">chkconfig haldaemon off</span><br /><span style="font-family: courier new;">service haldaemon stop</span><br /><span style="font-family: courier new;">chkconfig sendmail off</span><br /><span style="font-family: courier new;">service sendmail stop</span><br /><span style="font-family: courier new;">chkconfig hplip off</span><br /><span style="font-family: courier new;">service hplip stop</span><br /><span style="font-family: courier new;">chkconfig portmap off</span><br /><span style="font-family: courier new;">service portmap stop</span><br /><span style="font-family: courier new;">chkconfig avahi-daemon off</span><br /><span style="font-family: courier new;">service avahi-daemon stop</span><br /><span style="font-family: courier new;">chkconfig nfs off</span><br /><span style="font-family: courier new;">service nfs stop</span><br /><span style="font-family: courier new;">chkconfig rpcidmapd off</span><br /><span style="font-family: courier new;">service rpcidmapd stop</span><br /><span style="font-family: courier new;">chkconfig rpcgssd off</span><br /><span style="font-family: courier new;">service rpcgssd stop</span><br /><span style="font-family: courier new;">chkconfig autofs off</span><br /><span style="font-family: courier new;">service autofs stop</span><br /><span style="font-family: courier new;">chkconfig yum-updatesd off</span><br /><span style="font-family: courier new;">service yum-updatesd stop</span><br /><span style="font-family: courier new;">chkconfig nfslock off</span><br /><span style="font-family: courier new;">service nfslock stop</span><br /><span style="font-family: courier new;">chkconfig hidd off</span><br /><span style="font-family: courier new;">service hidd stop</span><br /><span style="font-family: courier new;">chkconfig pcscd off</span><br /><span style="font-family: courier new;">chkconfig acpid off</span><br /><span style="font-family: courier new;">service acpid stop</span><br /><span style="font-family: courier new;">chkconfig iptables off</span><br /><span style="font-family: courier new;">service iptables stop</span></span><br /><br /></span></pre><div style="clear: both;"></div>
+<b>Published: Thursday, August 16, 2007</b>
+<a href="tag_linux">linux</a>&nbsp;<a href="tag_debian">debian</a>&nbsp;
+<hr>
+<div id="section"><p id="postTitle">Measure download  upload with multiple interfaces</p>
+<p> You need to measure the download or upload speed of one interface, supposing you have multiple in your gateway. I use the utility curl to measure this metrics, because curl permits to specify the interface from where i want to download or upload the files.<br /><br />This shows the download speed through the interface eth1 from the site ftp.serverlinux.blogspot.com<br /><span style="font-size:85%;"><span style="font-family: courier new;">curl --interface eth1 -w &#39;\t%{speed_download}\n&#39; --disable-epsv -u user:pass ftp://ftp.serverlinux.blogspot.com/bigfile.iso &gt; out.iso</span><br /></span><br />This shows the upload speed through the interface eth1 to site ftp.serverlinux.blogspot.com<br /><span style="font-size:85%;"><span style="font-family: courier new;">curl --interface eth1 -w &#39;\t%{speed_upload}\n&#39; -T out.iso --disable-epsv -u user:pass ftp://ftp.serverlinux.blogpost.com/incoming/</span></span><br /><br />The upload and download speeds are measures in kbytes.<br /><br />Thanks to linux.com for their help:<br /><span style="font-size:85%;"><span style="font-family: courier new;">http://www.linux.com/article.pl?sid=06/10/10/1824245</span></span><div style="clear: both;"></div>
+<b>Published: Tuesday, June 12, 2007</b>
+<a href="tag_linux">linux</a>&nbsp;<a href="tag_debian">debian</a>&nbsp;
+<hr>
+<div id="section"><p id="postTitle">Print the processes cpu usage and memory</p>
+<p> In linuxforum was asked this and i found it interesting to resolve, he needed to list the processes ordered by CPU and memory usage in Linux. My resolution was this:<br /><br /><span style="font-family: courier new;">ps -eo pcpu,pid,user,args,pmem | sort -k 1 -r | head -10</span><br /><br />And if you want to have a terminal listing it you can use this line:<br /><br /><span style="font-family: courier new;">for i in `seq 1 10`; do ps -eo pcpu,pid,user,args,pmem | sort -k 1 -r | head -10; sleep 1; clear; done</span><br /><br />I hope it was usefull. <div style="clear: both;"></div>
+<b>Published: Thursday, May 31, 2007</b>
+<a href="tag_linux">linux</a>&nbsp;<a href="tag_debian">debian</a>&nbsp;
+<hr>
+<div id="section"><p id="postTitle">Configure ttysnoop with SSH in Suse Or Redhat Linux</p>
+<p> This time a nice administrator tool called TTYSNOOP, it permits to watch what other persons are doing in other terminals. Usefull for security people.<br /><br /><span style="font-weight: bold;">Steps:</span><br />1) Download openssh from http://openbsd.md5.com.ar/pub/OpenBSD/OpenSSH/portable/<br />wget http://openbsd.md5.com.ar/pub/OpenBSD/OpenSSH/portable/openssh-4.6p1.tar.gz<br />2) Uncompress it<br />tar zxvf openssh-4.6p1.tar.gz<br />3) Compile it, you have to set the &quot;login&quot; program that ssh has to use !<br />cd openssh-4.6p1<br />export LOGIN_PROGRAM=&quot;/sbin/foo_login&quot;<br />cd openssh-4.6p1<br />./configure --prefix=/usr --sysconfdir=/etc/ssh --without-zlib-version-check --with-pam --with-tcp-wrappers<br />make<br />make install<br /><br />4) Modify the sshd_config file, should be located in /etc/ssh/sshd_config and change these variables:<br /><span style="font-family:courier new;">PasswordAuthentication yes</span><br /><span style="font-family:courier new;">UseLogin yes</span><b><br /><br />Compile ttysnoop<br /></b>5) Download ttysnoop from http://freshmeat.net/redir/ttysnoop26/<br /><span style="font-size:85%;"><span style="font-family:courier new;">wget http://freshmeat.net/redir/ttysnoop26/50871/url_tgz/ttysnoop-0.12d.k26.tar.gz</span><br /><span style="font-family:courier new;">6) tar xzvf ttysnoop-0.12d.k26.tar.gz</span><br /><span style="font-family:courier new;">7) cd ttysnoop-0.12d.k26</span><br /><span style="font-family:courier new;">8) make</span><br /><span style="font-family:courier new;">9) make install</span></span><br /><br />10) Copy the new login from ttysnoop:<br /><span style="font-size:85%;"><span style="font-family:courier new;">cp ttysnoops /sbin/foo_login</span></span><br />11) This directory is not created, you have to do it:<br /><span style="font-size:85%;"><span style="font-family:courier new;">mkdir /var/spool/ttysnoop</span></span><br /><br />12) copy snooptab.dist to /etc<br /><span style="font-size:85%;"><span style="font-family:courier new;">cp snooptab.dist /etc/snooptab</span></span><br /><br />13) Edit /etc/snooptab<br />Comment all lines except:<br /><span style="font-size:85%;"><span style="font-family:courier new;">* socket login /bin/login</span></span><br /><br />Now you can use it:<br /><span style="font-size:85%;"><span style="font-family: courier new;">#w</span><br /><span style="font-family: courier new;">wlamagna pts/1 192.168.2.20 16:51 0.00s 1:42 0.01s login -- wlamagna</span><br /><span style="font-family: courier new;"><br /><span style="font-size:100%;"><span style="font-family: times new roman;">In another terminal write this to snoop terminal 1.</span></span><br />#ttysnoop 1<br /><br /></span><br /></span>Now you are ready to use ttysnoop :-) Please leave your comment with experiences. <div style="clear: both;"></div>
+<b>Published: Wednesday, April 25, 2007</b>
+<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;<a href="tag_linux">linux</a>&nbsp;
+<hr>
+<div id="section"><p id="postTitle">Deleting Apache semaphores</p>
+<p> Apache generates semaphores, when it can not create more semaphores this error appears:<br /><br /><span style="font-size:85%;"><span style="font-family: courier new;">[Wed Jan 31 07:07:07 2007] [crit] (28)No space left on device:</span><br /><span style="font-family: courier new;">mod_rewrite: could not create_rewrite: could not create rewrite_log_lock</span><br /><span style="font-family: courier new;">Configuration Failed</span></span><br /><br />This is resolved deleting the semaphores.<br />List the semaphores:<br /><span style="font-size:85%;"><span style="font-family: courier new;">#ipcs -s | grep apache</span></span><br /><br />Delete the semaphores:<br /><span style="font-size:85%;"><span style="font-family: courier new;">#ipcs -s | grep apache | perl -e &#39;while () { @a=split(/\s+/); print `ipcrm sem $a[1]`}&#39;</span></span><div style="clear: both;"></div>
+<b>Published: Tuesday, March 13, 2007</b>
+<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;<a href="tag_linux">linux</a>&nbsp;
+<hr>
+<div id="section"><p id="postTitle">Upgrading Linux Daylight Saving Time (timezone)</p>
+<p>
+<div class="tightenable top">Linux uses a special mechanism called DST 
+(Daylight Saving Time) that is used by linux to update the time of the 
+operating system when the clock has to change for daylight saving. 
+The daylight saving, of course, is different for every location and country.
+<br /><br />
+</div>
+In 2005, the congress of United States changed its daylight saving, 
+but at that time, Redhat 7.3 already existed and its daylight saving 
+files where deprecated. Newer versions of Linux have their DST files 
+updated but in United States, this year the time changes, and if there are RH 7.3, 
+they will change the incorrect day.
+<br />
+<br /> Check if you have the new timezones:
+<pre>
+$ zdump -v /etc/localtime | grep 2007
+</pre>
+<br />
+The file /etc/localtime is a link to the corresponding timezone 
+for the country the computer is in, the files of timezones are in /usr/share/zoneinfo/
+<br />
+For example, California&#39;s file is in /usr/share/zoneinfo/US/Pacific
+You could do:
+<pre>
+$ zdump -v /usr/share/zoneinfo/US/Pacific | grep 2007
+If the output says:
+/usr/share/zoneinfo/US/Pacific Sun Mar 11 09:59:59 2007 UTC = Sun Mar 11 01:59:59 2007 PST isdst=0 gmtoff=-28800
+/usr/share/zoneinfo/US/Pacific Sun Mar 11 10:00:00 2007 UTC = Sun Mar 11 03:00:00 2007 PDT isdst=1 gmtoff=-25200
+/usr/share/zoneinfo/US/Pacific Sun Nov 4 08:59:59 2007 UTC = Sun Nov 4 01:59:59 2007 PDT isdst=1 gmtoff=-25200
+/usr/share/zoneinfo/US/Pacific Sun Nov 4 09:00:00 2007 UTC = Sun Nov 4 01:00:00 2007 PST isdst=0 gmtoff=-28800</span>
+</pre>
+<br /><br />
+All is OK, if not, you have to upgrade Zoneinfo Files.
+<br /></div><div class="tightenable">So it is required, in some &quot;old&quot; linux distributions, to upgrade the timezone files, steps are following:
+<br /></div><div class="tightenable">1) Get the new timezone tzdata2007c.tar.gz copy it to some directory.
+<br /></div><div class="tightenable"><span style="font-family: Arial,Helvetica; font-size: 100%;"><code>wget ftp://elsie.nci.nih.gov/pub/tzdata2007k.tar.gz
+<br /></code></span>
+<br /><span style="font-size: 85%;"><span style="font-family: courier new;">2) tar zvxf tzdata2007k.tar.gz</span>
+<br /><span style="font-family: courier new;">3) zic -d zoneinfo northamerica</span>
+<br /><span style="font-family: courier new;">4) cd zoneinfo</span>
+<br /><span style="font-family: courier new;">5) cp -r * /usr/share/zoneinfo</span></span>
+<br /></div><div class="tightenable">Now try again:
+<br /></div><div class="tightenable" style="font-family: courier new;"><span style="font-size: 85%;">zdump -v /etc/localtime | grep 2007</span>
+<br /></div><div class="tightenable bottom">
+<br /></div>Sources:
+<br /> http://www.linux-watch.com/news/NS6300294422.html <div style="clear: both;"></div>
+<b>Published: Friday, March 09, 2007</b>
+<a href="tag_linux">linux</a>&nbsp;<a href="tag_admin">admin</a>&nbsp;
+<hr>
+</body></html>

@@ -3,12 +3,13 @@
 <title>Logging on a remote server with syslog</title>
 <link rel="stylesheet" type="text/css" href="css/blogstyle.css">
 </head>
-<body>
+<body style="margin:20;padding:0;">
 <script language="javascript">
 window.parent.document.title = "Logging on a remote server with syslog";
 </script>
 <div id="section"><p id="postTitle">Logging on a remote server with syslog</p>
 <p> Hi, it is a good security feature to log in a remote host, because an attacker should have access to that host to delete the logs, and this adds another security layer to the architecture you build.<br /><br />Linux logging facilities are managed mostly by the syslog Daemon. Syslog uses the configuration file <span style="font-family:courier new;">/etc/syslog.conf</span> to know where to log every system message.<br /><br />If you want to log in a remote host, you would add this line to <span style="font-family: courier new;">syslog.conf</span><br /><br /><span style="font-family:courier new;"> auth.*; authpriv.* @192.168.100.7</span><br /><br />It is required that the syslog daemon is started in the 192.168.100.7 host and it should also, be listening for messages thay come from the network. It is important that you know that this feature is by default &quot;off&quot;. You have to start syslog with a &quot;-r&quot; argument to enable this.<br /><br />To force syslog to re-read syslog.conf, send a SIGHUP signal to syslog.<br /><br />Happy logging ! <div style="clear: both;"></div>
 <b>Published: Sunday, June 15, 2008</b>
+<a href="tag_linux">linux</a>&nbsp;<a href="tag_debian">debian</a>&nbsp;
 <hr>
 </body></html>
