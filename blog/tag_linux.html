@@ -7,39 +7,6 @@
 <script language="javascript">
 window.parent.document.title = "Category linux";
 </script>
-<div id="section"><p id="postTitle">Installing Apache from scratch</p>
-<p>
-<u>1) A required library:</u><br />
-<pre>
-apt-get install libpcre++-dev
-</pre>
-<br />
-<u>2) Obtain the sources:</u><br />
-<pre>
-wget "http://apache.dattatec.com//httpd/httpd-2.4.18.tar.bz2"
-tar jxvf httpd-2.4.18.tar.bz2
-wget "http://mirrors.nxnethosting.com/apache//apr/apr-1.5.2.tar.gz"
-wget http://apache.dattatec.com//apr/apr-util-1.5.4.tar.gz
-
-cd httpd-2.4.18/srclib
-tar zxvf ../../apr-1.5.2.tar.gz
-
-tar zxvf ../../apr-util-1.5.4.tar.gz
-
-ln -s apr-1.5.2/ apr
-ln -s apr-util-1.5.4/ apr-util
-
-cd ..
-
-./configure --enable-ssl --prefix=/usr/local/apache2/ --enable-so --with-included-apr --enable-rewrite --enable-rewrite --enable-proxy --enable-cgi
-
-make
-</pre>
-</div>
-<div style="clear: both;"></div>
-<b>Published: Thursday, August 25, 2016</b>
-<a href="tag_linux">linux</a>&nbsp;<a href="tag_admin">admin</a>&nbsp;<a href="tag_apache">apache</a>&nbsp;
-<hr>
 <div id="section"><p id="postTitle">Unziping large files in linux copied from windows</p>
 <p>
 <br />
@@ -90,6 +57,39 @@ apt-get install texlive-latex-extra
 <div style="clear: both;"></div>
 <b>Published: Thursday, August 25, 2016</b>
 <a href="tag_linux">linux</a>&nbsp;<a href="tag_debian">debian</a>&nbsp;
+<hr>
+<div id="section"><p id="postTitle">Installing Apache from scratch</p>
+<p>
+<u>1) A required library:</u><br />
+<pre>
+apt-get install libpcre++-dev
+</pre>
+<br />
+<u>2) Obtain the sources:</u><br />
+<pre>
+wget "http://apache.dattatec.com//httpd/httpd-2.4.18.tar.bz2"
+tar jxvf httpd-2.4.18.tar.bz2
+wget "http://mirrors.nxnethosting.com/apache//apr/apr-1.5.2.tar.gz"
+wget http://apache.dattatec.com//apr/apr-util-1.5.4.tar.gz
+
+cd httpd-2.4.18/srclib
+tar zxvf ../../apr-1.5.2.tar.gz
+
+tar zxvf ../../apr-util-1.5.4.tar.gz
+
+ln -s apr-1.5.2/ apr
+ln -s apr-util-1.5.4/ apr-util
+
+cd ..
+
+./configure --enable-ssl --prefix=/usr/local/apache2/ --enable-so --with-included-apr --enable-rewrite --enable-rewrite --enable-proxy --enable-cgi
+
+make
+</pre>
+</div>
+<div style="clear: both;"></div>
+<b>Published: Thursday, August 25, 2016</b>
+<a href="tag_linux">linux</a>&nbsp;<a href="tag_admin">admin</a>&nbsp;<a href="tag_apache">apache</a>&nbsp;
 <hr>
 <div id="section"><p id="postTitle">Compile keepass 2.0.2 on Debian Linux Jeesie</p>
 <p>
@@ -287,6 +287,53 @@ And it should look like:
 <div style="clear: both;"></div>
 <b>Published: Wednesday, March 11, 2015</b>
 <a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;<a href="tag_linux">linux</a>&nbsp;
+<hr>
+<div id="section"><p id="postTitle">Errors compiling VMware Server on Fedora 12</p>
+<p> Hi! Today i downloaded vmware server to use it on my Linux workstation. 
+I am using Fedora 12 with the latest kernel update so i had not much hope to compile the vmware kernel modules without some troubleshooting.
+<br />
+After solving the problems, here i share the solutions i hope to help you. If you find it useful, remember that you can Invite me a kaffee ! :)
+<br />
+<ul>
+<li> 1. Download the latest VMware workstation (It is free) <br />
+https://www.vmware.com/tryvmware/p/activate.php?p=server20amp;lp=1amp;ext=1<br />
+Note: I downloaded the rpm version.</li>
+<li>2. Install it: yum install VMware-server-2.0.2-203138.i386.rpm</li>
+<li>3. Try to compile the modules: vmware-config.pl
+Ok.. in this moment a lot of warnings and errors appear between them, errors with vmnet, vmci, etc...</li>
+</ul>
+<pre>
+make[1]: Leaving directory `/usr/src/kernels/2.6.32.10-90.fc12.i686#39;
+Unable to build the vmnet module.<br />
+Unable to build the vmci module.
+</pre>
+<ul>
+<li>4. Patch the modules:<br />
+Download from http://www.erdemap.com/store/2.6.32.10-90.fc12.vmmon.tar.gz<br />
+wget http://www.erdemap.com/store/2.6.32.10-90.fc12.vmmon.tar.gz</li>
+<li>5. unzip amp; untar it.</li>
+<li>6. execute the patch shell script *inspect it first, it is very VERY basic*</li>
+<li>7. After installing the patches, execute the vmware-config.pl</li>
+</ul>
+<pre>
+Starting VMware services:
+Virtual machine monitor [ OK ]
+Virtual ethernet [ OK ]
+Bridged networking on /dev/vmnet0 [ OK ]
+Host-only networking on /dev/vmnet1 (background) [ OK ]
+DHCP server on /dev/vmnet1 [ OK ]
+Host-only networking on /dev/vmnet8 (background) [ OK ]
+DHCP server on /dev/vmnet8 [ OK ]
+NAT service on /dev/vmnet8 [ OK ]
+VMware Server Authentication Daemon (background) [ OK ]
+Shared Memory Available [ OK ]
+Starting VMware management services:
+VMware Server Host Agent (background) [ OK ]
+VMware Virtual Infrastructure Web Access
+Starting VMware autostart virtual machines:
+</pre>
+<b>Published: Saturday, April 03, 2010</b>
+<a href="tag_admin">admin</a>&nbsp;<a href="tag_linux">linux</a>&nbsp;
 <hr>
 <div id="section"><p id="postTitle">Upgrading Linux Daylight Saving Time (timezone)</p>
 <p>

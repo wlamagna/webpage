@@ -23,9 +23,51 @@ window.parent.document.title = "Year 2010";
 
 <hr>
 <div id="section"><p id="postTitle">Errors compiling VMware Server on Fedora 12</p>
-<p> Hi! Today i downloaded vmware server to use it on my Linux workstation.&nbsp; I am using Fedora 12 with the latest kernel update so i had not much hope to compile the vmware kernel modules without some troubleshooting.<br /><br /> After solving the problems, here i share the solutions i hope to help you.&nbsp; If you find it useful, remember that you can Invite me a kaffee ! :)<br /><br /> 1. Download the latest VMware workstation (It is free)<br /> https://www.vmware.com/tryvmware/p/activate.php?p=server20&amp;lp=1&amp;ext=1<br /><br /> Note: I downloaded the rpm version.<br /><br /> 2. Install it:<br /> yum install VMware-server-2.0.2-203138.i386.rpm<br /><br /> 3. Try to compile the modules:<br /> vmware-config.pl<br /><br /> Ok.. in this moment a lot of warnings and errors appear between them, errors with vmnet, vmci, etc...<br /><br /> make[1]: Leaving directory `/usr/src/kernels/2.6.32.10-90.fc12.i686&#39;<br /> Unable to build the vmnet module.<br /><br /><br /> Unable to build the vmci module.<br /><br /> 4. Patch the modules:<br /><br /> - Download from http://www.erdemap.com/store/2.6.32.10-90.fc12.vmmon.tar.gz<br /> wget http://www.erdemap.com/store/2.6.32.10-90.fc12.vmmon.tar.gz<br /><br /> 5. unzip &amp; untar it.<br /> 6. execute the patch shell script *inspect it first, it is very VERY basic*<br /> 7. After installing the patches, execute the vmware-config.pl<br /><br /> Starting VMware services:<br /> &nbsp;&nbsp; Virtual machine monitor&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [&nbsp; OK&nbsp; ]<br /> &nbsp;&nbsp; Virtual ethernet&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [&nbsp; OK&nbsp; ]<br /> &nbsp;&nbsp; Bridged networking on /dev/vmnet0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [&nbsp; OK&nbsp; ]<br /> &nbsp;&nbsp; Host-only networking on /dev/vmnet1 (background)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [&nbsp; OK&nbsp; ]<br /> &nbsp;&nbsp; DHCP server on /dev/vmnet1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [&nbsp; OK&nbsp; ]<br /> &nbsp;&nbsp; Host-only networking on /dev/vmnet8 (background)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [&nbsp; OK&nbsp; ]<br /> &nbsp;&nbsp; DHCP server on /dev/vmnet8&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [&nbsp; OK&nbsp; ]<br /> &nbsp;&nbsp; NAT service on /dev/vmnet8&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [&nbsp; OK&nbsp; ]<br /> &nbsp;&nbsp; VMware Server Authentication Daemon (background)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [&nbsp; OK&nbsp; ]<br /> &nbsp;&nbsp; Shared Memory Available&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [&nbsp; OK&nbsp; ]<br /> Starting VMware management services:<br /> &nbsp;&nbsp; VMware Server Host Agent (background)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [&nbsp; OK&nbsp; ]<br /> &nbsp;&nbsp; VMware Virtual Infrastructure Web Access<br /> Starting VMware autostart virtual machines:<br /><br /><strong>If you need more help and you want to get in touch with me</strong><br /><strong style="font-weight: normal;">Why</strong> not <a href="#">contact me</a> ;-) <div style="clear: both;"></div>
+<p> Hi! Today i downloaded vmware server to use it on my Linux workstation. 
+I am using Fedora 12 with the latest kernel update so i had not much hope to compile the vmware kernel modules without some troubleshooting.
+<br />
+After solving the problems, here i share the solutions i hope to help you. If you find it useful, remember that you can Invite me a kaffee ! :)
+<br />
+<ul>
+<li> 1. Download the latest VMware workstation (It is free) <br />
+https://www.vmware.com/tryvmware/p/activate.php?p=server20amp;lp=1amp;ext=1<br />
+Note: I downloaded the rpm version.</li>
+<li>2. Install it: yum install VMware-server-2.0.2-203138.i386.rpm</li>
+<li>3. Try to compile the modules: vmware-config.pl
+Ok.. in this moment a lot of warnings and errors appear between them, errors with vmnet, vmci, etc...</li>
+</ul>
+<pre>
+make[1]: Leaving directory `/usr/src/kernels/2.6.32.10-90.fc12.i686#39;
+Unable to build the vmnet module.<br />
+Unable to build the vmci module.
+</pre>
+<ul>
+<li>4. Patch the modules:<br />
+Download from http://www.erdemap.com/store/2.6.32.10-90.fc12.vmmon.tar.gz<br />
+wget http://www.erdemap.com/store/2.6.32.10-90.fc12.vmmon.tar.gz</li>
+<li>5. unzip amp; untar it.</li>
+<li>6. execute the patch shell script *inspect it first, it is very VERY basic*</li>
+<li>7. After installing the patches, execute the vmware-config.pl</li>
+</ul>
+<pre>
+Starting VMware services:
+Virtual machine monitor [ OK ]
+Virtual ethernet [ OK ]
+Bridged networking on /dev/vmnet0 [ OK ]
+Host-only networking on /dev/vmnet1 (background) [ OK ]
+DHCP server on /dev/vmnet1 [ OK ]
+Host-only networking on /dev/vmnet8 (background) [ OK ]
+DHCP server on /dev/vmnet8 [ OK ]
+NAT service on /dev/vmnet8 [ OK ]
+VMware Server Authentication Daemon (background) [ OK ]
+Shared Memory Available [ OK ]
+Starting VMware management services:
+VMware Server Host Agent (background) [ OK ]
+VMware Virtual Infrastructure Web Access
+Starting VMware autostart virtual machines:
+</pre>
 <b>Published: Saturday, April 03, 2010</b>
-
+<a href="tag_admin">admin</a>&nbsp;<a href="tag_linux">linux</a>&nbsp;
 <hr>
 <div id="section"><p id="postTitle">Five Easy Ways to Secure Your Linux System</p>
 <p> On the heels of last week&rsquo;s entry on using DenyHosts, and Nikto the week before that; I thought it appropriate to continue in the security vein with five more simple techniques that you can use to protect your systems. These include using account locking, limiting cron use, using DENY access to services, refusing root SSH logins and changing SSHD&rsquo;s default port.<br /><br /><a href="#">Keep reading..</a><br /><br /><div style="text-align: center;">&nbsp;Account Locking</div><div style="text-align: center;">&nbsp;Cron Restriction</div><div style="text-align: center;">&nbsp;Deny, Deny, Deny</div><div style="text-align: center;">&nbsp;Deny SSH by Root</div><div style="text-align: center;">&nbsp;Change the Default Port</div><div style="clear: both;"></div>
@@ -42,13 +84,13 @@ window.parent.document.title = "Year 2010";
 <b>Published: Friday, February 26, 2010</b>
 
 <hr>
-<div id="section"><p id="postTitle">Error compiling cairomm</p>
-<p> While compiling cairomm i got this error:<br /><br /><span style="font-family: &quot;Courier New&quot;,Courier,monospace;">configure.ac:37: error: possibly undefined macro: AC_DISABLE_STATIC</span><br style="font-family: &quot;Courier New&quot;,Courier,monospace;" /><span style="font-family: &quot;Courier New&quot;,Courier,monospace;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; If this token and others are legitimate, please use m4_pattern_allow.</span><br style="font-family: &quot;Courier New&quot;,Courier,monospace;" /><span style="font-family: &quot;Courier New&quot;,Courier,monospace;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; See the Autoconf documentation.</span><br style="font-family: &quot;Courier New&quot;,Courier,monospace;" /><span style="font-family: &quot;Courier New&quot;,Courier,monospace;">configure.ac:38: error: possibly undefined macro: AC_LIBTOOL_WIN32_DLL</span><br style="font-family: &quot;Courier New&quot;,Courier,monospace;" /><span style="font-family: &quot;Courier New&quot;,Courier,monospace;">configure.ac:39: error: possibly undefined macro: AC_PROG_LIBTOOL</span><br style="font-family: &quot;Courier New&quot;,Courier,monospace;" /><span style="font-family: &quot;Courier New&quot;,Courier,monospace;">autoreconf: /usr/bin/autoconf failed with exit status: 1</span><br /><br /> Solution:<br /> Install libtool:<br /><br /><pre><code>[root@dyn854450 ~]# yum install libtool</code></pre><div style="clear: both;"></div>
+<div id="section"><p id="postTitle">Badly formed XML there is no tag</p>
+<p> Using glade-3 i got with this error/warning:<br /><br /><br /><div style="font-family: &quot;Courier New&quot;,Courier,monospace;">[walter@talent Projects]$ gtk-builder-convert uno.glade uno.xml</div><div style="font-family: &quot;Courier New&quot;,Courier,monospace;">Traceback (most recent call last):</div><div style="font-family: &quot;Courier New&quot;,Courier,monospace;">File &quot;/usr/bin/gtk-builder-convert&quot;, line 772, in <br /> sys.exit(main(sys.argv))<br /> File &quot;/usr/bin/gtk-builder-convert&quot;, line 760, in main<br /> conv.parse_file(input_filename)<br /> File &quot;/usr/bin/gtk-builder-convert&quot;, line 161, in parse_file<br /> self._parse()<br /> File &quot;/usr/bin/gtk-builder-convert&quot;, line 233, in _parse<br /> assert glade_iface, (&quot;Badly formed XML, there is &quot;<br /> AssertionError: Badly formed XML, there is no  tag.</div><br /> Try saving the file as a libglade project and then try again. It work&#39;d for me.<br /><br /><div style="clear: both;"></div>
 <b>Published: Friday, February 26, 2010</b>
 
 <hr>
-<div id="section"><p id="postTitle">Badly formed XML there is no tag</p>
-<p> Using glade-3 i got with this error/warning:<br /><br /><br /><div style="font-family: &quot;Courier New&quot;,Courier,monospace;">[walter@talent Projects]$ gtk-builder-convert uno.glade uno.xml</div><div style="font-family: &quot;Courier New&quot;,Courier,monospace;">Traceback (most recent call last):</div><div style="font-family: &quot;Courier New&quot;,Courier,monospace;">File &quot;/usr/bin/gtk-builder-convert&quot;, line 772, in <br /> sys.exit(main(sys.argv))<br /> File &quot;/usr/bin/gtk-builder-convert&quot;, line 760, in main<br /> conv.parse_file(input_filename)<br /> File &quot;/usr/bin/gtk-builder-convert&quot;, line 161, in parse_file<br /> self._parse()<br /> File &quot;/usr/bin/gtk-builder-convert&quot;, line 233, in _parse<br /> assert glade_iface, (&quot;Badly formed XML, there is &quot;<br /> AssertionError: Badly formed XML, there is no  tag.</div><br /> Try saving the file as a libglade project and then try again. It work&#39;d for me.<br /><br /><div style="clear: both;"></div>
+<div id="section"><p id="postTitle">Error compiling cairomm</p>
+<p> While compiling cairomm i got this error:<br /><br /><span style="font-family: &quot;Courier New&quot;,Courier,monospace;">configure.ac:37: error: possibly undefined macro: AC_DISABLE_STATIC</span><br style="font-family: &quot;Courier New&quot;,Courier,monospace;" /><span style="font-family: &quot;Courier New&quot;,Courier,monospace;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; If this token and others are legitimate, please use m4_pattern_allow.</span><br style="font-family: &quot;Courier New&quot;,Courier,monospace;" /><span style="font-family: &quot;Courier New&quot;,Courier,monospace;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; See the Autoconf documentation.</span><br style="font-family: &quot;Courier New&quot;,Courier,monospace;" /><span style="font-family: &quot;Courier New&quot;,Courier,monospace;">configure.ac:38: error: possibly undefined macro: AC_LIBTOOL_WIN32_DLL</span><br style="font-family: &quot;Courier New&quot;,Courier,monospace;" /><span style="font-family: &quot;Courier New&quot;,Courier,monospace;">configure.ac:39: error: possibly undefined macro: AC_PROG_LIBTOOL</span><br style="font-family: &quot;Courier New&quot;,Courier,monospace;" /><span style="font-family: &quot;Courier New&quot;,Courier,monospace;">autoreconf: /usr/bin/autoconf failed with exit status: 1</span><br /><br /> Solution:<br /> Install libtool:<br /><br /><pre><code>[root@dyn854450 ~]# yum install libtool</code></pre><div style="clear: both;"></div>
 <b>Published: Friday, February 26, 2010</b>
 
 <hr>
@@ -97,13 +139,13 @@ window.parent.document.title = "Year 2010";
 <b>Published: Sunday, January 03, 2010</b>
 
 <hr>
-<div id="section"><p id="postTitle">What more should i do after installing Fedora 12</p>
-<p> I gave some tips to do after installing Fedora 12: <br /><br /><a href="#">http://serverlinux.blogspot.com/2009/12/what-should-i-do-after-installing.html</a><br /><br /> These steps should be done as superuser (root) or with a &quot;sudo&quot; in front of every command.<br /><br /> And now you can also do this to view plenty of media files with their codecs:<br /><br /><pre>yum install mplayer mplayer-gui gecko-mediaplayer mencoder</pre><pre>yum install xine xine-lib-extras xine-lib-extras-freeworld</pre><pre>&nbsp;</pre><pre></pre><pre style="font-family: Arial,Helvetica,sans-serif;">Navigate to: <a href="#" rel="nofollow" target="_blank">http://www.mplayerhq.hu/MPlayer/releases/codecs/</a> and download the packages</pre><pre style="font-family: Arial,Helvetica,sans-serif;">that matches your cpu architecture.  If you have a 32 bit processor, it may be</pre><pre style="font-family: Arial,Helvetica,sans-serif;">this file: <a href="#all-20071007.tar.bz2" rel="nofollow" target="_blank">all-20071007.tar.bz2</a>.</pre><pre>&nbsp;</pre><pre>You can also cut &amp; paste this:</pre><pre>wget http://www.mplayerhq.hu/MPlayer/releases/codecs/all-20071007.tar.bz2</pre><pre></pre><pre>And then:</pre><pre>sudo tar -jxvf all-20071007.tar.bz2 --strip-components 1 -C /usr/lib/codecs/</pre><pre></pre><pre>rpm -ivh http://rpm.livna.org/livna-release.rpm</pre><pre>rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-livna<br></pre><pre>&nbsp;</pre><pre>yum install libdvdcss</pre><pre></pre><pre></pre><div style="clear: both;"></div>
+<div id="section"><p id="postTitle">Joining multiple files with lxsplit</p>
+<p> I downloaded multiple files, they were splitted so i had to join them back.&nbsp; The files are commonly splitted to make it easier to download and to minimize the damage if the connection gets lost,<br /> of course, we are not considering a normal FTP or SSH with resume capabilities.<br /><br /><b>1) First install the lxsplit</b><br /> yum install lxsplit<br /><br /><b>2) Now it is time for some scripting:</b><br /><br /> for i in $(seq 1 9); do lxsplit -j M.part$i.rar.001; done<br /><br /> for i in $(seq 10 19); do lxsplit -j M.part$i.rar.001; done<br /><br /> And that is all.<br /> Happy new year for everybody. <div style="clear: both;"></div>
 <b>Published: Saturday, January 02, 2010</b>
 
 <hr>
-<div id="section"><p id="postTitle">Joining multiple files with lxsplit</p>
-<p> I downloaded multiple files, they were splitted so i had to join them back.&nbsp; The files are commonly splitted to make it easier to download and to minimize the damage if the connection gets lost,<br /> of course, we are not considering a normal FTP or SSH with resume capabilities.<br /><br /><b>1) First install the lxsplit</b><br /> yum install lxsplit<br /><br /><b>2) Now it is time for some scripting:</b><br /><br /> for i in $(seq 1 9); do lxsplit -j M.part$i.rar.001; done<br /><br /> for i in $(seq 10 19); do lxsplit -j M.part$i.rar.001; done<br /><br /> And that is all.<br /> Happy new year for everybody. <div style="clear: both;"></div>
+<div id="section"><p id="postTitle">What more should i do after installing Fedora 12</p>
+<p> I gave some tips to do after installing Fedora 12: <br /><br /><a href="#">http://serverlinux.blogspot.com/2009/12/what-should-i-do-after-installing.html</a><br /><br /> These steps should be done as superuser (root) or with a &quot;sudo&quot; in front of every command.<br /><br /> And now you can also do this to view plenty of media files with their codecs:<br /><br /><pre>yum install mplayer mplayer-gui gecko-mediaplayer mencoder</pre><pre>yum install xine xine-lib-extras xine-lib-extras-freeworld</pre><pre>&nbsp;</pre><pre></pre><pre style="font-family: Arial,Helvetica,sans-serif;">Navigate to: <a href="#" rel="nofollow" target="_blank">http://www.mplayerhq.hu/MPlayer/releases/codecs/</a> and download the packages</pre><pre style="font-family: Arial,Helvetica,sans-serif;">that matches your cpu architecture.  If you have a 32 bit processor, it may be</pre><pre style="font-family: Arial,Helvetica,sans-serif;">this file: <a href="#all-20071007.tar.bz2" rel="nofollow" target="_blank">all-20071007.tar.bz2</a>.</pre><pre>&nbsp;</pre><pre>You can also cut &amp; paste this:</pre><pre>wget http://www.mplayerhq.hu/MPlayer/releases/codecs/all-20071007.tar.bz2</pre><pre></pre><pre>And then:</pre><pre>sudo tar -jxvf all-20071007.tar.bz2 --strip-components 1 -C /usr/lib/codecs/</pre><pre></pre><pre>rpm -ivh http://rpm.livna.org/livna-release.rpm</pre><pre>rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-livna<br></pre><pre>&nbsp;</pre><pre>yum install libdvdcss</pre><pre></pre><pre></pre><div style="clear: both;"></div>
 <b>Published: Saturday, January 02, 2010</b>
 
 <hr>
