@@ -8,7 +8,7 @@
 window.parent.document.title = "Backup and restore floppy disks and drives with Linux";
 </script>
 <div id="section">
-<p id="postTitle">Backup and restore floppy disks and drives with Linux</p>
+<p id="postTitle"><a href="Backup%20and%20restore%20floppy%20disks%20and%20drives%20with%20Linux.html" id="alink">Backup and restore floppy disks and drives with Linux</a></p>
 <span style="color: rgb(255, 102, 0);font-family:arial;">We use still some floppies and it is important that we back up them, because it is a long process to create the disk and if it fails, the time to redo the disk is longer than restoring a backup or the knowhow is not there.</span><br /><br /><span style="color: rgb(255, 102, 0);font-family:arial;">To backup a floppy disk or any other disk we use the dd tool, including hard disks, in new versions of Linux it supports files larger than 2 Gigas.</span><br /><br /><span style="font-family:courier new;">$ dd if=/dev/fd0 of=/backup/floppy_backup.dd</span><br /><br /><span style="font-family:arial;">To restore the backup into a fresh floppy (note, you will loose any other information in the floppy):</span><br /><span style="font-family:courier new;">$ dd if=/backup/floppy_backup.dd of=/dev/fd0</span><br /><br /><span style="font-family:arial;">Let me know what did you backed up !</span><div style="clear: both;"></div>
 <b>Published: Saturday, January 14, 2006</b>
 

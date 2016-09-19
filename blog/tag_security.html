@@ -8,7 +8,7 @@
 window.parent.document.title = "Category security";
 </script>
 <div id="section">
-<p id="postTitle">Compile keepass 2.0.2 on Debian Linux Jeesie</p>
+<p id="postTitle"><a href="Compile%20keepass%202.0.2%20on%20Debian%20Linux%20Jeesie.html" id="alink">Compile keepass 2.0.2 on Debian Linux Jeesie</a></p>
 
 KeepassX webpage states: "KeePassX is an application for people with extremly high demands on secure personal data management. It has a light interface, is cross platform and published under the terms of the GNU General Public License."<br /><br />
 These steps have been executed in Debian Linux 8.2.0 Jeesie but for an experienced System Administrator/Hacker this should be trivial.<br /><br />
@@ -42,16 +42,16 @@ make install
 <br />
  
 <b>Published: Saturday, February 20, 2016</b>
-<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;<a href="tag_linux">linux</a>&nbsp;
+<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;
 </div>
 
 <hr>
 <div id="section">
-<p id="postTitle">Secure Debian Post Install configuration</p>
+<p id="postTitle"><a href="Secure%20Debian%20Post%20Install%20configuration.html" id="alink">Secure Debian Post Install configuration</a></p>
+
 In this <a href="http://blog.wallves.com/Some%20linux%20firewall%20tips.html">short article</a> i share some short
 but powerfull firewall logging tip.  Now i tell a little about some Debian post installation instructions i would
-commonly recommend.
-<br />
+commonly recommend.<br />
 Download the last stable Debian from <a href="https://www.debian.org/CD/http-ftp/#stable">here</a><br /><br />
 
 When you just install the last Debian you may have something more or less like this:<br />
@@ -95,19 +95,19 @@ apt-get remove exim4-*</span>
 <span style="color: #888888">apt-get remove cups</span>
 <span style="color: #888888">apt-get remove cups-browsed</span>
 <span style="color: #888888">apt-get remove cups-daemon</span>
-</pre></div>
+</pre>
 
 Now you would have a clearner list of network listening services.<br />
 
 
 <div style="clear: both;"></div>
 <b>Published: Monday, October 12, 2015</b>
-<a href="tag_linux">linux</a>&nbsp;<a href="tag_security">security</a>&nbsp;
+<a href="tag_debian">debian</a>&nbsp;<a href="tag_security">security</a>&nbsp;
 </div>
 
 <hr>
 <div id="section">
-<p id="postTitle">Debian 8 Post Install Cleanup</p>
+<p id="postTitle"><a href="Debian%208%20Post%20Install%20Cleanup.html" id="alink">Debian 8 Post Install Cleanup</a></p>
 In this <a href="http://blog.wallves.com/Some%20linux%20firewall%20tips.html">short article</a> i share some short
 but powerfull firewall logging tip.  And <a href="http://blog.wallves.com/Secure%20Debian%20Post%20Install%20configuration.html">
 here</a> security related post install removals for Debian.<br />
@@ -132,10 +132,11 @@ apt-get remove exim4-*</span>
 
 <hr>
 <div id="section">
-<p id="postTitle">Some linux firewall tips</p>
+<p id="postTitle"><a href="Some%20linux%20firewall%20tips.html" id="alink">Some linux firewall tips</a></p>
+
 The overconnected world needs some extra knowledge about protecting yourself from anti-democracy financed cyber-bandits,
 so here some small but powerfull firewall setup tips:<br />
-<br />
+
 <b><u>Firewall setup:</u></b>
 <pre>
 <span style="color: #888888">iptables -F </span>
@@ -159,7 +160,7 @@ so here some small but powerfull firewall setup tips:<br />
 <span style="color: #888888">:msg,contains,&quot;TCP/OUT:&quot; /var/log/iptables.log</span>
 <span style="color: #888888">:msg,contains,&quot;UDP/IN:&quot; /var/log/iptables.log</span>
 <span style="color: #888888">:msg,contains,&quot;UDP/OUT:&quot; /var/log/iptables.log</span>
-</pre></div>
+</pre>
 <br />
 <b><u>Restarting service</u></b><br />
 /etc/init.d/rsyslog restart
@@ -171,14 +172,15 @@ so here some small but powerfull firewall setup tips:<br />
 
 <hr>
 <div id="section">
-<p id="postTitle">Firefox starts a server on port 1900</p>
- I observed this kind of packets being filtered in my place:<br /><br /><b>
+<p id="postTitle"><a href="Firefox%20starts%20a%20server%20on%20port%201900.html" id="alink">Firefox starts a server on port 1900</a></p>
+
+I observed this kind of packets being filtered in my place:<br />
 <pre>
 Mar 17 13:13:21 reserved kernel: [15070.046566] UDP/OUT: IN= OUT=eth1 SRC=10.10.10.176 DST=239.255.255.250 LEN=122 TOS=0x00 PREC=0x00 TTL=1 ID=17655 DF PROTO=UDP SPT=1900 DPT=1900 LEN=102
 </pre>
-<br /><br /><br />
+
 And for just one moment, because it starts and stops very quicky i found this:
-<br /><br /><br />
+
 <pre>
 root@reserved:~# netstat --listen -np
 Active Internet connections (only servers)
@@ -186,14 +188,19 @@ Proto Recv-Q Send-Q Local Address           Foreign Address         State       
 udp        0      0 0.0.0.0:1900            0.0.0.0:*                           5615/firefox
 </pre>
 <br />
-To disable this go to about:config and then set<br /> loop.enabled -&gt; false<br /><br /> loop.rooms.enabled -&gt; false<br /><br /> Good luck. <div style="clear: both;"></div>
+To disable this go to about:config and then set
+<pre>
+loop.enabled -&gt; false
+loop.rooms.enabled -&gt; false
+</pre>
+Good luck. <div style="clear: both;"></div>
 <b>Published: Tuesday, March 17, 2015</b>
 <a href="tag_security">security</a>&nbsp;
 </div>
 
 <hr>
 <div id="section">
-<p id="postTitle">Compile keepass 0.4.3 on Debian Linux wheezy</p>
+<p id="postTitle"><a href="Compile%20keepass%200.4.3%20on%20Debian%20Linux%20wheezy.html" id="alink">Compile keepass 0.4.3 on Debian Linux wheezy</a></p>
  I have switched from Ubuntu to Debian, and am happy i did so.
 There are enough blogs talking about their pros and i only ask why i did it not before.
 
@@ -259,7 +266,284 @@ And it should look like:
 
 <div style="clear: both;"></div>
 <b>Published: Wednesday, March 11, 2015</b>
-<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;<a href="tag_linux">linux</a>&nbsp;
+<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;
+</div>
+
+<hr>
+<div id="section">
+<p id="postTitle"><a href="Truly%20private%20surfing.html" id="alink">Truly private surfing</a></p>
+<div style="text-align: justify;">
+In my <a href="Protecting%20your%20privacy%20while%20browsing.html" target="_blank">previous post</a> 
+i recommended to use two firefox plugins to truly surf through Internet whoes pages are &quot;infected&quot; with 
+social network embedded widgets that only report about our presense in those pages and if we are lucky, only that, 
+but i also identifies us because the propagation of cookies.<br />
+<br />
+</div>
+<div style="text-align: justify;">In this post i will give some recommendations about how to stop Firefox from surfing the web without us knowing it, yes, in the background.&nbsp; The other day i was analyzing what happens in the background in the network with Firefox open, and i was worried for a minute or two because i saw connections going out of my computer but i was not surfing anything...&nbsp; i had one page open, so i closed it incase that that page had some javascript with a loop doing some connections without me knowing.... but the connections kept being done.<br />
+<br />
+</div><b>Disclaimer:</b> These steps may do produce undesiderable behavior in your browser, these are notes i have written for myself and am sharing to help anybody that could benefit from them.<br />
+<br />
+<u>How to stop Firefox from automatically making connections without my permission</u><br />
+<br />
+1) Clean all the <a href="https://support.mozilla.org/en-US/kb/live-bookmarks#w_delete-a-live-bookmark" target="_blank">live bookmarks</a> if any.<br />
+2) Disable auto update (Edit -&gt; Preferences -&gt; Update -&gt;<br />
+<b>Never check for updates (not recommended: security risk)&nbsp;</b><br />
+and uncheck <b>Update Search Engines</b><span class="for" data-for="fx10"><b>)</b></span><br />
+<br />
+3) Disable auto update for plugins (Tools -&gt; AddOns -&gt; Extensions<br />
+At the top of the tab, click the Tools for All Add-ons menu and uncheck 
+<b>Update Add-ons Automatically</b>, then select <b>Reset All Add-ons to Update Automatically</b>.) <br />
+<br />
+4) Anti-phishing list updating (Edit -&gt; Preferences -&gt; Security -&gt;<br />
+<b>Block reported web forgeries</b>. and<br />
+<b>Block reported attack sites</b>) <br />
+<br />
+ 5) Add-on blocklist updating, Add-on metadata updating, Link prefetching<br />
+ In the location bar write: <b>about:config</b> and set:<br />
+<b><span class="pref">extensions.blocklist.enabled -&gt; false</span></b><br />
+<b>extensions.getAddons.cache.enabled -&gt; false</b><span class="pref"><br />
+</span><br />
+<span class="pref"><b>network.prefetch-next -&gt; false</b></span><br />
+<br />
+ Leave a &quot;Thank you&quot; if it helped or any question are welcome. <div style="clear: both;"></div>
+<b>Published: Tuesday, November 25, 2014</b>
+<a href="tag_security">security</a>&nbsp;
+</div>
+
+<hr>
+<div id="section">
+<p id="postTitle"><a href="Secure%20php%20Server%20and%20programming%20practices.html" id="alink">Secure php Server and programming practices</a></p>
+
+
+In one of my works, the company wanted to have their 
+webpage and they contracted a freelance programmer.<br />
+<br />
+He coded this in PHP:
+<pre>
+if(!$top)
+$top=&quot;top_home.php&quot;;
+include($top)
+</pre>
+<br />
+Proof Of Concept - This code works this way, you call the webpage with this url:<br />
+<pre>
+www.server.com/index.php?top=page.php
+</pre>
+<br />
+For this to work we need in php.ini this variable in ON
+<pre>
+register_globals = On
+</pre>
+
+This is very insecure, so we asked him to do this change:
+<br />
+<pre>
+if(!$_GET[top])
+$_GET[top]=&quot;top_home.php&quot;;
+include($_GET[top])
+</pre>
+<br />
+This is a little more secure, but it is a trap, you 
+can still compromise the security of the server with a query like this:
+<br />
+<pre>
+www.server.com/index.php?top=/etc/passwd
+</pre>
+<br />
+
+<u>I recommend:</u>
+
+1) To hardcode the filenames you want to open.<br />
+2) Use fopen() to open the filename, store it in a variable and then print it.<br />
+3) Do not use include()<br />
+4) Check the input variables with regular expressions ! Like this:<br />
+
+<pre>
+if (ereg(&quot;^[a-z]+\.html$&quot;, $_GET[cen])) {
+ echo &quot;Good!&quot;;<br />
+} else {
+ die(&quot;Try hacking somebody else&#39;s site.&quot;);
+}
+</pre>
+
+<br />
+
+5) Be preventive, save into logs or send you an email when somebody 
+is trying strange things in your server, you will probably not be 
+able to send the hacker to prison but detect the attack and take 
+preventive measures if neccesary, with new politics.<br />
+
+<br />
+I hope it helped somebody, this is very common.<br />
+<br />
+What is required to be safe when you program a website and worry about Security is...<br />
+<br />
+In httpd.conf configure<br />
+<pre>
+php_admin_value open_basedir &quot;/home/webpagedirectory/&quot;
+</pre>
+In php.ini configure<br />
+<pre>
+allow_url_fopen = Off
+enable_dl = Off
+expose_php = Off
+error_log = /var/log/error_php.log
+</pre>
+<u>Security is a process.</u><br />
+If this was usefull please leave me a message with feedback !!! Thanks.<br />
+<div style="clear: both;">
+
+<b>Published: Saturday, November 12, 2005</b>
+<a href="tag_security">security</a>&nbsp;
+</div>
+
+<hr>
+<div id="section">
+<p id="postTitle"><a href="Asymmetric%20Cryptography%20with%20PGP%20and%20Linux.html" id="alink">Asymmetric Cryptography with PGP and Linux</a></p>
+
+A fast introduction or memory notes about PGP and GPG (GNU) for Linux and UNIX.<br />
+Asymmetric Cryptography is the best method to encrypt information and asure confidentiality and authenticity.<br />
+<br />
+You will see these formulas:<br />
+Symetric cryptography<br />
+Y = E(X)<br />
+X = D(Y)<br />
+<br />
+Confidentiality with asymmetric Cryptography<br />
+A--&gt;Kub---&gt;Krb--&gt;B<br />
+<br />
+Authenticity with asymmetric Cryptography<br />
+A--&gt;Kra---&gt;Kua--&gt;B<br />
+<br />
+Authentication and Confidentiality<br />
+A--&gt;Kra---&gt;Kub---&gt;Krb---&gt;Kua--&gt;B<br />
+<br />
+<br />
+This is not intended to be a deep introduction to 
+Cryptography, just some notes.<br />
+<br />
+
+<b>* How to create a Private Key and a Public Key in Linux with GPG ?</b>
+<pre>
+$ gpg --gen-key
+Please select what kind of key you want:
+(1) DSA and ElGamal (default)
+(2) DSA (sign only)
+(4) ElGamal (sign and encrypt)
+(5) RSA (sign only)
+Your selection? 1
+
+(It is recomended to choose DSA and ElGamal since it is not patented)
+
+DSA keypair will have 1024 bits.
+About to generate a new ELG-E keypair.
+minimum keysize is 768 bits default keysize is 1024 bits
+highest suggested keysize is 2048 bits What keysize do you want? (1024) 2048 (Larger keys = more security)
+Requested keysize is 2048 bits
+Please specify how long the key should be valid.
+0 = key does not expire
+n = key expires in n days
+w = key expires in n weeks
+m = key expires in n months
+y = key expires in n years
+
+Key is valid for? (0) 0
+Key does not expire at all Is this correct (y/n)? y
+</pre>
+Now you have to enter a password, better described by &quot; keyphrase &quot;, input 
+uppercase and lowercase with numbers and a password that you will not forget, since 
+if you do, any encripted information sent to you with you public key 
+will not be restable. Now you keys where created ! <br />
+
+<b>* List the keys created with GPG Linux</b><br />
+<pre>
+[wlamagna@internet wlamagna]$ gpg --list-keys
+/home/wlamagna/.gnupg/pubring.gpg
+---------------------------------
+pub 1024D/B070DC8F 2005-10-25 Walter Lamagna (Sysop)
+sub 2048g/C89C0BA5 2005-10-25 ---------------------------------------------
+</pre>
+
+<b>* View or export a key with GPG in Linux and UNIX</b><br />
+<pre>
+$ gpg --export [UID]
+[wlamagna@internet wlamagna]$ gpg --export -a wlamagna@hotmail.com
+gpg: Warning: using insecure memory!
+gpg: please see http://www.gnupg.org/faq.html for more information
+
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+Version: GnuPG v1.0.7 (GNU/Linux)
+
+mQGiBENer7URBACcip5EQKuI2Xu0Ol2QgXGvR1wjWxLsyVz2p3maRPZMGEL9V8qf<br />
+PePhXaMp7IR247JEHy1TBztP6EVohYcm12629OaubzDKS4ogzfaUXUVbp5oGguU/<br />
+95jPhrrAPg3gSoTsa1h0eFzZxwHFmJPwiVgJC2Ih22cPZHuH3bQulQ/yJwCg+xhj<br />
+qufw1hIOf0IxKbc+774ce2MD/3F3Z9tF7WNUHg9BeQ1EQRxGg+HOhhnLaYWQiU3M<br />
+IL9Ox/RSHnJGet9eIFnNX+4BPASxDVRWZ/03lNspVeidU2OCWvhrEBZ2CdCZ7OZ3<br />
+g/WK5WT66HYgshP3U1il6w7tJat+CZn1ynXRmzo03ZWNlqQ+rhuDrI8ewAdE1FN1<br />
+8ACsA/4wGkFtlQ87acZkqYOIBYVaut9fKbc4A5THHagmt8W8oXpAS3/KdK8t3D68<br />
+j+cQU9hGaEzqg1i4WtwzfuYcbFYeICFGP8Hr++Rj4O/9SKNU6JoojHjVh/UWAa5z<br />
+wkqMufSs6k4tGO6WoUKrtnHWylS2cX3jCmEKL6pDjP56X2688rQtV2FsdGVyIExh<br />
+bWFnbmEgKFN5c29wKSA8d2xhbWFnbmFAaG90bWFpbC5jb20+iFkEExECABkFAkNe<br />
+r7YECwcDAgMVAgMDFgIBAh4BAheAAAoJEHgOrOiwcNyP3hYAn1DzUhzY20wCqgfW<br />
+T1C2//Ib0qDBAKCF+IJlTMwQwE4BVVgK63urJNVmP7kCDQRDXq/AEAgAxmVnz0wO<br />
+tO5HamE5/vWPLehfRtI7GbrqeatVy0F0It170g4L1s4Jynpoqsr/YYjftEM/xgj9<br />
+9Xk6vu3BlgU5EsfCQdlZA6Buvy/q0MoSIR0dCmNbK1iel23nXFBzYaVo5MsD003R<br />
+jy0/Cnyx4wELfcj/cJgFY21rcUyzxLULVzAdcSlV0v3RuunuHjCKj2/oYYroYrSk<br />
+PyNGM1z3LbB93U6P3fB3HDiRbU23VZin2hdi1PXwXFZtTV6g5Xs6sz8wud6pqbe6<br />
+7zqXqjQsASWXdwPLT14QmAP2yq7zfgJrPXYQOfqm0mWjn0xU6aq/9km2nRdP3WlR<br />
+QH2XiYBA0g02PwADBQf/RwBcPsgsTeF7lIIWTZkW537rPorGPrsLhSQpDLeeZzwT<br />
+MMVY+1n6EHlcSejHr6DXTMj0cn9zUyXKzh01gpPoj5pyNpl9gffFQYkU4U7fXLQ5<br />
+A2+AU/oF73n6iliKQs0WmdMSvEw+pObrO7OOZLPuNmhkWqZYsorlxRVb02EEicVP<br />
+og9IBQY7mjrxZfnrd2o95tQEVzqGv4L1wuYVLTqfIcf6yQuiY2qusXWz+Ja8cqm4<br />
+fHCjMfVZL2put900Qy8lmf8Lky+eRnf/2iDgMNuFT9HRnfgO0bUWuWInbw7HvgvK<br />
+UbtXYQM2QvNNLUoDU5gXksLRSbEcs9+Gu0eSPGKIx4hGBBgRAgAGBQJDXq/AAAoJ<br />
+EHgOrOiwcNyP5sYAnRVCcKMnQfh4V44Sb0lrqt6L07jeAJ40tRY7P7SfBKrczAiF<br />
+UT9etzCMiA==
+=1Ok9
+-----END PGP PUBLIC KEY BLOCK-----
+ [wlamagna@internet wlamagna]$
+</pre>
+
+This is my public key, so your secret messages will be welcome. 
+If you do not specify the UID it will print all the keys in your 
+keyring and if you do not use &quot;-a&quot; i will print the 
+key in non printable characters. If you export the public key (never give your private key to anybody)<br />
+you can exchange confidentiality information with somebody else who has your public key. You can exchange the password by writing it in a webpage, finger, ftp or uploading it to a Public Keys Server.<br />
+
+<b>* Import Keys with GNU GPG</b><br />
+<pre>
+$ gpg --import [file]
+</pre>
+<br />
+When you receive a public key from somebody, add it to your keyring.
+<br />
+<b>* Delete a public key with GNU GPG</b><br />
+<pre>
+$ gpg --delete-key [UID]
+</pre>
+<hr /> 
+And finaly, how to list your secret (private) keys ? The keys 
+your should not give anybody. Be carefull with the keyloggers, 
+best use them in secure machines.<br />
+<pre>
+[wlamagna@internet wlamagna]$ gpg --list-secret-keys
+/home/wlamagna/.gnupg/secring.gpg
+---------------------------------
+sec 1024D/B070DC8F 2005-10-25 Walter Lamagna (Sysop)
+ssb 2048g/C89C0BA5 2005-10-25        
+</pre>
+<b>* To delete a secret (private) key with GNU GPG</b><br />
+<pre>
+$ gpg --delete-secret-key [UID]</pre>
+<br />
+<b>* To modify a secret (private) key with GNU GPG</b><br />
+<pre>
+$ gpg --edit-key [UID]
+</pre>
+<div style="clear: both;"></div>
+<b>Published: Thursday, October 27, 2005</b>
+<a href="tag_security">security</a>&nbsp;
 </div>
 
 <hr>

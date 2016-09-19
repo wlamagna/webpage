@@ -8,7 +8,7 @@
 window.parent.document.title = "Linux RAM filesystem";
 </script>
 <div id="section">
-<p id="postTitle">Linux RAM filesystem</p>
+<p id="postTitle"><a href="Linux%20RAM%20filesystem.html" id="alink">Linux RAM filesystem</a></p>
  I do datamining, and the first thing learned is that 80% of this wonderful science is datapreparation.&nbsp; I am looking for cheap wais to manage large about of data, and today i want to try how a RAM disk in Linux performs to create a dataset for weka.<br /><br /> As root, i want a 10MB file (yes, even though it is far away from being big data, the data preparation was taking several minutes)<br /><br /> root@talento:~# mkfs -q /dev/ram1 10240<br />root@talento:~# mkdir -p /ramcache<br />root@talento:~# mount /dev/ram1 /ramcache<br />root@talento:~# df -H | grep ramcache<br />/dev/ram1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 11M&nbsp;&nbsp;&nbsp; 95k&nbsp;&nbsp; 9.6M&nbsp;&nbsp; 1% /ramcache<br /><br /><br /><br /><br /><div style="clear: both;"></div>
 <b>Published: Tuesday, June 12, 2012</b>
 

@@ -8,7 +8,7 @@
 window.parent.document.title = "Error compiling cairomm";
 </script>
 <div id="section">
-<p id="postTitle">Error compiling cairomm</p>
+<p id="postTitle"><a href="Error%20compiling%20cairomm.html" id="alink">Error compiling cairomm</a></p>
  While compiling cairomm i got this error:<br /><br /><span style="font-family: &quot;Courier New&quot;,Courier,monospace;">configure.ac:37: error: possibly undefined macro: AC_DISABLE_STATIC</span><br style="font-family: &quot;Courier New&quot;,Courier,monospace;" /><span style="font-family: &quot;Courier New&quot;,Courier,monospace;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; If this token and others are legitimate, please use m4_pattern_allow.</span><br style="font-family: &quot;Courier New&quot;,Courier,monospace;" /><span style="font-family: &quot;Courier New&quot;,Courier,monospace;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; See the Autoconf documentation.</span><br style="font-family: &quot;Courier New&quot;,Courier,monospace;" /><span style="font-family: &quot;Courier New&quot;,Courier,monospace;">configure.ac:38: error: possibly undefined macro: AC_LIBTOOL_WIN32_DLL</span><br style="font-family: &quot;Courier New&quot;,Courier,monospace;" /><span style="font-family: &quot;Courier New&quot;,Courier,monospace;">configure.ac:39: error: possibly undefined macro: AC_PROG_LIBTOOL</span><br style="font-family: &quot;Courier New&quot;,Courier,monospace;" /><span style="font-family: &quot;Courier New&quot;,Courier,monospace;">autoreconf: /usr/bin/autoconf failed with exit status: 1</span><br /><br /> Solution:<br /> Install libtool:<br /><br /><pre><code>[root@dyn854450 ~]# yum install libtool</code></pre><div style="clear: both;"></div>
 <b>Published: Friday, February 26, 2010</b>
 

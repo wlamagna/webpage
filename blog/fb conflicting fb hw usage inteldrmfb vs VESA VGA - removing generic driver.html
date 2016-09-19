@@ -8,10 +8,33 @@
 window.parent.document.title = "fb conflicting fb hw usage inteldrmfb vs VESA VGA - removing generic driver";
 </script>
 <div id="section">
-<p id="postTitle">fb conflicting fb hw usage inteldrmfb vs VESA VGA - removing generic driver</p>
-<br /><br /> After upgrading to Ubuntu 14.04.1 the machine hung after s very short passage through an attempt to start the graphical interface.&nbsp;&nbsp; With some luck, i pressed ctrl+alt+f1 to be on the terminal and avoided to use the graphics, hence avoided the crash.&nbsp; But i would recommend you to just start with a live cd and mount the filesystem.<br /><br /> I found this in the /var/log/kern.log .<br /><br /> After googling and looking at a lot of suggestions, what worked for me was:<br /><br /> apt-get install nvidia-331<br /> apt-get remove xserver-xorg-video-nouveau<br /><br /> vi /etc/modprobe.d/nvidia-graphics-drivers.conf<br /><br /> blacklist nouveau<br /> blacklist lbm-nouveau<br /> blacklist nvidia-173<br /> blacklist nvidia-96<br /> alias nvidia nvidia-current<br /><br /> This will do it (or most likely should).&nbsp; Then you may have issues with the desktop that do not starts.. but that may be another story. <div style="clear: both;"></div>
-<b>Published: Sunday, October 12, 2014</b>
+<p id="postTitle"><a href="fb%20conflicting%20fb%20hw%20usage%20inteldrmfb%20vs%20VESA%20VGA%20-%20removing%20generic%20driver.html" id="alink">fb conflicting fb hw usage inteldrmfb vs VESA VGA - removing generic driver</a></p>
 
+After upgrading to Ubuntu 14.04.1 the machine hung after a very short 
+passage through an attempt to start the graphical interface.&nbsp;&nbsp; With some 
+luck, i pressed ctrl+alt+f1 to be on the terminal and avoided to use 
+the graphics, hence avoided the crash.&nbsp; But i would recommend you to just start with a live cd and mount the filesystem.<br />
+<br />
+ I found this in the /var/log/kern.log .<br />
+<br />
+ After googling and looking at a lot of suggestions, what worked for me was:<br />
+<br />
+ apt-get install nvidia-331<br />
+ apt-get remove xserver-xorg-video-nouveau<br />
+<br />
+ vi /etc/modprobe.d/nvidia-graphics-drivers.conf<br />
+<br />
+<pre>
+blacklist nouveau
+blacklist lbm-nouveau
+blacklist nvidia-173
+blacklist nvidia-96
+alias nvidia nvidia-current
+</pre>
+<br />
+ This will do it (or most likely should).&nbsp; Then you may have issues with the desktop that do not starts.. but that may be another story. <div style="clear: both;"></div>
+<b>Published: Sunday, October 12, 2014</b>
+<a href="tag_admin">admin</a>&nbsp;
 </div>
 
 <hr>

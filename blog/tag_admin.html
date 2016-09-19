@@ -8,7 +8,7 @@
 window.parent.document.title = "Category admin";
 </script>
 <div id="section">
-<p id="postTitle">Unziping large files in linux copied from windows</p>
+<p id="postTitle"><a href="Unziping%20large%20files%20in%20linux%20copied%20from%20windows.html" id="alink">Unziping large files in linux copied from windows</a></p>
 
 In Windows 7 i created a large ZIP file (around 15 Gigas). I wanted to
 move it to a linux machine and unzip it there.  But once in the linux 
@@ -24,28 +24,23 @@ error [Windows 7 Clone.zip]:  start of central directory not found;
   (please check that you have transferred or created the zipfile in the
   appropriate BINARY mode and that you have compiled UnZip properly)
 </pre>
-
 After trying some things i resolved it like this:<br />
-
 <pre>
 7za x Windows\ 7\ Clone.zip
-
 7-Zip (A) [64] 9.20  Copyright (c) 1999-2010 Igor Pavlov  2010-11-18
 p7zip Version 9.20 (locale=en_US.UTF-8,Utf16=on,HugeFiles=on,4 CPUs)
-
 Processing archive: Windows 7 Clone.zip
-
 Extracting  Windows 7 Clone/Windows 7 Clone.vbox
 </pre>
 
 <div style="clear: both;"></div>
 <b>Published: Thursday, August 25, 2016</b>
-<a href="tag_linux">linux</a>&nbsp;<a href="tag_admin">admin</a>&nbsp;
+<a href="tag_admin">admin</a>&nbsp;
 </div>
 
 <hr>
 <div id="section">
-<p id="postTitle">Installing Apache from scratch</p>
+<p id="postTitle"><a href="Installing%20Apache%20from%20scratch.html" id="alink">Installing Apache from scratch</a></p>
 
 <u>1) A required library:</u><br />
 <pre>
@@ -61,27 +56,26 @@ wget http://apache.dattatec.com//apr/apr-util-1.5.4.tar.gz
 
 cd httpd-2.4.18/srclib
 tar zxvf ../../apr-1.5.2.tar.gz
-
 tar zxvf ../../apr-util-1.5.4.tar.gz
-
 ln -s apr-1.5.2/ apr
 ln -s apr-util-1.5.4/ apr-util
-
 cd ..
 
-./configure --enable-ssl --prefix=/usr/local/apache2/ --enable-so --with-included-apr --enable-rewrite --enable-rewrite --enable-proxy --enable-cgi
+./configure --enable-ssl \
+--prefix=/usr/local/apache2/ \
+--enable-so --with-included-apr \
+--enable-rewrite --enable-rewrite --enable-proxy --enable-cgi
 
 make
 </pre>
-</div>
 <div style="clear: both;"></div>
 <b>Published: Thursday, August 25, 2016</b>
-<a href="tag_linux">linux</a>&nbsp;<a href="tag_admin">admin</a>&nbsp;<a href="tag_apache">apache</a>&nbsp;
+<a href="tag_admin">admin</a>&nbsp;<a href="tag_apache">apache</a>&nbsp;
 </div>
 
 <hr>
 <div id="section">
-<p id="postTitle">Compile keepass 2.0.2 on Debian Linux Jeesie</p>
+<p id="postTitle"><a href="Compile%20keepass%202.0.2%20on%20Debian%20Linux%20Jeesie.html" id="alink">Compile keepass 2.0.2 on Debian Linux Jeesie</a></p>
 
 KeepassX webpage states: "KeePassX is an application for people with extremly high demands on secure personal data management. It has a light interface, is cross platform and published under the terms of the GNU General Public License."<br /><br />
 These steps have been executed in Debian Linux 8.2.0 Jeesie but for an experienced System Administrator/Hacker this should be trivial.<br /><br />
@@ -115,12 +109,12 @@ make install
 <br />
  
 <b>Published: Saturday, February 20, 2016</b>
-<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;<a href="tag_linux">linux</a>&nbsp;
+<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;
 </div>
 
 <hr>
 <div id="section">
-<p id="postTitle">Compile keepass 0.4.3 on Debian Linux wheezy</p>
+<p id="postTitle"><a href="Compile%20keepass%200.4.3%20on%20Debian%20Linux%20wheezy.html" id="alink">Compile keepass 0.4.3 on Debian Linux wheezy</a></p>
  I have switched from Ubuntu to Debian, and am happy i did so.
 There are enough blogs talking about their pros and i only ask why i did it not before.
 
@@ -186,12 +180,218 @@ And it should look like:
 
 <div style="clear: both;"></div>
 <b>Published: Wednesday, March 11, 2015</b>
-<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;<a href="tag_linux">linux</a>&nbsp;
+<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;
 </div>
 
 <hr>
 <div id="section">
-<p id="postTitle">Errors compiling VMware Server on Fedora 12</p>
+<p id="postTitle"><a href="fb%20conflicting%20fb%20hw%20usage%20inteldrmfb%20vs%20VESA%20VGA%20-%20removing%20generic%20driver.html" id="alink">fb conflicting fb hw usage inteldrmfb vs VESA VGA - removing generic driver</a></p>
+
+After upgrading to Ubuntu 14.04.1 the machine hung after a very short 
+passage through an attempt to start the graphical interface.&nbsp;&nbsp; With some 
+luck, i pressed ctrl+alt+f1 to be on the terminal and avoided to use 
+the graphics, hence avoided the crash.&nbsp; But i would recommend you to just start with a live cd and mount the filesystem.<br />
+<br />
+ I found this in the /var/log/kern.log .<br />
+<br />
+ After googling and looking at a lot of suggestions, what worked for me was:<br />
+<br />
+ apt-get install nvidia-331<br />
+ apt-get remove xserver-xorg-video-nouveau<br />
+<br />
+ vi /etc/modprobe.d/nvidia-graphics-drivers.conf<br />
+<br />
+<pre>
+blacklist nouveau
+blacklist lbm-nouveau
+blacklist nvidia-173
+blacklist nvidia-96
+alias nvidia nvidia-current
+</pre>
+<br />
+ This will do it (or most likely should).&nbsp; Then you may have issues with the desktop that do not starts.. but that may be another story. <div style="clear: both;"></div>
+<b>Published: Sunday, October 12, 2014</b>
+<a href="tag_admin">admin</a>&nbsp;
+</div>
+
+<hr>
+<div id="section">
+<p id="postTitle"><a href="Ubuntu%2012.04%20post%20install%20i%20would%20do.html" id="alink">Ubuntu 12.04 post install i would do</a></p>
+These are some steps i like to do after installing Ubuntu, 
+these apply to 12.04 but if you analyze what they do you may use them in other releases.
+<br />
+<u>1) I don&#39;t like to see the dnsmasq</u> service doing a party with my resources: 
+<pre>
+vi /etc/NetworkManager/NetworkManager.conf
+</pre>
+Comment this line &quot;dns=dnsmasq&quot;
+<pre>
+sudo restart network-manager
+</pre>
+
+<u>2) I do not need any avahi-daemon</u> doing things for me i do not need:
+<pre>
+apt-get remove avahi-daemon
+</pre>
+<br />
+<u>3) Setup some basic (but powerful) firewall</u> rules:
+<br />
+<u>4) Change unity</u>
+<br /><u>For 14.04</u>
+<pre>
+apt-get remove unity unity-2d unity-2d-panel unity-2d-spread unity-asset-pool unity-services unity-lens-files unity-lens-music unity-lens-applications gir1.2-unity-5.0 unity-common indicator-sound indicator-power indicator-appmenu libindicator7 indicator-application indicator-datetime indicator-messages libnux-4.0-0 nux-tools libunity-misc4 unity-2d-common  
+apt-get install gnome-core   
+</pre>
+<br />
+<br /><div style="clear: both;"></div>
+<b>Published: Friday, October 10, 2014</b>
+<a href="tag_admin">admin</a>&nbsp;<a href="tag_ubuntu">ubuntu</a>&nbsp;
+</div>
+
+<hr>
+<div id="section">
+<p id="postTitle"><a href="Creating%20a%20RAMFS.html" id="alink">Creating a RAMFS</a></p>
+With the previous method i found it slow for being a 
+ram disk, i read that ramfs does no swapping, i want 
+to test it:
+<br /><br />
+<pre>
+mount -t ramfs -o size=50m ramfs /ramcache
+</pre>
+This is a good resource:
+<pre>http://www.thegeekstuff.com/2008/11/overview-of-ramfs-and-tmpfs-on-linux/ </pre>
+<div style="clear: both;"></div>
+<b>Published: Tuesday, June 12, 2012</b>
+<a href="tag_admin">admin</a>&nbsp;
+</div>
+
+<hr>
+<div id="section">
+<p id="postTitle"><a href="glib%20lotus%20notes%20java%20memory%20corruption.html" id="alink">glib lotus notes java memory corruption</a></p>
+
+Today i updated some packets related to IBM lotus notes 
+and a problem with libraries caused a great and long 
+investigation process to have lotus notes back.
+<br />
+
+I tried lot of things: reinstalling, purging the 
+packets, installing the same version again... nothing worked. Today i found the 
+solution <a href="http://linux-noosphere.blogspot.com.ar/2012/04/glib-lotus-notes-java-memory-corruption.html">here</a>.<br />
+<br />
+It says:
+<br /><b>[...]&nbsp;</b>After some research I found the problem: libnuma. 
+If this lib exists in the system the Notes Client loads data forever.<b> [...]<br />
+<br /><br /><br />
+The solution is:<br />
+<pre>
+apt-get remove libnuma1
+</pre>
+<div style="clear: both;"></div>
+<b>Published: Tuesday, April 24, 2012</b>
+<a href="tag_admin">admin</a>&nbsp;
+</div>
+
+<hr>
+<div id="section">
+<p id="postTitle"><a href="How%20to%20obtain%20the%20flash%20videos%20in%20Firefox%204.html" id="alink">How to obtain the flash videos in Firefox 4</a></p>
+Flash videos were stored in /tmp/FlashXXXX and i was able to copy 
+them to another place like cp /tmp/FlashXXX ~/Desktop/new.video.mpeg.
+<br />
+<br />
+Since Firefox 4 i thought for a moment that everything 
+changed and my happy days were over but i was wrong, i remembered that with Linux there are no sad days.<br />
+<br />
+How to obtain the flash videos with Firefox 4:<br />
+When the video already finished loading in the browser (being Youtube or any other), do this:<br />
+<br />
+<pre>
+ps -ef | grep libflashplayer.so | grep -v grep
+walter&nbsp;&nbsp; 20040 19812&nbsp; 9 11:52 ?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 00:53:34 /usr/lib/firefox-3.6.17/plugin-container /home/walter/.mozilla/plugins/libflashplayer.so 19812 plugin true
+</pre>
+<br />
+Now, with the PID, inspect what it is opening:<br />
+<br />
+<br />
+<pre>
+root@talento:~# lsof -p 20040 | grep Flash
+lsof: WARNING: can&#39;t stat() fuse.gvfs-fuse-daemon file system /home/walter/.gvfs
+		Output information may be incomplete.
+
+plugin-co 20040 walter&nbsp;&nbsp; 16u&nbsp;&nbsp; REG&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 8,2&nbsp; 1249930 21708868 /tmp/FlashXXQANNm2 (deleted)
+root@talento:~#
+</pre>
+You are interested in the file descriptor id, these are the file descriptors from that process:<br />
+<br />
+<br />
+<pre>
+root@talento:~# ls -la /proc/20040/fd/
+total 0
+dr-x------ 2 walter walter&nbsp; 0 2011-04-30 21:12 .
+dr-xr-xr-x 7 walter walter&nbsp; 0 2011-04-30 21:06 ..
+lr-x------ 1 walter walter 64 2011-04-30 21:12 0 -&gt; /dev/null
+lrwx------ 1 walter walter 64 2011-04-30 21:12 1 -&gt; /home/walter/.xsession-errors
+l-wx------ 1 walter walter 64 2011-04-30 21:12 10 -&gt; pipe:[18679239]
+lr-x------ 1 walter walter 64 2011-04-30 21:12 11 -&gt; pipe:[18679240]
+l-wx------ 1 walter walter 64 2011-04-30 21:12 12 -&gt; pipe:[18679240]
+lrwx------ 1 walter walter 64 2011-04-30 21:12 13 -&gt; socket:[18679243]
+lr-x------ 1 walter walter 64 2011-04-30 21:12 14 -&gt; /home/walter/.mozilla/firefox/2te1hj2x.default/cert8.db
+lr-x------ 1 walter walter 64 2011-04-30 21:12 15 -&gt; /home/walter/.mozilla/firefox/2te1hj2x.default/key3.db
+lrwx------ 1 walter walter 64 2011-04-30 21:15 16 -&gt; /tmp/FlashXXQANNm2 (deleted)
+lr-x------ 1 walter walter 64 2011-04-30 21:16 17 -&gt; pipe:[19890054]
+l-wx------ 1 walter walter 64 2011-04-30 21:16 18 -&gt; pipe:[19890054]
+lr-x------ 1 walter walter 64 2011-04-30 21:16 19 -&gt; pipe:[19890055]
+lrwx------ 1 walter walter 64 2011-04-30 21:12 2 -&gt; /home/walter/.xsession-errors
+l-wx------ 1 walter walter 64 2011-04-30 21:16 20 -&gt; pipe:[19890055]
+lrwx------ 1 walter walter 64 2011-04-30 21:16 21 -&gt; socket:[19890059]
+lrwx------ 1 walter walter 64 2011-04-30 21:12 22 -&gt; socket:[19338003]
+lr-x------ 1 walter walter 64 2011-04-30 21:12 23 -&gt; anon_inode:inotify
+lrwx------ 1 walter walter 64 2011-04-30 21:12 3 -&gt; socket:[18679123]
+lrwx------ 1 walter walter 64 2011-04-30 21:12 4 -&gt; anon_inode:[eventpoll]
+lrwx------ 1 walter walter 64 2011-04-30 21:12 42 -&gt; socket:[18679124]
+lrwx------ 1 walter walter 64 2011-04-30 21:12 5 -&gt; socket:[18679236]
+lrwx------ 1 walter walter 64 2011-04-30 21:12 6 -&gt; socket:[18679237]
+lr-x------ 1 walter walter 64 2011-04-30 21:12 7 -&gt; pipe:[18679238]
+<span style="font-family: &quot;Courier New&quot;,Courier,monospace;">l-wx------ 1 walter walter 64 2011-04-30 21:12 8 -&gt; pipe:[18679238]
+lr-x------ 1 walter walter 64 2011-04-30 21:12 9 -&gt; pipe:[18679239]
+</pre>
+<br />
+What is of our interest if the Flash process, displayed in the previous lines.<br />
+<br />
+Now, you can copy the file to a safe place, because, if you close Firefox, those files are released and lost.<br />
+<br />
+<span style="font-family: &quot;Courier New&quot;,Courier,monospace;">cp /proc/20040/fd/16 ~/Desktop/A.Movie.mpeg</span><br />
+<br />
+Now if you want to put everything in a script:<br />
+<br />
+<pre>
+root@talento:~# cat saveflash.sh
+#!/bin/bash</span><br />
+PID=`ps -ef | grep libflashplayer.so | grep -v grep | awk &#39;{print $2}&#39;`
+FD=`lsof -p $PID | grep Flash | awk &#39;{print $4}&#39; | sed &#39;s/u$//&#39;`
+cp /proc/$PID/fd/$FD &quot;$1&quot;
+</pre>
+And remember, you can &quot;invite me a coffee&quot; :) <div style="clear: both;"></div>
+<b>Published: Saturday, April 30, 2011</b>
+<a href="tag_admin">admin</a>&nbsp;
+</div>
+
+<hr>
+<div id="section">
+<p id="postTitle"><a href="Installing%20R%20project%20for%20statistics%20in%20Fedora%20Linux..html" id="alink">Installing R project for statistics in Fedora Linux.</a></p>
+Is is as easy as this:<br />
+<br />
+<span style="font-family: Verdana,sans-serif;">[root@dyn8382 ~]# yum install R R-devel</span><br />
+<span style="font-family: Verdana,sans-serif;">[root@dyn8382 ~]# R</span><br />
+<span style="font-family: Verdana,sans-serif;">&gt;install.packages(&quot;arules&quot;, repos=&quot;http://R-Forge.R-project.org&quot;)</span><br />
+<br />
+<b><code><span style="color: #6aa84f;">http://www.r-project.org/</span></code></b><div style="clear: both;"></div>
+<b>Published: Sunday, June 27, 2010</b>
+<a href="tag_admin">admin</a>&nbsp;<a href="tag_datamining">datamining</a>&nbsp;
+</div>
+
+<hr>
+<div id="section">
+<p id="postTitle"><a href="Errors%20compiling%20VMware%20Server%20on%20Fedora%2012.html" id="alink">Errors compiling VMware Server on Fedora 12</a></p>
  Hi! Today i downloaded vmware server to use it on my Linux workstation. 
 I am using Fedora 12 with the latest kernel update so i had not much hope to compile the vmware kernel modules without some troubleshooting.
 <br />
@@ -241,7 +441,7 @@ Starting VMware autostart virtual machines:
 
 <hr>
 <div id="section">
-<p id="postTitle">Upgrading Linux Daylight Saving Time (timezone)</p>
+<p id="postTitle"><a href="Upgrading%20Linux%20Daylight%20Saving%20Time%20%28timezone%29.html" id="alink">Upgrading Linux Daylight Saving Time (timezone)</a></p>
 
 <div class="tightenable top">Linux uses a special mechanism called DST 
 (Daylight Saving Time) that is used by linux to update the time of the 
@@ -290,6 +490,106 @@ All is OK, if not, you have to upgrade Zoneinfo Files.
 <br /> http://www.linux-watch.com/news/NS6300294422.html <div style="clear: both;"></div>
 <b>Published: Friday, March 09, 2007</b>
 <a href="tag_linux">linux</a>&nbsp;<a href="tag_admin">admin</a>&nbsp;
+</div>
+
+<hr>
+<div id="section">
+<p id="postTitle"><a href="How%20to%20set%20colors%20in%20the%20Linux%20Console.html" id="alink">How to set colors in the Linux Console</a></p>
+
+That dark blue color of the directories from the console, i would like to change them.
+<br />
+Execute
+<pre>/usr/bin/dircolors</pre>
+You will see an output like this:<br />
+<pre>
+LS_COLORS=&#39;no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:
+do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:ex=01;32:
+*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:
+*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.bz2=01;31:
+*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.jpg=01;35:*.jpeg=01;35:
+*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:
+*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:
+*.png=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.avi=01;35:
+*.fli=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:
+*.ogg=01;35:*.mp3=01;35:*.wav=01;35:&#39;;
+export LS_COLORS
+</pre>
+Edit the output to your needs.
+<br />
+<pre>di=01;34 are the directories.</pre>
+The codes are these:<br />
+Attribute codes:<br />
+<pre>
+00=none 01=bold 04=underscore 05=blink 07=reverse 08=concealed
+</pre>
+Text color codes:<br />
+<pre>
+30=black 31=red 32=green 33=yellow 34=blue 35=magenta 36=cyan 37=white
+</pre>
+Background color codes:<br />
+
+<pre>
+40=black 41=red 42=green 43=yellow 44=blue 45=magenta 46=cyan 47=white
+</pre>
+
+These are the variables and every abbreviation in the exported LS_COLORS variable:<br />
+<br />
+NORMAL 00 # global default, although everything should be something.<br />
+FILE 00 # normal file<br />
+DIR 01;34 # directory<br />
+LINK 01;36 # symbolic link<br />
+FIFO 40;33 # pipe<br />
+SOCK 01;35 # socket<br />
+BLK 40;33;01 # block device driver<br />
+CHR 40;33;01 # character device driver<br />
+ORPHAN 40;31;01 # symlink to nonexistent file<br />
+<br />
+# This is for files with execute permission:</tt>
+<span style="font-family:monospace;">
+<br />
+</span>
+<span style="font-size:85%;">
+<span style="font-family:courier new;">
+EXEC 01;32</span>
+</span>
+<br />
+
+<br />
+
+Paste the edited output of &quot;dircolors&quot; into .bashrc or .bash_profile or /etc/profile<br />
+
+<br />
+You must have this likes too:<br />
+<pre>
+alias dir=&#39;dir --color&#39;
+alias ls=&#39;ls --color&#39;
+</pre>
+<div style="clear: both;">
+
+<b>Published: Tuesday, December 27, 2005</b>
+<a href="tag_admin">admin</a>&nbsp;
+</div>
+
+<hr>
+<div id="section">
+<p id="postTitle"><a href="Linux%20disk%20recovery.html" id="alink">Linux disk recovery</a></p>
+After any power problem with the linux machine, the filesystem could be corrupted and you may not be able to login. When this happens, you will need e2fsck, the tool to recover ext2 or ext3 partitions. (Do not ever use it with a partition that has AFS or another format).<br />
+<br />
+Boot with a live cd or the first cd of Redhat and write &quot;linux rescue&quot;.<br />
+Do not let the rescue mode to detect the linux partitions, else it would mount them and you do not want to mount the partitions yet, the file system check (e2fsck) can cause severe problems on a mounted partition.<br />
+<br />
+When you are at the rescue mode prompt, write:<br />
+<br />
+<pre>
+e2fsck -c -c -v -y /dev/hda1
+</pre>
+It is important to user &quot;-c -c&quot; (twice) this means that badblocks will scan using a non-destructive read-write test.<br />
+&quot;-v&quot; to verbose and see the status of fsck.<br />
+&quot;-y&quot; says to answer &quot;yes&quot; to all the questinons from fsck. <div style="clear: both;">
+</div>
+
+<b>Published: Wednesday, October 26, 2005</b>
+<a href="tag_admin">admin</a>&nbsp;
 </div>
 
 <hr>

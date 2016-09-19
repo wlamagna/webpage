@@ -8,7 +8,7 @@
 window.parent.document.title = "Badly formed XML there is no tag";
 </script>
 <div id="section">
-<p id="postTitle">Badly formed XML there is no tag</p>
+<p id="postTitle"><a href="Badly%20formed%20XML%20there%20is%20no%20tag.html" id="alink">Badly formed XML there is no tag</a></p>
  Using glade-3 i got with this error/warning:<br /><br /><br /><div style="font-family: &quot;Courier New&quot;,Courier,monospace;">[walter@talent Projects]$ gtk-builder-convert uno.glade uno.xml</div><div style="font-family: &quot;Courier New&quot;,Courier,monospace;">Traceback (most recent call last):</div><div style="font-family: &quot;Courier New&quot;,Courier,monospace;">File &quot;/usr/bin/gtk-builder-convert&quot;, line 772, in <br /> sys.exit(main(sys.argv))<br /> File &quot;/usr/bin/gtk-builder-convert&quot;, line 760, in main<br /> conv.parse_file(input_filename)<br /> File &quot;/usr/bin/gtk-builder-convert&quot;, line 161, in parse_file<br /> self._parse()<br /> File &quot;/usr/bin/gtk-builder-convert&quot;, line 233, in _parse<br /> assert glade_iface, (&quot;Badly formed XML, there is &quot;<br /> AssertionError: Badly formed XML, there is no  tag.</div><br /> Try saving the file as a libglade project and then try again. It work&#39;d for me.<br /><br /><div style="clear: both;"></div>
 <b>Published: Friday, February 26, 2010</b>
 

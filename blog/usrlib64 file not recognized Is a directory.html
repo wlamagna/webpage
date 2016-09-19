@@ -8,7 +8,7 @@
 window.parent.document.title = "usrlib64 file not recognized Is a directory";
 </script>
 <div id="section">
-<p id="postTitle">usrlib64 file not recognized Is a directory</p>
+<p id="postTitle"><a href="usrlib64%20file%20not%20recognized%20Is%20a%20directory.html" id="alink">usrlib64 file not recognized Is a directory</a></p>
  I have seen this error several times when compiling and the solution is always the same:<br /><br />Edit the Makefile and replace:<br /><span style="font-family: courier new;">LDFLAGS = -L /usr/lib64</span><br />for:<br /><span style="font-family: courier new;">LDFLAGS = -L/usr/lib64</span><br />(remove the space between the -L and /usr/lib64) <div style="clear: both;"></div>
 <b>Published: Saturday, December 13, 2008</b>
 

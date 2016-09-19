@@ -8,23 +8,172 @@
 window.parent.document.title = "Year 2005";
 </script>
 <div id="section">
-<p id="postTitle">How to set colors in the Linux Console</p>
-<span style="font-size:85%;"><span style="font-family:arial;">That dark blue color of the directories from the console, i would like to change them.</span><br /><br /><span style="font-family:arial;">Execute </span></span><span style="font-family:Tahoma,Book Antiqua,Times New Roman,Times;"><tt><span style="color: rgb(51, 51, 255);">/usr/bin/dircolors, </span></tt><span style="color: rgb(51, 51, 255); font-family: arial;font-size:85%;"><span style="color: rgb(0, 0, 0);">you will see an output like this:</span></span><tt><span style="color: rgb(51, 51, 255);"><br /><span style="color: rgb(0, 0, 0);">LS_COLORS=&#39;no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:</span><br /><span style="color: rgb(0, 0, 0);">do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:ex=01;32:</span><br /><span style="color: rgb(0, 0, 0);">*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:</span><br /><span style="color: rgb(0, 0, 0);">*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.bz2=01;31:</span><br /><span style="color: rgb(0, 0, 0);">*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.jpg=01;35:*.jpeg=01;35:</span><br /><span style="color: rgb(0, 0, 0);">*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:</span><br /><span style="color: rgb(0, 0, 0);">*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:</span><br /><span style="color: rgb(0, 0, 0);">*.png=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.avi=01;35:</span><br /><span style="color: rgb(0, 0, 0);">*.fli=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:</span><br /><span style="color: rgb(0, 0, 0);">*.ogg=01;35:*.mp3=01;35:*.wav=01;35:&#39;;</span><br /><span style="color: rgb(0, 0, 0);">export LS_COLORS</span><br /><br /></span></tt><span style="color: rgb(51, 51, 255);font-family:arial;font-size:85%;"><span style="color: rgb(0, 0, 0);">Edit the output to your needs.</span></span><tt><span style="color: rgb(51, 51, 255);"><br /><br /></span></tt><span style="color: rgb(51, 51, 255);font-family:courier new;"><span style="font-size:85%;">di=01;34 are the directories.</span></span><tt><span style="color: rgb(51, 51, 255);"><br /><br />The codes are these:<br /></span></tt></span><span style="font-family:Tahoma,Book Antiqua,Times New Roman,Times;"><span style=";font-family:arial;font-size:85%;">Attribute codes:<br />00=none 01=bold 04=underscore 05=blink 07=reverse 08=concealed<br />Text color codes:<br />30=black 31=red 32=green 33=yellow 34=blue 35=magenta 36=cyan 37=white<br />Background color codes:<br /></span> <span style=";font-family:arial;font-size:85%;">40=black 41=red 42=green 43=yellow 44=blue 45=magenta 46=cyan 47=white</span><tt><br /><br />These are the variables and every abbreviation in the exported LS_COLORS variable:<br /></tt></span><span style="font-family:Tahoma,Book Antiqua,Times New Roman,Times;"><tt>NORMAL 00 # global default, although everything should be something.</tt><br /><tt>FILE 00 # normal file</tt><br /><tt>DIR 01;34 # directory</tt><br /><tt>LINK 01;36 # symbolic link</tt><br /><tt>FIFO 40;33 # pipe</tt><br /><tt>SOCK 01;35 # socket</tt><br /><tt>BLK 40;33;01 # block device driver</tt><br /><tt>CHR 40;33;01 # character device driver</tt><br /><tt>ORPHAN 40;31;01 # symlink to nonexistent file<br /></tt></span><tt><br /># This is for files with execute permission:</tt><span style="font-family:monospace;"><br /></span><span style="font-size:85%;"><span style="font-family:courier new;">EXEC 01;32</span></span><br /><span style="font-size:85%;"><br /><span style="font-family:arial;">Paste the edited output of &quot;dircolors&quot; into .bashrc or .bash_profile or /etc/profile</span><br /></span><span style=";font-family:arial;font-size:85%;"><br />You must have this likes too:<br /></span><span style=";font-family:courier new;font-size:85%;"><span style=";font-family:arial;font-size:85%;"></span><span style="color: rgb(51, 51, 255);">alias dir=&#39;dir --color&#39;</span></span><span style=";font-family:Tahoma,Book Antiqua,Times New Roman,Times;font-size:85%;"><span style="color: rgb(51, 51, 255);"><br /><span style="font-family: courier new;">alias ls=&#39;ls --color&#39;</span></span></span><div style="clear: both;"></div>
+<p id="postTitle"><a href="How%20to%20set%20colors%20in%20the%20Linux%20Console.html" id="alink">How to set colors in the Linux Console</a></p>
+
+That dark blue color of the directories from the console, i would like to change them.
+<br />
+Execute
+<pre>/usr/bin/dircolors</pre>
+You will see an output like this:<br />
+<pre>
+LS_COLORS=&#39;no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:
+do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:ex=01;32:
+*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:
+*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.bz2=01;31:
+*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.jpg=01;35:*.jpeg=01;35:
+*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:
+*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:
+*.png=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.avi=01;35:
+*.fli=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:
+*.ogg=01;35:*.mp3=01;35:*.wav=01;35:&#39;;
+export LS_COLORS
+</pre>
+Edit the output to your needs.
+<br />
+<pre>di=01;34 are the directories.</pre>
+The codes are these:<br />
+Attribute codes:<br />
+<pre>
+00=none 01=bold 04=underscore 05=blink 07=reverse 08=concealed
+</pre>
+Text color codes:<br />
+<pre>
+30=black 31=red 32=green 33=yellow 34=blue 35=magenta 36=cyan 37=white
+</pre>
+Background color codes:<br />
+
+<pre>
+40=black 41=red 42=green 43=yellow 44=blue 45=magenta 46=cyan 47=white
+</pre>
+
+These are the variables and every abbreviation in the exported LS_COLORS variable:<br />
+<br />
+NORMAL 00 # global default, although everything should be something.<br />
+FILE 00 # normal file<br />
+DIR 01;34 # directory<br />
+LINK 01;36 # symbolic link<br />
+FIFO 40;33 # pipe<br />
+SOCK 01;35 # socket<br />
+BLK 40;33;01 # block device driver<br />
+CHR 40;33;01 # character device driver<br />
+ORPHAN 40;31;01 # symlink to nonexistent file<br />
+<br />
+# This is for files with execute permission:</tt>
+<span style="font-family:monospace;">
+<br />
+</span>
+<span style="font-size:85%;">
+<span style="font-family:courier new;">
+EXEC 01;32</span>
+</span>
+<br />
+
+<br />
+
+Paste the edited output of &quot;dircolors&quot; into .bashrc or .bash_profile or /etc/profile<br />
+
+<br />
+You must have this likes too:<br />
+<pre>
+alias dir=&#39;dir --color&#39;
+alias ls=&#39;ls --color&#39;
+</pre>
+<div style="clear: both;">
+
 <b>Published: Tuesday, December 27, 2005</b>
-
+<a href="tag_admin">admin</a>&nbsp;
 </div>
 
 <hr>
 <div id="section">
-<p id="postTitle">Secure php Server and programming practices</p>
-<span style="font-size:85%;"><span style="font-family:arial;">In one of my works, the company wanted to have their webpage and they contracted a freelance programmer.<br />Keep up reading !</span><br /><br /><span style="font-family:arial;">He coded this in PHP:</span></span><br /><span style="font-size:85%;"><span style="font-family:courier new;">if(!$top)</span><br /><span style="font-family:courier new;"> $top=&quot;top_home.php&quot;;</span><br /><span style="font-family:courier new;"> include($top)</span></span><br /><br /><span style=";font-family:arial;font-size:85%;">This code works this way, you call the webpage with this url:<br />www.server.com/index.php?top=page.php</span><br /><br /><span style="font-size:85%;"><span style="font-family:arial;">For this to work we need in php.ini this variable in ON</span></span><br /><span style="font-size:85%;"><span style="font-family:courier new;">register_globals = On</span></span><br /><br /><span style="font-size:85%;"><span style="font-family:arial;">This is very insecure, so we asked him to do this change:</span></span><br /><br /><span style="font-size:85%;"><span style="font-family:courier new;">if(!$_GET[top])</span><br /><span style="font-family:courier new;"> $_GET[top]=&quot;top_home.php&quot;;</span><br /><span style="font-family:courier new;"> include($_GET[top])</span></span><br /><br /><span style="font-size:85%;"><span style="font-family:arial;">This is a little more secure, but it is a trap, you can still compromise the security of the server with a query like this:</span></span><br /><br /><span style="font-size:85%;"><span style="font-family:courier new;">www.server.com/index.php?top=/etc/passwd</span></span><br /><br /><span style="font-size:85%;"><span style="font-family:arial;">I recommend:</span><br /><br /><span style="font-family:arial;">1) To hardcode the filenames you want to open.<br /></span><span style="font-family:arial;">2) Use fopen() to open the filename, store it in a variable and then print it.<br />3) Do not use include()<br />4) Check the input variables with regular expressions ! Like this:<br /></span></span> <tt><br /></tt> <tt>if (ereg(&quot;^[a-z]+\.html$&quot;, $_GET[cen])) {<br /> echo &quot;Good!&quot;;<br />} else {<br /> die(&quot;Try hacking somebody else&#39;s site.&quot;);<br />}</tt><br /><span style="font-size:85%;"><br /><span style="font-family:arial;">5) Be preventive, save into logs or send you an email when somebody is trying strange things in your server, you will probably not be able to send the hacker to prison but detect the attack and take preventive measures if neccesary, with new politics.</span><br /><br /><span style="font-family:arial;">I hope it helped somebody, this is very common.<br /><br />What is required to be safe when you program a website and worry about Security is...<br /><br />In httpd.conf configure<br />php_admin_value open_basedir &quot;/home/webpagedirectory/&quot;<br /><br />In php.ini configure<br />allow_url_fopen = Off<br />enable_dl = Off<br />expose_php = Off<br />error_log = /var/log/error_php.log<br /><br />Security is a process.<br />If this was usefull please leave me a message with feedback !!! Thanks.<br /></span></span><div style="clear: both;"></div>
+<p id="postTitle"><a href="Secure%20php%20Server%20and%20programming%20practices.html" id="alink">Secure php Server and programming practices</a></p>
+
+
+In one of my works, the company wanted to have their 
+webpage and they contracted a freelance programmer.<br />
+<br />
+He coded this in PHP:
+<pre>
+if(!$top)
+$top=&quot;top_home.php&quot;;
+include($top)
+</pre>
+<br />
+Proof Of Concept - This code works this way, you call the webpage with this url:<br />
+<pre>
+www.server.com/index.php?top=page.php
+</pre>
+<br />
+For this to work we need in php.ini this variable in ON
+<pre>
+register_globals = On
+</pre>
+
+This is very insecure, so we asked him to do this change:
+<br />
+<pre>
+if(!$_GET[top])
+$_GET[top]=&quot;top_home.php&quot;;
+include($_GET[top])
+</pre>
+<br />
+This is a little more secure, but it is a trap, you 
+can still compromise the security of the server with a query like this:
+<br />
+<pre>
+www.server.com/index.php?top=/etc/passwd
+</pre>
+<br />
+
+<u>I recommend:</u>
+
+1) To hardcode the filenames you want to open.<br />
+2) Use fopen() to open the filename, store it in a variable and then print it.<br />
+3) Do not use include()<br />
+4) Check the input variables with regular expressions ! Like this:<br />
+
+<pre>
+if (ereg(&quot;^[a-z]+\.html$&quot;, $_GET[cen])) {
+ echo &quot;Good!&quot;;<br />
+} else {
+ die(&quot;Try hacking somebody else&#39;s site.&quot;);
+}
+</pre>
+
+<br />
+
+5) Be preventive, save into logs or send you an email when somebody 
+is trying strange things in your server, you will probably not be 
+able to send the hacker to prison but detect the attack and take 
+preventive measures if neccesary, with new politics.<br />
+
+<br />
+I hope it helped somebody, this is very common.<br />
+<br />
+What is required to be safe when you program a website and worry about Security is...<br />
+<br />
+In httpd.conf configure<br />
+<pre>
+php_admin_value open_basedir &quot;/home/webpagedirectory/&quot;
+</pre>
+In php.ini configure<br />
+<pre>
+allow_url_fopen = Off
+enable_dl = Off
+expose_php = Off
+error_log = /var/log/error_php.log
+</pre>
+<u>Security is a process.</u><br />
+If this was usefull please leave me a message with feedback !!! Thanks.<br />
+<div style="clear: both;">
+
 <b>Published: Saturday, November 12, 2005</b>
-
+<a href="tag_security">security</a>&nbsp;
 </div>
 
 <hr>
 <div id="section">
-<p id="postTitle">Binaries changing size in Fedora Core 4</p>
+<p id="postTitle"><a href="Binaries%20changing%20size%20in%20Fedora%20Core%204.html" id="alink">Binaries changing size in Fedora Core 4</a></p>
 <span style=";font-family:arial;font-size:85%;">I think that it is probably this cause, the yum.cron running daily at 4:03. This &quot;yum&quot; program that updates the system files automaticaly. It is strange that the updated rpm&#39;s do not appear as the new rpm version, that it just updates the binaries and not the rpm package... That is how it looks like, so i will investigate further, for this night, i will check if the binaries change without the &quot;yum&quot;. Just in case, the machine was scanned with F-PROT for Linux and all is fine with it.<br /><br />12/11/05 I chmod -x /etc/cron.daily/yum.conf and the problem continues, today i will try out if it is a cron.daily job or something else.<br /><br />12/11/05 18:00: The cause was found. The &quot;prelink&quot; binary and cron.daily script is the cause. The prelink program in Linux modifies the ELF shared libraries and ELF dynamicaly linked binaries to run faster.<br /></span><div style="clear: both;"></div>
 <b>Published: Thursday, November 10, 2005</b>
 
@@ -32,7 +181,7 @@ window.parent.document.title = "Year 2005";
 
 <hr>
 <div id="section">
-<p id="postTitle">Strange binaries changing size in Linux</p>
+<p id="postTitle"><a href="Strange%20binaries%20changing%20size%20in%20Linux.html" id="alink">Strange binaries changing size in Linux</a></p>
 <div style="text-align: justify;"><span style="font-size:85%;"><span style="font-family:arial;">Last week i noticed a problem in one of my machines in two of our Redhat Fedora Linux machines. I realized about this problem when i executed the bash command &quot;umask&quot; instead of receiving 0755 or whathever the mode of files creation is, i received &quot;Linux&quot;. So i checked the rpm packages installed from bash, procps, lsof, made a copy from the installed binaries in a directory and reinstalled the original packages from CD, the same version that was installed already.<br /><br />rpm -i --force <br /><br />Then i compared the previous binaries and the new ones (installed from the rpm package) and the size was different, so something changed the files, but not the package, so it was not an up2date from Redhat.<br /><br />I looked at my co-worker machine and there was happening the same, he has FC4 and me FC2. So i decided to investigate and coded a <a href="#">daemon in c</a> to check when the files change and send me an email with information about processes and who is connected to the machine.<br /><br />In my machine with Fedora Core 2 the files just changed once, and next night no more... strange, i dont know what happened there. In my co-workers machine, the files are changing every night at 4:02, nobody connected to the machine and these processes running:<br /><span style="font-size:78%;"><br /></span></span><span style="font-size:78%;"><span style="font-family:courier new;"> root 19090 2184 0 04:02 ? 00:00:00 crond</span><br /><span style="font-family:courier new;"> root 19091 19090 0 04:02 ? 00:00:00 /bin/bash /usr/bin/run-parts /etc/cron.daily</span><br /><span style="font-family:courier new;">smmsp 19464 19090 0 04:02 ? 00:00:00 /usr/sbin/sendmail -FCronDaemon -i -odi -oem -oi -t</span><br /><span style="font-family:courier new;"> root 20037 19091 0 04:02 ? 00:00:00 /bin/sh /etc/cron.daily/rpm</span><br /><span style="font-family:courier new;">root 20038 20037 28 04:02 ? 00:00:02 /usr/lib/rpm/rpmq -q --all --qf %{name}-%{version}-%{release}.%{arch}.rpm\n</span><br /><span style="font-family:courier new;"> root 20039 20037 0 04:02 ? 00:00:00 sort</span><br /><span style="font-family:courier new;"> root 20040 19091 0 04:02 ? 00:00:00 awk -v progname=/etc/cron.daily/rpm progname {????? print progname &quot;:\n&quot;????? progname=&quot;&quot;;???? }???? { print; }</span><br /><span style="font-family:courier new;"> root 20042 15186 0 04:03 ? 00:00:00 /tmp/.backup/ps -ef<br /><br /><span style="font-size:85%;"><span style="font-family:arial;"><span style=";font-family:arial;font-size:100%;">So may be the cron.daily is involved. I will continue investigating.<br /><br />I hope i can post news about this problem that may be is related and automatic update in Fedora Core 4.<br /></span><br /></span></span></span></span></span></div><div style="clear: both;"></div>
 <b>Published: Wednesday, November 09, 2005</b>
 
@@ -40,7 +189,7 @@ window.parent.document.title = "Year 2005";
 
 <hr>
 <div id="section">
-<p id="postTitle">Installing IMAP on Linux FC3</p>
+<p id="postTitle"><a href="Installing%20IMAP%20on%20Linux%20FC3.html" id="alink">Installing IMAP on Linux FC3</a></p>
 <span style="font-weight: bold;font-size:85%;">I want to install IMAP on Linux because:</span><span style="font-size:85%;"><br /></span><ul><li><span style="font-size:85%;">The webmail programms able to create folders with IMAP and not with POP3.</span></ul><ul><li><span style="font-size:85%;">IMAP is better.</span></ul><ul><li><span style="font-size:85%;">I think it is better idea to install IMAP than adding code to an existing webmail solution.</span></ul><span style="font-weight: bold;font-family:arial;font-size:85%;">I tryed to install Cyrus imap that comes with Fedora, but i had many problems.</span><br /><span style="font-size:85%;"><span style="font-family:courier new;">master[12190]: retrying with 1024 (current max)<br />master[12190]: can&#39;t open pidfile: Bad file descriptor<br />master[12192]: setrlimit: Unable to set file descriptors limit to -1: Operation not permitted<br />master[12192]: retrying with 1024 (current max)<br />master[12192]: can&#39;t open pidfile: Bad file descriptor<br /></span></span><ul style="font-family:arial;"><li><span style="font-size:85%;"><span style="">And imapd do not working with xinetd, and db4 with errors in lastlog:</span></span></ul><span style="font-size:85%;"><span style="font-family:courier new;">lmtpunix[23898]: DBERROR: opening /var/lib/imap/deliver.db: cyrusdb error<br />lmtpunix[23898]: FATAL: lmtpd: unable to init duplicate delivery database<br />master[17437]: process 23898 exited, status 75<br />master[17437]: service lmtpunix pid 23898 in READY state: terminated abnormally<br /><br />lmtpunix[23898]: DBERROR: opening /var/lib/imap/deliver.db: cyrusdb error<br />lmtpunix[23898]: FATAL: lmtpd: unable to init duplicate delivery database<br />master[17437]: process 23898 exited, status 75<br />master[17437]: service lmtpunix pid 23898 in READY state: terminated abnormally<br /><br /><span style="font-family:arial;">There are no solutions in Internet for these problems, so i decided to install Washington IMAP.</span><br /><span style="font-family:arial;">http://www.washington.edu/imap/<br /><br />These where the steps in Linux:<br /><br /><span style="font-size:85%;"><span style="font-family:courier new;">$ mkdir /tmp/imap</span><br /><span style="font-family:courier new;">$ cd /tmp/imap</span><br /><span style="font-family:courier new;">$ lynx ftp://ftp.cac.washington.edu/mail/imap.tar.Z</span><br /><span style="font-family:courier new;">$ tar zxvf imap.tar.Z</span><br /><span style="font-family:courier new;">$ cd imap-2004g/<br /><br /></span></span>(Look inside Makefile and see what argument you need to give to the make command, i use &quot;rhl&quot; because it is Redhat or Later)<br /><br /></span></span></span><span style="font-size:85%;"><span style="font-family:courier new;">$ make rhl</span><br /><span style="font-family:courier new;">$ install -s -m 755 -o root -g mail imapd/imapd /usr/sbin</span></span><br /><span style="font-size:85%;"><span style="font-family:courier new;"><span style="font-family:arial;"><br />Create an /etc/xinetd.d/imap file:<br /><br /><span style="font-family:courier new;">service imap</span><br /><span style="font-family:courier new;">{</span><br /><span style="font-family:courier new;"> disable = no</span><br /><span style="font-family:courier new;"> socket_type = stream</span><br /><span style="font-family:courier new;"> server = /usr/sbin/imapd</span><br /><span style="font-family:courier new;"> protocol = tcp</span><br /><span style="font-family:courier new;"> user = root</span><br /><span style="font-family:courier new;"> wait = no</span><br /><span style="font-family:courier new;">}</span><br /></span></span></span> <pre><span style="font-size:85%;">$ killall -HUP inetd</span><span style="font-family:georgia,serif;"><span style="font-size:85%;"><br /></span><br /><span style="font-family:courier new;">[root@monitor1 imap-2004g]# telnet localhost imap</span><br /><span style="font-family:courier new;">Trying 127.0.0.1...</span><br /><span style="font-family:courier new;">Connected to xxx.walterlamagna.com.ar (127.0.0.1).</span><br /><span style="font-family:courier new;">Escape character is &#39;^]&#39;.</span><br /><span style="font-family:courier new;">* OK [CAPABILITY IMAP4REV1 LITERAL+ SASL-IR LOGIN-</span><br /><span style="font-family:courier new;">REFERRALS STARTTLS LOGINDISABLED] localhost IMAP4</span><br /><span style="font-family:courier new;">rev1 2004.357 at Sat, 5 Nov 2005 23:07:15 -0300 (ART)</span><br /><br />Excelent, IMAP is working !!<br /><br /><span style="font-family:arial;">Now you would probably get this error in /etc/messages when you try to login:</span><br /><span style="font-family:courier new;">imapd[14370]: Login disabled user=pepito auth=pepito host=localhost [127.0.0.1]</span><br /><br /><span style="font-family:arial;">And when you: telnet localhost imap, you will probably see </span></span><span style="font-family:arial;">LOGINDISABLED.</span><br /><span style="font-family:arial;">This is because you compiled imap with the option:</span><br /><span style="font-family:courier new;">SSLTYPE=nopwd</span><br /><br />If you do not want to use SSL, just plain passwords, you have<br />to change the Makefile and change SSLTYPE=nopwd for SSLTYPE=none.<br />And recompile.<br />Restart xinetd<br /><br />And now i should work :)<br /></pre><div style="clear: both;"></div>
 <b>Published: Saturday, November 05, 2005</b>
 
@@ -48,7 +197,7 @@ window.parent.document.title = "Year 2005";
 
 <hr>
 <div id="section">
-<p id="postTitle">Change from Half to Full duplex in Linux</p>
+<p id="postTitle"><a href="Change%20from%20Half%20to%20Full%20duplex%20in%20Linux.html" id="alink">Change from Half to Full duplex in Linux</a></p>
 <span style="font-size:85%;"><span style="font-family:arial;">I had to change a network card from Half to Full duplex to test our Internet link.</span><br /><br /><span style="font-family:arial;">This is performed with the mii-tool.</span></span><br /><tt><br /></tt><span style="font-size:85%;"><span style="color: rgb(0, 153, 0);font-family:courier new;"> # mii-tool --force=100baseTx-HD eth1 (half duplex 100 base T)</span><br /><span style="color: rgb(0, 153, 0);font-family:courier new;"> # mii-tool --force=100baseTx-FD eth1 (Full duplex 100 base T)</span><br /><span style="color: rgb(0, 153, 0);font-family:courier new;"># mii-tool --force=10baseT-FD eth1 (Full duplex 10 base T)</span><br /><span style="font-family:courier new;"><span style="color: rgb(0, 153, 0);"># mii-tool --force=10baseT-HD (Half duplex 10 base T)</span><br /><br /><span style="font-family:arial;">I hope it helps :) Please, leave a comment if it was helpfull !!!<br /><br />Walter<br /></span></span></span><div style="clear: both;"></div>
 <b>Published: Thursday, November 03, 2005</b>
 
@@ -56,7 +205,7 @@ window.parent.document.title = "Year 2005";
 
 <hr>
 <div id="section">
-<p id="postTitle">Advantages of Linux over its commercial competitors</p>
+<p id="postTitle"><a href="Advantages%20of%20Linux%20over%20its%20commercial%20competitors.html" id="alink">Advantages of Linux over its commercial competitors</a></p>
 <span style="font-weight: bold;font-family:georgia;">Linux is free.</span><span style="font-size:85%;"><span style="font-weight: bold;"></span></span><br /><span style="font-size:85%;">You can install a complete Unix system at no expense other than the hardware.</span><br /><span class="docemphbolditalic1"><span lang="EN-GB"><span style="font-weight: bold;"><br />Linux is fully customizable in all its components.</span></span></span><span lang="EN-GB"><span style="font-size:85%;"><br /></span></span><div style="text-align: justify;"><span lang="EN-GB"><span style="font-size:85%;">Thanks to the General Public License (GPL), you are allowed to freely read and modify the source code of the kernel and of all system programs.</span></span><span class="docemphbolditalic1" style="font-weight: bold;"><span lang="EN-GB"><br /><br />Linux runs on low-end, cheap hardware platforms.</span></span><br /></div><span lang="EN-GB"><span style="font-size:85%;">You can even build a network server using an old Intel 80386 system with 4 MB of RAM<span style="font-size:100%;">.<br /><br /></span></span></span><span class="docemphbolditalic1" style="font-weight: bold;"><span lang="EN-GB"><span style="font-size:100%;">Li</span>nux is powerful.</span></span><span lang="EN-GB"><br /></span><div style="text-align: justify;"><span lang="EN-GB" style="font-size:85%;">Linux systems are very fast, since they fully exploit the features of the hardware components. The main Linux goal is efficiency, and indeed many design choices of commercial variants, like the STREAMS I/O subsystem, have been rejected by Linus because of their implied performance penalty.</span><br /></div><span lang="EN-GB"><br /></span><span class="docemphbolditalic1" style="font-weight: bold;"><span lang="EN-GB">Linux has a high standard for source code quality.</span></span><br /><span style="font-size:85%;">Linux systems are usually very stable; they have a very low failure rate and system maintenance time.</span><br /><br /><span class="docemphbolditalic1" style="font-weight: bold;"><span lang="EN-GB">The Linux kernel can be very small and compact.</span></span><span lang="EN-GB"><br /></span><div style="text-align: justify;"><span lang="EN-GB" style="font-size:85%;">It is possible to fit both a kernel image and full root filesystem, including all fundamental system programs, on just one 1.4 MB floppy disk. As far as we know, none of the commercial Unix variants is able to boot from a single floppy disk.</span><br /></div><span class="docemphbolditalic1"><span lang="EN-GB"><br /><span style="font-weight: bold;">Linux is highly compatible with many common operating systems.</span></span></span><span lang="EN-GB"><br /></span><div style="text-align: justify;"><span lang="EN-GB" style="font-size:85%;">It lets you directly mount filesystems for all versions of MS-DOS and MS Windows, SVR4, OS/2, Mac OS, Solaris, SunOS, NeXTSTEP, many BSD variants, and so on. Linux is also able to operate with many network layers, such as Ethernet (as well as Fast Ethernet and Gigabit Ethernet), Fiber Distributed Data Interface (FDDI), High Performance Parallel Interface (HIPPI), IBM&#39;s Token Ring, AT&amp;T WaveLAN, and DEC RoamAbout DS. </span><span style="font-size:85%;">By using suitable libraries, Linux systems are even able to directly run programs written for other operating systems. For example, Linux is able to execute applications written for MS-DOS, MS Windows, SVR3 and R4, 4.4BSD, SCO Unix, XENIX, and others on the 80 x 86 platform.</span><br /></div><span class="docemphbolditalic1"><br /><span style="font-weight: bold;">Linux is well supported.</span></span><br /><div style="text-align: justify;"><span style="font-size:85%;">Believe it or not, it may be a lot easier to get patches and updates for Linux than for any other proprietary operating system. The answer to a problem often comes back within a few hours after sending a message to some newsgroup or mailing list. Moreover, drivers for Linux are usually available a few weeks after new hardware products have been introduced on the market. By contrast, hardware manufacturers release device drivers for only a few commercial operating systems &mdash; usually Microsoft&#39;s. Therefore, all commercial Unix variants run on a restricted subset of hardware components.</span></div><p class="doctext" face="times new roman" style="font-style: italic;">With an estimated installed base of several tens of millions, people who are used to certain features that are standard under other operating systems are starting to expect the same from Linux. In that regard, the demand on Linux developers is also increasing. Luckily, though, Linux has evolved under the close direction of Linus to accommodate the needs of the masses.<br /><p class="doctext" style="font-family: times new roman; font-style: italic;"><span style=";font-family:arial;font-size:100%;"><span style="font-family: arial; color: rgb(255, 102, 0); font-weight: bold;">I hope it was usefull, leave me a &quot;hello&quot; if it is so!</span><br /><span style="font-family: arial; color: rgb(255, 102, 0); font-weight: bold;">Thanks.</span><br /></span><div style="clear: both;"></div>
 <b>Published: Tuesday, November 01, 2005</b>
 
@@ -64,18 +213,173 @@ window.parent.document.title = "Year 2005";
 
 <hr>
 <div id="section">
-<p id="postTitle">Asymmetric Cryptography with PGP and Linux</p>
-<div style="text-align: center; color: rgb(204, 0, 0);font-family:arial;"><span style="font-size:130%;">Asymmetric Cryptography with Linux<br /><br /></span><div style="text-align: left; color: rgb(51, 0, 153);"><span style="font-size:78%;"> A fast introduction or memory notes about PGP and GPG (GNU) for Linux and UNIX.<br />Asymmetric Cryptography is the best method to encrypt information and asure confidentiality and authenticity.<br /><br /> You will see these formulas:<br />Symetric cryptography<br />Y = E(X)<br />X = D(Y)<br /><br />Confidentiality with asymmetric Cryptography<br />A--&gt;Kub---&gt;Krb--&gt;B<br /><br />Authenticity with asymmetric Cryptography<br />A--&gt;Kra---&gt;Kua--&gt;B<br /><br />Authentication and Confidentiality<br />A--&gt;Kra---&gt;Kub---&gt;Krb---&gt;Kua--&gt;B<br /><span style="font-size:78%;"><br /></span></span><span style="font-size:78%;"> This is not intended to be a deep introduction to Cryptography, just some notes, if you are interested in more information contact me.<br /><br /></span><b>* How to create a Private Key and a Public Key in Linux with GPG ?<br /></b><span style="font-size:78%;"><span style=";font-family:courier new;font-size:85%;">$ gpg --gen-key<br />Please select what kind of key you want:<br />(1) DSA and ElGamal (default)<br />(2) DSA (sign only)<br />(4) ElGamal (sign and encrypt)<br />(5) RSA (sign only)<br />Your selection? 1 </span><span style="color: rgb(0, 0, 0);font-family:courier new;font-size:85%;">(It is recomended to choose DSA and ElGamal since it is not patented)</span><span style="font-size:85%;"><b style="font-family: courier new;"><br /></b></span><span style=";font-family:courier new;font-size:85%;"> DSA keypair will have 1024 bits.<br />About to generate a new ELG-E keypair.<br />minimum keysize is 768 bits default keysize is 1024 bits<br />highest suggested keysize is 2048 bits What keysize do you want? (1024) 2048 (Larger keys = more security)<br />Requested keysize is 2048 bits<br />Please specify how long the key should be valid.<br />0 = key does not expire<br /> = key expires in n days<br /> w = key expires in n weeks<br /> m = key expires in n months<br /></span><span style="font-size:85%;">y = key expires in n years<br />Key is valid for? (0) 0<br />Key does not expire at all Is this correct (y/n)? y</span><br /></span><br />Now you have to enter a password, better described by &quot; keyphrase &quot;, input uppercase and lowercase with numbers and a password <span style="font-size:100%;"> that you will not forget, since if you do, any encripted information sent to you with you public key will not be restable. Now you keys where created !</span><span style="font-size:78%;"><br /><br /></span><b>* List the keys created with GPG Linux<br /></b><span style="font-size:85%;"><span style="font-family:courier new;">[wlamagna@internet wlamagna]$ gpg --list-keys</span></span><span style="font-family:monospace;"><br /></span><span style=";font-family:courier new;font-size:85%;">/home/wlamagna/.gnupg/pubring.gpg<br />---------------------------------<br />pub 1024D/B070DC8F 2005-10-25 Walter Lamagna (Sysop) <br />sub 2048g/C89C0BA5 2005-10-25 ---------------------------------------------<br /><br /></span><span style="color: rgb(51, 0, 153); font-weight: bold;font-size:100%;">* View or export a key with GPG in Linux and UNIX</span><br /><pre>$ gpg --export [UID]<br />[wlamagna@internet wlamagna]$ gpg --export -a wlamagna@hotmail.com<br />gpg: Warning: using insecure memory!<br />gpg: please see http://www.gnupg.org/faq.html for more information<br /><br /><span style="font-size:78%;">-----BEGIN PGP PUBLIC KEY BLOCK-----<br />Version: GnuPG v1.0.7 (GNU/Linux)<br /><br />mQGiBENer7URBACcip5EQKuI2Xu0Ol2QgXGvR1wjWxLsyVz2p3maRPZMGEL9V8qf<br />PePhXaMp7IR247JEHy1TBztP6EVohYcm12629OaubzDKS4ogzfaUXUVbp5oGguU/<br />95jPhrrAPg3gSoTsa1h0eFzZxwHFmJPwiVgJC2Ih22cPZHuH3bQulQ/yJwCg+xhj<br />qufw1hIOf0IxKbc+774ce2MD/3F3Z9tF7WNUHg9BeQ1EQRxGg+HOhhnLaYWQiU3M<br />IL9Ox/RSHnJGet9eIFnNX+4BPASxDVRWZ/03lNspVeidU2OCWvhrEBZ2CdCZ7OZ3<br />g/WK5WT66HYgshP3U1il6w7tJat+CZn1ynXRmzo03ZWNlqQ+rhuDrI8ewAdE1FN1<br />8ACsA/4wGkFtlQ87acZkqYOIBYVaut9fKbc4A5THHagmt8W8oXpAS3/KdK8t3D68<br />j+cQU9hGaEzqg1i4WtwzfuYcbFYeICFGP8Hr++Rj4O/9SKNU6JoojHjVh/UWAa5z<br />wkqMufSs6k4tGO6WoUKrtnHWylS2cX3jCmEKL6pDjP56X2688rQtV2FsdGVyIExh<br />bWFnbmEgKFN5c29wKSA8d2xhbWFnbmFAaG90bWFpbC5jb20+iFkEExECABkFAkNe<br />r7YECwcDAgMVAgMDFgIBAh4BAheAAAoJEHgOrOiwcNyP3hYAn1DzUhzY20wCqgfW<br />T1C2//Ib0qDBAKCF+IJlTMwQwE4BVVgK63urJNVmP7kCDQRDXq/AEAgAxmVnz0wO<br />tO5HamE5/vWPLehfRtI7GbrqeatVy0F0It170g4L1s4Jynpoqsr/YYjftEM/xgj9<br />9Xk6vu3BlgU5EsfCQdlZA6Buvy/q0MoSIR0dCmNbK1iel23nXFBzYaVo5MsD003R<br />jy0/Cnyx4wELfcj/cJgFY21rcUyzxLULVzAdcSlV0v3RuunuHjCKj2/oYYroYrSk<br />PyNGM1z3LbB93U6P3fB3HDiRbU23VZin2hdi1PXwXFZtTV6g5Xs6sz8wud6pqbe6<br />7zqXqjQsASWXdwPLT14QmAP2yq7zfgJrPXYQOfqm0mWjn0xU6aq/9km2nRdP3WlR<br />QH2XiYBA0g02PwADBQf/RwBcPsgsTeF7lIIWTZkW537rPorGPrsLhSQpDLeeZzwT<br />MMVY+1n6EHlcSejHr6DXTMj0cn9zUyXKzh01gpPoj5pyNpl9gffFQYkU4U7fXLQ5<br />A2+AU/oF73n6iliKQs0WmdMSvEw+pObrO7OOZLPuNmhkWqZYsorlxRVb02EEicVP<br />og9IBQY7mjrxZfnrd2o95tQEVzqGv4L1wuYVLTqfIcf6yQuiY2qusXWz+Ja8cqm4<br />fHCjMfVZL2put900Qy8lmf8Lky+eRnf/2iDgMNuFT9HRnfgO0bUWuWInbw7HvgvK<br />UbtXYQM2QvNNLUoDU5gXksLRSbEcs9+Gu0eSPGKIx4hGBBgRAgAGBQJDXq/AAAoJ<br />EHgOrOiwcNyP5sYAnRVCcKMnQfh4V44Sb0lrqt6L07jeAJ40tRY7P7SfBKrczAiF<br />UT9etzCMiA==<br />=1Ok9</span><br />-----END PGP PUBLIC KEY BLOCK-----<br /> [wlamagna@internet wlamagna]$<br /></pre> This is my public key, so your secret messages will be welcome. If you do not specify the UID it will print all the keys in your keyring and if you do not use &quot;-a&quot; i will print the key in non printable characters. If you export the public key (never give your private key to anybody)<br />you can exchange confidentiality information with somebody else who has your public key. You can exchange the password by writing it in a webpage, finger, ftp or uploading it to a Public Keys Server.<br /><hr /><span style="color: rgb(51, 0, 153); font-weight: bold;">* Import Keys with GNU GPG</span><br /><span style="font-size:85%;"><span style="font-family:courier new;">$ gpg --import [file]</span></span><br /><br /> When you receive a public key from somebody, add it to your keyring.<br /><br /><span style="font-weight: bold; color: rgb(51, 0, 153);">* Delete a public key with GNU GPG</span> <span style="font-family:monospace;"><br /></span><span style="font-size:85%;"><span style="font-family:courier new;">$ gpg --delete-key [UID]</span></span><br /><hr /> And finaly, how to list your secret (private) keys ? The keys your should not give anybody. Be carefull with the keyloggers, best use them in secure machines.<br /><pre>[wlamagna@internet wlamagna]$ gpg --list-secret-keys<br />/home/wlamagna/.gnupg/secring.gpg<br />---------------------------------<br />sec 1024D/B070DC8F 2005-10-25 Walter Lamagna (Sysop) <br />ssb 2048g/C89C0BA5 2005-10-25        </pre><hr /><span style="color: rgb(51, 0, 153); font-weight: bold;">* To delete a secret (private) key with GNU GPG</span><span style="font-family:monospace;"><br /></span><span style="font-size:85%;"><span style="font-family:courier new;">$ gpg --delete-secret-key [UID]</span></span><br /><br /><span style="font-weight: bold;">* To modify a secret (private) key with GNU GPG</span><span style="font-family:monospace;"><br /></span><span style=";font-family:courier new;font-size:85%;">$ gpg --edit-key [UID]</span><br /></div></div><div style="clear: both;"></div>
-<b>Published: Thursday, October 27, 2005</b>
+<p id="postTitle"><a href="Asymmetric%20Cryptography%20with%20PGP%20and%20Linux.html" id="alink">Asymmetric Cryptography with PGP and Linux</a></p>
 
+A fast introduction or memory notes about PGP and GPG (GNU) for Linux and UNIX.<br />
+Asymmetric Cryptography is the best method to encrypt information and asure confidentiality and authenticity.<br />
+<br />
+You will see these formulas:<br />
+Symetric cryptography<br />
+Y = E(X)<br />
+X = D(Y)<br />
+<br />
+Confidentiality with asymmetric Cryptography<br />
+A--&gt;Kub---&gt;Krb--&gt;B<br />
+<br />
+Authenticity with asymmetric Cryptography<br />
+A--&gt;Kra---&gt;Kua--&gt;B<br />
+<br />
+Authentication and Confidentiality<br />
+A--&gt;Kra---&gt;Kub---&gt;Krb---&gt;Kua--&gt;B<br />
+<br />
+<br />
+This is not intended to be a deep introduction to 
+Cryptography, just some notes.<br />
+<br />
+
+<b>* How to create a Private Key and a Public Key in Linux with GPG ?</b>
+<pre>
+$ gpg --gen-key
+Please select what kind of key you want:
+(1) DSA and ElGamal (default)
+(2) DSA (sign only)
+(4) ElGamal (sign and encrypt)
+(5) RSA (sign only)
+Your selection? 1
+
+(It is recomended to choose DSA and ElGamal since it is not patented)
+
+DSA keypair will have 1024 bits.
+About to generate a new ELG-E keypair.
+minimum keysize is 768 bits default keysize is 1024 bits
+highest suggested keysize is 2048 bits What keysize do you want? (1024) 2048 (Larger keys = more security)
+Requested keysize is 2048 bits
+Please specify how long the key should be valid.
+0 = key does not expire
+n = key expires in n days
+w = key expires in n weeks
+m = key expires in n months
+y = key expires in n years
+
+Key is valid for? (0) 0
+Key does not expire at all Is this correct (y/n)? y
+</pre>
+Now you have to enter a password, better described by &quot; keyphrase &quot;, input 
+uppercase and lowercase with numbers and a password that you will not forget, since 
+if you do, any encripted information sent to you with you public key 
+will not be restable. Now you keys where created ! <br />
+
+<b>* List the keys created with GPG Linux</b><br />
+<pre>
+[wlamagna@internet wlamagna]$ gpg --list-keys
+/home/wlamagna/.gnupg/pubring.gpg
+---------------------------------
+pub 1024D/B070DC8F 2005-10-25 Walter Lamagna (Sysop)
+sub 2048g/C89C0BA5 2005-10-25 ---------------------------------------------
+</pre>
+
+<b>* View or export a key with GPG in Linux and UNIX</b><br />
+<pre>
+$ gpg --export [UID]
+[wlamagna@internet wlamagna]$ gpg --export -a wlamagna@hotmail.com
+gpg: Warning: using insecure memory!
+gpg: please see http://www.gnupg.org/faq.html for more information
+
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+Version: GnuPG v1.0.7 (GNU/Linux)
+
+mQGiBENer7URBACcip5EQKuI2Xu0Ol2QgXGvR1wjWxLsyVz2p3maRPZMGEL9V8qf<br />
+PePhXaMp7IR247JEHy1TBztP6EVohYcm12629OaubzDKS4ogzfaUXUVbp5oGguU/<br />
+95jPhrrAPg3gSoTsa1h0eFzZxwHFmJPwiVgJC2Ih22cPZHuH3bQulQ/yJwCg+xhj<br />
+qufw1hIOf0IxKbc+774ce2MD/3F3Z9tF7WNUHg9BeQ1EQRxGg+HOhhnLaYWQiU3M<br />
+IL9Ox/RSHnJGet9eIFnNX+4BPASxDVRWZ/03lNspVeidU2OCWvhrEBZ2CdCZ7OZ3<br />
+g/WK5WT66HYgshP3U1il6w7tJat+CZn1ynXRmzo03ZWNlqQ+rhuDrI8ewAdE1FN1<br />
+8ACsA/4wGkFtlQ87acZkqYOIBYVaut9fKbc4A5THHagmt8W8oXpAS3/KdK8t3D68<br />
+j+cQU9hGaEzqg1i4WtwzfuYcbFYeICFGP8Hr++Rj4O/9SKNU6JoojHjVh/UWAa5z<br />
+wkqMufSs6k4tGO6WoUKrtnHWylS2cX3jCmEKL6pDjP56X2688rQtV2FsdGVyIExh<br />
+bWFnbmEgKFN5c29wKSA8d2xhbWFnbmFAaG90bWFpbC5jb20+iFkEExECABkFAkNe<br />
+r7YECwcDAgMVAgMDFgIBAh4BAheAAAoJEHgOrOiwcNyP3hYAn1DzUhzY20wCqgfW<br />
+T1C2//Ib0qDBAKCF+IJlTMwQwE4BVVgK63urJNVmP7kCDQRDXq/AEAgAxmVnz0wO<br />
+tO5HamE5/vWPLehfRtI7GbrqeatVy0F0It170g4L1s4Jynpoqsr/YYjftEM/xgj9<br />
+9Xk6vu3BlgU5EsfCQdlZA6Buvy/q0MoSIR0dCmNbK1iel23nXFBzYaVo5MsD003R<br />
+jy0/Cnyx4wELfcj/cJgFY21rcUyzxLULVzAdcSlV0v3RuunuHjCKj2/oYYroYrSk<br />
+PyNGM1z3LbB93U6P3fB3HDiRbU23VZin2hdi1PXwXFZtTV6g5Xs6sz8wud6pqbe6<br />
+7zqXqjQsASWXdwPLT14QmAP2yq7zfgJrPXYQOfqm0mWjn0xU6aq/9km2nRdP3WlR<br />
+QH2XiYBA0g02PwADBQf/RwBcPsgsTeF7lIIWTZkW537rPorGPrsLhSQpDLeeZzwT<br />
+MMVY+1n6EHlcSejHr6DXTMj0cn9zUyXKzh01gpPoj5pyNpl9gffFQYkU4U7fXLQ5<br />
+A2+AU/oF73n6iliKQs0WmdMSvEw+pObrO7OOZLPuNmhkWqZYsorlxRVb02EEicVP<br />
+og9IBQY7mjrxZfnrd2o95tQEVzqGv4L1wuYVLTqfIcf6yQuiY2qusXWz+Ja8cqm4<br />
+fHCjMfVZL2put900Qy8lmf8Lky+eRnf/2iDgMNuFT9HRnfgO0bUWuWInbw7HvgvK<br />
+UbtXYQM2QvNNLUoDU5gXksLRSbEcs9+Gu0eSPGKIx4hGBBgRAgAGBQJDXq/AAAoJ<br />
+EHgOrOiwcNyP5sYAnRVCcKMnQfh4V44Sb0lrqt6L07jeAJ40tRY7P7SfBKrczAiF<br />
+UT9etzCMiA==
+=1Ok9
+-----END PGP PUBLIC KEY BLOCK-----
+ [wlamagna@internet wlamagna]$
+</pre>
+
+This is my public key, so your secret messages will be welcome. 
+If you do not specify the UID it will print all the keys in your 
+keyring and if you do not use &quot;-a&quot; i will print the 
+key in non printable characters. If you export the public key (never give your private key to anybody)<br />
+you can exchange confidentiality information with somebody else who has your public key. You can exchange the password by writing it in a webpage, finger, ftp or uploading it to a Public Keys Server.<br />
+
+<b>* Import Keys with GNU GPG</b><br />
+<pre>
+$ gpg --import [file]
+</pre>
+<br />
+When you receive a public key from somebody, add it to your keyring.
+<br />
+<b>* Delete a public key with GNU GPG</b><br />
+<pre>
+$ gpg --delete-key [UID]
+</pre>
+<hr /> 
+And finaly, how to list your secret (private) keys ? The keys 
+your should not give anybody. Be carefull with the keyloggers, 
+best use them in secure machines.<br />
+<pre>
+[wlamagna@internet wlamagna]$ gpg --list-secret-keys
+/home/wlamagna/.gnupg/secring.gpg
+---------------------------------
+sec 1024D/B070DC8F 2005-10-25 Walter Lamagna (Sysop)
+ssb 2048g/C89C0BA5 2005-10-25        
+</pre>
+<b>* To delete a secret (private) key with GNU GPG</b><br />
+<pre>
+$ gpg --delete-secret-key [UID]</pre>
+<br />
+<b>* To modify a secret (private) key with GNU GPG</b><br />
+<pre>
+$ gpg --edit-key [UID]
+</pre>
+<div style="clear: both;"></div>
+<b>Published: Thursday, October 27, 2005</b>
+<a href="tag_security">security</a>&nbsp;
 </div>
 
 <hr>
 <div id="section">
-<p id="postTitle">Linux disk recovery</p>
- After any power problem with the linux machine, the filesystem could be corrupted and you may not be able to login. When this happens, you will need e2fsck, the tool to recover ext2 or ext3 partitions. (Do not ever use it with a partition that has AFS or another format).<br /><br />Boot with a live cd or the first cd of Redhat and write &quot;linux rescue&quot;.<br />Do not let the rescue mode to detect the linux partitions, else it would mount them and you do not want to mount the partitions yet, the file system check (e2fsck) can cause severe problems on a mounted partition.<br /><br />When you are at the rescue mode prompt, write:<br /><br /># e2fsck -c -c -v -y /dev/hda1<br />It is important to user &quot;-c -c&quot; (twice) this means that badblocks will scan using a non-destructive read-write test.<br />&quot;-v&quot; to verbose and see the status of fsck.<br />&quot;-y&quot; says to answer &quot;yes&quot; to all the questinons from fsck. <div style="clear: both;"></div>
-<b>Published: Wednesday, October 26, 2005</b>
+<p id="postTitle"><a href="Linux%20disk%20recovery.html" id="alink">Linux disk recovery</a></p>
+After any power problem with the linux machine, the filesystem could be corrupted and you may not be able to login. When this happens, you will need e2fsck, the tool to recover ext2 or ext3 partitions. (Do not ever use it with a partition that has AFS or another format).<br />
+<br />
+Boot with a live cd or the first cd of Redhat and write &quot;linux rescue&quot;.<br />
+Do not let the rescue mode to detect the linux partitions, else it would mount them and you do not want to mount the partitions yet, the file system check (e2fsck) can cause severe problems on a mounted partition.<br />
+<br />
+When you are at the rescue mode prompt, write:<br />
+<br />
+<pre>
+e2fsck -c -c -v -y /dev/hda1
+</pre>
+It is important to user &quot;-c -c&quot; (twice) this means that badblocks will scan using a non-destructive read-write test.<br />
+&quot;-v&quot; to verbose and see the status of fsck.<br />
+&quot;-y&quot; says to answer &quot;yes&quot; to all the questinons from fsck. <div style="clear: both;">
+</div>
 
+<b>Published: Wednesday, October 26, 2005</b>
+<a href="tag_admin">admin</a>&nbsp;
 </div>
 
 <hr>

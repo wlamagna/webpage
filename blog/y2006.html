@@ -8,7 +8,7 @@
 window.parent.document.title = "Year 2006";
 </script>
 <div id="section">
-<p id="postTitle">Qt 2.2 To Be Released Under the GPL</p>
+<p id="postTitle"><a href="Qt%202.2%20To%20Be%20Released%20Under%20the%20GPL.html" id="alink">Qt 2.2 To Be Released Under the GPL</a></p>
  I use KDE or Gnome, kde is more mature than gnome but its downside is that it is not free license and the user that used KDE was not completly free though he was using Linux.<br /><br />Not Qt (the libraries from KDE) are free, that that means a step forward in freedom.<br /><br /><span style="font-weight: bold;">Link:<br /><a href="#">http://freshmeat.net/articles/view/180/</a><br /><br />Leave your comment!<br /></span><div style="clear: both;"></div>
 <b>Published: Monday, September 18, 2006</b>
 
@@ -16,7 +16,7 @@ window.parent.document.title = "Year 2006";
 
 <hr>
 <div id="section">
-<p id="postTitle">An alternative and clever way of scheduling tasks with perl.</p>
+<p id="postTitle"><a href="An%20alternative%20and%20clever%20way%20of%20scheduling%20tasks%20with%20perl..html" id="alink">An alternative and clever way of scheduling tasks with perl.</a></p>
  Writing perl scripts that are better suited for scheduled tasks.<br /><br /><a href="#">http://www.oreillynet.com/sysadmin/blog/2006/08/scheduling_perl_scripts_outsid.html</a><div style="clear: both;"></div>
 <b>Published: Thursday, August 31, 2006</b>
 
@@ -24,7 +24,7 @@ window.parent.document.title = "Year 2006";
 
 <hr>
 <div id="section">
-<p id="postTitle">Viewing mpeg and DVD in Suse 10.1</p>
+<p id="postTitle"><a href="Viewing%20mpeg%20and%20DVD%20in%20Suse%2010.1.html" id="alink">Viewing mpeg and DVD in Suse 10.1</a></p>
  I installed Suse 10.1 in my laptop, this is a real peace of heaven, i love it. I like the installation (targeted for the general public, not only specialists) and Novell knows what the administrators and normal users want, and that is simplicity, easy to learn and manage. Suse Linux do not installs selinux by default or LVM like Fedora, i like this and the explanaitions given by Novell for doing so.<br /><br />Now i want to see mpeg in my Suse 10.1, you will not be able to see them by default, you will need to use the program &quot;yast&quot; to install needed packages that do not come by default.<br /><br />1) Run yast as root user, and add a new source for the installation, add the pacman repository:<br />Link: http://en.opensuse.org/Additional_YaST_Package_Repositories<br />Add the pacman repository<br /><br />2) Execute: <span style="font-family: courier new;">yast -i kaffeine-mozilla</span><br /><br />This will install win32 drivers to see mpeg and DVD, also Kaffeine player.<br /><br />Please, write here your opinion about Suse Linux or other distros. <div style="clear: both;"></div>
 <b>Published: Sunday, August 27, 2006</b>
 
@@ -32,7 +32,7 @@ window.parent.document.title = "Year 2006";
 
 <hr>
 <div id="section">
-<p id="postTitle">Simple rotation backup with tar</p>
+<p id="postTitle"><a href="Simple%20rotation%20backup%20with%20tar.html" id="alink">Simple rotation backup with tar</a></p>
  To do a simple backup in a few lines, that mantains a history of the past 7 days, you can use this simple script:<br /><br /><span style="font-size:85%;"><span style="font-family: courier new;">#!/bin/bash</span><br /><span style="font-family: courier new;"># fecha has a formated date</span><br /><span style="font-family: courier new;">fecha=`date +&quot;%d-%m-%Y&quot;`</span><br /><span style="font-family: courier new;"># Backup and gzip the directory</span><br /><span style="font-family: courier new;">tar zcvf /backups/trunk-$fecha.tgz /var/www/repository</span><br /><span style="font-family: courier new;"># Rotate the logs, delete older than 7 days</span><br /><span style="font-family: courier new;">find /backups/ -mtime +7 -exec rm {} \; </span></span><br /><br />You are invited to post your little, simple though usefull scripts. <div style="clear: both;"></div>
 <b>Published: Saturday, August 26, 2006</b>
 
@@ -40,7 +40,7 @@ window.parent.document.title = "Year 2006";
 
 <hr>
 <div id="section">
-<p id="postTitle">How to disable selinux</p>
+<p id="postTitle"><a href="How%20to%20disable%20selinux.html" id="alink">How to disable selinux</a></p>
  I have compiled apache in FC5 and when i wanted to start the daemon i received an error with security permissions. The problem was selinux that comes enabled by default.<br /><br />I had to disable it manualy, this is done so:<br /><br /><pre class="SCREEN">$ setenforce 1<br />$ sestatus | grep -i mode<br />Current mode:           enforcing<br />Mode from config file:  permissive<br /><br />------<br />Edit /etc/selinux/config and set SELINUX=disabled to make the change permanent.<br /><br /><br /></pre><div style="clear: both;"></div>
 <b>Published: Friday, August 18, 2006</b>
 
@@ -48,7 +48,7 @@ window.parent.document.title = "Year 2006";
 
 <hr>
 <div id="section">
-<p id="postTitle">Installing the famous LAMP - in FC4</p>
+<p id="postTitle"><a href="Installing%20the%20famous%20LAMP%20-%20in%20FC4.html" id="alink">Installing the famous LAMP - in FC4</a></p>
  Installing in Linux an Apache web server with PHP that accesses Mysql and compresses zlib is easy, <span style="font-weight: bold; color: rgb(51, 51, 255);font-size:100%;"><span style="font-family:courier new;">These are the basic steps:</span></span><br /><br /><span style="color: rgb(0, 153, 0);font-size:85%;"><span style="font-family:arial;">1) Download httpd-2.2.2 and php-4.4.6</span><br /><span style="font-family:arial;">2) Install Mysql in /usr/local/mysql (from rpm or sources)</span><br /><span style="font-family:arial;">3) tar zxvf httpd-2.2.2.tgz</span><br /><span style="font-family:arial;">4) cd httpd-2.2.2<br />5) ./configure --enable-ssl --prefix=/usr/local/apache2/ --enable-so --with-included-apr --enable-rewrite</span></span><br /><span style="color: rgb(0, 153, 0);font-size:85%;"><span style="font-family:arial;">6) make<br />7) make install<br /></span> <span style="font-family:arial;"></span><span style="font-family:arial;">8) cd ..</span><br /><span style="font-family:arial;">9) cd php-4.4.6</span><br /><span style="font-family:arial;">10) ./configure --with-mysql --with-apxs2=/usr/local/apache2/bin/apxs --with-xml --disable-dom --without-pear --with-pgsql --with-gd --with-zlib --enable-sockets</span><br /><span style="font-family:arial;">11) make</span><br /><span style="font-family:arial;">12) make install &amp;&amp; cp php.ini-dist /usr/local/lib/php.ini</span><br /><span style="font-family:arial;"><br />I recommend to read the INSTALL and README of both packages, they have usefull information.<br />Configure the </span></span><span style="color: rgb(0, 153, 0);font-size:85%;"><span style="font-family:arial;">/usr/local/lib/php.ini file because it could have security issues (ready my previous post about php security).<br /><br />Add this entry to httpd.conf:<br />AddType application/x-httpd-php .php .phtml<br /><br />Thanks<br />Walter<br /></span></span><div style="clear: both;"></div>
 <b>Published: Wednesday, March 22, 2006</b>
 
@@ -56,7 +56,7 @@ window.parent.document.title = "Year 2006";
 
 <hr>
 <div id="section">
-<p id="postTitle">Mono Project for .NET</p>
+<p id="postTitle"><a href="Mono%20Project%20for%20.NET.html" id="alink">Mono Project for .NET</a></p>
  As an Engeneering student i need access to software, and if open source, much better. As soon as i study in a .net college, i need access to this and sincerelly, Linux motivates me more than Windows.<br /><br />So, how to install .net framework and Apache in Linux Fedora Core 4 ?<br /><br />Create the file /etc/yum.repos.d/mono.repo<br /><tt>------------------<br />[mono-1.1]<br />name=Mono 1.1 for fedora-$releasever-$basearch<br />baseurl=<a href="http://go-mono.com/download/mono-1.1/fedora-$releasever-$basearch/"><u>http://go-mono.com/download/mono-1.1/fedora-$releasever-$basearch/</u></a><br />enabled=1<br />gpgcheck=0<br /><br />[gtk-sharp-1.0]<br />name=Gtk# 1.0 for fedora-$releasever-$basearch<br />baseurl=<a href="http://go-mono.com/download/gtk-sharp/fedora-$releasever-$basearch/"><u>http://go-mono.com/download/gtk-sharp/fedora-$releasever-$basearch/</u></a><br />enabled=1<br />gpgcheck=0<br /><br />[gtk-sharp-2.0]<br />name=Gtk# 2.0 for fedora-$releasever-$basearch<br />baseurl=<a href="http://go-mono.com/download/gtk-sharp-2.0/fedora-$releasever-$basearch/"><u>http://go-mono.com/download/gtk-sharp-2.0/fedora-$releasever-$basearch/</u></a><br />enabled=1<br />gpgcheck=0<br /><br />[mono-tools]<br />name=Mono Tools for fedora-$releasever-$basearch<br />baseurl=<a href="http://go-mono.com/download/mono-tools/fedora-$releasever-$basearch/"><u>http://go-mono.com/download/mono-tools/fedora-$releasever-$basearch/</u></a><br />enabled=1<br />gpgcheck=0<br /><br />[mono-deps]<br />name=Mono Deps for fedora-$releasever-$basearch<br />baseurl=<a href="http://go-mono.com/download/mono-deps/fedora-$releasever-$basearch/"><u>http://go-mono.com/download/mono-deps/fedora-$releasever-$basearch/</u></a><br />enabled=1<br />gpgcheck=0</tt><br />----------------------------<br />Then install it as root:<br /><span style="font-size:85%;"><span style="font-family:courier new;">$ yum install mono httpd httpd-devel httpd-manual php xsp</span></span><br />Download from the go-mono.org site the mod_mono Apache module:<br />mod_mono-1.1.13-0.fedora4.novell.i386.rpm<br />And install it:<br /><span style=";font-family:courier new;font-size:85%;">$ rpm -i mod_mono-1.1.13-0.fedora4.novell.i386.rpm</span><br /><br />Edit /etc/httpd/conf/httpd.conf and add:<br />LoadModule mono_module modules/mod_mono.so<br /><br />And add this:<br /><tt style="color: rgb(51, 102, 255);">Alias /test &quot;/usr/local/lib/xsp/test/&quot;<br />AddMonoApplications default &quot;/test:/usr/local/lib/xsp/test/&quot;<br /><br /> SetHandler mono<br /></tt><br /><br />Good luck and happy development! <div style="clear: both;"></div>
 <b>Published: Thursday, March 02, 2006</b>
 
@@ -64,7 +64,7 @@ window.parent.document.title = "Year 2006";
 
 <hr>
 <div id="section">
-<p id="postTitle">Open Invention Network</p>
+<p id="postTitle"><a href="Open%20Invention%20Network.html" id="alink">Open Invention Network</a></p>
 <div style="text-align: justify;">IBM, RedHat, Sony, Philips and Novell have founded The Open Invention Network (<a href="#">http://www.openinventionnetwork.com</a>) a new company that plans to acquire patents and offer them royalty-free to promote Linux and spark innovation.<br /></div><div style="clear: both;"></div>
 <b>Published: Tuesday, February 28, 2006</b>
 
@@ -72,7 +72,7 @@ window.parent.document.title = "Year 2006";
 
 <hr>
 <div id="section">
-<p id="postTitle">Logrotate in Linux</p>
+<p id="postTitle"><a href="Logrotate%20in%20Linux.html" id="alink">Logrotate in Linux</a></p>
 <span style="font-size:85%;"><span style="font-family:arial;">Logs are important and usefull in security and administration. If a log grows too much, you compress it , back it up for some months or years and create a new log file. All this is done in a much better way by Logrotate. Logrotate enables you to compress the old logfile, and store it for as long as you want, to run every day, montly, or when you want, and if a file expires, it can send it to you by email or delete it, after for example, 2 years. Old logs can be stored in an alternative directory.</span><br /><br /><span style="font-family:arial;">You set up logs configuring /etc/logrotate.conf or adding a new file in /etc/logrotate.d/</span><br /><span style="font-family:arial;">For example, a logrotate file for apache looks like this:</span><br /><span style="font-family:arial;">File: /etc/logrotate.d/httpd</span></span><br />-------8&lt;-------<br /><span style="font-size:85%;"><span style="font-family:courier new;">/usr/local/apache/logs/*log {</span><br /><span style="font-family:courier new;"> missingok</span><br /><span style="font-family:courier new;"> notifempty</span><br /><span style="font-family:courier new;"> sharedscripts</span><br /><span style="font-family:courier new;"> postrotate</span><br /><span style="font-family:courier new;"> /bin/kill -USR1 `cat /var/run/httpd.pid 2&gt;/dev/null` 2&gt; /dev/null || true</span><br /><span style="font-family:courier new;"> endscript</span><br /><span style="font-family:courier new;">}</span></span><br />-------8&lt;------- <div style="clear: both;"></div>
 <b>Published: Friday, February 10, 2006</b>
 
@@ -80,7 +80,7 @@ window.parent.document.title = "Year 2006";
 
 <hr>
 <div id="section">
-<p id="postTitle">Mare Nostrum Europe most powerfull supercomputer</p>
+<p id="postTitle"><a href="Mare%20Nostrum%20Europe%20most%20powerfull%20supercomputer.html" id="alink">Mare Nostrum Europe most powerfull supercomputer</a></p>
 <span style="font-family:arial;font-size:85%;color:#990000;"><strong>The Europe most powerfull computer has been build by IBM, it will work with Linux operating system and will count with 4.564 processors with Power technology. It will be used to medical investigations like human genome, proteins, medicaments development and climate change.</strong></span><br /><br /><span style="font-family:arial;font-size:85%;">More information (in spanish)</span><br /><span style="font-family:arial;font-size:85%;">Barcelona Supercomputing Center h</span><a href="#"><span style="font-family:arial;font-size:85%;">ttp://www.bsc.org.es/</span></a><br /><span style="font-family:arial;font-size:85%;">IBM: </span><a href="#"><span style="font-family:arial;font-size:85%;">http://www.ibm.com/news/es/2004/11/superordenador.html</span></a><br /><span style="font-family:arial;font-size:85%;">(in english)</span><br /><a href="#"><span style="font-family:arial;font-size:85%;">http://imagicweb.com/ambient/modules.php?op=modload&amp;name=News&amp;file=article&amp;sid=66</span></a><div style="clear: both;"></div>
 <b>Published: Sunday, January 22, 2006</b>
 
@@ -88,7 +88,7 @@ window.parent.document.title = "Year 2006";
 
 <hr>
 <div id="section">
-<p id="postTitle">Backup and restore floppy disks and drives with Linux</p>
+<p id="postTitle"><a href="Backup%20and%20restore%20floppy%20disks%20and%20drives%20with%20Linux.html" id="alink">Backup and restore floppy disks and drives with Linux</a></p>
 <span style="color: rgb(255, 102, 0);font-family:arial;">We use still some floppies and it is important that we back up them, because it is a long process to create the disk and if it fails, the time to redo the disk is longer than restoring a backup or the knowhow is not there.</span><br /><br /><span style="color: rgb(255, 102, 0);font-family:arial;">To backup a floppy disk or any other disk we use the dd tool, including hard disks, in new versions of Linux it supports files larger than 2 Gigas.</span><br /><br /><span style="font-family:courier new;">$ dd if=/dev/fd0 of=/backup/floppy_backup.dd</span><br /><br /><span style="font-family:arial;">To restore the backup into a fresh floppy (note, you will loose any other information in the floppy):</span><br /><span style="font-family:courier new;">$ dd if=/backup/floppy_backup.dd of=/dev/fd0</span><br /><br /><span style="font-family:arial;">Let me know what did you backed up !</span><div style="clear: both;"></div>
 <b>Published: Saturday, January 14, 2006</b>
 
@@ -96,7 +96,7 @@ window.parent.document.title = "Year 2006";
 
 <hr>
 <div id="section">
-<p id="postTitle">Set the keyboard language in Console and XFree86</p>
+<p id="postTitle"><a href="Set%20the%20keyboard%20language%20in%20Console%20and%20XFree86.html" id="alink">Set the keyboard language in Console and XFree86</a></p>
 <span style="font-family: arial; color: rgb(0, 0, 153);">To set the keyboard keys distribution (or language) use these utilities:</span><br /><br /><span style="font-family: courier new;">$ setxkbmap </span><br /><span style="font-family: courier new;">$ setxkbmap us</span><br /><span style="font-family: courier new;">$ setxkbmap es</span><br /><span style="font-family: courier new;">$ setxkbmap us-acentos</span><div style="clear: both;"></div>
 <b>Published: Thursday, January 12, 2006</b>
 
@@ -104,7 +104,7 @@ window.parent.document.title = "Year 2006";
 
 <hr>
 <div id="section">
-<p id="postTitle">Adding and quiting services with chkconfig</p>
+<p id="postTitle"><a href="Adding%20and%20quiting%20services%20with%20chkconfig.html" id="alink">Adding and quiting services with chkconfig</a></p>
 <span style="font-family: arial;"><span style="color: rgb(102, 0, 204);">This implementation of chkconfig was inspired by the chkconfig command present in the IRIX operating system. Rather than maintaining configuation information outside of the /etc/rc[0-6].d hierarchy, however, this version directly manages the symlinks in /etc/rc[0-6].d.</span><br /><br />In Redhat Linux you have a powerfull tool called chkconfig, you can list all the services with:</span><br /><span style="color: rgb(0, 153, 0);font-size:85%;"><span style="font-family: courier new;">chkconfig --list</span></span><br /><span style="font-family: arial;">To see the services started in runlevel 3:</span><br /><span style="color: rgb(0, 153, 0);font-size:85%;"><span style="font-family: courier new;">chkconfig --list | grep 3:on</span></span><br /><br /><span style="font-family: arial;">To turn off a service in all the runlevels:</span><br /><span style="font-size:85%;"><span style="font-family: courier new;">chkconfig pcmcia off</span></span><br /><br /><span style="font-family: arial;">Turn off a service in a desired runlevel:</span><span style="font-size:85%;"><br /><span style="font-family: courier new; color: rgb(0, 153, 0);">[root@monitor1]# chkconfig --list | grep hpoj</span><br /><span style="font-family: courier new; color: rgb(0, 153, 0);">hpoj 0:off 1:off 2:on 3:on 4:on 5:on 6:off</span><br /><span style="font-family: courier new; color: rgb(0, 153, 0);">[root@monitor1]# chkconfig --level 3 hpoj off</span><br /><span style="font-family: courier new; color: rgb(0, 153, 0);">[root@monitor1 rc3.d]# chkconfig --list | grep hpoj</span><br /><span style="font-family: courier new;"><span style="color: rgb(0, 153, 0);">hpoj 0:off 1:off 2:on 3:off 4:on 5:on 6:off</span><br /><br /><br />If you want to add a new service, you created the /etc/rc.d/init.d/ file and now you wans to manage the service, configure it to start and stop on desired runlevels.<br /><br />Edit the /etc/rc.d/init.d/service-name file, and add this line on the top:<br /></span></span> <pre><span style="color: rgb(0, 102, 0);">#!/bin/bash</span><br /><span style="color: rgb(0, 102, 0);"># chkconfig: 2345 55 25</span><br /><span style="color: rgb(0, 102, 0);"># description: A service that does powerful things</span><br /><span style="color: rgb(0, 102, 0);">#</span><span style="font-family: georgia,serif;"><br /><br /><span style="font-size:100%;"><span style="font-family: arial;">T</span></span><span style="font-size:100%;"><span style="font-family: arial;">his is a description of what this line does:</span></span><br /></span># chkconfig: 2345 55 25<br />             |   |  |<br />             |   |  priority for kill scripts<br />             |   |<br />             |   priority for start scripts<br />             |<br />             run levels at which to start service<br /><br /><span style="font-size:130%;"><span style="font-family: arial;">Then execute, for example, adding the qmail service:</span></span><br /><span style="color: rgb(0, 153, 0);">[root@monitor1 init.d]# chkconfig --add qmail</span><br /><span style="color: rgb(0, 153, 0);">[root@monitor1 init.d]# chkconfig --list qmail</span><br /><span style="color: rgb(0, 153, 0);">qmail           0:off   1:off   2:off   3:on    4:off   5:on    6:off</span><br /><span style="font-size:100%;"><br /><span style="font-family: arial;">Now configure it to start on desired runlevels !</span></span><br /><br /></pre><div style="clear: both;"></div>
 <b>Published: Sunday, January 01, 2006</b>
 

@@ -8,8 +8,25 @@
 window.parent.document.title = "VMplayer crash in fedora 12";
 </script>
 <div id="section">
-<p id="postTitle">VMplayer crash in fedora 12</p>
- After installing VMplayer from the bundle, the 3.0.1 version i were surprised because it crashed just one second after running it.&nbsp; Thanks that another co-blogger posted the solution, too simple in fact:<br /><br /><br /><pre>cd /usr/lib/vmware/lib</pre><pre>mv libcurl.so.4 libcurl.so.4.old</pre><pre style="font-family: Arial,Helvetica,sans-serif;">&nbsp;</pre><pre style="font-family: Arial,Helvetica,sans-serif;">Credits:</pre><pre><a href="#" style="font-family: Arial,Helvetica,sans-serif;">here</a><span style="font-family: Arial,Helvetica,sans-serif;"> and </span><a href="#" style="font-family: Arial,Helvetica,sans-serif;">here</a></pre><pre>&nbsp;</pre><pre>If you need to recompile the modules because some of them is failing, you can do it this way:</pre><pre>vmware-modconfig --console --install-all</pre><pre></pre><pre></pre><pre>&nbsp;</pre><pre><strong>If you need more help and you want to get in touch with me</strong> <strong style="font-weight: normal;">Why</strong> not <a href="#">contact me</a> ;-)</pre><div style="clear: both;"></div>
+<p id="postTitle"><a href="VMplayer%20crash%20in%20fedora%2012.html" id="alink">VMplayer crash in fedora 12</a></p>
+After installing VMplayer from the bundle, the 3.0.1 version where
+i got surprised because it crashed just one second after 
+running it.&nbsp; 
+Thanks that another co-blogger posted the solution, too simple in fact:<br />
+<br />
+<br />
+<pre>
+cd /usr/lib/vmware/lib
+mv libcurl.so.4 libcurl.so.4.old
+</pre>
+
+If you need to recompile the modules because some of them is failing, 
+you can do it this way:
+
+<pre>
+vmware-modconfig --console --install-all
+</pre>
+<div style="clear: both;"></div>
 <b>Published: Sunday, April 04, 2010</b>
 
 </div>

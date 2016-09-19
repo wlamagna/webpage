@@ -8,7 +8,7 @@
 window.parent.document.title = "Category headless";
 </script>
 <div id="section">
-<p id="postTitle">Headless Linux Server with X Fluxbox and Lightdm</p>
+<p id="postTitle"><a href="Headless%20Linux%20Server%20with%20X%20Fluxbox%20and%20Lightdm.html" id="alink">Headless Linux Server with X Fluxbox and Lightdm</a></p>
 
 Hi, here is a very short list telling about how you can have
 very easily a server withoug a monitor connected and manage it
@@ -46,6 +46,117 @@ These steps have worked in Debian 8.0 Jessie.
  
 <b>Published: Thuesday, February 23, 2016</b>
 <a href="tag_headless">headless</a>&nbsp;<a href="tag_fluxbox">fluxbox</a>&nbsp;<a href="tag_lightdm">lightdm</a>&nbsp;
+</div>
+
+<hr>
+<div id="section">
+<p id="postTitle"><a href="Installing%20Matlab%20R2013%208.01%20on%20Linux%20Headless%20Xvfb%20using%20lightdm%20and%20fluxbox.html" id="alink">Installing Matlab R2013 8.01 on Linux Headless Xvfb using lightdm and fluxbox</a></p>
+
+Good, you are a Matlab user like me, but.. why are you willing to install it on a 
+headless linux workstation ?  I thought i was the only person in the world doing that
+but you reading this proves i am not alone...<br /><br />
+
+<u>1) Well you mounted the iso image:</u><br />
+<pre>
+mount -o loop Matlab801_MacUnix.iso /mnt/cd
+</pre>
+<br />
+
+<u>2) And tried to install but.... you are getting this</u><br />
+<pre>
+java.lang.InternalError: Can't connect to X11 window server using ':20.0' as the value of the DISPLAY variable.
+        at sun.awt.X11GraphicsEnvironment.initDisplay(Native Method)
+        at sun.awt.X11GraphicsEnvironment.access$100(Unknown Source)
+        at sun.awt.X11GraphicsEnvironment$1.run(Unknown Source)
+        at java.security.AccessController.doPrivileged(Native Method)
+        at sun.awt.X11GraphicsEnvironment.(Unknown Source)
+        at java.lang.Class.forName0(Native Method)
+        at java.lang.Class.forName(Unknown Source)
+</pre>
+<br />
+<u>3) OPS! this should not be difficult you think...</u><br />
+<pre>
+#Try this...
+install_linux -mode silent
+#And this... 
+install_linux -javahome /opt/java -mode silent
+#And your DISPLAY variable is logically correct! because ...
+printenv | grep DISPLAY
+DISPLAY=:20.0
+</pre>
+
+The error message keeps displaying:<br />
+<pre>
+Error: The application encountered an unexpected error and needs to close.  You may want to try re-installing your product(s).  More information can be found at /tmp/mathworks_root.log
+</pre>
+<br />
+And you are able to run any other X application, starting from xclock... but the Matlab install do not wants to start.<br />
+Do not worry, it is not all lost.<br />
+First, you will have to modify the install_linux shell script, but the image is readonly, so you will have to do a trick:
+<br />
+<u>4) First create a directory</u><br />
+<pre>
+mkdir /mnt/tmpcd
+cd /mnt/tmpcd
+</pre>
+<br />
+<u>5)  Copy there the install_linux script</u><br />
+<pre>
+cp /mnt/cd install_linux /mnt/tmpcd
+</pre>
+
+<u>6) Modify this line:</u><br />
+<pre>
+java_cmd="$java_exe -Xmx512m $XTRAFLAGS -Djava.ext.dirs=$JAR_SEARCH_PATH $JAVA_LAUNCH_TARGET -root \"$ROOT\" -tmpdir \"$TEMP_DIR\" -inputFile '$ROOT/install_ini_linux.txt' $arglist"
+#
+#And add this: "-Djava.awt.headless=true" It should look like this:
+#
+java_cmd="$java_exe -Xmx512m $XTRAFLAGS -Djava.awt.headless=true -Djava.ext.dirs=$JAR_SEARCH_PATH $JAVA_LAUNCH_TARGET -root \"$ROOT\" -tmpdir \"$TEMP_DIR\" -inputFile '$ROOT/install_ini_linux.txt' $arglist"
+</pre><br />
+<u>7) Now create a link to all the other files, i did it like this</u><br />
+<pre>
+# Being in /mnt/tmpcd
+for i in /mnt/cd/*; do ln -s $i; done
+</pre>
+<br />
+<u>8) Now you are ready! install it.</u><br />
+<pre>
+(Feb 23, 2016 15:36:37) Installing Product: Simulink Report Generator 3.14
+(Feb 23, 2016 15:36:38) Installing Product: Simulink Verification and Validation 3.5
+(Feb 23, 2016 15:36:38) Installing Product: Stateflow 8.1
+(Feb 23, 2016 15:36:39) Installing Product: Statistics Toolbox 8.2
+(Feb 23, 2016 15:36:40) Installing Product: Symbolic Math Toolbox 5.10
+(Feb 23, 2016 15:36:57) Installing Product: System Identification Toolbox 8.2
+(Feb 23, 2016 15:37:06) Installing Product: SystemTest 2.6.5
+(Feb 23, 2016 15:37:09) Installing Product: Wavelet Toolbox 4.11
+(Feb 23, 2016 15:37:26) Notes:
+Your installation may require additional configuration steps.
+
+1. The following products require a supported compiler:
+
+MATLAB Compiler 4.18.1
+MATLAB Builder JA 2.2.6
+Stateflow 8.1
+Simulink Coder 8.4
+MATLAB Coder 2.4
+
+2. Simulink requires a C compiler for simulation acceleration, model reference, and MATLAB Function Block capabilities. It is recommended that you install a supported compiler on your machine.
+
+3. To accelerate computations with the following products, a supported compiler is required:
+
+SimBiology 4.3
+Fixed-Point Designer 4.0
+(Feb 23, 2016 15:37:26) Exiting with status 0
+(Feb 23, 2016 15:37:26) End - Successful.
+Finished
+</pre>
+
+
+
+
+ 
+<b>Published: Thuesday, February 23, 2016</b>
+<a href="tag_headless">headless</a>&nbsp;<a href="tag_lightdm">lightdm</a>&nbsp;<a href="tag_fluxbox">fluxbox</a>&nbsp;
 </div>
 
 <hr>

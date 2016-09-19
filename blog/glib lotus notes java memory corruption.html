@@ -8,10 +8,28 @@
 window.parent.document.title = "glib lotus notes java memory corruption";
 </script>
 <div id="section">
-<p id="postTitle">glib lotus notes java memory corruption</p>
-<br /><br />Today i updated some packets related to IBM lotus notes and a problem with libraries caused a great and long investigation process to have lotus notes back.<br /><br /><br />I tried lot of things: reinstalling, purging the packets, installing the same version again... nothing worked. Today i found the solution <a href="#">here</a>.<br /><br /><br />It says:<br /><br /><b>[...]&nbsp;</b>After some research I found the problem: libnuma. If this lib exists in the system the Notes Client loads data forever.<b> [...]</b><br /><br /><br />the solution is:<br /> apt-get remove libnuma1<br /><br /><br /><br /><br /><br /><span class="comment-body" data-li-comment-text="">Standard disclosure: this is my opinion and not necessarily that of my employer or anyone else.</span><div style="clear: both;"></div>
-<b>Published: Tuesday, April 24, 2012</b>
+<p id="postTitle"><a href="glib%20lotus%20notes%20java%20memory%20corruption.html" id="alink">glib lotus notes java memory corruption</a></p>
 
+Today i updated some packets related to IBM lotus notes 
+and a problem with libraries caused a great and long 
+investigation process to have lotus notes back.
+<br />
+
+I tried lot of things: reinstalling, purging the 
+packets, installing the same version again... nothing worked. Today i found the 
+solution <a href="http://linux-noosphere.blogspot.com.ar/2012/04/glib-lotus-notes-java-memory-corruption.html">here</a>.<br />
+<br />
+It says:
+<br /><b>[...]&nbsp;</b>After some research I found the problem: libnuma. 
+If this lib exists in the system the Notes Client loads data forever.<b> [...]<br />
+<br /><br /><br />
+The solution is:<br />
+<pre>
+apt-get remove libnuma1
+</pre>
+<div style="clear: both;"></div>
+<b>Published: Tuesday, April 24, 2012</b>
+<a href="tag_admin">admin</a>&nbsp;
 </div>
 
 <hr>

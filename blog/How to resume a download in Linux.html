@@ -8,7 +8,7 @@
 window.parent.document.title = "How to resume a download in Linux";
 </script>
 <div id="section">
-<p id="postTitle">How to resume a download in Linux</p>
+<p id="postTitle"><a href="How%20to%20resume%20a%20download%20in%20Linux.html" id="alink">How to resume a download in Linux</a></p>
  If you are downloading a large file, of several Gigas and your, or the orthers connection gets lost, and you think that you have to download it again from the beginning, dont worry, it is possible to resume the download with some tools.<br /><br />If the file is not so big, (less than 2 Gigas), you can use &quot;wget&quot;<br /><span style="font-size:85%;"><span style="font-family: courier new;"># wget -c ftp://user:password@ftp.serverlinux.blogspot.com/incoming/*</span></span><br /><br />But, as i said, you could be downloading the DVD from Solaris o Centos 5, in this cases wget it is not usefull because it has a limit of the file size. In this cases use Curl:<br /><br /><span style="font-size:85%;"><span style="font-family: courier new;"># curl -C - -O --disable-epsv -u user:password ftp://ftp.usf.edu/pub/centos/5.0/isos/x86_64/CentOS-5.0-x86_64-bin-DVD.iso</span><br /></span><br />Let your opinion ! ;-) <div style="clear: both;"></div>
 <b>Published: Wednesday, October 31, 2007</b>
 

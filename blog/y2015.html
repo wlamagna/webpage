@@ -8,11 +8,11 @@
 window.parent.document.title = "Year 2015";
 </script>
 <div id="section">
-<p id="postTitle">Secure Debian Post Install configuration</p>
+<p id="postTitle"><a href="Secure%20Debian%20Post%20Install%20configuration.html" id="alink">Secure Debian Post Install configuration</a></p>
+
 In this <a href="http://blog.wallves.com/Some%20linux%20firewall%20tips.html">short article</a> i share some short
 but powerfull firewall logging tip.  Now i tell a little about some Debian post installation instructions i would
-commonly recommend.
-<br />
+commonly recommend.<br />
 Download the last stable Debian from <a href="https://www.debian.org/CD/http-ftp/#stable">here</a><br /><br />
 
 When you just install the last Debian you may have something more or less like this:<br />
@@ -56,19 +56,19 @@ apt-get remove exim4-*</span>
 <span style="color: #888888">apt-get remove cups</span>
 <span style="color: #888888">apt-get remove cups-browsed</span>
 <span style="color: #888888">apt-get remove cups-daemon</span>
-</pre></div>
+</pre>
 
 Now you would have a clearner list of network listening services.<br />
 
 
 <div style="clear: both;"></div>
 <b>Published: Monday, October 12, 2015</b>
-<a href="tag_linux">linux</a>&nbsp;<a href="tag_security">security</a>&nbsp;
+<a href="tag_debian">debian</a>&nbsp;<a href="tag_security">security</a>&nbsp;
 </div>
 
 <hr>
 <div id="section">
-<p id="postTitle">Debian 8 Post Install Cleanup</p>
+<p id="postTitle"><a href="Debian%208%20Post%20Install%20Cleanup.html" id="alink">Debian 8 Post Install Cleanup</a></p>
 In this <a href="http://blog.wallves.com/Some%20linux%20firewall%20tips.html">short article</a> i share some short
 but powerfull firewall logging tip.  And <a href="http://blog.wallves.com/Secure%20Debian%20Post%20Install%20configuration.html">
 here</a> security related post install removals for Debian.<br />
@@ -93,10 +93,11 @@ apt-get remove exim4-*</span>
 
 <hr>
 <div id="section">
-<p id="postTitle">Some linux firewall tips</p>
+<p id="postTitle"><a href="Some%20linux%20firewall%20tips.html" id="alink">Some linux firewall tips</a></p>
+
 The overconnected world needs some extra knowledge about protecting yourself from anti-democracy financed cyber-bandits,
 so here some small but powerfull firewall setup tips:<br />
-<br />
+
 <b><u>Firewall setup:</u></b>
 <pre>
 <span style="color: #888888">iptables -F </span>
@@ -120,7 +121,7 @@ so here some small but powerfull firewall setup tips:<br />
 <span style="color: #888888">:msg,contains,&quot;TCP/OUT:&quot; /var/log/iptables.log</span>
 <span style="color: #888888">:msg,contains,&quot;UDP/IN:&quot; /var/log/iptables.log</span>
 <span style="color: #888888">:msg,contains,&quot;UDP/OUT:&quot; /var/log/iptables.log</span>
-</pre></div>
+</pre>
 <br />
 <b><u>Restarting service</u></b><br />
 /etc/init.d/rsyslog restart
@@ -132,14 +133,15 @@ so here some small but powerfull firewall setup tips:<br />
 
 <hr>
 <div id="section">
-<p id="postTitle">Firefox starts a server on port 1900</p>
- I observed this kind of packets being filtered in my place:<br /><br /><b>
+<p id="postTitle"><a href="Firefox%20starts%20a%20server%20on%20port%201900.html" id="alink">Firefox starts a server on port 1900</a></p>
+
+I observed this kind of packets being filtered in my place:<br />
 <pre>
 Mar 17 13:13:21 reserved kernel: [15070.046566] UDP/OUT: IN= OUT=eth1 SRC=10.10.10.176 DST=239.255.255.250 LEN=122 TOS=0x00 PREC=0x00 TTL=1 ID=17655 DF PROTO=UDP SPT=1900 DPT=1900 LEN=102
 </pre>
-<br /><br /><br />
+
 And for just one moment, because it starts and stops very quicky i found this:
-<br /><br /><br />
+
 <pre>
 root@reserved:~# netstat --listen -np
 Active Internet connections (only servers)
@@ -147,14 +149,19 @@ Proto Recv-Q Send-Q Local Address           Foreign Address         State       
 udp        0      0 0.0.0.0:1900            0.0.0.0:*                           5615/firefox
 </pre>
 <br />
-To disable this go to about:config and then set<br /> loop.enabled -&gt; false<br /><br /> loop.rooms.enabled -&gt; false<br /><br /> Good luck. <div style="clear: both;"></div>
+To disable this go to about:config and then set
+<pre>
+loop.enabled -&gt; false
+loop.rooms.enabled -&gt; false
+</pre>
+Good luck. <div style="clear: both;"></div>
 <b>Published: Tuesday, March 17, 2015</b>
 <a href="tag_security">security</a>&nbsp;
 </div>
 
 <hr>
 <div id="section">
-<p id="postTitle">Compile keepass 0.4.3 on Debian Linux wheezy</p>
+<p id="postTitle"><a href="Compile%20keepass%200.4.3%20on%20Debian%20Linux%20wheezy.html" id="alink">Compile keepass 0.4.3 on Debian Linux wheezy</a></p>
  I have switched from Ubuntu to Debian, and am happy i did so.
 There are enough blogs talking about their pros and i only ask why i did it not before.
 
@@ -220,7 +227,7 @@ And it should look like:
 
 <div style="clear: both;"></div>
 <b>Published: Wednesday, March 11, 2015</b>
-<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;<a href="tag_linux">linux</a>&nbsp;
+<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;
 </div>
 
 <hr>

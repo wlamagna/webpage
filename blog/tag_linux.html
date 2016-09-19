@@ -8,199 +8,11 @@
 window.parent.document.title = "Category linux";
 </script>
 <div id="section">
-<p id="postTitle">Unziping large files in linux copied from windows</p>
+<p id="postTitle"><a href="Some%20linux%20firewall%20tips.html" id="alink">Some linux firewall tips</a></p>
 
-In Windows 7 i created a large ZIP file (around 15 Gigas). I wanted to
-move it to a linux machine and unzip it there.  But once in the linux 
-machine, it produced this error:
-
-<pre>
-unzip Windows\ 7\ Clone.zip                          
-Archive:  Windows 7 Clone.zip
-warning [Windows 7 Clone.zip]:  15415149290 extra bytes at beginning or within zipfile
-  (attempting to process anyway)
-error [Windows 7 Clone.zip]:  start of central directory not found;
-  zipfile corrupt.
-  (please check that you have transferred or created the zipfile in the
-  appropriate BINARY mode and that you have compiled UnZip properly)
-</pre>
-
-After trying some things i resolved it like this:<br />
-
-<pre>
-7za x Windows\ 7\ Clone.zip
-
-7-Zip (A) [64] 9.20  Copyright (c) 1999-2010 Igor Pavlov  2010-11-18
-p7zip Version 9.20 (locale=en_US.UTF-8,Utf16=on,HugeFiles=on,4 CPUs)
-
-Processing archive: Windows 7 Clone.zip
-
-Extracting  Windows 7 Clone/Windows 7 Clone.vbox
-</pre>
-
-<div style="clear: both;"></div>
-<b>Published: Thursday, August 25, 2016</b>
-<a href="tag_linux">linux</a>&nbsp;<a href="tag_admin">admin</a>&nbsp;
-</div>
-
-<hr>
-<div id="section">
-<p id="postTitle">Installing Apache from scratch</p>
-
-<u>1) A required library:</u><br />
-<pre>
-apt-get install libpcre++-dev
-</pre>
-<br />
-<u>2) Obtain the sources:</u><br />
-<pre>
-wget "http://apache.dattatec.com//httpd/httpd-2.4.18.tar.bz2"
-tar jxvf httpd-2.4.18.tar.bz2
-wget "http://mirrors.nxnethosting.com/apache//apr/apr-1.5.2.tar.gz"
-wget http://apache.dattatec.com//apr/apr-util-1.5.4.tar.gz
-
-cd httpd-2.4.18/srclib
-tar zxvf ../../apr-1.5.2.tar.gz
-
-tar zxvf ../../apr-util-1.5.4.tar.gz
-
-ln -s apr-1.5.2/ apr
-ln -s apr-util-1.5.4/ apr-util
-
-cd ..
-
-./configure --enable-ssl --prefix=/usr/local/apache2/ --enable-so --with-included-apr --enable-rewrite --enable-rewrite --enable-proxy --enable-cgi
-
-make
-</pre>
-</div>
-<div style="clear: both;"></div>
-<b>Published: Thursday, August 25, 2016</b>
-<a href="tag_linux">linux</a>&nbsp;<a href="tag_admin">admin</a>&nbsp;<a href="tag_apache">apache</a>&nbsp;
-</div>
-
-<hr>
-<div id="section">
-<p id="postTitle">Installing latex with some usefull complements in Debian Linux</p>
-
-<pre>
-apt-get install texlive texlive-math-extra texlive-science
-</pre>
-# Provides program.sty: <br />
-<pre>
-apt-get install texlive-latex-extra
-</pre>
-
-<div style="clear: both;"></div>
-<b>Published: Thursday, August 25, 2016</b>
-<a href="tag_linux">linux</a>&nbsp;<a href="tag_debian">debian</a>&nbsp;
-</div>
-
-<hr>
-<div id="section">
-<p id="postTitle">Compile keepass 2.0.2 on Debian Linux Jeesie</p>
-
-KeepassX webpage states: "KeePassX is an application for people with extremly high demands on secure personal data management. It has a light interface, is cross platform and published under the terms of the GNU General Public License."<br /><br />
-These steps have been executed in Debian Linux 8.2.0 Jeesie but for an experienced System Administrator/Hacker this should be trivial.<br /><br />
-Some time ago i explained 
-<a href="Compile%20keepass%200.4.3%20on%20Debian%20Linux%20wheezy.html">how to install KeepassX 0.4.3</a>
-but a newer version is available and i wanted to have it.<br /><br />
-
-First you should have these packages installed:<br />
-<pre>
-apt-get install cmake
-apt-get install g++
-apt-get install libqt4-core
-apt-get install libqt4-dev
-apt-get install libgcrypt-dev
-apt-get install zlib1g zlib1g-dev
-</pre>
-<br />
-Now you can download the latest keepassX package and compile it:<br />
-<pre>
-wget https://www.keepassx.org/releases/2.0.2/keepassx-2.0.2.tar.gz
-tar zxvf keepassx-2.0.2.tar.gz
-cd keepassx-2.0.2
-mkdir build
-cd build
-cmake -DCMAKE_INSTALL_PREFIX=/usr/local ..
-</pre>
-<br />As root:<br />
-<pre>
-make install
-</pre>
-<br />
- 
-<b>Published: Saturday, February 20, 2016</b>
-<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;<a href="tag_linux">linux</a>&nbsp;
-</div>
-
-<hr>
-<div id="section">
-<p id="postTitle">Secure Debian Post Install configuration</p>
-In this <a href="http://blog.wallves.com/Some%20linux%20firewall%20tips.html">short article</a> i share some short
-but powerfull firewall logging tip.  Now i tell a little about some Debian post installation instructions i would
-commonly recommend.
-<br />
-Download the last stable Debian from <a href="https://www.debian.org/CD/http-ftp/#stable">here</a><br /><br />
-
-When you just install the last Debian you may have something more or less like this:<br />
-
-<pre>
-root@host1:~# netstat --listen -np
-<span style="color: #888888">Active Internet connections (only servers)</span>
-<span style="color: #888888">Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name</span>
-<span style="color: #888888">tcp        0      0 0.0.0.0:111             0.0.0.0:*               LISTEN      397/rpcbind     </span>
-<span style="color: #888888">tcp        0      0 127.0.0.1:631           0.0.0.0:*               LISTEN      445/cupsd       </span>
-<span style="color: #888888">tcp        0      0 127.0.0.1:25            0.0.0.0:*               LISTEN      696/exim4       </span>
-<span style="color: #888888">tcp        0      0 0.0.0.0:38845           0.0.0.0:*               LISTEN      406/rpc.statd   </span>
-<span style="color: #888888">tcp6       0      0 :::111                  :::*                    LISTEN      397/rpcbind     </span>
-<span style="color: #888888">tcp6       0      0 :::48180                :::*                    LISTEN      406/rpc.statd   </span>
-<span style="color: #888888">tcp6       0      0 ::1:631                 :::*                    LISTEN      445/cupsd       </span>
-<span style="color: #888888">tcp6       0      0 ::1:25                  :::*                    LISTEN      696/exim4       </span>
-<span style="color: #888888">udp        0      0 0.0.0.0:996             0.0.0.0:*                           397/rpcbind     </span>
-<span style="color: #888888">udp        0      0 0.0.0.0:5353            0.0.0.0:*                           427/avahi-daemon: r</span>
-<span style="color: #888888">udp        0      0 127.0.0.1:1006          0.0.0.0:*                           406/rpc.statd   </span>
-<span style="color: #888888">udp        0      0 0.0.0.0:42504           0.0.0.0:*                           427/avahi-daemon: r</span>
-<span style="color: #888888">udp        0      0 0.0.0.0:68              0.0.0.0:*                           356/dhclient    </span>
-<span style="color: #888888">udp        0      0 0.0.0.0:50762           0.0.0.0:*                           356/dhclient    </span>
-<span style="color: #888888">udp        0      0 0.0.0.0:111             0.0.0.0:*                           397/rpcbind     </span>
-<span style="color: #888888">udp        0      0 0.0.0.0:631             0.0.0.0:*                           448/cups-browsed</span>
-<span style="color: #888888">udp        0      0 0.0.0.0:49788           0.0.0.0:*                           406/rpc.statd   </span>
-<span style="color: #888888">udp6       0      0 :::996                  :::*                                397/rpcbind     </span>
-<span style="color: #888888">udp6       0      0 :::5353                 :::*                                427/avahi-daemon: r</span>
-<span style="color: #888888">udp6       0      0 :::59218                :::*                                406/rpc.statd   </span>
-<span style="color: #888888">udp6       0      0 :::14952                :::*                                356/dhclient    </span>
-<span style="color: #888888">udp6       0      0 :::111                  :::*                                397/rpcbind     </span>
-<span style="color: #888888">udp6       0      0 :::60837                :::*                                427/avahi-daemon: r</span>
-</pre>
-
-If you are a security conscious administrator, then you agree here is work do to.  Not only to have a safer
-workplace, also to reduce the cpu and memory usage!<br /><br />
-
-<pre>
-apt-get remove exim4-*</span>
-<span style="color: #888888">apt-get remove rpcbind</span>
-<span style="color: #888888">apt-get remove avahi-daemon</span>
-<span style="color: #888888">apt-get remove cups</span>
-<span style="color: #888888">apt-get remove cups-browsed</span>
-<span style="color: #888888">apt-get remove cups-daemon</span>
-</pre></div>
-
-Now you would have a clearner list of network listening services.<br />
-
-
-<div style="clear: both;"></div>
-<b>Published: Monday, October 12, 2015</b>
-<a href="tag_linux">linux</a>&nbsp;<a href="tag_security">security</a>&nbsp;
-</div>
-
-<hr>
-<div id="section">
-<p id="postTitle">Some linux firewall tips</p>
 The overconnected world needs some extra knowledge about protecting yourself from anti-democracy financed cyber-bandits,
 so here some small but powerfull firewall setup tips:<br />
-<br />
+
 <b><u>Firewall setup:</u></b>
 <pre>
 <span style="color: #888888">iptables -F </span>
@@ -224,7 +36,7 @@ so here some small but powerfull firewall setup tips:<br />
 <span style="color: #888888">:msg,contains,&quot;TCP/OUT:&quot; /var/log/iptables.log</span>
 <span style="color: #888888">:msg,contains,&quot;UDP/IN:&quot; /var/log/iptables.log</span>
 <span style="color: #888888">:msg,contains,&quot;UDP/OUT:&quot; /var/log/iptables.log</span>
-</pre></div>
+</pre>
 <br />
 <b><u>Restarting service</u></b><br />
 /etc/init.d/rsyslog restart
@@ -236,78 +48,7 @@ so here some small but powerfull firewall setup tips:<br />
 
 <hr>
 <div id="section">
-<p id="postTitle">Compile keepass 0.4.3 on Debian Linux wheezy</p>
- I have switched from Ubuntu to Debian, and am happy i did so.
-There are enough blogs talking about their pros and i only ask why i did it not before.
-
-<br /><br /><br /> 
-Well, when you wish to compile keepassx on Debian you may 
-find one or two obstacles, i hope this post targets them 
-and saves you some time.
-<br /><br /><br />
-Get It:<br /> 
-<pre>
-wget http://www.keepassx.org/releases/keepassx-0.4.3.tar.gz
-tar zxvf keepassx-0.4.3.tar.gz
-cd keepassx-0.4.3/
-mkdir build
-</pre>
-I recommend you to read the INSTALL file<br />
-<pre>
-apt-get install libqt4-dev
-apt-get install libx11-dev
-apt-get install libx11-dev
-</pre>
-And finally you have to install this one:<br />
-<pre>
-apt-get install libxtst-dev
-</pre>
-Yes, it do not leaves you given dependencies, 
-i fixed it this way:
-<pre>
-wget http://ftp.de.debian.org/debian/pool/main/x/x11proto-record/x11proto-record-dev_1.14.2-1_all.deb
-dpkg -i x11proto-record-dev_1.14.2-1_all.deb
-</pre>
-And now you go!
-<pre>
-apt-get instal libxtst-dev
-qmake
-make
-</pre>
-And again, second challenge, you may find this 
-message trying to compile:
-<pre>
-lib/random.cpp: In function [void initStdRand()]:
-lib/random.cpp:98:19: error: [getpid] was not declared in this scope
-</pre>
-I did this:
-<pre>
-vi ./src/lib/random.cpp
-</pre>
-Basically you just modify the file, before it looks like:
-<pre>
-#include "random.h"
-#if defined(Q_WS_X11) || defined(Q_WS_MAC)
-#include <QFile>
-</pre>
-
-And it should look like:
-
-<pre>
-#include "random.h"
-#include &lt;unistd.h&gt;
-#if defined(Q_WS_X11) || defined(Q_WS_MAC)
-#include <QFile>
-</pre>
-
-<div style="clear: both;"></div>
-<b>Published: Wednesday, March 11, 2015</b>
-<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;<a href="tag_linux">linux</a>&nbsp;
-</div>
-
-<hr>
-<div id="section">
-<p id="postTitle">Errors compiling VMware Server on Fedora 12</p>
+<p id="postTitle"><a href="Errors%20compiling%20VMware%20Server%20on%20Fedora%2012.html" id="alink">Errors compiling VMware Server on Fedora 12</a></p>
  Hi! Today i downloaded vmware server to use it on my Linux workstation. 
 I am using Fedora 12 with the latest kernel update so i had not much hope to compile the vmware kernel modules without some troubleshooting.
 <br />
@@ -357,7 +98,7 @@ Starting VMware autostart virtual machines:
 
 <hr>
 <div id="section">
-<p id="postTitle">Upgrading Linux Daylight Saving Time (timezone)</p>
+<p id="postTitle"><a href="Upgrading%20Linux%20Daylight%20Saving%20Time%20%28timezone%29.html" id="alink">Upgrading Linux Daylight Saving Time (timezone)</a></p>
 
 <div class="tightenable top">Linux uses a special mechanism called DST 
 (Daylight Saving Time) that is used by linux to update the time of the 

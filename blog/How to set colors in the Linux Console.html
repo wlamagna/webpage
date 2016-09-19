@@ -8,10 +8,80 @@
 window.parent.document.title = "How to set colors in the Linux Console";
 </script>
 <div id="section">
-<p id="postTitle">How to set colors in the Linux Console</p>
-<span style="font-size:85%;"><span style="font-family:arial;">That dark blue color of the directories from the console, i would like to change them.</span><br /><br /><span style="font-family:arial;">Execute </span></span><span style="font-family:Tahoma,Book Antiqua,Times New Roman,Times;"><tt><span style="color: rgb(51, 51, 255);">/usr/bin/dircolors, </span></tt><span style="color: rgb(51, 51, 255); font-family: arial;font-size:85%;"><span style="color: rgb(0, 0, 0);">you will see an output like this:</span></span><tt><span style="color: rgb(51, 51, 255);"><br /><span style="color: rgb(0, 0, 0);">LS_COLORS=&#39;no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:</span><br /><span style="color: rgb(0, 0, 0);">do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:ex=01;32:</span><br /><span style="color: rgb(0, 0, 0);">*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:</span><br /><span style="color: rgb(0, 0, 0);">*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.bz2=01;31:</span><br /><span style="color: rgb(0, 0, 0);">*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.jpg=01;35:*.jpeg=01;35:</span><br /><span style="color: rgb(0, 0, 0);">*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:</span><br /><span style="color: rgb(0, 0, 0);">*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:</span><br /><span style="color: rgb(0, 0, 0);">*.png=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.avi=01;35:</span><br /><span style="color: rgb(0, 0, 0);">*.fli=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:</span><br /><span style="color: rgb(0, 0, 0);">*.ogg=01;35:*.mp3=01;35:*.wav=01;35:&#39;;</span><br /><span style="color: rgb(0, 0, 0);">export LS_COLORS</span><br /><br /></span></tt><span style="color: rgb(51, 51, 255);font-family:arial;font-size:85%;"><span style="color: rgb(0, 0, 0);">Edit the output to your needs.</span></span><tt><span style="color: rgb(51, 51, 255);"><br /><br /></span></tt><span style="color: rgb(51, 51, 255);font-family:courier new;"><span style="font-size:85%;">di=01;34 are the directories.</span></span><tt><span style="color: rgb(51, 51, 255);"><br /><br />The codes are these:<br /></span></tt></span><span style="font-family:Tahoma,Book Antiqua,Times New Roman,Times;"><span style=";font-family:arial;font-size:85%;">Attribute codes:<br />00=none 01=bold 04=underscore 05=blink 07=reverse 08=concealed<br />Text color codes:<br />30=black 31=red 32=green 33=yellow 34=blue 35=magenta 36=cyan 37=white<br />Background color codes:<br /></span> <span style=";font-family:arial;font-size:85%;">40=black 41=red 42=green 43=yellow 44=blue 45=magenta 46=cyan 47=white</span><tt><br /><br />These are the variables and every abbreviation in the exported LS_COLORS variable:<br /></tt></span><span style="font-family:Tahoma,Book Antiqua,Times New Roman,Times;"><tt>NORMAL 00 # global default, although everything should be something.</tt><br /><tt>FILE 00 # normal file</tt><br /><tt>DIR 01;34 # directory</tt><br /><tt>LINK 01;36 # symbolic link</tt><br /><tt>FIFO 40;33 # pipe</tt><br /><tt>SOCK 01;35 # socket</tt><br /><tt>BLK 40;33;01 # block device driver</tt><br /><tt>CHR 40;33;01 # character device driver</tt><br /><tt>ORPHAN 40;31;01 # symlink to nonexistent file<br /></tt></span><tt><br /># This is for files with execute permission:</tt><span style="font-family:monospace;"><br /></span><span style="font-size:85%;"><span style="font-family:courier new;">EXEC 01;32</span></span><br /><span style="font-size:85%;"><br /><span style="font-family:arial;">Paste the edited output of &quot;dircolors&quot; into .bashrc or .bash_profile or /etc/profile</span><br /></span><span style=";font-family:arial;font-size:85%;"><br />You must have this likes too:<br /></span><span style=";font-family:courier new;font-size:85%;"><span style=";font-family:arial;font-size:85%;"></span><span style="color: rgb(51, 51, 255);">alias dir=&#39;dir --color&#39;</span></span><span style=";font-family:Tahoma,Book Antiqua,Times New Roman,Times;font-size:85%;"><span style="color: rgb(51, 51, 255);"><br /><span style="font-family: courier new;">alias ls=&#39;ls --color&#39;</span></span></span><div style="clear: both;"></div>
-<b>Published: Tuesday, December 27, 2005</b>
+<p id="postTitle"><a href="How%20to%20set%20colors%20in%20the%20Linux%20Console.html" id="alink">How to set colors in the Linux Console</a></p>
 
+That dark blue color of the directories from the console, i would like to change them.
+<br />
+Execute
+<pre>/usr/bin/dircolors</pre>
+You will see an output like this:<br />
+<pre>
+LS_COLORS=&#39;no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:
+do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:ex=01;32:
+*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:
+*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.bz2=01;31:
+*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.jpg=01;35:*.jpeg=01;35:
+*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:
+*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:
+*.png=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.avi=01;35:
+*.fli=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:
+*.ogg=01;35:*.mp3=01;35:*.wav=01;35:&#39;;
+export LS_COLORS
+</pre>
+Edit the output to your needs.
+<br />
+<pre>di=01;34 are the directories.</pre>
+The codes are these:<br />
+Attribute codes:<br />
+<pre>
+00=none 01=bold 04=underscore 05=blink 07=reverse 08=concealed
+</pre>
+Text color codes:<br />
+<pre>
+30=black 31=red 32=green 33=yellow 34=blue 35=magenta 36=cyan 37=white
+</pre>
+Background color codes:<br />
+
+<pre>
+40=black 41=red 42=green 43=yellow 44=blue 45=magenta 46=cyan 47=white
+</pre>
+
+These are the variables and every abbreviation in the exported LS_COLORS variable:<br />
+<br />
+NORMAL 00 # global default, although everything should be something.<br />
+FILE 00 # normal file<br />
+DIR 01;34 # directory<br />
+LINK 01;36 # symbolic link<br />
+FIFO 40;33 # pipe<br />
+SOCK 01;35 # socket<br />
+BLK 40;33;01 # block device driver<br />
+CHR 40;33;01 # character device driver<br />
+ORPHAN 40;31;01 # symlink to nonexistent file<br />
+<br />
+# This is for files with execute permission:</tt>
+<span style="font-family:monospace;">
+<br />
+</span>
+<span style="font-size:85%;">
+<span style="font-family:courier new;">
+EXEC 01;32</span>
+</span>
+<br />
+
+<br />
+
+Paste the edited output of &quot;dircolors&quot; into .bashrc or .bash_profile or /etc/profile<br />
+
+<br />
+You must have this likes too:<br />
+<pre>
+alias dir=&#39;dir --color&#39;
+alias ls=&#39;ls --color&#39;
+</pre>
+<div style="clear: both;">
+
+<b>Published: Tuesday, December 27, 2005</b>
+<a href="tag_admin">admin</a>&nbsp;
 </div>
 
 <hr>

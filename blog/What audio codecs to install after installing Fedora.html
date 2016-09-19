@@ -1,0 +1,43 @@
+<html>
+<head>
+<title>What audio codecs to install after installing Fedora</title>
+<link rel="stylesheet" type="text/css" href="css/blogstyle.css">
+</head>
+<body style="margin:20;padding:0;">
+<script language="javascript">
+window.parent.document.title = "What audio codecs to install after installing Fedora";
+</script>
+<div id="section">
+<p id="postTitle"><a href="What%20audio%20codecs%20to%20install%20after%20installing%20Fedora.html" id="alink">What audio codecs to install after installing Fedora</a></p>
+I shared some tips to do after installing
+Fedora 12: <a href="What%20should%20i%20do%20after%20installing%20Fedora%2012.html">head</a>.
+<br />
+<br />
+These steps should be done as superuser (root) or with a &quot;sudo&quot; in front of every command.<br />
+And now you can also do this to view plenty of media files with their codecs:<br />
+<br />
+<pre>
+yum install mplayer mplayer-gui gecko-mediaplayer mencoder
+yum install xine xine-lib-extras xine-lib-extras-freeworld
+</pre>
+
+Navigate to: <a href="#" rel="nofollow" target="_blank">
+http://www.mplayerhq.hu/MPlayer/releases/codecs/</a> and download the packages
+that matches your cpu architecture.  If you have a 32 bit processor, it may be
+this file: all-20071007.tar.bz2.<br /><br />
+You can also cut &amp; paste this:
+<pre>
+wget http://www.mplayerhq.hu/MPlayer/releases/codecs/all-20071007.tar.bz2
+sudo tar -jxvf all-20071007.tar.bz2 --strip-components 1 -C /usr/lib/codecs/
+rpm -ivh http://rpm.livna.org/livna-release.rpm
+rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-livna
+yum install libdvdcss
+</pre>
+<div style="clear: both;">
+
+<b>Published: Saturday, January 02, 2010</b>
+
+</div>
+
+<hr>
+</body></html>

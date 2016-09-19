@@ -8,7 +8,7 @@
 window.parent.document.title = "Working with text files in UnixLinux (part 23)";
 </script>
 <div id="section">
-<p id="postTitle">Working with text files in UnixLinux (part 23)</p>
+<p id="postTitle"><a href="Working%20with%20text%20files%20in%20UnixLinux%20%28part%2023%29.html" id="alink">Working with text files in UnixLinux (part 23)</a></p>
 <span style="font-family: Verdana,sans-serif;">The scenario is that you have a compressed file with ZIP, and this is a raw text log file that you have to unzip and then to cat.</span><br /><br /><span style="font-family: &quot;Courier New&quot;,Courier,monospace;">$ zcat messages.gz</span><br /><br /><span style="font-family: Verdana,sans-serif;">You want to see only the first lines of a text file, for that is the head command.</span><br /><br /><span style="font-family: &quot;Courier New&quot;,Courier,monospace;">$ head messages.log</span><br /><br /><span style="font-family: Verdana,sans-serif;">And if you want to see the line number of a file, use the cat with the -n argument like:</span><br /><span style="font-family: &quot;Courier New&quot;,Courier,monospace;">$ cat -n file1.txt</span><br /><br /><span style="font-family: Verdana,sans-serif;">Everything together:</span><span style="font-family: &quot;Courier New&quot;,Courier,monospace;">&nbsp;</span><br /><span style="font-family: &quot;Courier New&quot;,Courier,monospace;">$ zcat messages.gz | head | cat -n</span><div style="clear: both;"></div>
 <b>Published: Friday, September 25, 2009</b>
 

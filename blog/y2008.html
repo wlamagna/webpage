@@ -8,7 +8,7 @@
 window.parent.document.title = "Year 2008";
 </script>
 <div id="section">
-<p id="postTitle">usrlib64 file not recognized Is a directory</p>
+<p id="postTitle"><a href="usrlib64%20file%20not%20recognized%20Is%20a%20directory.html" id="alink">usrlib64 file not recognized Is a directory</a></p>
  I have seen this error several times when compiling and the solution is always the same:<br /><br />Edit the Makefile and replace:<br /><span style="font-family: courier new;">LDFLAGS = -L /usr/lib64</span><br />for:<br /><span style="font-family: courier new;">LDFLAGS = -L/usr/lib64</span><br />(remove the space between the -L and /usr/lib64) <div style="clear: both;"></div>
 <b>Published: Saturday, December 13, 2008</b>
 
@@ -16,15 +16,7 @@ window.parent.document.title = "Year 2008";
 
 <hr>
 <div id="section">
-<p id="postTitle">Error starting snmp on Centos.</p>
-<span style="font-size:85%;"><span style="font-family:arial;">/usr/sbin/snmpd: symbol lookup error: /usr/sbin/snmpd: undefined symbol: smux_snmp_select_list_get_length</span><br /></span><br /><span style="font-family:courier new;">Resolution:</span><br /><span style="font-weight: bold;font-family:courier new;">yum update net-snmp-libs</span><div style="clear: both;"></div>
-<b>Published: Friday, December 12, 2008</b>
-
-</div>
-
-<hr>
-<div id="section">
-<p id="postTitle">Error with PHP and Mysql</p>
+<p id="postTitle"><a href="Error%20with%20PHP%20and%20Mysql.html" id="alink">Error with PHP and Mysql</a></p>
 <span style="font-size:85%;"><span style="font-family:courier new;">skipping incompatible /usr/lib/mysql/libmysqlclient.so when searching for -lmysqlclient<br /><br /><span style="font-weight: bold;font-family:arial;">Seems that this errors come because of incompatibility between i386 and x64.</span><br /><span style="font-weight: bold;font-family:arial;"></span><br /># cd /usr/lib/mysql<br /># ln -s ../../lib64/mysql/libmysqlclient.so<br /><br /><span style="font-weight: bold;font-family:arial;">If this do not works, you can patch the Makefile to use the x64 version of the</span><br /><span style="font-weight: bold;font-family:arial;">libraries instead of the x32:</span><br /><br /># sed -i -e &#39;s@-L/usr/lib/mysql@-L/usr/lib64/mysql@g&#39; Makefile<br /><br /><br /></span></span><div style="clear: both;"></div>
 <b>Published: Friday, December 12, 2008</b>
 
@@ -32,7 +24,15 @@ window.parent.document.title = "Year 2008";
 
 <hr>
 <div id="section">
-<p id="postTitle">The Linux Knowledge Base and Tutorial</p>
+<p id="postTitle"><a href="Error%20starting%20snmp%20on%20Centos..html" id="alink">Error starting snmp on Centos.</a></p>
+<span style="font-size:85%;"><span style="font-family:arial;">/usr/sbin/snmpd: symbol lookup error: /usr/sbin/snmpd: undefined symbol: smux_snmp_select_list_get_length</span><br /></span><br /><span style="font-family:courier new;">Resolution:</span><br /><span style="font-weight: bold;font-family:courier new;">yum update net-snmp-libs</span><div style="clear: both;"></div>
+<b>Published: Friday, December 12, 2008</b>
+
+</div>
+
+<hr>
+<div id="section">
+<p id="postTitle"><a href="The%20Linux%20Knowledge%20Base%20and%20Tutorial.html" id="alink">The Linux Knowledge Base and Tutorial</a></p>
  Looking for an in-depth and easy-to-understand introduction to Linux? Then look no further!<br />We don&#39;t just show you how to execute a handful of commands and use a few utilities. The Linux Tutorial goes beyond the basics, providing you with the knowledge necessary to get the most out of your Linux system.<br /><br />[...] Keep reading in: <a href="#">Linux Knowledge Base and Tutorial</a><div style="clear: both;"></div>
 <b>Published: Monday, August 25, 2008</b>
 
@@ -40,7 +40,7 @@ window.parent.document.title = "Year 2008";
 
 <hr>
 <div id="section">
-<p id="postTitle">100 Tips and Tools to Set Up Your Own Home LAMP Server</p>
+<p id="postTitle"><a href="100%20Tips%20and%20Tools%20to%20Set%20Up%20Your%20Own%20Home%20LAMP%20Server.html" id="alink">100 Tips and Tools to Set Up Your Own Home LAMP Server</a></p>
  LAMP (Linux, Apache, MySQL and PHP) servers are very popular for their ease of use and flexibility. They&rsquo;re also easy to initiate, because the components are easy to aquire and there&rsquo;s a lot of documentation available to help with getting started. Read on to find some of the best resources available for creating your own home LAMP server, from installation to maintenance.<br />[...]<br />Keep reading in:<br /><a href="#" target="_new"> 100 Tips and Tools to Set Up Your Own Home LAMP Server</a><div style="clear: both;"></div>
 <b>Published: Friday, August 22, 2008</b>
 
@@ -48,7 +48,7 @@ window.parent.document.title = "Year 2008";
 
 <hr>
 <div id="section">
-<p id="postTitle">Recover etcfstab file</p>
+<p id="postTitle"><a href="Recover%20etcfstab%20file.html" id="alink">Recover etcfstab file</a></p>
  If you have deleted the /etc/fstab file it is possible to recover it in the following way:<br /><br /><span style="font-family: courier new;font-size:85%;">cat /proc/mounts &gt; /etc/fstab<br />chmod 644 /etc/fstab<br /></span><br />The &quot;proc&quot; filesystem, which is /proc/mounts, is used to handle sytem configuration parameters, it is a virtual filesystem. <div style="clear: both;"></div>
 <b>Published: Tuesday, August 19, 2008</b>
 
@@ -56,7 +56,7 @@ window.parent.document.title = "Year 2008";
 
 <hr>
 <div id="section">
-<p id="postTitle">Managing links in Linux</p>
+<p id="postTitle"><a href="Managing%20links%20in%20Linux.html" id="alink">Managing links in Linux</a></p>
  Hard and Symbolic links are the two types of files that exist in a Unix Operating System to point to another file. <p><span style="text-decoration: underline;"><strong>Hard Links</strong></span>: They are a pointer that is exactly as the same than the file it points to, no mather if it has a different name, any modification done to the pointer are also done to the target file. The hard links can only point to other files, but not directories (though directories are a special kind of files). And the other main difference with Symbolic Links is that hard links MUST reside in the same filesystem than the file they point to, because they have the same inode number.<p><span style="text-decoration: underline;"><strong>Symbolic liks</strong></span>: The are a pointer to another file but they contain the name of the file they point to, it can span filesystems (they have a different inode number), and they can point to files or direcoties. Creating Hard and Symbolic Links:<br />ln -fs &lt;source&gt; [&lt;target&gt;]<br /><br />By default ln (without arguments) it creates hard links.<br /><span style="font-size:85%;">-f, --force : Remove existing destination files.<br />-s, --symbolic : Make symbolic links instead of hard links.</span><div style="clear: both;"></div>
 <b>Published: Monday, August 18, 2008</b>
 
@@ -64,15 +64,7 @@ window.parent.document.title = "Year 2008";
 
 <hr>
 <div id="section">
-<p id="postTitle">A strong Unix Password</p>
- The strong of a cryptographic solution is not recommended to be into the obscurity of the algorithm, the most usefull and most hard to vulnere solutions are public algorithms, which everybody can see, for example PKI, CAST, PGP, all them are public.<br />So.. the obvious hard point of a security system is a strong password, they part of the mechanism that no other knows. The password could be interpreted as something you know, you have, something that uniquely identifies you or a combination of these.<br /><br />But taking in consideration just a password (something you know) i would like to share some best practices in Linux.<br /><br /><span style="font-weight: bold; color: rgb(51, 51, 255);">DON&#39;T DO THIS</span><br /><br /><ul><li>A password of less than 8 characters is easily breaked by brute force attack. You can set the PASS_MIN_LENGTH in /etc/login.defs file to force long enough passwords.</ul><ul><li>Don&#39;t use words that can be found in a dictionary or encyclopedy of any existing language, a good technique would be to input the password in &quot;google&quot; and see if something was found :-)</ul><ul><li>Don&#39;t use any personal detail (phone, ages, names, etc).</ul><ul><li>Any combination of these.</ul><br /><span style="font-weight: bold; color: rgb(51, 51, 255);">THESE METHODS ARE MORE EFFECTIVE:</span><br /><br /><ul><li>Replace letters with numbers, for example &quot;3&quot; for &quot;e&quot;, &quot;4&quot; for &quot;A&quot;, &quot;7&quot; for &quot;T&quot;.</ul><ul><li>Create a mnemonic from a phrase only you know, for example &quot;i like linux and security&quot; would be converted in &quot;illas&quot;, add some numbers and your password would be secure, remember to use a larger than 8 digits password.</ul><ul><li>Mix uppercase and lowercase letters</ul><ul><li>Use special characters: &quot;-&quot;, &quot;!&quot;, &quot;:&quot;, &quot;@&quot;.</ul><br />In Linux or Solaris it is possible to create secure passwords with the &quot;mkpasswd&quot; utility.<br /><br /><span style="font-family: courier new;"># mkpasswd -l 20</span><br /><span style="font-family: courier new;">jnXbrScbzbtnwqg99hho</span><div style="clear: both;"></div>
-<b>Published: Monday, June 30, 2008</b>
-
-</div>
-
-<hr>
-<div id="section">
-<p id="postTitle">Using wget behind a proxy in Linux</p>
+<p id="postTitle"><a href="Using%20wget%20behind%20a%20proxy%20in%20Linux.html" id="alink">Using wget behind a proxy in Linux</a></p>
  If you are behind a proxy and would like to download a file, you could do this by issuing this commands:<br /><br />export http_proxy=proxy.anonymous.com:8080<br />export use_proxy=on<br />wget http://www.serversolaris.com/Crypt-SSLeay.tgz <div style="clear: both;"></div>
 <b>Published: Monday, June 30, 2008</b>
 
@@ -80,7 +72,15 @@ window.parent.document.title = "Year 2008";
 
 <hr>
 <div id="section">
-<p id="postTitle">Forcing logrotation with logrotate</p>
+<p id="postTitle"><a href="A%20strong%20Unix%20Password.html" id="alink">A strong Unix Password</a></p>
+ The strong of a cryptographic solution is not recommended to be into the obscurity of the algorithm, the most usefull and most hard to vulnere solutions are public algorithms, which everybody can see, for example PKI, CAST, PGP, all them are public.<br />So.. the obvious hard point of a security system is a strong password, they part of the mechanism that no other knows. The password could be interpreted as something you know, you have, something that uniquely identifies you or a combination of these.<br /><br />But taking in consideration just a password (something you know) i would like to share some best practices in Linux.<br /><br /><span style="font-weight: bold; color: rgb(51, 51, 255);">DON&#39;T DO THIS</span><br /><br /><ul><li>A password of less than 8 characters is easily breaked by brute force attack. You can set the PASS_MIN_LENGTH in /etc/login.defs file to force long enough passwords.</ul><ul><li>Don&#39;t use words that can be found in a dictionary or encyclopedy of any existing language, a good technique would be to input the password in &quot;google&quot; and see if something was found :-)</ul><ul><li>Don&#39;t use any personal detail (phone, ages, names, etc).</ul><ul><li>Any combination of these.</ul><br /><span style="font-weight: bold; color: rgb(51, 51, 255);">THESE METHODS ARE MORE EFFECTIVE:</span><br /><br /><ul><li>Replace letters with numbers, for example &quot;3&quot; for &quot;e&quot;, &quot;4&quot; for &quot;A&quot;, &quot;7&quot; for &quot;T&quot;.</ul><ul><li>Create a mnemonic from a phrase only you know, for example &quot;i like linux and security&quot; would be converted in &quot;illas&quot;, add some numbers and your password would be secure, remember to use a larger than 8 digits password.</ul><ul><li>Mix uppercase and lowercase letters</ul><ul><li>Use special characters: &quot;-&quot;, &quot;!&quot;, &quot;:&quot;, &quot;@&quot;.</ul><br />In Linux or Solaris it is possible to create secure passwords with the &quot;mkpasswd&quot; utility.<br /><br /><span style="font-family: courier new;"># mkpasswd -l 20</span><br /><span style="font-family: courier new;">jnXbrScbzbtnwqg99hho</span><div style="clear: both;"></div>
+<b>Published: Monday, June 30, 2008</b>
+
+</div>
+
+<hr>
+<div id="section">
+<p id="postTitle"><a href="Forcing%20logrotation%20with%20logrotate.html" id="alink">Forcing logrotation with logrotate</a></p>
  In my previous post i explained how to setup a simple logrotation (<a href="#">http://serverlinux.blogspot.com/2006/02/logrotate-in-linux.html</a>), now i would like to show a simple but usefull command that forces the logrotation, independent of the normal execution.<br /><br /># logrotate -f /etc/logrotate.conf<br /><br />For more information, see &quot;man logrotate&quot;. LOGROTATE(8). <div style="clear: both;"></div>
 <b>Published: Tuesday, June 24, 2008</b>
 
@@ -88,7 +88,7 @@ window.parent.document.title = "Year 2008";
 
 <hr>
 <div id="section">
-<p id="postTitle">10 most important Unix Security issues</p>
+<p id="postTitle"><a href="10%20most%20important%20Unix%20Security%20issues.html" id="alink">10 most important Unix Security issues</a></p>
  A good place for security education is the SANS/FBI site (<i class="emphasis"><a class="url" href="#" target="_top">http://www.sans.org/top20/</a><span class="url">). These are the most important Unix related security issues:<br /><span style="font-size:100%;"><br /></span><span style="font-size:100%;"><span style="font-family:arial;">1. Web Server. One of the places that an intruder is going to check first is for vulnerabilities in your Apache version and in you cgi-scripts.</span><br /><br /><span style="font-family:arial;">2. Remote Procedure Calls. RPC Services should be down if they are not required, they allow a remote user to execute instructions in your computer; the intruder usualy gains root access this way.</span><br /><br /></span></span></i><span style="font-size:100%;"><i class="emphasis" style="font-family:arial;"><span class="url">3. SNMP (Simple Network Management Protocol). This protocol is known to have had its vulnerabilities and their password can be easily cracked and more easier captured from the network.<br /><br /></span></i></span><i class="emphasis"><span class="url"><span style="font-size:100%;"><span style="font-family:arial;">4. SSH (Secure Shell). SSH has been exploited before, if you do not need it then you can turn it off, or filter the source ip addresses with </span><a href="#" style="font-family: arial;">TCP Wrapper</a><span style="font-family:arial;">.</span><br /><br /><span style="font-family:arial;">5. Remote Services (Trusted host). This was a setup in the machines based on the rely of other machines IP address, and leaved access without asking password. Their binaries are &quot;rsh&quot;, &quot;rcp&quot;, &quot;rlogin&quot; and &quot;rexec&quot;. They exist and can be used also today, the attacked can do a party with your machine if they use a technique known as &quot;ip spoofing&quot;.</span><br /><br /><span style="font-family:arial;">6. FTP (File Transfer Protocol). Many vulnerabilities have been found in FTP, as exploits and protocol weaknesses, like clear text password transfer (resolved in SFTP).</span><br /><br /><span style="font-family:arial;">7. LPD (Line Printer Daemon). This daemon is also remotely exploitable with help of an overflow and a shellcode, gaining root access if the server is running as root.</span><br /><br /><span style="font-family:arial;">8. BIND/DNS (Dynamic Name Server). DNS Flooding, exploits and other attacks are available, if you are going to set up a DNS, use a firewall to filter any port that you do not want.</span><br /><br /><span style="font-family:arial;">9. Sendmail. This mail transfer agent is known for its buffer overflows and remote exploits, though it has resolved its issues, always appears something new. It is recommended to use qmail.</span><br /><br /><span style="font-family:arial;">10. Weak Password / No Passwords in the system. I do not need to explain this.</span><br /></span><br />Many people that talk about security talk about a false sense of security that one can have in the cyberspace, i do not totaly agree with them, i see very often thay it is created a false sense of insecurity also. The items i have listed before create some sense of insecurity and alert; but do not worry, if you are going to run one of this critical services, just keep in mind:<br /><span style="font-weight: bold;font-size:100%;"><br /><span style="font-family:arial;">* Use a <span style="font-size:130%;"><span style="color: rgb(255, 0, 0);">well configured</span></span> firewall (pay more attention to &quot;well configured&quot; than &quot;firewall&quot;)</span><br /><span style="font-family:arial;">* Set up <span style="color: rgb(255, 0, 0);font-size:130%;">correctly</span> an Intrusion Detection and Prevention System.</span><br /><span style="font-family:arial;">* Ask for help a security professional, here in Argentina we have very good ones :-)</span></span><br /></span></i><div style="clear: both;"></div>
 <b>Published: Monday, June 23, 2008</b>
 
@@ -96,7 +96,7 @@ window.parent.document.title = "Year 2008";
 
 <hr>
 <div id="section">
-<p id="postTitle">Find out the php.ini location in your LAMP setup</p>
+<p id="postTitle"><a href="Find%20out%20the%20php.ini%20location%20in%20your%20LAMP%20setup.html" id="alink">Find out the php.ini location in your LAMP setup</a></p>
  In the command line write:<br /><br />echo &quot;&lt;?php phpinfo(); ?&gt;&quot; | php | grep php.ini <div style="clear: both;"></div>
 <b>Published: Saturday, June 21, 2008</b>
 
@@ -104,7 +104,7 @@ window.parent.document.title = "Year 2008";
 
 <hr>
 <div id="section">
-<p id="postTitle">How to enable shadow passwords in Linux</p>
+<p id="postTitle"><a href="How%20to%20enable%20shadow%20passwords%20in%20Linux.html" id="alink">How to enable shadow passwords in Linux</a></p>
  It is important that you use shadow passwords, because this puts another layer of security against password cracking and also enable the possibility to set policies about how often the password must be modified.<br /><br />Using the Linux <a href="#">Shadow Suite</a><br />I am going to show you the &quot;<span style="font-family:courier new;">chage</span>&quot; command, it changes the number of days between password changes and the date of the last password change.<br /><br /><span style="font-size:85%;"><span style="font-family:courier new;">chage [-m mindays] [-M maxdays] [-d lastday] [-I inactive] [-E expiredate] [-W warndays] user</span></span><br /><br />It is not recommended to modify the /etc/passwd or /etc/shadow file because this could result in the corruption if at the same time another process writes the files. To modify the /etc/passwd file, use the <a href="#">vipw</a> command:<br /><br />Vipw edits the password file after setting the appropriate locks, and does any necessary processing after the password file is unlocked. If the password file is already locked for editing by another user, vipw will ask you to try again later. The default editor for vipw is vi(1).<br /><br />To list the users password expiration settins:<br /><br /><span style="font-size:85%;"><span style="font-family:courier new;"> $ chage -l walter</span><br /><span style="font-family:courier new;"> Minimum: 0</span><br /><span style="font-family:courier new;"> Maximum: 99999</span><br /><span style="font-family:courier new;"> Warning: 6</span><br /><span style="font-family:courier new;"> Inactive: -1</span><br /><span style="font-family:courier new;"> Last Change: Apr 09, 2004</span><br /><span style="font-family:courier new;"> Password Expires: Never</span><br /><span style="font-family:courier new;"> Password Inactive: Never</span><br /><span style="font-family:courier new;"> Account Expires: Never</span></span><br /><br /><span style="font-weight: bold;">Suggestions:</span><br /><br /><span style="font-family:arial;">* Set the minimum password lenght to eight characters.</span><br /><span style="font-family:arial;"> * Force the users to change their passwords every four to six weeks.</span><div style="clear: both;"></div>
 <b>Published: Friday, June 20, 2008</b>
 
@@ -112,7 +112,7 @@ window.parent.document.title = "Year 2008";
 
 <hr>
 <div id="section">
-<p id="postTitle">Creating a complete LAMP solution in Centos Linux</p>
+<p id="postTitle"><a href="Creating%20a%20complete%20LAMP%20solution%20in%20Centos%20Linux.html" id="alink">Creating a complete LAMP solution in Centos Linux</a></p>
 Download Apache: httpd-2.2.9.tgz<br />
 Download PHP: php-5.2.6.tgz<br /><br />
 Uncompress and compile Apache:<br />
@@ -162,7 +162,7 @@ Now configure PHP with jpeg and postgresql support:
 
 <hr>
 <div id="section">
-<p id="postTitle">Analysing logs in Linux</p>
+<p id="postTitle"><a href="Analysing%20logs%20in%20Linux.html" id="alink">Analysing logs in Linux</a></p>
  Part of the security and sysadmins tasks is the log analysis and decision taking. There is plenty of information in <a href="#">http://www.linux.org/apps/all/Administration/Log_Analyzers.html</a>.<br /><br />The tools i recommend is called &quot;Lire&quot;, this tool permits the creation of several reporting formats, including html, pdf, xml, <a href="#">between others</a>. It also permits to analyze many log file formats, which include MySQL, Iptables, BIND, Apache, Qmail, Postfix, Syslog <a href="#">and more</a>. Lire is GPL&#39;ed Free Software (and Open Source), built around the idea of extendibility.<br /><br />This tool is available from http://www.logreport.org/lire, it has been deveploped in Perl and i recommend you to install all the dependence modules with CPAN (type &quot;perl -M CPAN -e shell&quot; on the command line as root). <div style="clear: both;"></div>
 <b>Published: Monday, June 16, 2008</b>
 
@@ -170,7 +170,7 @@ Now configure PHP with jpeg and postgresql support:
 
 <hr>
 <div id="section">
-<p id="postTitle">Logging on a remote server with syslog</p>
+<p id="postTitle"><a href="Logging%20on%20a%20remote%20server%20with%20syslog.html" id="alink">Logging on a remote server with syslog</a></p>
  Hi, it is a good security feature to log in a remote host, because an attacker should have access to that host to delete the logs, and this adds another security layer to the architecture you build.<br /><br />Linux logging facilities are managed mostly by the syslog Daemon. Syslog uses the configuration file <span style="font-family:courier new;">/etc/syslog.conf</span> to know where to log every system message.<br /><br />If you want to log in a remote host, you would add this line to <span style="font-family: courier new;">syslog.conf</span><br /><br /><span style="font-family:courier new;"> auth.*; authpriv.* @192.168.100.7</span><br /><br />It is required that the syslog daemon is started in the 192.168.100.7 host and it should also, be listening for messages thay come from the network. It is important that you know that this feature is by default &quot;off&quot;. You have to start syslog with a &quot;-r&quot; argument to enable this.<br /><br />To force syslog to re-read syslog.conf, send a SIGHUP signal to syslog.<br /><br />Happy logging ! <div style="clear: both;"></div>
 <b>Published: Sunday, June 15, 2008</b>
 
@@ -178,7 +178,7 @@ Now configure PHP with jpeg and postgresql support:
 
 <hr>
 <div id="section">
-<p id="postTitle">Loading modules in RHEL 3.0 and prior Linux versions</p>
+<p id="postTitle"><a href="Loading%20modules%20in%20RHEL%203.0%20and%20prior%20Linux%20versions.html" id="alink">Loading modules in RHEL 3.0 and prior Linux versions</a></p>
  In RHEL 3.0 when you install a new module you may be tempted to put them in the file modules.conf. This may not work, because the modules are not in the initrd boot image.<br /><br />The solution is to create a new file called /etc/rc.modules which loads the modules, this file do not exist by default, but if you see the file /etc/rc.d/rc.sysinit there you are going to see that it checks for the existence of the file, and if it exists, it executes it:<br /><br /><span style="font-family: courier new;"># Load modules (for backward compatibility with VARs)</span><br /><span style="font-family: courier new;">if [ -f /etc/rc.modules ]; then</span><br /><span style="font-family: courier new;"> /etc/rc.modules</span><br /><span style="font-family: courier new;">fi</span><br /><br />This is the procedure to create the file:<br /><br /><span style="font-family:courier new;">echo &quot;modprobe qla2300&quot; &gt;&gt; /etc/rc.modules</span><br /><span style="font-family:courier new;">echo &quot;modprobe qla2300_conf&quot; &gt;&gt; /etc/rc.modules</span><br /><span style="font-family:courier new;">chmod 700 /etc/rc.modules</span><div style="clear: both;"></div>
 <b>Published: Saturday, June 14, 2008</b>
 
@@ -186,7 +186,7 @@ Now configure PHP with jpeg and postgresql support:
 
 <hr>
 <div id="section">
-<p id="postTitle">Infinite loops with shell scripting</p>
+<p id="postTitle"><a href="Infinite%20loops%20with%20shell%20scripting.html" id="alink">Infinite loops with shell scripting</a></p>
  This way one can create useful infinite loops:<br /><br />while [ 1 ]; do echo &quot;1&quot;; done<br /><br />for ((;;)); do echo $RANDOM; sleep 1; done<br /><br />The $RANDOM variable has a random number. <div style="clear: both;"></div>
 <b>Published: Monday, March 31, 2008</b>
 
@@ -194,7 +194,7 @@ Now configure PHP with jpeg and postgresql support:
 
 <hr>
 <div id="section">
-<p id="postTitle">Installing FluxBox on RHEL or Fedora</p>
+<p id="postTitle"><a href="Installing%20FluxBox%20on%20RHEL%20or%20Fedora.html" id="alink">Installing FluxBox on RHEL or Fedora</a></p>
  Fluxbox is a lightweight desktop for linux, i want to test it.<br /><br />First, download Fluxbox.<br /><span style=";font-family:courier new;font-size:85%;">wget http://newrpms.sunsite.dk/apt/redhat/en/i386/fc3/RPMS.newrpms/fluxbox-0.9.13-1.rhfc3.nr.i386.rpm<br /></span><br />If while installing it, you get this errors:<br />Error: Missing Dependency: libImlib2.so.1 is needed by package fluxbox<br />Error: Missing Dependency: pyxdg is needed by package fluxbox<br /><br />Get the required packages:<br /><span style=";font-family:courier new;font-size:85%;">wget http://hany.sk/mirror/fedora/releases/8/Everything/x86_64/os/Packages/imlib2-1.4.0-3.fc8.i386.rpm<br />yum install imlib2-1.4.0-3.fc8.i386.rpm</span><br /><span style=";font-family:courier new;font-size:85%;">wget ftp://ftp.univie.ac.at/systems/linux/dag/redhat/el5/en/x86_64/RPMS.dag/python-xdg-0.15-1.el5.rf.noarch.rpm</span><br /><span style=";font-family:courier new;font-size:85%;">yum install python-xdg-0.15-1.el5.rf.noarch.rpm</span><br /><br />Now install fluxbox:<br /><span style=";font-family:courier new;font-size:85%;">yum install fluxbox-0.9.13-1.rhfc3.nr.i386.rpm<br /><br />You also need Xorg:<br />yum install xorg-x11-xinit<br />yum install xorg-x11-server-Xorg<br />yum install sytem-config-display<br /><br />And dont forget to install all the fonts, else you wouldnt see anything<br />yum install xorg-x11-fonts*<br /><br /></span><div style="clear: both;"></div>
 <b>Published: Saturday, February 09, 2008</b>
 
@@ -202,7 +202,7 @@ Now configure PHP with jpeg and postgresql support:
 
 <hr>
 <div id="section">
-<p id="postTitle">Error No Package Matching glibc.x86_64</p>
+<p id="postTitle"><a href="Error%20No%20Package%20Matching%20glibc.x86_64.html" id="alink">Error No Package Matching glibc.x86_64</a></p>
  In Centos 5.1 and Fedora is a bug reported here:<br />https://bugzilla.redhat.com/show_bug.cgi?id=228430<br /><br />The work arround is this:<br />vi /etc/yum.repos.d/CentOS-Base.repo<br /><br />Add this repository:<br /><span style="font-size:85%;"><span style="font-family: courier new;">[c5-base32]</span><br /><span style="font-family: courier new;">name=CentOS-5</span><br /><span style="font-family: courier new;">mirrorlist=http://mirrorlist.centos.org/?release=5&amp;arch=$i386&amp;repo=os</span><br /><span style="font-family: courier new;">gpgcheck=0</span><br /><span style="font-family: courier new;">enabled=0</span><br /><span style="font-family: courier new;">gpgkey=http://mirror.centos.org/centos/RPM-GPG-KEY-centos5</span></span><br /><br /><br />And then:<br /><span style="font-size:85%;"><span style="font-family: courier new;">yum install glibc glibc.i386 --enablerepo=c532*</span></span><div style="clear: both;"></div>
 <b>Published: Saturday, February 09, 2008</b>
 
@@ -210,7 +210,7 @@ Now configure PHP with jpeg and postgresql support:
 
 <hr>
 <div id="section">
-<p id="postTitle">Installing Asterisk PBX on Redhat Centos 5</p>
+<p id="postTitle"><a href="Installing%20Asterisk%20PBX%20on%20Redhat%20Centos%205.html" id="alink">Installing Asterisk PBX on Redhat Centos 5</a></p>
  This was easy and fast:<br /><span style="font-family: courier new;"># mkdir asterisk</span><br /><span style="font-family: courier new;"># cd asterisk</span><br /><span style="font-family: courier new;"># wget http://redhat.theplanet.com/asterisk/asterisk-1.4.10.1.tar.gz</span><br /><span style="font-family: courier new;"># tar xzvf asterisk-1.4.10.1.tar.gz </span><br /><span style="font-family: courier new;"># cd asterisk-1.4.10.1/</span><br /><span style="font-family: courier new;">#./configure</span><br /><span style="font-family: courier new;"># make</span><br /><span style="font-family: courier new;"># make install</span><br /><span style="font-family: courier new;"># make samples</span><div style="clear: both;"></div>
 <b>Published: Thursday, January 31, 2008</b>
 
@@ -218,7 +218,7 @@ Now configure PHP with jpeg and postgresql support:
 
 <hr>
 <div id="section">
-<p id="postTitle">How to reinstall a package with Yum (RedhatFedora)</p>
+<p id="postTitle"><a href="How%20to%20reinstall%20a%20package%20with%20Yum%20%28RedhatFedora%29.html" id="alink">How to reinstall a package with Yum (RedhatFedora)</a></p>
  Yum does not has a feature to reinstall a package, though, there is a little walk arround:<br /><br /><span style="font-family:courier new;">[root@mutant build]# rpm -e --justdb --nodeps [package name]</span><br /><span style="font-family:courier new;">[root@mutant build]# yum install [package name]<br /></span><div style="clear: both;"></div>
 <b>Published: Thursday, January 31, 2008</b>
 
@@ -226,7 +226,7 @@ Now configure PHP with jpeg and postgresql support:
 
 <hr>
 <div id="section">
-<p id="postTitle">Resizing a partition in linux with parted</p>
+<p id="postTitle"><a href="Resizing%20a%20partition%20in%20linux%20with%20parted.html" id="alink">Resizing a partition in linux with parted</a></p>
  To resize an ext3 partition comes handy LVM, but i will explain how i did it without. I did this in a Fedora 6, booting with a Fedora 7 or Knoppix disk and entering into rescue mode, sorry but i can not take any resposibility if something goes wrong while following this procedures&gt;<br /><br />After getting the prompt in Fedora 7 or any other distro in rescue mode, unmount all the partitions of the filesystem you want to resize, in my case it is the disk /dev/sda, but it could be /dev/hda<br /><br />Fedora 7 rescue disk has parted installed and i get , so we are going to use it.<br /><span style="font-weight: bold;">#umount /dev/{sda1,sda2,sda3}</span><br /><span style="font-weight: bold;"></span>Check the Filesystem to resize, i am going to shrink sda2 first<br /><span style="font-weight: bold;">#e2fsck -f /dev/sda2</span><br /><span>Resizing the partition:</span><span style="font-weight: bold;"><br />#resize2fs -p /dev/sda2 2600M<br /></span>The <i>size</i> parameter may be suffixed by one of the following the units designators: &#39;s&#39;, &#39;K&#39;, &#39;M&#39;, or &#39;G&#39;, for 512 byte sectors, kilobytes, megabytes, or gigabytes, respectively. The -p argument is to display a nice status bar.<br />The message on screen is:<br /><span style="font-weight: bold;">Resizing the filesystem on /dev/sda2 to 665600 (4k) blocks</span><br />So i do the calculation of how many bytes this is to use it later in fdisk:<br />665600 blocks * 4k = 2662400 Bytes.<br />My partition had 4 G before, now, after resizing, the partition will still have 4G, but &quot;resize2fs&quot; has prepared for a technical surgical procedure ;-) we are going to delete the partition and recreate it<br /><br />I entered fdisk and deleted the /dev/sda2 partition, then i recreated it with the same starting cylinder and +2662400K as size (this is imperative and may loose all your information if you do not do this right, again, i take no responsability, the results may depend on filesystems). Then i wrote the partition with &quot;w&quot; and went back to the shell.<br /><br />Now i execute again:<br /><span style="font-weight: bold;">#resize2fs -p /dev/sda2 2600M<br /></span><span>And this command to recreate some information of the partition table.</span><span style="font-weight: bold;"><br /></span><span style="font-weight: bold;">#e2fsck -f /dev/sda2<br /></span>Time to reboot and see if all is ok, yes it is all fine and the partition has now 2662400 K.<br /><br />Now it is time to resize the next partition, /dev/sda3, to take the space left by /dev/sda2, another surgical procedure is required.<br /><br />Enter the rescue mode again, umount the partitions that are going to be resized and lets delete /dev/sda4 to begin at the end of /dev/sda2, this is done with &quot;fdisk&quot;.<br />From the resize2fs man page:<br /><span style="color: rgb(0, 153, 0);">If you wish to shrink an ext2 </span><span class="highlight2" style="color: rgb(0, 153, 0);">partition</span><span style="color: rgb(0, 153, 0);">, first use </span><b style="color: rgb(0, 153, 0);"><span class="highlight0">resize2fs</span></b><span style="color: rgb(0, 153, 0);"> to shrink the size of filesystem. Then you may use </span><i style="color: rgb(0, 153, 0);"><b>fdisk</b>(8)</i><span style="color: rgb(0, 153, 0);"> to shrink the size of the </span><span class="highlight2" style="color: rgb(0, 153, 0);">partition</span><span style="color: rgb(0, 153, 0);">. When shrinking the size of the </span><span class="highlight2" style="color: rgb(0, 153, 0);">partition</span><span style="color: rgb(0, 153, 0);">, make sure you do not make it smaller than the new size of the ext2 filesystem!<br /><br /></span>My partition distribution looks like this now:<br /><span style="font-family: courier new;"> start end</span><br /><span style="font-family: courier new;">/dev/sda1 1 13</span><br /><span style="font-family: courier new;">/dev/sda2 14 345</span><br /><span style="font-family: courier new;">/dev/sda3 1012 1043</span><br /><span style="font-family: courier new;">/dev/sda4 744 1011</span><br /><br /><span style="font-family: courier new;"> Start - End</span><br /><span style="font-family: courier new;">1 - 32,3 kb - 107 MB</span><br /><span style="font-family: courier new;">2 - 107 MB - 2838 MB</span><br /><span style="font-family: courier new;">4 - 6111 MB - 8316 MB</span><br /><span style="font-family: courier new;">3 - 8316 MB - 8579 MB</span><br /><br />The beginning of /dev/sda4 should be 346, so i used parted to move the partition. Be careful, it is not possible to delete the partition and recreate it with fdisk (well, it is possible but it would corrupt the partition because the partition table would be in the middle of the disk).<br /><br /><span style="font-weight: bold;">#parted</span><br /><span style="font-weight: bold;">(parted) move</span><br /><span style="font-weight: bold;">Start? 3000MB</span><br /><span style="font-weight: bold;">End? 5204MB</span><br />Something curious happened here, i had to specify &quot;MB&quot; at the end of the numbers, else it gave me an error about &quot;Can&#39;t have overlapping partitions&quot; <div style="clear: both;"></div>
 <b>Published: Sunday, January 06, 2008</b>
 
@@ -234,7 +234,7 @@ Now configure PHP with jpeg and postgresql support:
 
 <hr>
 <div id="section">
-<p id="postTitle">First notes about Minix Source code.</p>
+<p id="postTitle"><a href="First%20notes%20about%20Minix%20Source%20code..html" id="alink">First notes about Minix Source code.</a></p>
  I hope not to loose the path with this post, it is about Minix Source code which i am studying for curiosity, but would also be applicable to Linux kernel source code. It is about some conventions used while coding header files in C.<br /><br />In some headers i find this:<br /><span style="font-size:100%;">PUBLIC char *t_stack[TOT_STACK_SPACE / sizeof(char *)];<br />PRIVATE int mini_send() {...};<br />EXTERN struct proc proc[NR_TASKS + NR_PROCS];</span><br /><br />These words are not from C, they are macros declared in a header src/include/minix/const.h file, like this:<br /><span style="font-size:100%;"><span style="font-family: arial;">#define EXTERN extern /* used in *.h files */</span><br /><span style="font-family: arial;">#define PRIVATE static /* PRIVATE x limits the scope of x */</span><br /><span style="font-family: arial;">#define PUBLIC /* PUBLIC is the opposite of PRIVATE */</span></span><br /><br /><span style="font-weight: bold;">The extern keyword</span><br />C permits to link together various modules already compiled, for better management possibilities and time reduction in big projects. The global variables have to be declared just one time. So, a solution is to declare all the global variables in one of the files, and in the other files where this variable is required, use the &quot;extern&quot; declaration. The &quot;extern&quot; work gives the compiler the information to know the types and names of the global variables, without creating a new storage.<br /><br /><span style="font-weight: bold;">The static keyword</span><br />The static variables have different effects when they are local or global.<br /><span style="font-weight: bold; font-style: italic;">Static local variables:</span><br />When the static modifier is applied to a local variable, the compiler creates a permanent storage for it. The difference between a local static variable and a global one, is that the local static variable is only known in the block in which it is declared. It is a variable that whoes value remains between the function calls.<br />Example:<br />adding (void ) {<br /> static int age;<br /> age = age + 1;<br /> return age;<br />}<br /><br />The variable age keeps existing between calls to the function, which returns always a new number.<br /><span style="font-weight: bold; font-style: italic;">Static global variables</span><br />This variables are only known in the file where they where declared, this means that though the variable is global, the other files are not going to see it, nor modify its content directly. <div style="clear: both;"></div>
 <b>Published: Friday, January 04, 2008</b>
 
@@ -242,7 +242,7 @@ Now configure PHP with jpeg and postgresql support:
 
 <hr>
 <div id="section">
-<p id="postTitle">What is and how to setup SUDO in Linux</p>
+<p id="postTitle"><a href="What%20is%20and%20how%20to%20setup%20SUDO%20in%20Linux.html" id="alink">What is and how to setup SUDO in Linux</a></p>
  First of all, happy 2008 to everybody. To begin 2008 a post about SUDO and security configuration.<br />The program sudo (SuperUser DO) is an utility from the unix operating systems like Linux, BSD or MAC OS X, that gives the normal users the possibility to execute programs with security privileges of the admin user (root).<br /><br />How to set it up ?<br />Write &quot;visudo&quot; as the administrator<br /><span style=";font-family:courier new;font-size:85%;"># Host alias specification<br /># Here you set up the hosts from where should the rule be applied, in this it is for local users<br />Host_Alias LOCALHOST=127.0.0.1<br /># User alias specification<br /># SYS is just a group name, it can be any string, you will use it later in this same file.<br />User_Alias SYS=user1, walter, user2<br /># Here we define the binaries that can be executed.<br />Cmnd_Alias SQA=/root/sudoers/program1.sh,\<br /> /root/sudoers/program2.sh,\<br /> /root/sudoers/program3.sh<br /># User privilege specification<br />root ALL=(ALL) ALL<br /># This specifies that no password has to be asked when executing the command.<br />SYS LOCALHOST=NOPASSWD: SYS</span><div style="clear: both;"></div>
 <b>Published: Tuesday, January 01, 2008</b>
 

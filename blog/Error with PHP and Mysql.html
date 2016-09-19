@@ -8,7 +8,7 @@
 window.parent.document.title = "Error with PHP and Mysql";
 </script>
 <div id="section">
-<p id="postTitle">Error with PHP and Mysql</p>
+<p id="postTitle"><a href="Error%20with%20PHP%20and%20Mysql.html" id="alink">Error with PHP and Mysql</a></p>
 <span style="font-size:85%;"><span style="font-family:courier new;">skipping incompatible /usr/lib/mysql/libmysqlclient.so when searching for -lmysqlclient<br /><br /><span style="font-weight: bold;font-family:arial;">Seems that this errors come because of incompatibility between i386 and x64.</span><br /><span style="font-weight: bold;font-family:arial;"></span><br /># cd /usr/lib/mysql<br /># ln -s ../../lib64/mysql/libmysqlclient.so<br /><br /><span style="font-weight: bold;font-family:arial;">If this do not works, you can patch the Makefile to use the x64 version of the</span><br /><span style="font-weight: bold;font-family:arial;">libraries instead of the x32:</span><br /><br /># sed -i -e &#39;s@-L/usr/lib/mysql@-L/usr/lib64/mysql@g&#39; Makefile<br /><br /><br /></span></span><div style="clear: both;"></div>
 <b>Published: Friday, December 12, 2008</b>
 

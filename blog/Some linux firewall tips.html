@@ -8,10 +8,11 @@
 window.parent.document.title = "Some linux firewall tips";
 </script>
 <div id="section">
-<p id="postTitle">Some linux firewall tips</p>
+<p id="postTitle"><a href="Some%20linux%20firewall%20tips.html" id="alink">Some linux firewall tips</a></p>
+
 The overconnected world needs some extra knowledge about protecting yourself from anti-democracy financed cyber-bandits,
 so here some small but powerfull firewall setup tips:<br />
-<br />
+
 <b><u>Firewall setup:</u></b>
 <pre>
 <span style="color: #888888">iptables -F </span>
@@ -35,7 +36,7 @@ so here some small but powerfull firewall setup tips:<br />
 <span style="color: #888888">:msg,contains,&quot;TCP/OUT:&quot; /var/log/iptables.log</span>
 <span style="color: #888888">:msg,contains,&quot;UDP/IN:&quot; /var/log/iptables.log</span>
 <span style="color: #888888">:msg,contains,&quot;UDP/OUT:&quot; /var/log/iptables.log</span>
-</pre></div>
+</pre>
 <br />
 <b><u>Restarting service</u></b><br />
 /etc/init.d/rsyslog restart
