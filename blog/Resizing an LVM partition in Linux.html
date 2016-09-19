@@ -7,9 +7,12 @@
 <script language="javascript">
 window.parent.document.title = "Resizing an LVM partition in Linux";
 </script>
-<div id="section"><p id="postTitle">Resizing an LVM partition in Linux</p>
-<p> First check how much space you have left in the Volume Group that contains that Logical Volume:<br /><br /><div style="font-family: &quot;Courier New&quot;,Courier,monospace;">lvextend -L +300 /dev/system_vg/usr_lv</div><div style="font-family: &quot;Courier New&quot;,Courier,monospace;">resize_reiserfs -s+300m /dev/system_vg/usr_lv</div><br /> 1) Without unmounting<br /> 2) The /usr partition, which holds kernel modules and is being used.<br /> 3) Zero downtime. <div style="clear: both;"></div>
+<div id="section">
+<p id="postTitle">Resizing an LVM partition in Linux</p>
+ First check how much space you have left in the Volume Group that contains that Logical Volume:<br /><br /><div style="font-family: &quot;Courier New&quot;,Courier,monospace;">lvextend -L +300 /dev/system_vg/usr_lv</div><div style="font-family: &quot;Courier New&quot;,Courier,monospace;">resize_reiserfs -s+300m /dev/system_vg/usr_lv</div><br /> 1) Without unmounting<br /> 2) The /usr partition, which holds kernel modules and is being used.<br /> 3) Zero downtime. <div style="clear: both;"></div>
 <b>Published: Tuesday, September 15, 2009</b>
+
+</div>
 
 <hr>
 </body></html>

@@ -7,9 +7,12 @@
 <script language="javascript">
 window.parent.document.title = "chroot to the linux distribution filesystem";
 </script>
-<div id="section"><p id="postTitle">chroot to the linux distribution filesystem</p>
-<p> For recovery purposes, mostly, you may need to boot with the live cd and perform some maintenance.<br /><br /> mount /dev/ /mnt/<br /><pre><code>cd /mnt<br>mount -t proc proc proc/<br>mount -t sysfs sys sys/<br>mount -o bind /dev dev/</code></pre> <pre><code>chroot /mnt</code></pre> <pre><code>&nbsp;</code></pre><div style="clear: both;"></div>
+<div id="section">
+<p id="postTitle">chroot to the linux distribution filesystem</p>
+ For recovery purposes, mostly, you may need to boot with the live cd and perform some maintenance.<br /><br /> mount /dev/ /mnt/<br /><pre><code>cd /mnt<br>mount -t proc proc proc/<br>mount -t sysfs sys sys/<br>mount -o bind /dev dev/</code></pre> <pre><code>chroot /mnt</code></pre> <pre><code>&nbsp;</code></pre><div style="clear: both;"></div>
 <b>Published: Tuesday, September 16, 2014</b>
+
+</div>
 
 <hr>
 </body></html>

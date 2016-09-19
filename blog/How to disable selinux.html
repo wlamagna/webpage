@@ -7,9 +7,12 @@
 <script language="javascript">
 window.parent.document.title = "How to disable selinux";
 </script>
-<div id="section"><p id="postTitle">How to disable selinux</p>
-<p> I have compiled apache in FC5 and when i wanted to start the daemon i received an error with security permissions. The problem was selinux that comes enabled by default.<br /><br />I had to disable it manualy, this is done so:<br /><br /><pre class="SCREEN">$ setenforce 1<br />$ sestatus | grep -i mode<br />Current mode:           enforcing<br />Mode from config file:  permissive<br /><br />------<br />Edit /etc/selinux/config and set SELINUX=disabled to make the change permanent.<br /><br /><br /></pre><div style="clear: both;"></div>
+<div id="section">
+<p id="postTitle">How to disable selinux</p>
+ I have compiled apache in FC5 and when i wanted to start the daemon i received an error with security permissions. The problem was selinux that comes enabled by default.<br /><br />I had to disable it manualy, this is done so:<br /><br /><pre class="SCREEN">$ setenforce 1<br />$ sestatus | grep -i mode<br />Current mode:           enforcing<br />Mode from config file:  permissive<br /><br />------<br />Edit /etc/selinux/config and set SELINUX=disabled to make the change permanent.<br /><br /><br /></pre><div style="clear: both;"></div>
 <b>Published: Friday, August 18, 2006</b>
+
+</div>
 
 <hr>
 </body></html>

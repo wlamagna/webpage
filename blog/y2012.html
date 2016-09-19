@@ -7,29 +7,44 @@
 <script language="javascript">
 window.parent.document.title = "Year 2012";
 </script>
-<div id="section"><p id="postTitle">Creating a RAMFS</p>
-<p> With the previous method i found it slow for being a ram disk, i read that ramfs does no swapping, i want to test it:<br /><br /><pre>mount -t ramfs -o size=50m ramfs /ramcache</pre> <pre>&nbsp;</pre> <pre><br></pre> <pre>This is a good resource:</pre> <pre>http://www.thegeekstuff.com/2008/11/overview-of-ramfs-and-tmpfs-on-linux/ </pre><div style="clear: both;"></div>
+<div id="section">
+<p id="postTitle">Linux RAM filesystem</p>
+ I do datamining, and the first thing learned is that 80% of this wonderful science is datapreparation.&nbsp; I am looking for cheap wais to manage large about of data, and today i want to try how a RAM disk in Linux performs to create a dataset for weka.<br /><br /> As root, i want a 10MB file (yes, even though it is far away from being big data, the data preparation was taking several minutes)<br /><br /> root@talento:~# mkfs -q /dev/ram1 10240<br />root@talento:~# mkdir -p /ramcache<br />root@talento:~# mount /dev/ram1 /ramcache<br />root@talento:~# df -H | grep ramcache<br />/dev/ram1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 11M&nbsp;&nbsp;&nbsp; 95k&nbsp;&nbsp; 9.6M&nbsp;&nbsp; 1% /ramcache<br /><br /><br /><br /><br /><div style="clear: both;"></div>
 <b>Published: Tuesday, June 12, 2012</b>
 
-<hr>
-<div id="section"><p id="postTitle">Linux RAM filesystem</p>
-<p> I do datamining, and the first thing learned is that 80% of this wonderful science is datapreparation.&nbsp; I am looking for cheap wais to manage large about of data, and today i want to try how a RAM disk in Linux performs to create a dataset for weka.<br /><br /> As root, i want a 10MB file (yes, even though it is far away from being big data, the data preparation was taking several minutes)<br /><br /> root@talento:~# mkfs -q /dev/ram1 10240<br />root@talento:~# mkdir -p /ramcache<br />root@talento:~# mount /dev/ram1 /ramcache<br />root@talento:~# df -H | grep ramcache<br />/dev/ram1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 11M&nbsp;&nbsp;&nbsp; 95k&nbsp;&nbsp; 9.6M&nbsp;&nbsp; 1% /ramcache<br /><br /><br /><br /><br /><div style="clear: both;"></div>
-<b>Published: Tuesday, June 12, 2012</b>
+</div>
 
 <hr>
-<div id="section"><p id="postTitle">Perl Date manipulation as is</p>
-<p> Today i had to program a little script, in perl, and had to manipulate some dates.&nbsp; To convert the AM/PM part i used this previously written function (<a href="#" target="_blank">here</a>).<br /><br /> But then i need to do some delta operation on the dates, for whom i new packages like Date::Calc.<br /><br /> The surprise was that i couldn&#39;t install new packages in the server, it is a remote server and the less problems one causes, the better... because the server is shared, there was no gcc, bla, bla..<br /><br /> I found this package:<br /> use Date::Manip;<br /><br /> Which seems to be included with Perl.&nbsp; I couldn&#39;t confirm it but it saved the day, here is an example:<br /><br /> my $ffin = &amp;DateCalc(&quot;$startdate&quot;, &quot;+8 days&quot;, \$err);<br /> my ($y, $m, $d) = $ffin =~ m/([0-9]{4})([0-9]{2})([0-9]{2}).*/g;<br /><br /><br /> More about it:<br /> http://snowhare.com/utilities/perldoc2tree/example/Date/Manip.html<br /><br /><div style="clear: both;"></div>
+<div id="section">
+<p id="postTitle">Creating a RAMFS</p>
+ With the previous method i found it slow for being a ram disk, i read that ramfs does no swapping, i want to test it:<br /><br /><pre>mount -t ramfs -o size=50m ramfs /ramcache</pre> <pre>&nbsp;</pre> <pre><br></pre> <pre>This is a good resource:</pre> <pre>http://www.thegeekstuff.com/2008/11/overview-of-ramfs-and-tmpfs-on-linux/ </pre><div style="clear: both;"></div>
+<b>Published: Tuesday, June 12, 2012</b>
+
+</div>
+
+<hr>
+<div id="section">
+<p id="postTitle">Perl Date manipulation as is</p>
+ Today i had to program a little script, in perl, and had to manipulate some dates.&nbsp; To convert the AM/PM part i used this previously written function (<a href="#" target="_blank">here</a>).<br /><br /> But then i need to do some delta operation on the dates, for whom i new packages like Date::Calc.<br /><br /> The surprise was that i couldn&#39;t install new packages in the server, it is a remote server and the less problems one causes, the better... because the server is shared, there was no gcc, bla, bla..<br /><br /> I found this package:<br /> use Date::Manip;<br /><br /> Which seems to be included with Perl.&nbsp; I couldn&#39;t confirm it but it saved the day, here is an example:<br /><br /> my $ffin = &amp;DateCalc(&quot;$startdate&quot;, &quot;+8 days&quot;, \$err);<br /> my ($y, $m, $d) = $ffin =~ m/([0-9]{4})([0-9]{2})([0-9]{2}).*/g;<br /><br /><br /> More about it:<br /> http://snowhare.com/utilities/perldoc2tree/example/Date/Manip.html<br /><br /><div style="clear: both;"></div>
 <b>Published: Tuesday, May 29, 2012</b>
 
-<hr>
-<div id="section"><p id="postTitle">glib lotus notes java memory corruption</p>
-<p><br /><br />Today i updated some packets related to IBM lotus notes and a problem with libraries caused a great and long investigation process to have lotus notes back.<br /><br /><br />I tried lot of things: reinstalling, purging the packets, installing the same version again... nothing worked. Today i found the solution <a href="#">here</a>.<br /><br /><br />It says:<br /><br /><b>[...]&nbsp;</b>After some research I found the problem: libnuma. If this lib exists in the system the Notes Client loads data forever.<b> [...]</b><br /><br /><br />the solution is:<br /> apt-get remove libnuma1<br /><br /><br /><br /><br /><br /><span class="comment-body" data-li-comment-text="">Standard disclosure: this is my opinion and not necessarily that of my employer or anyone else.</span><div style="clear: both;"></div>
-<b>Published: Tuesday, April 24, 2012</b>
+</div>
 
 <hr>
-<div id="section"><p id="postTitle">Decision Trees with r project on Linux</p>
-<p><div style="text-align: center;"><u><b>Chaid Trees with R Project on Linux</b></u></div><br /> Start R and install Partykit:<br /> $ R<br /> &gt; install.packages(&quot;partykit&quot;)<br /><br /> On a command line download the chaid sources:<br /> svn checkout svn://svn.r-forge.r-project.org/svnroot/chaid/<br /><br /> $ cd chaid<br /> $ R CMD INSTALL pkg/<br /><br /> On R:<br /> &gt; library(&quot;CHAID&quot;)<br /> Loading required package: partykit<br />Loading required package: grid<br /><br /><br /><br /> Chaid project:<br /> http://r-forge.r-project.org/scm/?group_id=343 <div style="clear: both;"></div>
+<div id="section">
+<p id="postTitle">glib lotus notes java memory corruption</p>
+<br /><br />Today i updated some packets related to IBM lotus notes and a problem with libraries caused a great and long investigation process to have lotus notes back.<br /><br /><br />I tried lot of things: reinstalling, purging the packets, installing the same version again... nothing worked. Today i found the solution <a href="#">here</a>.<br /><br /><br />It says:<br /><br /><b>[...]&nbsp;</b>After some research I found the problem: libnuma. If this lib exists in the system the Notes Client loads data forever.<b> [...]</b><br /><br /><br />the solution is:<br /> apt-get remove libnuma1<br /><br /><br /><br /><br /><br /><span class="comment-body" data-li-comment-text="">Standard disclosure: this is my opinion and not necessarily that of my employer or anyone else.</span><div style="clear: both;"></div>
+<b>Published: Tuesday, April 24, 2012</b>
+
+</div>
+
+<hr>
+<div id="section">
+<p id="postTitle">Decision Trees with r project on Linux</p>
+<div style="text-align: center;"><u><b>Chaid Trees with R Project on Linux</b></u></div><br /> Start R and install Partykit:<br /> $ R<br /> &gt; install.packages(&quot;partykit&quot;)<br /><br /> On a command line download the chaid sources:<br /> svn checkout svn://svn.r-forge.r-project.org/svnroot/chaid/<br /><br /> $ cd chaid<br /> $ R CMD INSTALL pkg/<br /><br /> On R:<br /> &gt; library(&quot;CHAID&quot;)<br /> Loading required package: partykit<br />Loading required package: grid<br /><br /><br /><br /> Chaid project:<br /> http://r-forge.r-project.org/scm/?group_id=343 <div style="clear: both;"></div>
 <b>Published: Monday, February 27, 2012</b>
+
+</div>
 
 <hr>
 </body></html>

@@ -7,9 +7,12 @@
 <script language="javascript">
 window.parent.document.title = "Managing links in Linux";
 </script>
-<div id="section"><p id="postTitle">Managing links in Linux</p>
-<p> Hard and Symbolic links are the two types of files that exist in a Unix Operating System to point to another file. <p><span style="text-decoration: underline;"><strong>Hard Links</strong></span>: They are a pointer that is exactly as the same than the file it points to, no mather if it has a different name, any modification done to the pointer are also done to the target file. The hard links can only point to other files, but not directories (though directories are a special kind of files). And the other main difference with Symbolic Links is that hard links MUST reside in the same filesystem than the file they point to, because they have the same inode number.<p><span style="text-decoration: underline;"><strong>Symbolic liks</strong></span>: The are a pointer to another file but they contain the name of the file they point to, it can span filesystems (they have a different inode number), and they can point to files or direcoties. Creating Hard and Symbolic Links:<br />ln -fs &lt;source&gt; [&lt;target&gt;]<br /><br />By default ln (without arguments) it creates hard links.<br /><span style="font-size:85%;">-f, --force : Remove existing destination files.<br />-s, --symbolic : Make symbolic links instead of hard links.</span><div style="clear: both;"></div>
+<div id="section">
+<p id="postTitle">Managing links in Linux</p>
+ Hard and Symbolic links are the two types of files that exist in a Unix Operating System to point to another file. <p><span style="text-decoration: underline;"><strong>Hard Links</strong></span>: They are a pointer that is exactly as the same than the file it points to, no mather if it has a different name, any modification done to the pointer are also done to the target file. The hard links can only point to other files, but not directories (though directories are a special kind of files). And the other main difference with Symbolic Links is that hard links MUST reside in the same filesystem than the file they point to, because they have the same inode number.<p><span style="text-decoration: underline;"><strong>Symbolic liks</strong></span>: The are a pointer to another file but they contain the name of the file they point to, it can span filesystems (they have a different inode number), and they can point to files or direcoties. Creating Hard and Symbolic Links:<br />ln -fs &lt;source&gt; [&lt;target&gt;]<br /><br />By default ln (without arguments) it creates hard links.<br /><span style="font-size:85%;">-f, --force : Remove existing destination files.<br />-s, --symbolic : Make symbolic links instead of hard links.</span><div style="clear: both;"></div>
 <b>Published: Monday, August 18, 2008</b>
+
+</div>
 
 <hr>
 </body></html>

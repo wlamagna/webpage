@@ -7,14 +7,12 @@
 <script language="javascript">
 window.parent.document.title = "Year 2016";
 </script>
-<div id="section"><p id="postTitle">Unziping large files in linux copied from windows</p>
-<p>
-<br />
-<b>
+<div id="section">
+<p id="postTitle">Unziping large files in linux copied from windows</p>
+
 In Windows 7 i created a large ZIP file (around 15 Gigas). I wanted to
 move it to a linux machine and unzip it there.  But once in the linux 
 machine, it produced this error:
-
 
 <pre>
 unzip Windows\ 7\ Clone.zip                          
@@ -43,23 +41,12 @@ Extracting  Windows 7 Clone/Windows 7 Clone.vbox
 <div style="clear: both;"></div>
 <b>Published: Thursday, August 25, 2016</b>
 <a href="tag_linux">linux</a>&nbsp;<a href="tag_admin">admin</a>&nbsp;
-<hr>
-<div id="section"><p id="postTitle">Installing latex with some usefull complements in Debian Linux</p>
-<p>
-<pre>
-apt-get install texlive texlive-math-extra texlive-science
-</pre>
-# Provides program.sty: <br />
-<pre>
-apt-get install texlive-latex-extra
-</pre>
+</div>
 
-<div style="clear: both;"></div>
-<b>Published: Thursday, August 25, 2016</b>
-<a href="tag_linux">linux</a>&nbsp;<a href="tag_debian">debian</a>&nbsp;
 <hr>
-<div id="section"><p id="postTitle">Installing Apache from scratch</p>
-<p>
+<div id="section">
+<p id="postTitle">Installing Apache from scratch</p>
+
 <u>1) A required library:</u><br />
 <pre>
 apt-get install libpcre++-dev
@@ -90,9 +77,29 @@ make
 <div style="clear: both;"></div>
 <b>Published: Thursday, August 25, 2016</b>
 <a href="tag_linux">linux</a>&nbsp;<a href="tag_admin">admin</a>&nbsp;<a href="tag_apache">apache</a>&nbsp;
+</div>
+
 <hr>
-<div id="section"><p id="postTitle">Installing Matlab R2013 8.01 on Linux Headless Xvfb using lightdm and fluxbox</p>
-<p>
+<div id="section">
+<p id="postTitle">Installing latex with some usefull complements in Debian Linux</p>
+
+<pre>
+apt-get install texlive texlive-math-extra texlive-science
+</pre>
+# Provides program.sty: <br />
+<pre>
+apt-get install texlive-latex-extra
+</pre>
+
+<div style="clear: both;"></div>
+<b>Published: Thursday, August 25, 2016</b>
+<a href="tag_linux">linux</a>&nbsp;<a href="tag_debian">debian</a>&nbsp;
+</div>
+
+<hr>
+<div id="section">
+<p id="postTitle">Installing Matlab R2013 8.01 on Linux Headless Xvfb using lightdm and fluxbox</p>
+
 Good, you are a Matlab user like me, but.. why are you willing to install it on a 
 headless linux workstation ?  I thought i was the only person in the world doing that
 but you reading this proves i am not alone...<br /><br />
@@ -116,17 +123,17 @@ java.lang.InternalError: Can't connect to X11 window server using ':20.0' as the
 </pre>
 <br />
 <u>3) OPS! this should not be difficult you think...</u><br />
+<b>You try this...</b>
 <pre>
-<b>You try this...</b><br />
-install_linux -mode silent<br /><br />
-<b>And this... </b><br /> 
-install_linux -javahome /opt/java -mode silent<br />
-<b>And your DISPLAY variable is logically correct! because ... </b><br />
-printenv | grep DISPLAY<br />
-DISPLAY=:20.0<br />
-<br />
+#Try this...
+install_linux -mode silent
+#And this... 
+install_linux -javahome /opt/java -mode silent
+#And your DISPLAY variable is logically correct! because ...
+printenv | grep DISPLAY
+DISPLAY=:20.0
 </pre>
-<br />
+
 The error message keeps displaying:<br />
 <pre>
 Error: The application encountered an unexpected error and needs to close.  You may want to try re-installing your product(s).  More information can be found at /tmp/mathworks_root.log
@@ -199,9 +206,12 @@ Finished
  
 <b>Published: Thuesday, February 23, 2016</b>
 
+</div>
+
 <hr>
-<div id="section"><p id="postTitle">Headless Linux Server with X Fluxbox and Lightdm</p>
-<p>
+<div id="section">
+<p id="postTitle">Headless Linux Server with X Fluxbox and Lightdm</p>
+
 Hi, here is a very short list telling about how you can have
 very easily a server withoug a monitor connected and manage it
 with just few resources... a short post but without waste!<br /><br />
@@ -238,9 +248,12 @@ These steps have worked in Debian 8.0 Jessie.
  
 <b>Published: Thuesday, February 23, 2016</b>
 <a href="tag_headless">headless</a>&nbsp;<a href="tag_fluxbox">fluxbox</a>&nbsp;<a href="tag_lightdm">lightdm</a>&nbsp;
+</div>
+
 <hr>
-<div id="section"><p id="postTitle">Compile keepass 2.0.2 on Debian Linux Jeesie</p>
-<p>
+<div id="section">
+<p id="postTitle">Compile keepass 2.0.2 on Debian Linux Jeesie</p>
+
 KeepassX webpage states: "KeePassX is an application for people with extremly high demands on secure personal data management. It has a light interface, is cross platform and published under the terms of the GNU General Public License."<br /><br />
 These steps have been executed in Debian Linux 8.2.0 Jeesie but for an experienced System Administrator/Hacker this should be trivial.<br /><br />
 Some time ago i explained 
@@ -274,9 +287,12 @@ make install
  
 <b>Published: Saturday, February 20, 2016</b>
 <a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;<a href="tag_linux">linux</a>&nbsp;
+</div>
+
 <hr>
-<div id="section"><p id="postTitle">Install Libreoffice on Debian</p>
-<p>
+<div id="section">
+<p id="postTitle">Install Libreoffice on Debian</p>
+
 Go to <a href="http://www.libreoffice.org/" target="_new">Libreoffice Webpage</a> and download
 the libreoffice package, in my case it was:<br />
 <pre>
@@ -304,6 +320,8 @@ Unpacking libobasis4.4-core (4.4.7.2-2) ...
 
 
 <b>Published: Friday, February 5, 2016</b>
+
+</div>
 
 <hr>
 </body></html>

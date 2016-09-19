@@ -7,8 +7,9 @@
 <script language="javascript">
 window.parent.document.title = "Installing Matlab R2013 8.01 on Linux Headless Xvfb using lightdm and fluxbox";
 </script>
-<div id="section"><p id="postTitle">Installing Matlab R2013 8.01 on Linux Headless Xvfb using lightdm and fluxbox</p>
-<p>
+<div id="section">
+<p id="postTitle">Installing Matlab R2013 8.01 on Linux Headless Xvfb using lightdm and fluxbox</p>
+
 Good, you are a Matlab user like me, but.. why are you willing to install it on a 
 headless linux workstation ?  I thought i was the only person in the world doing that
 but you reading this proves i am not alone...<br /><br />
@@ -32,17 +33,17 @@ java.lang.InternalError: Can't connect to X11 window server using ':20.0' as the
 </pre>
 <br />
 <u>3) OPS! this should not be difficult you think...</u><br />
+<b>You try this...</b>
 <pre>
-<b>You try this...</b><br />
-install_linux -mode silent<br /><br />
-<b>And this... </b><br /> 
-install_linux -javahome /opt/java -mode silent<br />
-<b>And your DISPLAY variable is logically correct! because ... </b><br />
-printenv | grep DISPLAY<br />
-DISPLAY=:20.0<br />
-<br />
+#Try this...
+install_linux -mode silent
+#And this... 
+install_linux -javahome /opt/java -mode silent
+#And your DISPLAY variable is logically correct! because ...
+printenv | grep DISPLAY
+DISPLAY=:20.0
 </pre>
-<br />
+
 The error message keeps displaying:<br />
 <pre>
 Error: The application encountered an unexpected error and needs to close.  You may want to try re-installing your product(s).  More information can be found at /tmp/mathworks_root.log
@@ -114,6 +115,8 @@ Finished
 
  
 <b>Published: Thuesday, February 23, 2016</b>
+
+</div>
 
 <hr>
 </body></html>

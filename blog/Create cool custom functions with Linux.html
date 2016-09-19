@@ -7,9 +7,12 @@
 <script language="javascript">
 window.parent.document.title = "Create cool custom functions with Linux";
 </script>
-<div id="section"><p id="postTitle">Create cool custom functions with Linux</p>
-<p> This section today is dedicated to the cool functions a System Administrator can create to make its life easier. I will give two examples i found very usefull.<br /><br /><span style="font-size:78%;"><span style="font-family:courier new;">$ tip() { lynx -cfg=/dev/null -dump &quot;http://www.ugu.com/sui/ugu/show?tip.today&quot; | sed -n &#39;/Unix Tip #/,/generously/p&#39; }</span><br /></span><span style="font-size:78%;"><br /><span style="font-family:courier new;">$ trans() {lynx -cfg=/dev/null -dump &quot;http://spanishdict.com/1AS.cfm?e=$1&quot; | sed -n &#39;/Spanish Word/,/Spanish Word:/p&#39; }<br /><br />Yoy call these functions this way:<br /><br />$ tip<br />Thanks to www.ugu.com<br /><br />$ trans traducir<br />Spanish Word English Word<br />traducir [9]to translate<br /><span style=";font-family:georgia;font-size:100%;"><span style="font-weight: bold;">And to see the defined functions type:</span></span><br />$ set<br /><br />Please, share with your comment some helpfulness scripts ;)<br /><br /></span></span><div style="clear: both;"></div>
+<div id="section">
+<p id="postTitle">Create cool custom functions with Linux</p>
+ This section today is dedicated to the cool functions a System Administrator can create to make its life easier. I will give two examples i found very usefull.<br /><br /><span style="font-size:78%;"><span style="font-family:courier new;">$ tip() { lynx -cfg=/dev/null -dump &quot;http://www.ugu.com/sui/ugu/show?tip.today&quot; | sed -n &#39;/Unix Tip #/,/generously/p&#39; }</span><br /></span><span style="font-size:78%;"><br /><span style="font-family:courier new;">$ trans() {lynx -cfg=/dev/null -dump &quot;http://spanishdict.com/1AS.cfm?e=$1&quot; | sed -n &#39;/Spanish Word/,/Spanish Word:/p&#39; }<br /><br />Yoy call these functions this way:<br /><br />$ tip<br />Thanks to www.ugu.com<br /><br />$ trans traducir<br />Spanish Word English Word<br />traducir [9]to translate<br /><span style=";font-family:georgia;font-size:100%;"><span style="font-weight: bold;">And to see the defined functions type:</span></span><br />$ set<br /><br />Please, share with your comment some helpfulness scripts ;)<br /><br /></span></span><div style="clear: both;"></div>
 <b>Published: Friday, August 17, 2007</b>
+
+</div>
 
 <hr>
 </body></html>

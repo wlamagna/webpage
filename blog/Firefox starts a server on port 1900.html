@@ -7,8 +7,9 @@
 <script language="javascript">
 window.parent.document.title = "Firefox starts a server on port 1900";
 </script>
-<div id="section"><p id="postTitle">Firefox starts a server on port 1900</p>
-<p> I observed this kind of packets being filtered in my place:<br /><br /><b>
+<div id="section">
+<p id="postTitle">Firefox starts a server on port 1900</p>
+ I observed this kind of packets being filtered in my place:<br /><br /><b>
 <pre>
 Mar 17 13:13:21 reserved kernel: [15070.046566] UDP/OUT: IN= OUT=eth1 SRC=10.10.10.176 DST=239.255.255.250 LEN=122 TOS=0x00 PREC=0x00 TTL=1 ID=17655 DF PROTO=UDP SPT=1900 DPT=1900 LEN=102
 </pre>
@@ -25,5 +26,7 @@ udp        0      0 0.0.0.0:1900            0.0.0.0:*                           
 To disable this go to about:config and then set<br /> loop.enabled -&gt; false<br /><br /> loop.rooms.enabled -&gt; false<br /><br /> Good luck. <div style="clear: both;"></div>
 <b>Published: Tuesday, March 17, 2015</b>
 <a href="tag_security">security</a>&nbsp;
+</div>
+
 <hr>
 </body></html>
