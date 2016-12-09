@@ -8,6 +8,175 @@
 window.parent.document.title = "Server Linux Devops Blog from Walter Lamagna";
 </script>
 <div id="section">
+<p id="postTitle"><a href="Compile%20keepass%202.0.3%20on%20Linux.html" id="alink">Compile keepass 2.0.3 on Linux</a></p>
+
+KeepassX is a graphical password management system, the webpage is <a href="https://www.keepassx.org/" target="_new">www.keepassx.org</a>
+<br />
+KeepassX webpage states: "KeePassX is an application for people with extremly high demands on secure personal data management. It has a light interface, is cross platform and published under the terms of the GNU General Public License."<br /><br />
+These steps have been executed on a Debian 
+Linux 8.6.0 but for an experienced System 
+Administrator/Hacker this should be trivial.<br /><br />
+You can look at older related posts:<br />
+<ul>
+<li><a href="Compile%20keepass%200.4.3%20on%20Debian%20Linux%20wheezy.html">how to install KeepassX 0.4.3</a></li>
+<li><a href="http://www.wallves.com/blog/Compile%20keepass%202.0.2%20on%20Debian%20Linux%20Jeesie.html">how to install KeepassX 2.0.2</a></li>
+</ul><br />
+
+First you should have these packages installed:<br />
+<pre>
+apt-get install cmake g++ libqt4-core libqt4-dev libgcrypt-dev zlib1g zlib1g-dev
+
+</pre>
+<br />
+Now you can download the latest keepassX package and compile it:<br />
+<pre>
+wget https://www.keepassx.org/releases/2.0.3/keepassx-2.0.3.tar.gz
+tar zxvf keepassx-2.0.3.tar.gz
+cd keepassx-2.0.3/
+mkdir build
+cd build
+cmake -DCMAKE_INSTALL_PREFIX=/usr/local ..
+</pre>
+<br />As root:<br />
+<pre>
+make install
+</pre>
+<br />
+
+Now you could for example, add the access on a fluxbox window manager:
+
+
+<br />
+It works.<br />
+<img src="images/keepass3.png" />
+<br />
+ 
+<b>Published: Saturday, December 09, 2016</b>
+<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;
+</div>
+
+<hr>
+<div id="section">
+<p id="postTitle"><a href="Installing%20tor%20on%20linux.html" id="alink">Installing tor on linux</a></p>
+
+Obtain the download link from the <a href="https://www.torproject.org/download/download.html.en">
+tor project page</a><br />You can get the compiled version but i recall you
+that this is the Server Linux blog and we preffer to build things from scratch:<br />
+<pre>
+apt-get install libevent-dev
+
+wget https://www.torproject.org/dist/tor-0.2.8.8.tar.gz
+tar zxvf tor-0.2.8.8.tar.gz
+cd tor-0.2.8.8/
+
+./configure
+make
+src/or/tor
+</pre>
+
+mkdir /usr/local/etc/tor/
+cp src/or/config/torrc /usr/local/etc/tor/
+
+
+Flash videos were stored in /tmp/FlashXXXX and i was able to copy 
+them to another place like cp /tmp/FlashXXX ~/Desktop/new.video.mpeg.
+<br />
+<br />
+Since Firefox 4 i thought for a moment that everything 
+changed and my happy days were over but i was wrong, i remembered that with Linux there are no sad days.<br />
+<br />
+How to obtain the flash videos with Firefox 4:<br />
+When the video already finished loading in the browser (being Youtube or any other), do this:<br />
+<br />
+<pre>
+ps -ef | grep libflashplayer.so | grep -v grep
+walter&nbsp;&nbsp; 20040 19812&nbsp; 9 11:52 ?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 00:53:34 /usr/lib/firefox-3.6.17/plugin-container /home/walter/.mozilla/plugins/libflashplayer.so 19812 plugin true
+</pre>
+<br />
+Now, with the PID, inspect what it is opening:<br />
+<br />
+<br />
+<pre>
+root@talento:~# lsof -p 20040 | grep Flash
+lsof: WARNING: can&#39;t stat() fuse.gvfs-fuse-daemon file system /home/walter/.gvfs
+		Output information may be incomplete.
+
+plugin-co 20040 walter&nbsp;&nbsp; 16u&nbsp;&nbsp; REG&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 8,2&nbsp; 1249930 21708868 /tmp/FlashXXQANNm2 (deleted)
+root@talento:~#
+</pre>
+You are interested in the file descriptor id, these are the file descriptors from that process:<br />
+<br />
+<br />
+<pre>
+root@talento:~# ls -la /proc/20040/fd/
+total 0
+dr-x------ 2 walter walter&nbsp; 0 2011-04-30 21:12 .
+dr-xr-xr-x 7 walter walter&nbsp; 0 2011-04-30 21:06 ..
+lr-x------ 1 walter walter 64 2011-04-30 21:12 0 -&gt; /dev/null
+lrwx------ 1 walter walter 64 2011-04-30 21:12 1 -&gt; /home/walter/.xsession-errors
+l-wx------ 1 walter walter 64 2011-04-30 21:12 10 -&gt; pipe:[18679239]
+lr-x------ 1 walter walter 64 2011-04-30 21:12 11 -&gt; pipe:[18679240]
+l-wx------ 1 walter walter 64 2011-04-30 21:12 12 -&gt; pipe:[18679240]
+lrwx------ 1 walter walter 64 2011-04-30 21:12 13 -&gt; socket:[18679243]
+lr-x------ 1 walter walter 64 2011-04-30 21:12 14 -&gt; /home/walter/.mozilla/firefox/2te1hj2x.default/cert8.db
+lr-x------ 1 walter walter 64 2011-04-30 21:12 15 -&gt; /home/walter/.mozilla/firefox/2te1hj2x.default/key3.db
+lrwx------ 1 walter walter 64 2011-04-30 21:15 16 -&gt; /tmp/FlashXXQANNm2 (deleted)
+lr-x------ 1 walter walter 64 2011-04-30 21:16 17 -&gt; pipe:[19890054]
+l-wx------ 1 walter walter 64 2011-04-30 21:16 18 -&gt; pipe:[19890054]
+lr-x------ 1 walter walter 64 2011-04-30 21:16 19 -&gt; pipe:[19890055]
+lrwx------ 1 walter walter 64 2011-04-30 21:12 2 -&gt; /home/walter/.xsession-errors
+l-wx------ 1 walter walter 64 2011-04-30 21:16 20 -&gt; pipe:[19890055]
+lrwx------ 1 walter walter 64 2011-04-30 21:16 21 -&gt; socket:[19890059]
+lrwx------ 1 walter walter 64 2011-04-30 21:12 22 -&gt; socket:[19338003]
+lr-x------ 1 walter walter 64 2011-04-30 21:12 23 -&gt; anon_inode:inotify
+lrwx------ 1 walter walter 64 2011-04-30 21:12 3 -&gt; socket:[18679123]
+lrwx------ 1 walter walter 64 2011-04-30 21:12 4 -&gt; anon_inode:[eventpoll]
+lrwx------ 1 walter walter 64 2011-04-30 21:12 42 -&gt; socket:[18679124]
+lrwx------ 1 walter walter 64 2011-04-30 21:12 5 -&gt; socket:[18679236]
+lrwx------ 1 walter walter 64 2011-04-30 21:12 6 -&gt; socket:[18679237]
+lr-x------ 1 walter walter 64 2011-04-30 21:12 7 -&gt; pipe:[18679238]
+<span style="font-family: &quot;Courier New&quot;,Courier,monospace;">l-wx------ 1 walter walter 64 2011-04-30 21:12 8 -&gt; pipe:[18679238]
+lr-x------ 1 walter walter 64 2011-04-30 21:12 9 -&gt; pipe:[18679239]
+</pre>
+<br />
+What is of our interest if the Flash process, displayed in the previous lines.<br />
+<br />
+Now, you can copy the file to a safe place, because, if you close Firefox, those files are released and lost.<br />
+<br />
+<span style="font-family: &quot;Courier New&quot;,Courier,monospace;">cp /proc/20040/fd/16 ~/Desktop/A.Movie.mpeg</span><br />
+<br />
+Now if you want to put everything in a script:<br />
+<br />
+<pre>
+root@talento:~# cat saveflash.sh
+#!/bin/bash</span><br />
+PID=`ps -ef | grep libflashplayer.so | grep -v grep | awk &#39;{print $2}&#39;`
+FD=`lsof -p $PID | grep Flash | awk &#39;{print $4}&#39; | sed &#39;s/u$//&#39;`
+cp /proc/$PID/fd/$FD &quot;$1&quot;
+</pre>
+And remember, you can &quot;invite me a coffee&quot; :) <div style="clear: both;"></div>
+<b>Published: Friday, September 30, 2016</b>
+<a href="tag_security">security</a>&nbsp;<a href="tag_privacy">privacy</a>&nbsp;
+</div>
+
+<hr>
+<div id="section">
+<p id="postTitle"><a href="Installing%20latex%20with%20some%20usefull%20complements%20in%20Debian%20Linux.html" id="alink">Installing latex with some usefull complements in Debian Linux</a></p>
+<pre>
+apt-get install texlive texlive-math-extra texlive-science
+</pre>
+# Provides program.sty: <br />
+<pre>
+apt-get install texlive-latex-extra
+</pre>
+
+<div style="clear: both;"></div>
+<b>Published: Thursday, August 25, 2016</b>
+<a href="tag_debian">debian</a>&nbsp;
+</div>
+
+<hr>
+<div id="section">
 <p id="postTitle"><a href="Unziping%20large%20files%20in%20linux%20copied%20from%20windows.html" id="alink">Unziping large files in linux copied from windows</a></p>
 
 In Windows 7 i created a large ZIP file (around 15 Gigas). I wanted to
@@ -36,22 +205,6 @@ Extracting  Windows 7 Clone/Windows 7 Clone.vbox
 <div style="clear: both;"></div>
 <b>Published: Thursday, August 25, 2016</b>
 <a href="tag_admin">admin</a>&nbsp;
-</div>
-
-<hr>
-<div id="section">
-<p id="postTitle"><a href="Installing%20latex%20with%20some%20usefull%20complements%20in%20Debian%20Linux.html" id="alink">Installing latex with some usefull complements in Debian Linux</a></p>
-<pre>
-apt-get install texlive texlive-math-extra texlive-science
-</pre>
-# Provides program.sty: <br />
-<pre>
-apt-get install texlive-latex-extra
-</pre>
-
-<div style="clear: both;"></div>
-<b>Published: Thursday, August 25, 2016</b>
-<a href="tag_debian">debian</a>&nbsp;
 </div>
 
 <hr>
@@ -87,48 +240,6 @@ make
 <div style="clear: both;"></div>
 <b>Published: Thursday, August 25, 2016</b>
 <a href="tag_admin">admin</a>&nbsp;<a href="tag_apache">apache</a>&nbsp;
-</div>
-
-<hr>
-<div id="section">
-<p id="postTitle"><a href="Headless%20Linux%20Server%20with%20X%20Fluxbox%20and%20Lightdm.html" id="alink">Headless Linux Server with X Fluxbox and Lightdm</a></p>
-
-Hi, here is a very short list telling about how you can have
-very easily a server withoug a monitor connected and manage it
-with just few resources... a short post but without waste!<br /><br />
-
-<b>Install headless lightdm with fluxbox and vnc</b><br />
-<pre>
-apt-get install lightdm
-apt-get install fluxbox
-apt-get install x11vnc
-apt-get install xvfb
-apt-get remove xserver-xorg-video*
-</pre>
-
-Now, you setup the SSH Server and connect creating a tunnel.<br /><br />
-
-Once connected, in the Headless Server you type:
-<br /><br />
-<pre>
-x11vnc -localhost -create -env FD_PROG=/usr/bin/fluxbox \
-        -env X11VNC_FINDDISPLAY_ALWAYS_FAILS=1 \
-        -env X11VNC_CREATE_GEOM=${1:-1024x768x16} \
-        -gone 'killall Xvfb' \
-        -bg -nopw
-</pre>
-<br />
-And once the vnc server starts, you connect from your client through
-a tunnel.<br /><br />
-<pre>
-vncviewer localhost:5900
-</pre>
-
-These steps have worked in Debian 8.0 Jessie.
-<br />
- 
-<b>Published: Thuesday, February 23, 2016</b>
-<a href="tag_headless">headless</a>&nbsp;<a href="tag_fluxbox">fluxbox</a>&nbsp;<a href="tag_lightdm">lightdm</a>&nbsp;
 </div>
 
 <hr>
@@ -244,7 +355,55 @@ Finished
 
 <hr>
 <div id="section">
-<p id="postTitle"><a href="Compile%20keepass%202.0.2%20on%20Debian%20Linux%20Jeesie.html" id="alink">Compile keepass 2.0.2 on Debian Linux Jeesie</a></p>
+<p id="postTitle"><a href="Headless%20Linux%20Server%20with%20X%20Fluxbox%20and%20Lightdm.html" id="alink">Headless Linux Server with X Fluxbox and Lightdm</a></p>
+
+Hi, here is a very short list telling about how you can have
+very easily a server withoug a monitor connected and manage it
+with just few resources... a short post but without waste!<br /><br />
+
+<b>Install headless lightdm with fluxbox and vnc</b><br />
+<pre>
+apt-get install lightdm
+apt-get install fluxbox
+apt-get install x11vnc
+apt-get install xvfb
+apt-get remove xserver-xorg-video*
+</pre>
+
+Now, you setup the SSH Server and connect creating a tunnel.<br /><br />
+
+Once connected, in the Headless Server you type:
+<br /><br />
+<pre>
+x11vnc -localhost -create -env FD_PROG=/usr/bin/fluxbox \
+        -env X11VNC_FINDDISPLAY_ALWAYS_FAILS=1 \
+        -env X11VNC_CREATE_GEOM=${1:-1024x768x16} \
+        -gone 'killall Xvfb' \
+        -bg -nopw
+</pre>
+<br />
+And once the vnc server starts, you connect from your client through
+a tunnel.<br /><br />
+<pre>
+vncviewer localhost:5900
+</pre>
+
+These steps have worked in Debian 8.0 Jessie.
+<br />
+ 
+<b>Published: Thuesday, February 23, 2016</b>
+<a href="tag_headless">headless</a>&nbsp;<a href="tag_fluxbox">fluxbox</a>&nbsp;<a href="tag_lightdm">lightdm</a>&nbsp;
+</div>
+
+<hr>
+<div id="section">
+<script type="text/javascript">
+google_ad_client = "ca-pub-1655368661140826";
+google_ad_slot = "5799356291";
+google_ad_width = 728;
+google_ad_height = 90;
+</script><!-- blog_linux_1 --><script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script><p id="postTitle"><a href="Compile%20keepass%202.0.2%20on%20Debian%20Linux%20Jeesie.html" id="alink">Compile keepass 2.0.2 on Debian Linux Jeesie</a></p>
 
 KeepassX webpage states: "KeePassX is an application for people with extremly high demands on secure personal data management. It has a light interface, is cross platform and published under the terms of the GNU General Public License."<br /><br />
 These steps have been executed in Debian Linux 8.2.0 Jeesie but for an experienced System Administrator/Hacker this should be trivial.<br /><br />
@@ -279,106 +438,6 @@ make install
  
 <b>Published: Saturday, February 20, 2016</b>
 <a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;
-</div>
-
-<hr>
-<div id="section">
-<p id="postTitle"><a href="Install%20Libreoffice%20on%20Debian.html" id="alink">Install Libreoffice on Debian</a></p>
-
-Go to <a href="http://www.libreoffice.org/" target="_new">Libreoffice Webpage</a> and download
-the libreoffice package, in my case it was:<br />
-<pre>
-wget http://download.documentfoundation.org/libreoffice/stable/4.4.7/deb/x86_64/LibreOffice_4.4.7_Linux_x86-64_deb.tar.gz
-tar zxvf LibreOffice_4.4.7_Linux_x86-64_deb.tar.gz
-cd LibreOffice_4.4.7.2_Linux_x86-64_deb/
-cd DEBS
-dpkg -i *.deb
-
----- START OUTPUT ----
-Selecting previously unselected package libobasis4.4-base.
-(Reading database ... 155812 files and directories currently installed.)
-Preparing to unpack libobasis4.4-base_4.4.7.2-2_amd64.deb ...
-Unpacking libobasis4.4-base (4.4.7.2-2) ...
-Selecting previously unselected package libobasis4.4-calc.
-Preparing to unpack libobasis4.4-calc_4.4.7.2-2_amd64.deb ...
-Unpacking libobasis4.4-calc (4.4.7.2-2) ...
-Selecting previously unselected package libobasis4.4-core.
-Preparing to unpack libobasis4.4-core_4.4.7.2-2_amd64.deb ...
-Unpacking libobasis4.4-core (4.4.7.2-2) ...
-...
----- END OUTPUT ----
-</pre>
-
-
-
-<b>Published: Friday, February 5, 2016</b>
-
-</div>
-
-<hr>
-<div id="section">
-<script type="text/javascript">
-google_ad_client = "ca-pub-1655368661140826";
-google_ad_slot = "5799356291";
-google_ad_width = 728;
-google_ad_height = 90;
-</script><!-- blog_linux_1 --><script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-</script><p id="postTitle"><a href="Secure%20Debian%20Post%20Install%20configuration.html" id="alink">Secure Debian Post Install configuration</a></p>
-
-In this <a href="http://blog.wallves.com/Some%20linux%20firewall%20tips.html">short article</a> i share some short
-but powerfull firewall logging tip.  Now i tell a little about some Debian post installation instructions i would
-commonly recommend.<br />
-Download the last stable Debian from <a href="https://www.debian.org/CD/http-ftp/#stable">here</a><br /><br />
-
-When you just install the last Debian you may have something more or less like this:<br />
-
-<pre>
-root@host1:~# netstat --listen -np
-<span style="color: #888888">Active Internet connections (only servers)</span>
-<span style="color: #888888">Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name</span>
-<span style="color: #888888">tcp        0      0 0.0.0.0:111             0.0.0.0:*               LISTEN      397/rpcbind     </span>
-<span style="color: #888888">tcp        0      0 127.0.0.1:631           0.0.0.0:*               LISTEN      445/cupsd       </span>
-<span style="color: #888888">tcp        0      0 127.0.0.1:25            0.0.0.0:*               LISTEN      696/exim4       </span>
-<span style="color: #888888">tcp        0      0 0.0.0.0:38845           0.0.0.0:*               LISTEN      406/rpc.statd   </span>
-<span style="color: #888888">tcp6       0      0 :::111                  :::*                    LISTEN      397/rpcbind     </span>
-<span style="color: #888888">tcp6       0      0 :::48180                :::*                    LISTEN      406/rpc.statd   </span>
-<span style="color: #888888">tcp6       0      0 ::1:631                 :::*                    LISTEN      445/cupsd       </span>
-<span style="color: #888888">tcp6       0      0 ::1:25                  :::*                    LISTEN      696/exim4       </span>
-<span style="color: #888888">udp        0      0 0.0.0.0:996             0.0.0.0:*                           397/rpcbind     </span>
-<span style="color: #888888">udp        0      0 0.0.0.0:5353            0.0.0.0:*                           427/avahi-daemon: r</span>
-<span style="color: #888888">udp        0      0 127.0.0.1:1006          0.0.0.0:*                           406/rpc.statd   </span>
-<span style="color: #888888">udp        0      0 0.0.0.0:42504           0.0.0.0:*                           427/avahi-daemon: r</span>
-<span style="color: #888888">udp        0      0 0.0.0.0:68              0.0.0.0:*                           356/dhclient    </span>
-<span style="color: #888888">udp        0      0 0.0.0.0:50762           0.0.0.0:*                           356/dhclient    </span>
-<span style="color: #888888">udp        0      0 0.0.0.0:111             0.0.0.0:*                           397/rpcbind     </span>
-<span style="color: #888888">udp        0      0 0.0.0.0:631             0.0.0.0:*                           448/cups-browsed</span>
-<span style="color: #888888">udp        0      0 0.0.0.0:49788           0.0.0.0:*                           406/rpc.statd   </span>
-<span style="color: #888888">udp6       0      0 :::996                  :::*                                397/rpcbind     </span>
-<span style="color: #888888">udp6       0      0 :::5353                 :::*                                427/avahi-daemon: r</span>
-<span style="color: #888888">udp6       0      0 :::59218                :::*                                406/rpc.statd   </span>
-<span style="color: #888888">udp6       0      0 :::14952                :::*                                356/dhclient    </span>
-<span style="color: #888888">udp6       0      0 :::111                  :::*                                397/rpcbind     </span>
-<span style="color: #888888">udp6       0      0 :::60837                :::*                                427/avahi-daemon: r</span>
-</pre>
-
-If you are a security conscious administrator, then you agree here is work do to.  Not only to have a safer
-workplace, also to reduce the cpu and memory usage!<br /><br />
-
-<pre>
-apt-get remove exim4-*</span>
-<span style="color: #888888">apt-get remove rpcbind</span>
-<span style="color: #888888">apt-get remove avahi-daemon</span>
-<span style="color: #888888">apt-get remove cups</span>
-<span style="color: #888888">apt-get remove cups-browsed</span>
-<span style="color: #888888">apt-get remove cups-daemon</span>
-</pre>
-
-Now you would have a clearner list of network listening services.<br />
-
-
-<div style="clear: both;"></div>
-<b>Published: Monday, October 12, 2015</b>
-<a href="tag_debian">debian</a>&nbsp;<a href="tag_security">security</a>&nbsp;
 </div>
 
 <hr>

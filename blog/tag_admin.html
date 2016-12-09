@@ -8,6 +8,55 @@
 window.parent.document.title = "Category admin";
 </script>
 <div id="section">
+<p id="postTitle"><a href="Compile%20keepass%202.0.3%20on%20Linux.html" id="alink">Compile keepass 2.0.3 on Linux</a></p>
+
+KeepassX is a graphical password management system, the webpage is <a href="https://www.keepassx.org/" target="_new">www.keepassx.org</a>
+<br />
+KeepassX webpage states: "KeePassX is an application for people with extremly high demands on secure personal data management. It has a light interface, is cross platform and published under the terms of the GNU General Public License."<br /><br />
+These steps have been executed on a Debian 
+Linux 8.6.0 but for an experienced System 
+Administrator/Hacker this should be trivial.<br /><br />
+You can look at older related posts:<br />
+<ul>
+<li><a href="Compile%20keepass%200.4.3%20on%20Debian%20Linux%20wheezy.html">how to install KeepassX 0.4.3</a></li>
+<li><a href="http://www.wallves.com/blog/Compile%20keepass%202.0.2%20on%20Debian%20Linux%20Jeesie.html">how to install KeepassX 2.0.2</a></li>
+</ul><br />
+
+First you should have these packages installed:<br />
+<pre>
+apt-get install cmake g++ libqt4-core libqt4-dev libgcrypt-dev zlib1g zlib1g-dev
+
+</pre>
+<br />
+Now you can download the latest keepassX package and compile it:<br />
+<pre>
+wget https://www.keepassx.org/releases/2.0.3/keepassx-2.0.3.tar.gz
+tar zxvf keepassx-2.0.3.tar.gz
+cd keepassx-2.0.3/
+mkdir build
+cd build
+cmake -DCMAKE_INSTALL_PREFIX=/usr/local ..
+</pre>
+<br />As root:<br />
+<pre>
+make install
+</pre>
+<br />
+
+Now you could for example, add the access on a fluxbox window manager:
+
+
+<br />
+It works.<br />
+<img src="images/keepass3.png" />
+<br />
+ 
+<b>Published: Saturday, December 09, 2016</b>
+<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;
+</div>
+
+<hr>
+<div id="section">
 <p id="postTitle"><a href="Unziping%20large%20files%20in%20linux%20copied%20from%20windows.html" id="alink">Unziping large files in linux copied from windows</a></p>
 
 In Windows 7 i created a large ZIP file (around 15 Gigas). I wanted to
