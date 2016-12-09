@@ -127,6 +127,38 @@ It works.<br />
 
 <hr>
 <div id="section">
+<p id="postTitle"><a href="Unziping%20large%20files%20in%20linux%20copied%20from%20windows.html" id="alink">Unziping large files in linux copied from windows</a></p>
+
+In Windows 7 i created a large ZIP file (around 15 Gigas). I wanted to
+move it to a linux machine and unzip it there.  But once in the linux 
+machine, it produced this error:
+
+<pre>
+unzip Windows\ 7\ Clone.zip                          
+Archive:  Windows 7 Clone.zip
+warning [Windows 7 Clone.zip]:  15415149290 extra bytes at beginning or within zipfile
+  (attempting to process anyway)
+error [Windows 7 Clone.zip]:  start of central directory not found;
+  zipfile corrupt.
+  (please check that you have transferred or created the zipfile in the
+  appropriate BINARY mode and that you have compiled UnZip properly)
+</pre>
+After trying some things i resolved it like this:<br />
+<pre>
+7za x Windows\ 7\ Clone.zip
+7-Zip (A) [64] 9.20  Copyright (c) 1999-2010 Igor Pavlov  2010-11-18
+p7zip Version 9.20 (locale=en_US.UTF-8,Utf16=on,HugeFiles=on,4 CPUs)
+Processing archive: Windows 7 Clone.zip
+Extracting  Windows 7 Clone/Windows 7 Clone.vbox
+</pre>
+
+<div style="clear: both;"></div>
+<b>Published: Thursday, August 25, 2016</b>
+<a href="tag_admin">admin</a>&nbsp;
+</div>
+
+<hr>
+<div id="section">
 <p id="postTitle"><a href="Installing%20Apache%20from%20scratch.html" id="alink">Installing Apache from scratch</a></p>
 
 <u>1) A required library:</u><br />
@@ -158,38 +190,6 @@ make
 <div style="clear: both;"></div>
 <b>Published: Thursday, August 25, 2016</b>
 <a href="tag_admin">admin</a>&nbsp;<a href="tag_apache">apache</a>&nbsp;
-</div>
-
-<hr>
-<div id="section">
-<p id="postTitle"><a href="Unziping%20large%20files%20in%20linux%20copied%20from%20windows.html" id="alink">Unziping large files in linux copied from windows</a></p>
-
-In Windows 7 i created a large ZIP file (around 15 Gigas). I wanted to
-move it to a linux machine and unzip it there.  But once in the linux 
-machine, it produced this error:
-
-<pre>
-unzip Windows\ 7\ Clone.zip                          
-Archive:  Windows 7 Clone.zip
-warning [Windows 7 Clone.zip]:  15415149290 extra bytes at beginning or within zipfile
-  (attempting to process anyway)
-error [Windows 7 Clone.zip]:  start of central directory not found;
-  zipfile corrupt.
-  (please check that you have transferred or created the zipfile in the
-  appropriate BINARY mode and that you have compiled UnZip properly)
-</pre>
-After trying some things i resolved it like this:<br />
-<pre>
-7za x Windows\ 7\ Clone.zip
-7-Zip (A) [64] 9.20  Copyright (c) 1999-2010 Igor Pavlov  2010-11-18
-p7zip Version 9.20 (locale=en_US.UTF-8,Utf16=on,HugeFiles=on,4 CPUs)
-Processing archive: Windows 7 Clone.zip
-Extracting  Windows 7 Clone/Windows 7 Clone.vbox
-</pre>
-
-<div style="clear: both;"></div>
-<b>Published: Thursday, August 25, 2016</b>
-<a href="tag_admin">admin</a>&nbsp;
 </div>
 
 <hr>

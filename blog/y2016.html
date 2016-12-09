@@ -170,41 +170,6 @@ apt-get install texlive-latex-extra
 
 <hr>
 <div id="section">
-<p id="postTitle"><a href="Installing%20Apache%20from%20scratch.html" id="alink">Installing Apache from scratch</a></p>
-
-<u>1) A required library:</u><br />
-<pre>
-apt-get install libpcre++-dev
-</pre>
-<br />
-<u>2) Obtain the sources:</u><br />
-<pre>
-wget "http://apache.dattatec.com//httpd/httpd-2.4.18.tar.bz2"
-tar jxvf httpd-2.4.18.tar.bz2
-wget "http://mirrors.nxnethosting.com/apache//apr/apr-1.5.2.tar.gz"
-wget http://apache.dattatec.com//apr/apr-util-1.5.4.tar.gz
-
-cd httpd-2.4.18/srclib
-tar zxvf ../../apr-1.5.2.tar.gz
-tar zxvf ../../apr-util-1.5.4.tar.gz
-ln -s apr-1.5.2/ apr
-ln -s apr-util-1.5.4/ apr-util
-cd ..
-
-./configure --enable-ssl \
---prefix=/usr/local/apache2/ \
---enable-so --with-included-apr \
---enable-rewrite --enable-rewrite --enable-proxy --enable-cgi
-
-make
-</pre>
-<div style="clear: both;"></div>
-<b>Published: Thursday, August 25, 2016</b>
-<a href="tag_admin">admin</a>&nbsp;<a href="tag_apache">apache</a>&nbsp;
-</div>
-
-<hr>
-<div id="section">
 <p id="postTitle"><a href="Unziping%20large%20files%20in%20linux%20copied%20from%20windows.html" id="alink">Unziping large files in linux copied from windows</a></p>
 
 In Windows 7 i created a large ZIP file (around 15 Gigas). I wanted to
@@ -237,44 +202,37 @@ Extracting  Windows 7 Clone/Windows 7 Clone.vbox
 
 <hr>
 <div id="section">
-<p id="postTitle"><a href="Headless%20Linux%20Server%20with%20X%20Fluxbox%20and%20Lightdm.html" id="alink">Headless Linux Server with X Fluxbox and Lightdm</a></p>
+<p id="postTitle"><a href="Installing%20Apache%20from%20scratch.html" id="alink">Installing Apache from scratch</a></p>
 
-Hi, here is a very short list telling about how you can have
-very easily a server withoug a monitor connected and manage it
-with just few resources... a short post but without waste!<br /><br />
-
-<b>Install headless lightdm with fluxbox and vnc</b><br />
+<u>1) A required library:</u><br />
 <pre>
-apt-get install lightdm
-apt-get install fluxbox
-apt-get install x11vnc
-apt-get install xvfb
-apt-get remove xserver-xorg-video*
-</pre>
-
-Now, you setup the SSH Server and connect creating a tunnel.<br /><br />
-
-Once connected, in the Headless Server you type:
-<br /><br />
-<pre>
-x11vnc -localhost -create -env FD_PROG=/usr/bin/fluxbox \
-        -env X11VNC_FINDDISPLAY_ALWAYS_FAILS=1 \
-        -env X11VNC_CREATE_GEOM=${1:-1024x768x16} \
-        -gone 'killall Xvfb' \
-        -bg -nopw
+apt-get install libpcre++-dev
 </pre>
 <br />
-And once the vnc server starts, you connect from your client through
-a tunnel.<br /><br />
+<u>2) Obtain the sources:</u><br />
 <pre>
-vncviewer localhost:5900
-</pre>
+wget "http://apache.dattatec.com//httpd/httpd-2.4.18.tar.bz2"
+tar jxvf httpd-2.4.18.tar.bz2
+wget "http://mirrors.nxnethosting.com/apache//apr/apr-1.5.2.tar.gz"
+wget http://apache.dattatec.com//apr/apr-util-1.5.4.tar.gz
 
-These steps have worked in Debian 8.0 Jessie.
-<br />
- 
-<b>Published: Thuesday, February 23, 2016</b>
-<a href="tag_headless">headless</a>&nbsp;<a href="tag_fluxbox">fluxbox</a>&nbsp;<a href="tag_lightdm">lightdm</a>&nbsp;
+cd httpd-2.4.18/srclib
+tar zxvf ../../apr-1.5.2.tar.gz
+tar zxvf ../../apr-util-1.5.4.tar.gz
+ln -s apr-1.5.2/ apr
+ln -s apr-util-1.5.4/ apr-util
+cd ..
+
+./configure --enable-ssl \
+--prefix=/usr/local/apache2/ \
+--enable-so --with-included-apr \
+--enable-rewrite --enable-rewrite --enable-proxy --enable-cgi
+
+make
+</pre>
+<div style="clear: both;"></div>
+<b>Published: Thursday, August 25, 2016</b>
+<a href="tag_admin">admin</a>&nbsp;<a href="tag_apache">apache</a>&nbsp;
 </div>
 
 <hr>
@@ -386,6 +344,48 @@ Finished
  
 <b>Published: Thuesday, February 23, 2016</b>
 <a href="tag_headless">headless</a>&nbsp;<a href="tag_lightdm">lightdm</a>&nbsp;<a href="tag_fluxbox">fluxbox</a>&nbsp;
+</div>
+
+<hr>
+<div id="section">
+<p id="postTitle"><a href="Headless%20Linux%20Server%20with%20X%20Fluxbox%20and%20Lightdm.html" id="alink">Headless Linux Server with X Fluxbox and Lightdm</a></p>
+
+Hi, here is a very short list telling about how you can have
+very easily a server withoug a monitor connected and manage it
+with just few resources... a short post but without waste!<br /><br />
+
+<b>Install headless lightdm with fluxbox and vnc</b><br />
+<pre>
+apt-get install lightdm
+apt-get install fluxbox
+apt-get install x11vnc
+apt-get install xvfb
+apt-get remove xserver-xorg-video*
+</pre>
+
+Now, you setup the SSH Server and connect creating a tunnel.<br /><br />
+
+Once connected, in the Headless Server you type:
+<br /><br />
+<pre>
+x11vnc -localhost -create -env FD_PROG=/usr/bin/fluxbox \
+        -env X11VNC_FINDDISPLAY_ALWAYS_FAILS=1 \
+        -env X11VNC_CREATE_GEOM=${1:-1024x768x16} \
+        -gone 'killall Xvfb' \
+        -bg -nopw
+</pre>
+<br />
+And once the vnc server starts, you connect from your client through
+a tunnel.<br /><br />
+<pre>
+vncviewer localhost:5900
+</pre>
+
+These steps have worked in Debian 8.0 Jessie.
+<br />
+ 
+<b>Published: Thuesday, February 23, 2016</b>
+<a href="tag_headless">headless</a>&nbsp;<a href="tag_fluxbox">fluxbox</a>&nbsp;<a href="tag_lightdm">lightdm</a>&nbsp;
 </div>
 
 <hr>
