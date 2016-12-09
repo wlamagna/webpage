@@ -8,6 +8,70 @@
 window.parent.document.title = "Server Linux Devops Blog from Walter Lamagna";
 </script>
 <div id="section">
+<p id="postTitle"><a href="An%20additional%20LCD%20notebook%20monitor.html" id="alink">An additional LCD notebook monitor</a></p>
+
+Once i had a notebook, it was red, lenovo, z80... rest in peace.  One day, after using
+it helping helping at <a href="http://serfiscal.org/">an ONG Called Ser Fiscal</a> it started
+with problems...  at that ONG i was helping with the independant control of the elections
+documenting fraud and gave some technical assitance.  Some voluntary work.<br />
+But after that point in time, something very bad started to happen with that notebook and
+finally it never started again.  Of course i went to Lenovo here in Argentina, i do not know
+now, i suppose it is not much different, but the official technical service told me that the
+notebook was a rare model and they may not have the parts, in that case i would not have my
+money back anyway... (yes, lets cry together with a cold beer).<br /><br />
+Whathever, i wanted to recover something from the notebook, i could reuse the hard disk, i can
+sell the memory, and i wanted to reuse the monitor (if possible).<br /><br />
+<br />
+<b>Step 1: Obtain the monitor code</b><br />
+<br />
+<img src="images/lcd1.jpg" width=300 height=300 /><br />
+<img src="images/lcd2.jpg" width=300 height=300 /><br />
+<img src="images/lcd3.jpg" width=300 height=300 /><br />
+<br />
+
+<b>Step 2: Look for a selled of the circuit</b><br />
+I obtained it at ebay, the article at that time looked like this:
+<img src="images/ebay1.jpg" width=300 height=300 /><br />
+I bought it from a selled called <a href="http://www.ebay.com/usr/xiongchun2013?_trksid=p2047675.l2559">xionchung2013</a><br />
+This may sound like publicity, honestly i am just happy because i got the article and i had good
+luck that it worked.  But you wouldn't believe the troubles i had.  In Argentina we had a not so nice
+government from 2010 to 2015 and the possibility to import things, even they are not done here was arbitrary:
+only people with friends in the government could do that, and you can imagine that somebody like me is
+not the profile of somebody that makes friends with politicians.  Resuming, the selled sent the product and
+it never arrived, luckyly it was returned to him, i had to pay him again for the delivery, and the
+second time i contacted the postal office and followed like a crazy the package.<br /> Yes, lets
+cry together again with a cold beer in a bar.<br /><br />
+
+<b>Step 3: Connect it and use it!</b><br />
+I have to post some pictures about how it looks like.  It is great!<br />
+
+
+<b>Step 4: Enabling the secondary monitor in linux</b><br />
+I have this script to enable the monitor in the office or at home:<br />
+
+<pre>
+walter@arsat:~$ cat monitors.sh 
+#!/bin/bash
+
+if [[ "$1" == "office" ]]; then
+	xrandr --auto --output eDP1 --mode 1360x768 --left-of VGA1
+else
+# CASA
+	echo "En casa";
+	xrandr --auto --output VGA1 --mode 1920x1200 --left-of eDP1
+fi;
+
+</pre>
+<br />
+
+
+ 
+<b>Published: Saturday, December 09, 2016</b>
+<a href="tag_admin">admin</a>&nbsp;
+</div>
+
+<hr>
+<div id="section">
 <p id="postTitle"><a href="Compile%20keepass%202.0.3%20on%20Linux.html" id="alink">Compile keepass 2.0.3 on Linux</a></p>
 
 KeepassX is a graphical password management system, the webpage is <a href="https://www.keepassx.org/" target="_new">www.keepassx.org</a>
@@ -84,6 +148,41 @@ cp src/or/config/torrc /usr/local/etc/tor/
 
 <hr>
 <div id="section">
+<p id="postTitle"><a href="Installing%20Apache%20from%20scratch.html" id="alink">Installing Apache from scratch</a></p>
+
+<u>1) A required library:</u><br />
+<pre>
+apt-get install libpcre++-dev
+</pre>
+<br />
+<u>2) Obtain the sources:</u><br />
+<pre>
+wget "http://apache.dattatec.com//httpd/httpd-2.4.18.tar.bz2"
+tar jxvf httpd-2.4.18.tar.bz2
+wget "http://mirrors.nxnethosting.com/apache//apr/apr-1.5.2.tar.gz"
+wget http://apache.dattatec.com//apr/apr-util-1.5.4.tar.gz
+
+cd httpd-2.4.18/srclib
+tar zxvf ../../apr-1.5.2.tar.gz
+tar zxvf ../../apr-util-1.5.4.tar.gz
+ln -s apr-1.5.2/ apr
+ln -s apr-util-1.5.4/ apr-util
+cd ..
+
+./configure --enable-ssl \
+--prefix=/usr/local/apache2/ \
+--enable-so --with-included-apr \
+--enable-rewrite --enable-rewrite --enable-proxy --enable-cgi
+
+make
+</pre>
+<div style="clear: both;"></div>
+<b>Published: Thursday, August 25, 2016</b>
+<a href="tag_admin">admin</a>&nbsp;<a href="tag_apache">apache</a>&nbsp;
+</div>
+
+<hr>
+<div id="section">
 <p id="postTitle"><a href="Installing%20latex%20with%20some%20usefull%20complements%20in%20Debian%20Linux.html" id="alink">Installing latex with some usefull complements in Debian Linux</a></p>
 <pre>
 apt-get install texlive texlive-math-extra texlive-science
@@ -132,42 +231,55 @@ Extracting  Windows 7 Clone/Windows 7 Clone.vbox
 
 <hr>
 <div id="section">
-<p id="postTitle"><a href="Installing%20Apache%20from%20scratch.html" id="alink">Installing Apache from scratch</a></p>
+<p id="postTitle"><a href="Headless%20Linux%20Server%20with%20X%20Fluxbox%20and%20Lightdm.html" id="alink">Headless Linux Server with X Fluxbox and Lightdm</a></p>
 
-<u>1) A required library:</u><br />
+Hi, here is a very short list telling about how you can have
+very easily a server withoug a monitor connected and manage it
+with just few resources... a short post but without waste!<br /><br />
+
+<b>Install headless lightdm with fluxbox and vnc</b><br />
 <pre>
-apt-get install libpcre++-dev
+apt-get install lightdm
+apt-get install fluxbox
+apt-get install x11vnc
+apt-get install xvfb
+apt-get remove xserver-xorg-video*
+</pre>
+
+Now, you setup the SSH Server and connect creating a tunnel.<br /><br />
+
+Once connected, in the Headless Server you type:
+<br /><br />
+<pre>
+x11vnc -localhost -create -env FD_PROG=/usr/bin/fluxbox \
+        -env X11VNC_FINDDISPLAY_ALWAYS_FAILS=1 \
+        -env X11VNC_CREATE_GEOM=${1:-1024x768x16} \
+        -gone 'killall Xvfb' \
+        -bg -nopw
 </pre>
 <br />
-<u>2) Obtain the sources:</u><br />
+And once the vnc server starts, you connect from your client through
+a tunnel.<br /><br />
 <pre>
-wget "http://apache.dattatec.com//httpd/httpd-2.4.18.tar.bz2"
-tar jxvf httpd-2.4.18.tar.bz2
-wget "http://mirrors.nxnethosting.com/apache//apr/apr-1.5.2.tar.gz"
-wget http://apache.dattatec.com//apr/apr-util-1.5.4.tar.gz
-
-cd httpd-2.4.18/srclib
-tar zxvf ../../apr-1.5.2.tar.gz
-tar zxvf ../../apr-util-1.5.4.tar.gz
-ln -s apr-1.5.2/ apr
-ln -s apr-util-1.5.4/ apr-util
-cd ..
-
-./configure --enable-ssl \
---prefix=/usr/local/apache2/ \
---enable-so --with-included-apr \
---enable-rewrite --enable-rewrite --enable-proxy --enable-cgi
-
-make
+vncviewer localhost:5900
 </pre>
-<div style="clear: both;"></div>
-<b>Published: Thursday, August 25, 2016</b>
-<a href="tag_admin">admin</a>&nbsp;<a href="tag_apache">apache</a>&nbsp;
+
+These steps have worked in Debian 8.0 Jessie.
+<br />
+ 
+<b>Published: Thuesday, February 23, 2016</b>
+<a href="tag_headless">headless</a>&nbsp;<a href="tag_fluxbox">fluxbox</a>&nbsp;<a href="tag_lightdm">lightdm</a>&nbsp;
 </div>
 
 <hr>
 <div id="section">
-<p id="postTitle"><a href="Installing%20Matlab%20R2013%208.01%20on%20Linux%20Headless%20Xvfb%20using%20lightdm%20and%20fluxbox.html" id="alink">Installing Matlab R2013 8.01 on Linux Headless Xvfb using lightdm and fluxbox</a></p>
+<script type="text/javascript">
+google_ad_client = "ca-pub-1655368661140826";
+google_ad_slot = "5799356291";
+google_ad_width = 728;
+google_ad_height = 90;
+</script><!-- blog_linux_1 --><script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script><p id="postTitle"><a href="Installing%20Matlab%20R2013%208.01%20on%20Linux%20Headless%20Xvfb%20using%20lightdm%20and%20fluxbox.html" id="alink">Installing Matlab R2013 8.01 on Linux Headless Xvfb using lightdm and fluxbox</a></p>
 
 Good, you are a Matlab user like me, but.. why are you willing to install it on a 
 headless linux workstation ?  I thought i was the only person in the world doing that
@@ -274,93 +386,6 @@ Finished
  
 <b>Published: Thuesday, February 23, 2016</b>
 <a href="tag_headless">headless</a>&nbsp;<a href="tag_lightdm">lightdm</a>&nbsp;<a href="tag_fluxbox">fluxbox</a>&nbsp;
-</div>
-
-<hr>
-<div id="section">
-<p id="postTitle"><a href="Headless%20Linux%20Server%20with%20X%20Fluxbox%20and%20Lightdm.html" id="alink">Headless Linux Server with X Fluxbox and Lightdm</a></p>
-
-Hi, here is a very short list telling about how you can have
-very easily a server withoug a monitor connected and manage it
-with just few resources... a short post but without waste!<br /><br />
-
-<b>Install headless lightdm with fluxbox and vnc</b><br />
-<pre>
-apt-get install lightdm
-apt-get install fluxbox
-apt-get install x11vnc
-apt-get install xvfb
-apt-get remove xserver-xorg-video*
-</pre>
-
-Now, you setup the SSH Server and connect creating a tunnel.<br /><br />
-
-Once connected, in the Headless Server you type:
-<br /><br />
-<pre>
-x11vnc -localhost -create -env FD_PROG=/usr/bin/fluxbox \
-        -env X11VNC_FINDDISPLAY_ALWAYS_FAILS=1 \
-        -env X11VNC_CREATE_GEOM=${1:-1024x768x16} \
-        -gone 'killall Xvfb' \
-        -bg -nopw
-</pre>
-<br />
-And once the vnc server starts, you connect from your client through
-a tunnel.<br /><br />
-<pre>
-vncviewer localhost:5900
-</pre>
-
-These steps have worked in Debian 8.0 Jessie.
-<br />
- 
-<b>Published: Thuesday, February 23, 2016</b>
-<a href="tag_headless">headless</a>&nbsp;<a href="tag_fluxbox">fluxbox</a>&nbsp;<a href="tag_lightdm">lightdm</a>&nbsp;
-</div>
-
-<hr>
-<div id="section">
-<script type="text/javascript">
-google_ad_client = "ca-pub-1655368661140826";
-google_ad_slot = "5799356291";
-google_ad_width = 728;
-google_ad_height = 90;
-</script><!-- blog_linux_1 --><script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-</script><p id="postTitle"><a href="Compile%20keepass%202.0.2%20on%20Debian%20Linux%20Jeesie.html" id="alink">Compile keepass 2.0.2 on Debian Linux Jeesie</a></p>
-
-KeepassX webpage states: "KeePassX is an application for people with extremly high demands on secure personal data management. It has a light interface, is cross platform and published under the terms of the GNU General Public License."<br /><br />
-These steps have been executed in Debian Linux 8.2.0 Jeesie but for an experienced System Administrator/Hacker this should be trivial.<br /><br />
-Some time ago i explained 
-<a href="Compile%20keepass%200.4.3%20on%20Debian%20Linux%20wheezy.html">how to install KeepassX 0.4.3</a>
-but a newer version is available and i wanted to have it.<br /><br />
-
-First you should have these packages installed:<br />
-<pre>
-apt-get install cmake
-apt-get install g++
-apt-get install libqt4-core
-apt-get install libqt4-dev
-apt-get install libgcrypt-dev
-apt-get install zlib1g zlib1g-dev
-</pre>
-<br />
-Now you can download the latest keepassX package and compile it:<br />
-<pre>
-wget https://www.keepassx.org/releases/2.0.2/keepassx-2.0.2.tar.gz
-tar zxvf keepassx-2.0.2.tar.gz
-cd keepassx-2.0.2
-mkdir build
-cd build
-cmake -DCMAKE_INSTALL_PREFIX=/usr/local ..
-</pre>
-<br />As root:<br />
-<pre>
-make install
-</pre>
-<br />
- 
-<b>Published: Saturday, February 20, 2016</b>
-<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;
 </div>
 
 <hr>
