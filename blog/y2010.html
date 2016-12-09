@@ -157,14 +157,6 @@ Starting VMware autostart virtual machines:
 
 <hr>
 <div id="section">
-<p id="postTitle"><a href="Joining%20multiple%20files%20with%20lxsplit.html" id="alink">Joining multiple files with lxsplit</a></p>
- I downloaded multiple files, they were splitted so i had to join them back.&nbsp; The files are commonly splitted to make it easier to download and to minimize the damage if the connection gets lost,<br /> of course, we are not considering a normal FTP or SSH with resume capabilities.<br /><br /><b>1) First install the lxsplit</b><br /> yum install lxsplit<br /><br /><b>2) Now it is time for some scripting:</b><br /><br /> for i in $(seq 1 9); do lxsplit -j M.part$i.rar.001; done<br /><br /> for i in $(seq 10 19); do lxsplit -j M.part$i.rar.001; done<br /><br /> And that is all.<br /> Happy new year for everybody. <div style="clear: both;"></div>
-<b>Published: Saturday, January 02, 2010</b>
-
-</div>
-
-<hr>
-<div id="section">
 <p id="postTitle"><a href="What%20audio%20codecs%20to%20install%20after%20installing%20Fedora.html" id="alink">What audio codecs to install after installing Fedora</a></p>
 I shared some tips to do after installing
 Fedora 12: <a href="What%20should%20i%20do%20after%20installing%20Fedora%2012.html">head</a>.
@@ -192,6 +184,14 @@ yum install libdvdcss
 </pre>
 <div style="clear: both;">
 
+<b>Published: Saturday, January 02, 2010</b>
+
+</div>
+
+<hr>
+<div id="section">
+<p id="postTitle"><a href="Joining%20multiple%20files%20with%20lxsplit.html" id="alink">Joining multiple files with lxsplit</a></p>
+ I downloaded multiple files, they were splitted so i had to join them back.&nbsp; The files are commonly splitted to make it easier to download and to minimize the damage if the connection gets lost,<br /> of course, we are not considering a normal FTP or SSH with resume capabilities.<br /><br /><b>1) First install the lxsplit</b><br /> yum install lxsplit<br /><br /><b>2) Now it is time for some scripting:</b><br /><br /> for i in $(seq 1 9); do lxsplit -j M.part$i.rar.001; done<br /><br /> for i in $(seq 10 19); do lxsplit -j M.part$i.rar.001; done<br /><br /> And that is all.<br /> Happy new year for everybody. <div style="clear: both;"></div>
 <b>Published: Saturday, January 02, 2010</b>
 
 </div>

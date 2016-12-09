@@ -8,59 +8,10 @@
 window.parent.document.title = "Category admin";
 </script>
 <div id="section">
-<p id="postTitle"><a href="Compile%20keepass%202.0.3%20on%20Linux.html" id="alink">Compile keepass 2.0.3 on Linux</a></p>
-
-KeepassX is a graphical password management system, the webpage is <a href="https://www.keepassx.org/" target="_new">www.keepassx.org</a>
-<br />
-KeepassX webpage states: "KeePassX is an application for people with extremly high demands on secure personal data management. It has a light interface, is cross platform and published under the terms of the GNU General Public License."<br /><br />
-These steps have been executed on a Debian 
-Linux 8.6.0 but for an experienced System 
-Administrator/Hacker this should be trivial.<br /><br />
-You can look at older related posts:<br />
-<ul>
-<li><a href="Compile%20keepass%200.4.3%20on%20Debian%20Linux%20wheezy.html">how to install KeepassX 0.4.3</a></li>
-<li><a href="http://www.wallves.com/blog/Compile%20keepass%202.0.2%20on%20Debian%20Linux%20Jeesie.html">how to install KeepassX 2.0.2</a></li>
-</ul><br />
-
-First you should have these packages installed:<br />
-<pre>
-apt-get install cmake g++ libqt4-core libqt4-dev libgcrypt-dev zlib1g zlib1g-dev
-
-</pre>
-<br />
-Now you can download the latest keepassX package and compile it:<br />
-<pre>
-wget https://www.keepassx.org/releases/2.0.3/keepassx-2.0.3.tar.gz
-tar zxvf keepassx-2.0.3.tar.gz
-cd keepassx-2.0.3/
-mkdir build
-cd build
-cmake -DCMAKE_INSTALL_PREFIX=/usr/local ..
-</pre>
-<br />As root:<br />
-<pre>
-make install
-</pre>
-<br />
-
-Now you could for example, add the access on a fluxbox window manager:
-
-
-<br />
-It works.<br />
-<img src="images/keepass3.png" />
-<br />
- 
-<b>Published: Saturday, December 09, 2016</b>
-<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;
-</div>
-
-<hr>
-<div id="section">
 <p id="postTitle"><a href="An%20additional%20LCD%20notebook%20monitor.html" id="alink">An additional LCD notebook monitor</a></p>
 
 Once i had a notebook, it was red, lenovo, z80... rest in peace.  One day, after using
-it helping helping at <a href="http://serfiscal.org/">an ONG Called Ser Fiscal</a> it started
+it helping at <a href="http://serfiscal.org/">an ONG Called Ser Fiscal</a> it started
 with problems...  at that ONG i was helping with the independant control of the elections
 documenting fraud and gave some technical assitance.  Some voluntary work.<br />
 But after that point in time, something very bad started to happen with that notebook and
@@ -127,34 +78,51 @@ fi;
 
 <hr>
 <div id="section">
-<p id="postTitle"><a href="Unziping%20large%20files%20in%20linux%20copied%20from%20windows.html" id="alink">Unziping large files in linux copied from windows</a></p>
+<p id="postTitle"><a href="Compile%20keepass%202.0.3%20on%20Linux.html" id="alink">Compile keepass 2.0.3 on Linux</a></p>
 
-In Windows 7 i created a large ZIP file (around 15 Gigas). I wanted to
-move it to a linux machine and unzip it there.  But once in the linux 
-machine, it produced this error:
+KeepassX is a graphical password management system, the webpage is <a href="https://www.keepassx.org/" target="_new">www.keepassx.org</a>
+<br />
+KeepassX webpage states: "KeePassX is an application for people with extremly high demands on secure personal data management. It has a light interface, is cross platform and published under the terms of the GNU General Public License."<br /><br />
+These steps have been executed on a Debian 
+Linux 8.6.0 but for an experienced System 
+Administrator/Hacker this should be trivial.<br /><br />
+You can look at older related posts:<br />
+<ul>
+<li><a href="Compile%20keepass%200.4.3%20on%20Debian%20Linux%20wheezy.html">how to install KeepassX 0.4.3</a></li>
+<li><a href="http://www.wallves.com/blog/Compile%20keepass%202.0.2%20on%20Debian%20Linux%20Jeesie.html">how to install KeepassX 2.0.2</a></li>
+</ul><br />
 
+First you should have these packages installed:<br />
 <pre>
-unzip Windows\ 7\ Clone.zip                          
-Archive:  Windows 7 Clone.zip
-warning [Windows 7 Clone.zip]:  15415149290 extra bytes at beginning or within zipfile
-  (attempting to process anyway)
-error [Windows 7 Clone.zip]:  start of central directory not found;
-  zipfile corrupt.
-  (please check that you have transferred or created the zipfile in the
-  appropriate BINARY mode and that you have compiled UnZip properly)
-</pre>
-After trying some things i resolved it like this:<br />
-<pre>
-7za x Windows\ 7\ Clone.zip
-7-Zip (A) [64] 9.20  Copyright (c) 1999-2010 Igor Pavlov  2010-11-18
-p7zip Version 9.20 (locale=en_US.UTF-8,Utf16=on,HugeFiles=on,4 CPUs)
-Processing archive: Windows 7 Clone.zip
-Extracting  Windows 7 Clone/Windows 7 Clone.vbox
-</pre>
+apt-get install cmake g++ libqt4-core libqt4-dev libgcrypt-dev zlib1g zlib1g-dev
 
-<div style="clear: both;"></div>
-<b>Published: Thursday, August 25, 2016</b>
-<a href="tag_admin">admin</a>&nbsp;
+</pre>
+<br />
+Now you can download the latest keepassX package and compile it:<br />
+<pre>
+wget https://www.keepassx.org/releases/2.0.3/keepassx-2.0.3.tar.gz
+tar zxvf keepassx-2.0.3.tar.gz
+cd keepassx-2.0.3/
+mkdir build
+cd build
+cmake -DCMAKE_INSTALL_PREFIX=/usr/local ..
+</pre>
+<br />As root:<br />
+<pre>
+make install
+</pre>
+<br />
+
+Now you could for example, add the access on a fluxbox window manager:
+
+
+<br />
+It works.<br />
+<img src="images/keepass3.png" />
+<br />
+ 
+<b>Published: Saturday, December 09, 2016</b>
+<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;
 </div>
 
 <hr>
@@ -190,6 +158,38 @@ make
 <div style="clear: both;"></div>
 <b>Published: Thursday, August 25, 2016</b>
 <a href="tag_admin">admin</a>&nbsp;<a href="tag_apache">apache</a>&nbsp;
+</div>
+
+<hr>
+<div id="section">
+<p id="postTitle"><a href="Unziping%20large%20files%20in%20linux%20copied%20from%20windows.html" id="alink">Unziping large files in linux copied from windows</a></p>
+
+In Windows 7 i created a large ZIP file (around 15 Gigas). I wanted to
+move it to a linux machine and unzip it there.  But once in the linux 
+machine, it produced this error:
+
+<pre>
+unzip Windows\ 7\ Clone.zip                          
+Archive:  Windows 7 Clone.zip
+warning [Windows 7 Clone.zip]:  15415149290 extra bytes at beginning or within zipfile
+  (attempting to process anyway)
+error [Windows 7 Clone.zip]:  start of central directory not found;
+  zipfile corrupt.
+  (please check that you have transferred or created the zipfile in the
+  appropriate BINARY mode and that you have compiled UnZip properly)
+</pre>
+After trying some things i resolved it like this:<br />
+<pre>
+7za x Windows\ 7\ Clone.zip
+7-Zip (A) [64] 9.20  Copyright (c) 1999-2010 Igor Pavlov  2010-11-18
+p7zip Version 9.20 (locale=en_US.UTF-8,Utf16=on,HugeFiles=on,4 CPUs)
+Processing archive: Windows 7 Clone.zip
+Extracting  Windows 7 Clone/Windows 7 Clone.vbox
+</pre>
+
+<div style="clear: both;"></div>
+<b>Published: Thursday, August 25, 2016</b>
+<a href="tag_admin">admin</a>&nbsp;
 </div>
 
 <hr>
