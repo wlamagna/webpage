@@ -8,6 +8,83 @@
 window.parent.document.title = "Server Linux Devops Blog from Walter Lamagna";
 </script>
 <div id="section">
+<p id="postTitle"><a href="Check%20the%20battery%20power%20from%20command%20line%20on%20linux.html" id="alink">Check the battery power from command line on linux</a></p>
+
+If you want to check from a script the state from the battery on the linux operating
+system, it is as easy as looking this file:
+<br /><br />
+<pre>
+cat /sys/class/power_supply/BAT0/capacity_level
+Normal
+</pre>
+
+<br />
+And this file gives the percentage of charge, in this example 97%:
+<br /><br />
+<pre>
+cat /sys/class/power_supply/BAT0/capacity
+97
+</pre>
+
+<br />
+
+
+ 
+<b>Published: Friday, December 09, 2016</b>
+<a href="tag_admin">admin</a>&nbsp;
+</div>
+
+<hr>
+<div id="section">
+<p id="postTitle"><a href="Compile%20keepass%202.0.3%20on%20Linux.html" id="alink">Compile keepass 2.0.3 on Linux</a></p>
+
+KeepassX is a graphical password management system, the webpage is <a href="https://www.keepassx.org/" target="_new">www.keepassx.org</a>
+<br />
+KeepassX webpage states: "KeePassX is an application for people with extremly high demands on secure personal data management. It has a light interface, is cross platform and published under the terms of the GNU General Public License."<br /><br />
+These steps have been executed on a Debian 
+Linux 8.6.0 but for an experienced System 
+Administrator/Hacker this should be trivial.<br /><br />
+You can look at older related posts:<br />
+<ul>
+<li><a href="Compile%20keepass%200.4.3%20on%20Debian%20Linux%20wheezy.html">how to install KeepassX 0.4.3</a></li>
+<li><a href="http://www.wallves.com/blog/Compile%20keepass%202.0.2%20on%20Debian%20Linux%20Jeesie.html">how to install KeepassX 2.0.2</a></li>
+</ul><br />
+
+First you should have these packages installed:<br />
+<pre>
+apt-get install cmake g++ libqt4-core libqt4-dev libgcrypt-dev zlib1g zlib1g-dev
+
+</pre>
+<br />
+Now you can download the latest keepassX package and compile it:<br />
+<pre>
+wget https://www.keepassx.org/releases/2.0.3/keepassx-2.0.3.tar.gz
+tar zxvf keepassx-2.0.3.tar.gz
+cd keepassx-2.0.3/
+mkdir build
+cd build
+cmake -DCMAKE_INSTALL_PREFIX=/usr/local ..
+</pre>
+<br />As root:<br />
+<pre>
+make install
+</pre>
+<br />
+
+Now you could for example, add the access on a fluxbox window manager:
+
+
+<br />
+It works.<br />
+<img src="images/keepass3.png" />
+<br />
+ 
+<b>Published: Saturday, December 09, 2016</b>
+<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;
+</div>
+
+<hr>
+<div id="section">
 <p id="postTitle"><a href="An%20additional%20LCD%20notebook%20monitor.html" id="alink">An additional LCD notebook monitor</a></p>
 
 Once i had a notebook, it was red, lenovo, z80... rest in peace.  One day, after using
@@ -78,55 +155,6 @@ fi;
 
 <hr>
 <div id="section">
-<p id="postTitle"><a href="Compile%20keepass%202.0.3%20on%20Linux.html" id="alink">Compile keepass 2.0.3 on Linux</a></p>
-
-KeepassX is a graphical password management system, the webpage is <a href="https://www.keepassx.org/" target="_new">www.keepassx.org</a>
-<br />
-KeepassX webpage states: "KeePassX is an application for people with extremly high demands on secure personal data management. It has a light interface, is cross platform and published under the terms of the GNU General Public License."<br /><br />
-These steps have been executed on a Debian 
-Linux 8.6.0 but for an experienced System 
-Administrator/Hacker this should be trivial.<br /><br />
-You can look at older related posts:<br />
-<ul>
-<li><a href="Compile%20keepass%200.4.3%20on%20Debian%20Linux%20wheezy.html">how to install KeepassX 0.4.3</a></li>
-<li><a href="http://www.wallves.com/blog/Compile%20keepass%202.0.2%20on%20Debian%20Linux%20Jeesie.html">how to install KeepassX 2.0.2</a></li>
-</ul><br />
-
-First you should have these packages installed:<br />
-<pre>
-apt-get install cmake g++ libqt4-core libqt4-dev libgcrypt-dev zlib1g zlib1g-dev
-
-</pre>
-<br />
-Now you can download the latest keepassX package and compile it:<br />
-<pre>
-wget https://www.keepassx.org/releases/2.0.3/keepassx-2.0.3.tar.gz
-tar zxvf keepassx-2.0.3.tar.gz
-cd keepassx-2.0.3/
-mkdir build
-cd build
-cmake -DCMAKE_INSTALL_PREFIX=/usr/local ..
-</pre>
-<br />As root:<br />
-<pre>
-make install
-</pre>
-<br />
-
-Now you could for example, add the access on a fluxbox window manager:
-
-
-<br />
-It works.<br />
-<img src="images/keepass3.png" />
-<br />
- 
-<b>Published: Saturday, December 09, 2016</b>
-<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;
-</div>
-
-<hr>
-<div id="section">
 <p id="postTitle"><a href="Installing%20tor%20on%20linux.html" id="alink">Installing tor on linux</a></p>
 
 Obtain the download link from the <a href="https://www.torproject.org/download/download.html.en">
@@ -150,54 +178,6 @@ cp src/or/config/torrc /usr/local/etc/tor/
 
 <b>Published: Friday, September 30, 2016</b>
 <a href="tag_security">security</a>&nbsp;<a href="tag_privacy">privacy</a>&nbsp;
-</div>
-
-<hr>
-<div id="section">
-<p id="postTitle"><a href="Installing%20latex%20with%20some%20usefull%20complements%20in%20Debian%20Linux.html" id="alink">Installing latex with some usefull complements in Debian Linux</a></p>
-<pre>
-apt-get install texlive texlive-math-extra texlive-science
-</pre>
-# Provides program.sty: <br />
-<pre>
-apt-get install texlive-latex-extra
-</pre>
-
-<div style="clear: both;"></div>
-<b>Published: Thursday, August 25, 2016</b>
-<a href="tag_debian">debian</a>&nbsp;
-</div>
-
-<hr>
-<div id="section">
-<p id="postTitle"><a href="Unziping%20large%20files%20in%20linux%20copied%20from%20windows.html" id="alink">Unziping large files in linux copied from windows</a></p>
-
-In Windows 7 i created a large ZIP file (around 15 Gigas). I wanted to
-move it to a linux machine and unzip it there.  But once in the linux 
-machine, it produced this error:
-
-<pre>
-unzip Windows\ 7\ Clone.zip                          
-Archive:  Windows 7 Clone.zip
-warning [Windows 7 Clone.zip]:  15415149290 extra bytes at beginning or within zipfile
-  (attempting to process anyway)
-error [Windows 7 Clone.zip]:  start of central directory not found;
-  zipfile corrupt.
-  (please check that you have transferred or created the zipfile in the
-  appropriate BINARY mode and that you have compiled UnZip properly)
-</pre>
-After trying some things i resolved it like this:<br />
-<pre>
-7za x Windows\ 7\ Clone.zip
-7-Zip (A) [64] 9.20  Copyright (c) 1999-2010 Igor Pavlov  2010-11-18
-p7zip Version 9.20 (locale=en_US.UTF-8,Utf16=on,HugeFiles=on,4 CPUs)
-Processing archive: Windows 7 Clone.zip
-Extracting  Windows 7 Clone/Windows 7 Clone.vbox
-</pre>
-
-<div style="clear: both;"></div>
-<b>Published: Thursday, August 25, 2016</b>
-<a href="tag_admin">admin</a>&nbsp;
 </div>
 
 <hr>
@@ -237,113 +217,50 @@ make
 
 <hr>
 <div id="section">
-<p id="postTitle"><a href="Installing%20Matlab%20R2013%208.01%20on%20Linux%20Headless%20Xvfb%20using%20lightdm%20and%20fluxbox.html" id="alink">Installing Matlab R2013 8.01 on Linux Headless Xvfb using lightdm and fluxbox</a></p>
+<p id="postTitle"><a href="Unziping%20large%20files%20in%20linux%20copied%20from%20windows.html" id="alink">Unziping large files in linux copied from windows</a></p>
 
-Good, you are a Matlab user like me, but.. why are you willing to install it on a 
-headless linux workstation ?  I thought i was the only person in the world doing that
-but you reading this proves i am not alone...<br /><br />
+In Windows 7 i created a large ZIP file (around 15 Gigas). I wanted to
+move it to a linux machine and unzip it there.  But once in the linux 
+machine, it produced this error:
 
-<u>1) Well you mounted the iso image:</u><br />
 <pre>
-mount -o loop Matlab801_MacUnix.iso /mnt/cd
+unzip Windows\ 7\ Clone.zip                          
+Archive:  Windows 7 Clone.zip
+warning [Windows 7 Clone.zip]:  15415149290 extra bytes at beginning or within zipfile
+  (attempting to process anyway)
+error [Windows 7 Clone.zip]:  start of central directory not found;
+  zipfile corrupt.
+  (please check that you have transferred or created the zipfile in the
+  appropriate BINARY mode and that you have compiled UnZip properly)
 </pre>
-<br />
-
-<u>2) And tried to install but.... you are getting this</u><br />
+After trying some things i resolved it like this:<br />
 <pre>
-java.lang.InternalError: Can't connect to X11 window server using ':20.0' as the value of the DISPLAY variable.
-        at sun.awt.X11GraphicsEnvironment.initDisplay(Native Method)
-        at sun.awt.X11GraphicsEnvironment.access$100(Unknown Source)
-        at sun.awt.X11GraphicsEnvironment$1.run(Unknown Source)
-        at java.security.AccessController.doPrivileged(Native Method)
-        at sun.awt.X11GraphicsEnvironment.(Unknown Source)
-        at java.lang.Class.forName0(Native Method)
-        at java.lang.Class.forName(Unknown Source)
-</pre>
-<br />
-<u>3) OPS! this should not be difficult you think...</u><br />
-<pre>
-#Try this...
-install_linux -mode silent
-#And this... 
-install_linux -javahome /opt/java -mode silent
-#And your DISPLAY variable is logically correct! because ...
-printenv | grep DISPLAY
-DISPLAY=:20.0
+7za x Windows\ 7\ Clone.zip
+7-Zip (A) [64] 9.20  Copyright (c) 1999-2010 Igor Pavlov  2010-11-18
+p7zip Version 9.20 (locale=en_US.UTF-8,Utf16=on,HugeFiles=on,4 CPUs)
+Processing archive: Windows 7 Clone.zip
+Extracting  Windows 7 Clone/Windows 7 Clone.vbox
 </pre>
 
-The error message keeps displaying:<br />
+<div style="clear: both;"></div>
+<b>Published: Thursday, August 25, 2016</b>
+<a href="tag_admin">admin</a>&nbsp;
+</div>
+
+<hr>
+<div id="section">
+<p id="postTitle"><a href="Installing%20latex%20with%20some%20usefull%20complements%20in%20Debian%20Linux.html" id="alink">Installing latex with some usefull complements in Debian Linux</a></p>
 <pre>
-Error: The application encountered an unexpected error and needs to close.  You may want to try re-installing your product(s).  More information can be found at /tmp/mathworks_root.log
+apt-get install texlive texlive-math-extra texlive-science
 </pre>
-<br />
-And you are able to run any other X application, starting from xclock... but the Matlab install do not wants to start.<br />
-Do not worry, it is not all lost.<br />
-First, you will have to modify the install_linux shell script, but the image is readonly, so you will have to do a trick:
-<br />
-<u>4) First create a directory</u><br />
+# Provides program.sty: <br />
 <pre>
-mkdir /mnt/tmpcd
-cd /mnt/tmpcd
-</pre>
-<br />
-<u>5)  Copy there the install_linux script</u><br />
-<pre>
-cp /mnt/cd install_linux /mnt/tmpcd
+apt-get install texlive-latex-extra
 </pre>
 
-<u>6) Modify this line:</u><br />
-<pre>
-java_cmd="$java_exe -Xmx512m $XTRAFLAGS -Djava.ext.dirs=$JAR_SEARCH_PATH $JAVA_LAUNCH_TARGET -root \"$ROOT\" -tmpdir \"$TEMP_DIR\" -inputFile '$ROOT/install_ini_linux.txt' $arglist"
-#
-#And add this: "-Djava.awt.headless=true" It should look like this:
-#
-java_cmd="$java_exe -Xmx512m $XTRAFLAGS -Djava.awt.headless=true -Djava.ext.dirs=$JAR_SEARCH_PATH $JAVA_LAUNCH_TARGET -root \"$ROOT\" -tmpdir \"$TEMP_DIR\" -inputFile '$ROOT/install_ini_linux.txt' $arglist"
-</pre><br />
-<u>7) Now create a link to all the other files, i did it like this</u><br />
-<pre>
-# Being in /mnt/tmpcd
-for i in /mnt/cd/*; do ln -s $i; done
-</pre>
-<br />
-<u>8) Now you are ready! install it.</u><br />
-<pre>
-(Feb 23, 2016 15:36:37) Installing Product: Simulink Report Generator 3.14
-(Feb 23, 2016 15:36:38) Installing Product: Simulink Verification and Validation 3.5
-(Feb 23, 2016 15:36:38) Installing Product: Stateflow 8.1
-(Feb 23, 2016 15:36:39) Installing Product: Statistics Toolbox 8.2
-(Feb 23, 2016 15:36:40) Installing Product: Symbolic Math Toolbox 5.10
-(Feb 23, 2016 15:36:57) Installing Product: System Identification Toolbox 8.2
-(Feb 23, 2016 15:37:06) Installing Product: SystemTest 2.6.5
-(Feb 23, 2016 15:37:09) Installing Product: Wavelet Toolbox 4.11
-(Feb 23, 2016 15:37:26) Notes:
-Your installation may require additional configuration steps.
-
-1. The following products require a supported compiler:
-
-MATLAB Compiler 4.18.1
-MATLAB Builder JA 2.2.6
-Stateflow 8.1
-Simulink Coder 8.4
-MATLAB Coder 2.4
-
-2. Simulink requires a C compiler for simulation acceleration, model reference, and MATLAB Function Block capabilities. It is recommended that you install a supported compiler on your machine.
-
-3. To accelerate computations with the following products, a supported compiler is required:
-
-SimBiology 4.3
-Fixed-Point Designer 4.0
-(Feb 23, 2016 15:37:26) Exiting with status 0
-(Feb 23, 2016 15:37:26) End - Successful.
-Finished
-</pre>
-
-
-
-
- 
-<b>Published: Thuesday, February 23, 2016</b>
-<a href="tag_headless">headless</a>&nbsp;<a href="tag_lightdm">lightdm</a>&nbsp;<a href="tag_fluxbox">fluxbox</a>&nbsp;
+<div style="clear: both;"></div>
+<b>Published: Thursday, August 25, 2016</b>
+<a href="tag_debian">debian</a>&nbsp;
 </div>
 
 <hr>

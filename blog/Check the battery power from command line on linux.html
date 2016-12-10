@@ -1,0 +1,38 @@
+<html>
+<head>
+<title>Check the battery power from command line on linux</title>
+<link rel="stylesheet" type="text/css" href="css/blogstyle.css">
+</head>
+<body style="margin:20;padding:0;">
+<script language="javascript">
+window.parent.document.title = "Check the battery power from command line on linux";
+</script>
+<div id="section">
+<p id="postTitle"><a href="Check%20the%20battery%20power%20from%20command%20line%20on%20linux.html" id="alink">Check the battery power from command line on linux</a></p>
+
+If you want to check from a script the state from the battery on the linux operating
+system, it is as easy as looking this file:
+<br /><br />
+<pre>
+cat /sys/class/power_supply/BAT0/capacity_level
+Normal
+</pre>
+
+<br />
+And this file gives the percentage of charge, in this example 97%:
+<br /><br />
+<pre>
+cat /sys/class/power_supply/BAT0/capacity
+97
+</pre>
+
+<br />
+
+
+ 
+<b>Published: Friday, December 09, 2016</b>
+<a href="tag_admin">admin</a>&nbsp;
+</div>
+
+<hr>
+</body></html>
