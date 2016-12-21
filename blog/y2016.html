@@ -220,7 +220,7 @@ Quisiera repetir el análisis de a qué hora hay mayor caudal de vehículos en l
 en el retorno de un feriado largo.
 <br />
 <br />
-<u>Feriado de interes del año 2015:</u><br />
+<u>Feriado de interés del año 2015:</u><br />
 Agosto, Lunes 17 - Paso a la Inmortalidad del General José de San Martín.<br />
 <br />
 <br />
@@ -353,34 +353,6 @@ cryptsetup luksClose backup1
 
 <hr>
 <div id="section">
-<p id="postTitle"><a href="Check%20the%20battery%20power%20from%20command%20line%20on%20linux.html" id="alink">Check the battery power from command line on linux</a></p>
-
-If you want to check from a script the state from the battery on the linux operating
-system, it is as easy as looking this file:
-<br /><br />
-<pre>
-cat /sys/class/power_supply/BAT0/capacity_level
-Normal
-</pre>
-
-<br />
-And this file gives the percentage of charge, in this example 97%:
-<br /><br />
-<pre>
-cat /sys/class/power_supply/BAT0/capacity
-97
-</pre>
-
-<br />
-
-
- 
-<b>Published: Friday, December 09, 2016</b>
-<a href="tag_admin">admin</a>&nbsp;
-</div>
-
-<hr>
-<div id="section">
 <p id="postTitle"><a href="Compile%20keepass%202.0.3%20on%20Linux.html" id="alink">Compile keepass 2.0.3 on Linux</a></p>
 
 KeepassX is a graphical password management system, the webpage is <a href="https://www.keepassx.org/" target="_new">www.keepassx.org</a>
@@ -426,6 +398,34 @@ It works.<br />
  
 <b>Published: Saturday, December 09, 2016</b>
 <a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;
+</div>
+
+<hr>
+<div id="section">
+<p id="postTitle"><a href="Check%20the%20battery%20power%20from%20command%20line%20on%20linux.html" id="alink">Check the battery power from command line on linux</a></p>
+
+If you want to check from a script the state from the battery on the linux operating
+system, it is as easy as looking this file:
+<br /><br />
+<pre>
+cat /sys/class/power_supply/BAT0/capacity_level
+Normal
+</pre>
+
+<br />
+And this file gives the percentage of charge, in this example 97%:
+<br /><br />
+<pre>
+cat /sys/class/power_supply/BAT0/capacity
+97
+</pre>
+
+<br />
+
+
+ 
+<b>Published: Friday, December 09, 2016</b>
+<a href="tag_admin">admin</a>&nbsp;
 </div>
 
 <hr>
@@ -527,6 +527,22 @@ cp src/or/config/torrc /usr/local/etc/tor/
 
 <hr>
 <div id="section">
+<p id="postTitle"><a href="Installing%20latex%20with%20some%20usefull%20complements%20in%20Debian%20Linux.html" id="alink">Installing latex with some usefull complements in Debian Linux</a></p>
+<pre>
+apt-get install texlive texlive-math-extra texlive-science
+</pre>
+# Provides program.sty: <br />
+<pre>
+apt-get install texlive-latex-extra
+</pre>
+
+<div style="clear: both;"></div>
+<b>Published: Thursday, August 25, 2016</b>
+<a href="tag_debian">debian</a>&nbsp;
+</div>
+
+<hr>
+<div id="section">
 <p id="postTitle"><a href="Unziping%20large%20files%20in%20linux%20copied%20from%20windows.html" id="alink">Unziping large files in linux copied from windows</a></p>
 
 In Windows 7 i created a large ZIP file (around 15 Gigas). I wanted to
@@ -594,18 +610,44 @@ make
 
 <hr>
 <div id="section">
-<p id="postTitle"><a href="Installing%20latex%20with%20some%20usefull%20complements%20in%20Debian%20Linux.html" id="alink">Installing latex with some usefull complements in Debian Linux</a></p>
+<p id="postTitle"><a href="Headless%20Linux%20Server%20with%20X%20Fluxbox%20and%20Lightdm.html" id="alink">Headless Linux Server with X Fluxbox and Lightdm</a></p>
+
+Hi, here is a very short list telling about how you can have
+very easily a server withoug a monitor connected and manage it
+with just few resources... a short post but without waste!<br /><br />
+
+<b>Install headless lightdm with fluxbox and vnc</b><br />
 <pre>
-apt-get install texlive texlive-math-extra texlive-science
-</pre>
-# Provides program.sty: <br />
-<pre>
-apt-get install texlive-latex-extra
+apt-get install lightdm
+apt-get install fluxbox
+apt-get install x11vnc
+apt-get install xvfb
+apt-get remove xserver-xorg-video*
 </pre>
 
-<div style="clear: both;"></div>
-<b>Published: Thursday, August 25, 2016</b>
-<a href="tag_debian">debian</a>&nbsp;
+Now, you setup the SSH Server and connect creating a tunnel.<br /><br />
+
+Once connected, in the Headless Server you type:
+<br /><br />
+<pre>
+x11vnc -localhost -create -env FD_PROG=/usr/bin/fluxbox \
+        -env X11VNC_FINDDISPLAY_ALWAYS_FAILS=1 \
+        -env X11VNC_CREATE_GEOM=${1:-1024x768x16} \
+        -gone 'killall Xvfb' \
+        -bg -nopw
+</pre>
+<br />
+And once the vnc server starts, you connect from your client through
+a tunnel.<br /><br />
+<pre>
+vncviewer localhost:5900
+</pre>
+
+These steps have worked in Debian 8.0 Jessie.
+<br />
+ 
+<b>Published: Thuesday, February 23, 2016</b>
+<a href="tag_headless">headless</a>&nbsp;<a href="tag_fluxbox">fluxbox</a>&nbsp;<a href="tag_lightdm">lightdm</a>&nbsp;
 </div>
 
 <hr>
@@ -717,48 +759,6 @@ Finished
  
 <b>Published: Thuesday, February 23, 2016</b>
 <a href="tag_headless">headless</a>&nbsp;<a href="tag_lightdm">lightdm</a>&nbsp;<a href="tag_fluxbox">fluxbox</a>&nbsp;
-</div>
-
-<hr>
-<div id="section">
-<p id="postTitle"><a href="Headless%20Linux%20Server%20with%20X%20Fluxbox%20and%20Lightdm.html" id="alink">Headless Linux Server with X Fluxbox and Lightdm</a></p>
-
-Hi, here is a very short list telling about how you can have
-very easily a server withoug a monitor connected and manage it
-with just few resources... a short post but without waste!<br /><br />
-
-<b>Install headless lightdm with fluxbox and vnc</b><br />
-<pre>
-apt-get install lightdm
-apt-get install fluxbox
-apt-get install x11vnc
-apt-get install xvfb
-apt-get remove xserver-xorg-video*
-</pre>
-
-Now, you setup the SSH Server and connect creating a tunnel.<br /><br />
-
-Once connected, in the Headless Server you type:
-<br /><br />
-<pre>
-x11vnc -localhost -create -env FD_PROG=/usr/bin/fluxbox \
-        -env X11VNC_FINDDISPLAY_ALWAYS_FAILS=1 \
-        -env X11VNC_CREATE_GEOM=${1:-1024x768x16} \
-        -gone 'killall Xvfb' \
-        -bg -nopw
-</pre>
-<br />
-And once the vnc server starts, you connect from your client through
-a tunnel.<br /><br />
-<pre>
-vncviewer localhost:5900
-</pre>
-
-These steps have worked in Debian 8.0 Jessie.
-<br />
- 
-<b>Published: Thuesday, February 23, 2016</b>
-<a href="tag_headless">headless</a>&nbsp;<a href="tag_fluxbox">fluxbox</a>&nbsp;<a href="tag_lightdm">lightdm</a>&nbsp;
 </div>
 
 <hr>

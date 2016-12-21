@@ -16,16 +16,16 @@ window.parent.document.title = "Year 2008";
 
 <hr>
 <div id="section">
-<p id="postTitle"><a href="Error%20with%20PHP%20and%20Mysql.html" id="alink">Error with PHP and Mysql</a></p>
-<span style="font-size:85%;"><span style="font-family:courier new;">skipping incompatible /usr/lib/mysql/libmysqlclient.so when searching for -lmysqlclient<br /><br /><span style="font-weight: bold;font-family:arial;">Seems that this errors come because of incompatibility between i386 and x64.</span><br /><span style="font-weight: bold;font-family:arial;"></span><br /># cd /usr/lib/mysql<br /># ln -s ../../lib64/mysql/libmysqlclient.so<br /><br /><span style="font-weight: bold;font-family:arial;">If this do not works, you can patch the Makefile to use the x64 version of the</span><br /><span style="font-weight: bold;font-family:arial;">libraries instead of the x32:</span><br /><br /># sed -i -e &#39;s@-L/usr/lib/mysql@-L/usr/lib64/mysql@g&#39; Makefile<br /><br /><br /></span></span><div style="clear: both;"></div>
+<p id="postTitle"><a href="Error%20starting%20snmp%20on%20Centos..html" id="alink">Error starting snmp on Centos.</a></p>
+<span style="font-size:85%;"><span style="font-family:arial;">/usr/sbin/snmpd: symbol lookup error: /usr/sbin/snmpd: undefined symbol: smux_snmp_select_list_get_length</span><br /></span><br /><span style="font-family:courier new;">Resolution:</span><br /><span style="font-weight: bold;font-family:courier new;">yum update net-snmp-libs</span><div style="clear: both;"></div>
 <b>Published: Friday, December 12, 2008</b>
 
 </div>
 
 <hr>
 <div id="section">
-<p id="postTitle"><a href="Error%20starting%20snmp%20on%20Centos..html" id="alink">Error starting snmp on Centos.</a></p>
-<span style="font-size:85%;"><span style="font-family:arial;">/usr/sbin/snmpd: symbol lookup error: /usr/sbin/snmpd: undefined symbol: smux_snmp_select_list_get_length</span><br /></span><br /><span style="font-family:courier new;">Resolution:</span><br /><span style="font-weight: bold;font-family:courier new;">yum update net-snmp-libs</span><div style="clear: both;"></div>
+<p id="postTitle"><a href="Error%20with%20PHP%20and%20Mysql.html" id="alink">Error with PHP and Mysql</a></p>
+<span style="font-size:85%;"><span style="font-family:courier new;">skipping incompatible /usr/lib/mysql/libmysqlclient.so when searching for -lmysqlclient<br /><br /><span style="font-weight: bold;font-family:arial;">Seems that this errors come because of incompatibility between i386 and x64.</span><br /><span style="font-weight: bold;font-family:arial;"></span><br /># cd /usr/lib/mysql<br /># ln -s ../../lib64/mysql/libmysqlclient.so<br /><br /><span style="font-weight: bold;font-family:arial;">If this do not works, you can patch the Makefile to use the x64 version of the</span><br /><span style="font-weight: bold;font-family:arial;">libraries instead of the x32:</span><br /><br /># sed -i -e &#39;s@-L/usr/lib/mysql@-L/usr/lib64/mysql@g&#39; Makefile<br /><br /><br /></span></span><div style="clear: both;"></div>
 <b>Published: Friday, December 12, 2008</b>
 
 </div>

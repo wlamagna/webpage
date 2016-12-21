@@ -220,7 +220,7 @@ Quisiera repetir el análisis de a qué hora hay mayor caudal de vehículos en l
 en el retorno de un feriado largo.
 <br />
 <br />
-<u>Feriado de interes del año 2015:</u><br />
+<u>Feriado de interés del año 2015:</u><br />
 Agosto, Lunes 17 - Paso a la Inmortalidad del General José de San Martín.<br />
 <br />
 <br />
@@ -353,34 +353,6 @@ cryptsetup luksClose backup1
 
 <hr>
 <div id="section">
-<p id="postTitle"><a href="Check%20the%20battery%20power%20from%20command%20line%20on%20linux.html" id="alink">Check the battery power from command line on linux</a></p>
-
-If you want to check from a script the state from the battery on the linux operating
-system, it is as easy as looking this file:
-<br /><br />
-<pre>
-cat /sys/class/power_supply/BAT0/capacity_level
-Normal
-</pre>
-
-<br />
-And this file gives the percentage of charge, in this example 97%:
-<br /><br />
-<pre>
-cat /sys/class/power_supply/BAT0/capacity
-97
-</pre>
-
-<br />
-
-
- 
-<b>Published: Friday, December 09, 2016</b>
-<a href="tag_admin">admin</a>&nbsp;
-</div>
-
-<hr>
-<div id="section">
 <p id="postTitle"><a href="Compile%20keepass%202.0.3%20on%20Linux.html" id="alink">Compile keepass 2.0.3 on Linux</a></p>
 
 KeepassX is a graphical password management system, the webpage is <a href="https://www.keepassx.org/" target="_new">www.keepassx.org</a>
@@ -426,6 +398,34 @@ It works.<br />
  
 <b>Published: Saturday, December 09, 2016</b>
 <a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;
+</div>
+
+<hr>
+<div id="section">
+<p id="postTitle"><a href="Check%20the%20battery%20power%20from%20command%20line%20on%20linux.html" id="alink">Check the battery power from command line on linux</a></p>
+
+If you want to check from a script the state from the battery on the linux operating
+system, it is as easy as looking this file:
+<br /><br />
+<pre>
+cat /sys/class/power_supply/BAT0/capacity_level
+Normal
+</pre>
+
+<br />
+And this file gives the percentage of charge, in this example 97%:
+<br /><br />
+<pre>
+cat /sys/class/power_supply/BAT0/capacity
+97
+</pre>
+
+<br />
+
+
+ 
+<b>Published: Friday, December 09, 2016</b>
+<a href="tag_admin">admin</a>&nbsp;
 </div>
 
 <hr>
@@ -527,7 +527,29 @@ cp src/or/config/torrc /usr/local/etc/tor/
 
 <hr>
 <div id="section">
-<p id="postTitle"><a href="Unziping%20large%20files%20in%20linux%20copied%20from%20windows.html" id="alink">Unziping large files in linux copied from windows</a></p>
+<p id="postTitle"><a href="Installing%20latex%20with%20some%20usefull%20complements%20in%20Debian%20Linux.html" id="alink">Installing latex with some usefull complements in Debian Linux</a></p>
+<pre>
+apt-get install texlive texlive-math-extra texlive-science
+</pre>
+# Provides program.sty: <br />
+<pre>
+apt-get install texlive-latex-extra
+</pre>
+
+<div style="clear: both;"></div>
+<b>Published: Thursday, August 25, 2016</b>
+<a href="tag_debian">debian</a>&nbsp;
+</div>
+
+<hr>
+<div id="section">
+<script type="text/javascript">
+google_ad_client = "ca-pub-1655368661140826";
+google_ad_slot = "5799356291";
+google_ad_width = 728;
+google_ad_height = 90;
+</script><!-- blog_linux_1 --><script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script><p id="postTitle"><a href="Unziping%20large%20files%20in%20linux%20copied%20from%20windows.html" id="alink">Unziping large files in linux copied from windows</a></p>
 
 In Windows 7 i created a large ZIP file (around 15 Gigas). I wanted to
 move it to a linux machine and unzip it there.  But once in the linux 
@@ -555,47 +577,6 @@ Extracting  Windows 7 Clone/Windows 7 Clone.vbox
 <div style="clear: both;"></div>
 <b>Published: Thursday, August 25, 2016</b>
 <a href="tag_admin">admin</a>&nbsp;
-</div>
-
-<hr>
-<div id="section">
-<script type="text/javascript">
-google_ad_client = "ca-pub-1655368661140826";
-google_ad_slot = "5799356291";
-google_ad_width = 728;
-google_ad_height = 90;
-</script><!-- blog_linux_1 --><script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-</script><p id="postTitle"><a href="Installing%20Apache%20from%20scratch.html" id="alink">Installing Apache from scratch</a></p>
-
-<u>1) A required library:</u><br />
-<pre>
-apt-get install libpcre++-dev
-</pre>
-<br />
-<u>2) Obtain the sources:</u><br />
-<pre>
-wget "http://apache.dattatec.com//httpd/httpd-2.4.18.tar.bz2"
-tar jxvf httpd-2.4.18.tar.bz2
-wget "http://mirrors.nxnethosting.com/apache//apr/apr-1.5.2.tar.gz"
-wget http://apache.dattatec.com//apr/apr-util-1.5.4.tar.gz
-
-cd httpd-2.4.18/srclib
-tar zxvf ../../apr-1.5.2.tar.gz
-tar zxvf ../../apr-util-1.5.4.tar.gz
-ln -s apr-1.5.2/ apr
-ln -s apr-util-1.5.4/ apr-util
-cd ..
-
-./configure --enable-ssl \
---prefix=/usr/local/apache2/ \
---enable-so --with-included-apr \
---enable-rewrite --enable-rewrite --enable-proxy --enable-cgi
-
-make
-</pre>
-<div style="clear: both;"></div>
-<b>Published: Thursday, August 25, 2016</b>
-<a href="tag_admin">admin</a>&nbsp;<a href="tag_apache">apache</a>&nbsp;
 </div>
 
 <hr>
