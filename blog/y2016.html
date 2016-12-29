@@ -101,6 +101,19 @@ va a servir luego para revisar el funcionamiento del programa.<br />
 
 <br />
 
+Para los más curiosos, recomiendo estos recursos para leer
+acerca de DHCP:<br />
+
+<a href="http://www.tcpipguide.com/free/t_SummaryOfDHCPOptionsBOOTPVendorInformationFields.htm" target=_new>recurso1</a><br />
+<a href="http://www.tcpipguide.com/free/t_DHCPMessageFormat.htm" target=_new>recurso2</a><br />
+<a href="http://www.petenetlive.com/KB/Article/0001168" target=_new>recurso3</a><br />
+<br />
+Esta es una imagen que armé mientras estudiaba el funcionamiento
+de este viejo protocolo:<br />
+<center>
+<img src="images/dhcp1.png" width=600 height=400 />
+</center>
+<br />
 
 
 
@@ -820,81 +833,6 @@ cat /sys/class/power_supply/BAT0/capacity
 </form>
 
 <hr>
-<p id="postTitle"><a href="Check%20the%20battery%20power%20from%20command%20line%20on%20linux.html" id="alink">Check the battery power from command line on linux</a></p>
-
-<br />
-<pre>
-fallocate -l 4G diskimagefile.img
-</pre>
-<br /><br />
-
-
-<pre>
-cryptsetup -y -v luksFormat diskimagefile.img
-
-WARNING!
-========
-This will overwrite data on diskimagefile.img irrevocably.
-
-Are you sure? (Type uppercase yes): YES
-Enter passphrase: 
-Verify passphrase: 
-Command successful.
-</pre>
-<br /><br />
-
-Mount the virtual device that manages:
-<pre>
-cryptsetup luksOpen diskimagefile.img backup1
-</pre>
-
-<br /><br />
-
-If you have not done it yet, and it is a new disk, you can give the
-disk a format:
-<br />
-<pre>
-mkfs.ext3 /dev/mapper/backup1
-</pre>
-
-Mount:
-<pre>
-mount /dev/mapper/backup1 /mnt/secure
-</pre>
-
-Modify the password:
-<pre>
-sudo cryptsetup luksChangeKey diskimagefile.img
-Enter passphrase to be changed: 
-Enter new passphrase: 
-Verify passphrase: 
-</pre>
-
-Unmount and close the secure disk:<br />
-<pre>
-umount /mnt/secure
-cryptsetup luksClose backup1
-</pre>
-
-
- 
-<b>Published: Friday, December 09, 2016</b>
-<a href="tag_admin">admin</a>&nbsp;
-</div>
-
-<hr>
-<div id="section">
-
-
-
-<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-<input type="hidden" name="cmd" value="_s-xclick">
-<input type="hidden" name="hosted_button_id" value="7HY2N4VFEWYCL">
-<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-¿ Te sirvió la data ? ¿ Te pareció interesante ? Con tu aporte puedo continuar. <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-</form>
-
-<hr>
 <p id="postTitle"><a href="An%20additional%20LCD%20notebook%20monitor.html" id="alink">An additional LCD notebook monitor</a></p>
 
 Once i had a notebook, it was red, lenovo, z80... rest in peace.  One day, after using
@@ -976,6 +914,81 @@ fi;
 </form>
 
 <hr>
+<p id="postTitle"><a href="Check%20the%20battery%20power%20from%20command%20line%20on%20linux.html" id="alink">Check the battery power from command line on linux</a></p>
+
+<br />
+<pre>
+fallocate -l 4G diskimagefile.img
+</pre>
+<br /><br />
+
+
+<pre>
+cryptsetup -y -v luksFormat diskimagefile.img
+
+WARNING!
+========
+This will overwrite data on diskimagefile.img irrevocably.
+
+Are you sure? (Type uppercase yes): YES
+Enter passphrase: 
+Verify passphrase: 
+Command successful.
+</pre>
+<br /><br />
+
+Mount the virtual device that manages:
+<pre>
+cryptsetup luksOpen diskimagefile.img backup1
+</pre>
+
+<br /><br />
+
+If you have not done it yet, and it is a new disk, you can give the
+disk a format:
+<br />
+<pre>
+mkfs.ext3 /dev/mapper/backup1
+</pre>
+
+Mount:
+<pre>
+mount /dev/mapper/backup1 /mnt/secure
+</pre>
+
+Modify the password:
+<pre>
+sudo cryptsetup luksChangeKey diskimagefile.img
+Enter passphrase to be changed: 
+Enter new passphrase: 
+Verify passphrase: 
+</pre>
+
+Unmount and close the secure disk:<br />
+<pre>
+umount /mnt/secure
+cryptsetup luksClose backup1
+</pre>
+
+
+ 
+<b>Published: Friday, December 09, 2016</b>
+<a href="tag_admin">admin</a>&nbsp;
+</div>
+
+<hr>
+<div id="section">
+
+
+
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="7HY2N4VFEWYCL">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+¿ Te sirvió la data ? ¿ Te pareció interesante ? Con tu aporte puedo continuar. <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+<hr>
 <p id="postTitle"><a href="Installing%20tor%20on%20linux.html" id="alink">Installing tor on linux</a></p>
 
 Obtain the download link from the <a href="https://www.torproject.org/download/download.html.en">
@@ -999,6 +1012,33 @@ cp src/or/config/torrc /usr/local/etc/tor/
 
 <b>Published: Friday, September 30, 2016</b>
 <a href="tag_security">security</a>&nbsp;<a href="tag_privacy">privacy</a>&nbsp;
+</div>
+
+<hr>
+<div id="section">
+
+
+
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="7HY2N4VFEWYCL">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+¿ Te sirvió la data ? ¿ Te pareció interesante ? Con tu aporte puedo continuar. <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+<hr>
+<p id="postTitle"><a href="Installing%20latex%20with%20some%20usefull%20complements%20in%20Debian%20Linux.html" id="alink">Installing latex with some usefull complements in Debian Linux</a></p>
+<pre>
+apt-get install texlive texlive-math-extra texlive-science
+</pre>
+# Provides program.sty: <br />
+<pre>
+apt-get install texlive-latex-extra
+</pre>
+
+<div style="clear: both;"></div>
+<b>Published: Thursday, August 25, 2016</b>
+<a href="tag_debian">debian</a>&nbsp;
 </div>
 
 <hr>
@@ -1057,33 +1097,6 @@ Extracting  Windows 7 Clone/Windows 7 Clone.vbox
 </form>
 
 <hr>
-<p id="postTitle"><a href="Installing%20latex%20with%20some%20usefull%20complements%20in%20Debian%20Linux.html" id="alink">Installing latex with some usefull complements in Debian Linux</a></p>
-<pre>
-apt-get install texlive texlive-math-extra texlive-science
-</pre>
-# Provides program.sty: <br />
-<pre>
-apt-get install texlive-latex-extra
-</pre>
-
-<div style="clear: both;"></div>
-<b>Published: Thursday, August 25, 2016</b>
-<a href="tag_debian">debian</a>&nbsp;
-</div>
-
-<hr>
-<div id="section">
-
-
-
-<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-<input type="hidden" name="cmd" value="_s-xclick">
-<input type="hidden" name="hosted_button_id" value="7HY2N4VFEWYCL">
-<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-¿ Te sirvió la data ? ¿ Te pareció interesante ? Con tu aporte puedo continuar. <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-</form>
-
-<hr>
 <p id="postTitle"><a href="Installing%20Apache%20from%20scratch.html" id="alink">Installing Apache from scratch</a></p>
 
 <u>1) A required library:</u><br />
@@ -1115,59 +1128,6 @@ make
 <div style="clear: both;"></div>
 <b>Published: Thursday, August 25, 2016</b>
 <a href="tag_admin">admin</a>&nbsp;<a href="tag_apache">apache</a>&nbsp;
-</div>
-
-<hr>
-<div id="section">
-
-
-
-<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-<input type="hidden" name="cmd" value="_s-xclick">
-<input type="hidden" name="hosted_button_id" value="7HY2N4VFEWYCL">
-<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-¿ Te sirvió la data ? ¿ Te pareció interesante ? Con tu aporte puedo continuar. <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-</form>
-
-<hr>
-<p id="postTitle"><a href="Headless%20Linux%20Server%20with%20X%20Fluxbox%20and%20Lightdm.html" id="alink">Headless Linux Server with X Fluxbox and Lightdm</a></p>
-
-Hi, here is a very short list telling about how you can have
-very easily a server withoug a monitor connected and manage it
-with just few resources... a short post but without waste!<br /><br />
-
-<b>Install headless lightdm with fluxbox and vnc</b><br />
-<pre>
-apt-get install lightdm
-apt-get install fluxbox
-apt-get install x11vnc
-apt-get install xvfb
-apt-get remove xserver-xorg-video*
-</pre>
-
-Now, you setup the SSH Server and connect creating a tunnel.<br /><br />
-
-Once connected, in the Headless Server you type:
-<br /><br />
-<pre>
-x11vnc -localhost -create -env FD_PROG=/usr/bin/fluxbox \
-        -env X11VNC_FINDDISPLAY_ALWAYS_FAILS=1 \
-        -env X11VNC_CREATE_GEOM=${1:-1024x768x16} \
-        -gone 'killall Xvfb' \
-        -bg -nopw
-</pre>
-<br />
-And once the vnc server starts, you connect from your client through
-a tunnel.<br /><br />
-<pre>
-vncviewer localhost:5900
-</pre>
-
-These steps have worked in Debian 8.0 Jessie.
-<br />
- 
-<b>Published: Tuesday, February 23, 2016</b>
-<a href="tag_headless">headless</a>&nbsp;<a href="tag_fluxbox">fluxbox</a>&nbsp;<a href="tag_lightdm">lightdm</a>&nbsp;
 </div>
 
 <hr>
@@ -1290,6 +1250,59 @@ Finished
  
 <b>Published: Tuesday, February 23, 2016</b>
 <a href="tag_headless">headless</a>&nbsp;<a href="tag_lightdm">lightdm</a>&nbsp;<a href="tag_fluxbox">fluxbox</a>&nbsp;
+</div>
+
+<hr>
+<div id="section">
+
+
+
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="7HY2N4VFEWYCL">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+¿ Te sirvió la data ? ¿ Te pareció interesante ? Con tu aporte puedo continuar. <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+<hr>
+<p id="postTitle"><a href="Headless%20Linux%20Server%20with%20X%20Fluxbox%20and%20Lightdm.html" id="alink">Headless Linux Server with X Fluxbox and Lightdm</a></p>
+
+Hi, here is a very short list telling about how you can have
+very easily a server withoug a monitor connected and manage it
+with just few resources... a short post but without waste!<br /><br />
+
+<b>Install headless lightdm with fluxbox and vnc</b><br />
+<pre>
+apt-get install lightdm
+apt-get install fluxbox
+apt-get install x11vnc
+apt-get install xvfb
+apt-get remove xserver-xorg-video*
+</pre>
+
+Now, you setup the SSH Server and connect creating a tunnel.<br /><br />
+
+Once connected, in the Headless Server you type:
+<br /><br />
+<pre>
+x11vnc -localhost -create -env FD_PROG=/usr/bin/fluxbox \
+        -env X11VNC_FINDDISPLAY_ALWAYS_FAILS=1 \
+        -env X11VNC_CREATE_GEOM=${1:-1024x768x16} \
+        -gone 'killall Xvfb' \
+        -bg -nopw
+</pre>
+<br />
+And once the vnc server starts, you connect from your client through
+a tunnel.<br /><br />
+<pre>
+vncviewer localhost:5900
+</pre>
+
+These steps have worked in Debian 8.0 Jessie.
+<br />
+ 
+<b>Published: Tuesday, February 23, 2016</b>
+<a href="tag_headless">headless</a>&nbsp;<a href="tag_fluxbox">fluxbox</a>&nbsp;<a href="tag_lightdm">lightdm</a>&nbsp;
 </div>
 
 <hr>

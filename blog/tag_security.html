@@ -90,6 +90,19 @@ va a servir luego para revisar el funcionamiento del programa.<br />
 
 <br />
 
+Para los más curiosos, recomiendo estos recursos para leer
+acerca de DHCP:<br />
+
+<a href="http://www.tcpipguide.com/free/t_SummaryOfDHCPOptionsBOOTPVendorInformationFields.htm" target=_new>recurso1</a><br />
+<a href="http://www.tcpipguide.com/free/t_DHCPMessageFormat.htm" target=_new>recurso2</a><br />
+<a href="http://www.petenetlive.com/KB/Article/0001168" target=_new>recurso3</a><br />
+<br />
+Esta es una imagen que armé mientras estudiaba el funcionamiento
+de este viejo protocolo:<br />
+<center>
+<img src="images/dhcp1.png" width=600 height=400 />
+</center>
+<br />
 
 
 
@@ -511,6 +524,31 @@ make install
 
 <hr>
 <div id="section">
+<p id="postTitle"><a href="Debian%208%20Post%20Install%20Cleanup.html" id="alink">Debian 8 Post Install Cleanup</a></p>
+In this <a href="http://blog.wallves.com/Some%20linux%20firewall%20tips.html">short article</a> i share some short
+but powerfull firewall logging tip.  And <a href="http://blog.wallves.com/Secure%20Debian%20Post%20Install%20configuration.html">
+here</a> security related post install removals for Debian.<br />
+What is next? Lets keep cleaning and removing software!<br /><br />
+
+Almost with Debian 8 these uninstalls haven't caused any issues with other programs,
+but check what it is uninstalling first !  These recommendations are for server oriented
+installations and not so much for workstations, but you can do it if you know
+what you are doing.<br /><br />
+
+<pre>
+apt-get remove exim4-*</span>
+<span style="color: #888888">apt-get remove tracker</span>
+<span style="color: #888888">apt-get remove gnome-online-miners</span>
+</pre>
+
+
+<div style="clear: both;"></div>
+<b>Published: Monday, October 12, 2015</b>
+<a href="tag_security">security</a>&nbsp;
+</div>
+
+<hr>
+<div id="section">
 <p id="postTitle"><a href="Secure%20Debian%20Post%20Install%20configuration.html" id="alink">Secure Debian Post Install configuration</a></p>
 
 In this <a href="http://blog.wallves.com/Some%20linux%20firewall%20tips.html">short article</a> i share some short
@@ -567,31 +605,6 @@ Now you would have a clearner list of network listening services.<br />
 <div style="clear: both;"></div>
 <b>Published: Monday, October 12, 2015</b>
 <a href="tag_debian">debian</a>&nbsp;<a href="tag_security">security</a>&nbsp;
-</div>
-
-<hr>
-<div id="section">
-<p id="postTitle"><a href="Debian%208%20Post%20Install%20Cleanup.html" id="alink">Debian 8 Post Install Cleanup</a></p>
-In this <a href="http://blog.wallves.com/Some%20linux%20firewall%20tips.html">short article</a> i share some short
-but powerfull firewall logging tip.  And <a href="http://blog.wallves.com/Secure%20Debian%20Post%20Install%20configuration.html">
-here</a> security related post install removals for Debian.<br />
-What is next? Lets keep cleaning and removing software!<br /><br />
-
-Almost with Debian 8 these uninstalls haven't caused any issues with other programs,
-but check what it is uninstalling first !  These recommendations are for server oriented
-installations and not so much for workstations, but you can do it if you know
-what you are doing.<br /><br />
-
-<pre>
-apt-get remove exim4-*</span>
-<span style="color: #888888">apt-get remove tracker</span>
-<span style="color: #888888">apt-get remove gnome-online-miners</span>
-</pre>
-
-
-<div style="clear: both;"></div>
-<b>Published: Monday, October 12, 2015</b>
-<a href="tag_security">security</a>&nbsp;
 </div>
 
 <hr>
