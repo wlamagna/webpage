@@ -21,23 +21,59 @@ window.parent.document.title = "Check the battery power from command line on lin
 <hr>
 <p id="postTitle"><a href="Check%20the%20battery%20power%20from%20command%20line%20on%20linux.html" id="alink">Check the battery power from command line on linux</a></p>
 
-If you want to check from a script the state from the battery on the linux operating
-system, it is as easy as looking this file:
-<br /><br />
+<br />
 <pre>
-cat /sys/class/power_supply/BAT0/capacity_level
-Normal
+fallocate -l 4G diskimagefile.img
+</pre>
+<br /><br />
+
+
+<pre>
+cryptsetup -y -v luksFormat diskimagefile.img
+
+WARNING!
+========
+This will overwrite data on diskimagefile.img irrevocably.
+
+Are you sure? (Type uppercase yes): YES
+Enter passphrase: 
+Verify passphrase: 
+Command successful.
+</pre>
+<br /><br />
+
+Mount the virtual device that manages:
+<pre>
+cryptsetup luksOpen diskimagefile.img backup1
 </pre>
 
-<br />
-And this file gives the percentage of charge, in this example 97%:
 <br /><br />
+
+If you have not done it yet, and it is a new disk, you can give the
+disk a format:
+<br />
 <pre>
-cat /sys/class/power_supply/BAT0/capacity
-97
+mkfs.ext3 /dev/mapper/backup1
 </pre>
 
-<br />
+Mount:
+<pre>
+mount /dev/mapper/backup1 /mnt/secure
+</pre>
+
+Modify the password:
+<pre>
+sudo cryptsetup luksChangeKey diskimagefile.img
+Enter passphrase to be changed: 
+Enter new passphrase: 
+Verify passphrase: 
+</pre>
+
+Unmount and close the secure disk:<br />
+<pre>
+umount /mnt/secure
+cryptsetup luksClose backup1
+</pre>
 
 
  
