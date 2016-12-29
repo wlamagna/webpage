@@ -8,6 +8,17 @@
 window.parent.document.title = "Creating a VIP on Linux";
 </script>
 <div id="section">
+
+
+
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="7HY2N4VFEWYCL">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+¿ Te sirvió la data ? ¿ Te pareció interesante ? Con tu aporte puedo continuar. <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+<hr>
 <p id="postTitle"><a href="Creating%20a%20VIP%20on%20Linux.html" id="alink">Creating a VIP on Linux</a></p>
  If you want to have two or more ip addresses on one physical interface, in Linux, there are many ways to do it, but to have a change permanent you have to do these steps on Redhat Linux and probably other distros:<br /><br />Make a copy from the physical interface startup config file:<br />cp /etc/sysconfig/network-scripts/ifcfg-eth0 /etc/sysconfig/network-scripts/ifcfg-eth0:0<br /><br />Modify the /etc/sysconfig/network-scripts/ifcfg-eth0:0<br /><span style="font-family: courier new;">DEVICE=eth0</span><br /><span style="font-family: courier new;">BOOTPROTO=static</span><br /><span style="font-family: courier new;">HWADDR=00:53:52:A2:43:43</span><br /><span style="font-family: courier new;">IPADDR=192.168.100.30</span><br /><span style="font-family: courier new;">NETMASK=255.255.255.0</span><br /><span style="font-family: courier new;">ONBOOT=yes</span><br /><span style="font-family: courier new;">TYPE=Ethernet</span><br /><span style="font-family: courier new;">MACADDR=00:53:52:A2:43:43</span><br /><br />Finaly, do a :<br /><span style="font-family: courier new;"># ifup eth0:0</span><div style="clear: both;"></div>
 <b>Published: Tuesday, March 17, 2009</b>

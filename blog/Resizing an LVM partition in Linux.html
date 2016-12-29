@@ -8,6 +8,17 @@
 window.parent.document.title = "Resizing an LVM partition in Linux";
 </script>
 <div id="section">
+
+
+
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="7HY2N4VFEWYCL">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+¿ Te sirvió la data ? ¿ Te pareció interesante ? Con tu aporte puedo continuar. <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+<hr>
 <p id="postTitle"><a href="Resizing%20an%20LVM%20partition%20in%20Linux.html" id="alink">Resizing an LVM partition in Linux</a></p>
  First check how much space you have left in the Volume Group that contains that Logical Volume:<br /><br /><div style="font-family: &quot;Courier New&quot;,Courier,monospace;">lvextend -L +300 /dev/system_vg/usr_lv</div><div style="font-family: &quot;Courier New&quot;,Courier,monospace;">resize_reiserfs -s+300m /dev/system_vg/usr_lv</div><br /> 1) Without unmounting<br /> 2) The /usr partition, which holds kernel modules and is being used.<br /> 3) Zero downtime. <div style="clear: both;"></div>
 <b>Published: Tuesday, September 15, 2009</b>

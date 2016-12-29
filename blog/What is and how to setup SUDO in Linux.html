@@ -8,6 +8,17 @@
 window.parent.document.title = "What is and how to setup SUDO in Linux";
 </script>
 <div id="section">
+
+
+
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="7HY2N4VFEWYCL">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+¿ Te sirvió la data ? ¿ Te pareció interesante ? Con tu aporte puedo continuar. <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+<hr>
 <p id="postTitle"><a href="What%20is%20and%20how%20to%20setup%20SUDO%20in%20Linux.html" id="alink">What is and how to setup SUDO in Linux</a></p>
  First of all, happy 2008 to everybody. To begin 2008 a post about SUDO and security configuration.<br />The program sudo (SuperUser DO) is an utility from the unix operating systems like Linux, BSD or MAC OS X, that gives the normal users the possibility to execute programs with security privileges of the admin user (root).<br /><br />How to set it up ?<br />Write &quot;visudo&quot; as the administrator<br /><span style=";font-family:courier new;font-size:85%;"># Host alias specification<br /># Here you set up the hosts from where should the rule be applied, in this it is for local users<br />Host_Alias LOCALHOST=127.0.0.1<br /># User alias specification<br /># SYS is just a group name, it can be any string, you will use it later in this same file.<br />User_Alias SYS=user1, walter, user2<br /># Here we define the binaries that can be executed.<br />Cmnd_Alias SQA=/root/sudoers/program1.sh,\<br /> /root/sudoers/program2.sh,\<br /> /root/sudoers/program3.sh<br /># User privilege specification<br />root ALL=(ALL) ALL<br /># This specifies that no password has to be asked when executing the command.<br />SYS LOCALHOST=NOPASSWD: SYS</span><div style="clear: both;"></div>
 <b>Published: Tuesday, January 01, 2008</b>

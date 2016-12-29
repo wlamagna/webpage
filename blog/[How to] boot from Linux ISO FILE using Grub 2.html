@@ -8,6 +8,17 @@
 window.parent.document.title = "[How to] boot from Linux ISO FILE using Grub 2";
 </script>
 <div id="section">
+
+
+
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="7HY2N4VFEWYCL">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+¿ Te sirvió la data ? ¿ Te pareció interesante ? Con tu aporte puedo continuar. <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+<hr>
 <p id="postTitle"><a href="%5BHow%20to%5D%20boot%20from%20Linux%20ISO%20FILE%20using%20Grub%202.html" id="alink">[How to] boot from Linux ISO FILE using Grub 2</a></p>
  Edit <b>/etc/grub.d/40_custom</b> and add the below entry<br /><br /><div style="font-family: &quot;Courier New&quot;,Courier,monospace;">menuentry &quot;Karmic Live CD (sdaX)&quot; {<br /></div><div style="font-family: &quot;Courier New&quot;,Courier,monospace;">loopback loop (hd0,X)/my-ISO/ubuntu-9.10-desktop-i386.iso<br /></div><div class="para" style="font-family: &quot;Courier New&quot;,Courier,monospace;">linux (loop)/casper/vmlinuz boot=casper iso-scan/filename=/my-ISO/ubuntu-9.10-de<wbr />sktop-i386.iso<br /> initrd (loop)/casper/initrd.lz<br /> }<br /></div><div class="para"><br /></div><div class="para"><b style="font-family: Arial,Helvetica,sans-serif;"><a href="#">Keep reading</a></b><br /></div><div style="clear: both;"></div>
 <b>Published: Wednesday, December 02, 2009</b>

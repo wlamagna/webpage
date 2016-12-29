@@ -8,6 +8,17 @@
 window.parent.document.title = "cannot get shared lock on database";
 </script>
 <div id="section">
+
+
+
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="7HY2N4VFEWYCL">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+¿ Te sirvió la data ? ¿ Te pareció interesante ? Con tu aporte puedo continuar. <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+<hr>
 <p id="postTitle"><a href="cannot%20get%20shared%20lock%20on%20database.html" id="alink">cannot get shared lock on database</a></p>
  To resolve this i had to look which were the process taking the database:<br /><br /><div style="font-family: &quot;Courier New&quot;,Courier,monospace;">lsof | grep /var/lib/rpm/packages.rpm<br /></div><br /> And then killed it with the SIGKILL signal. <div style="clear: both;"></div>
 <b>Published: Monday, October 26, 2009</b>

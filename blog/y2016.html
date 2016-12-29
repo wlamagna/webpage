@@ -8,6 +8,427 @@
 window.parent.document.title = "Year 2016";
 </script>
 <div id="section">
+
+
+
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="7HY2N4VFEWYCL">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+¿ Te sirvió la data ? ¿ Te pareció interesante ? Con tu aporte puedo continuar. <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+<hr>
+<p id="postTitle"><a href="Hackeando%20el%20DHCP%20en%20la%20red.html" id="alink">Hackeando el DHCP en la red</a></p>
+
+Para bien o para mal, en casa tengo un proveedor de televisión por cable.  Es el servicio
+tradicional donde llega un cable coaxial y se conecta al televisor.  Hace unos pocos dias
+vinieron e instalaron un Decodificador, es un dispositivo que se conecta entre el cable
+coaxial y la tele permitiendo ver señales digitales con mejor calidad, también incluye un
+software con Youtube y aplicaciones para mirar televisión por Internet.<br /><br />
+
+<b>El problema</b>: Este decodificador se conecta a la red LAN de la casa, pero no permite
+configurarle una dirección IP estática, la única manera es que obtenga una IP, dirección
+de máscara de red y servidores 
+de resolución de nombres por <a href="https://www.ietf.org/rfc/rfc2131.txt">DHCP</a>.
+<br /><br />
+
+El verdadero problema es que me tomo muy en serio todo lo que permito y no permito
+en mi red hogareña, cada servicio nuevo es algo que me preocupa.  Quería evitar tener
+que instalar un servidor de DHCP, claramente está deshabilitado el DHCP en mi servidor
+wifi por que hago funcionar a las máquinas con IP estática (hasta ahora).<br /><br />
+
+<u>¿ Cómo evitar instalar un servidor de DHCP y hacer funcionar el decodificador que necesita
+una IP ?  No hacerlo funcionar no es una opción.</u>
+<br />
+<b>Solucion:</b> Crear un servidor DHCP minimalista de menos de 200 lineas, 
+un script en lo posible, bien simple de levantar y cerrar y poder controlar que IP asigno
+a cada estación.<br /><br />
+
+
+En el RFC se describe el funcionamiento de este protocolo, un gráfico muy claro es este, nos
+va a servir luego para revisar el funcionamiento del programa.<br />
+
+<pre>
+
+
+                Server          Client          Server
+            (not selected)                    (selected)
+
+                  v               v               v
+                  |               |               |
+                  |     Begins initialization     |
+                  |               |               |
+                  | _____________/|\____________  |
+                  |/DHCPDISCOVER | DHCPDISCOVER  \|
+                  |               |               |
+              Determines          |          Determines
+             configuration        |         configuration
+                  |               |               |
+                  |\             |  ____________/ |
+                  | \________    | /DHCPOFFER     |
+                  | DHCPOFFER\   |/               |
+                  |           \  |                |
+                  |       Collects replies        |
+                  |             \|                |
+                  |     Selects configuration     |
+                  |               |               |
+                  | _____________/|\____________  |
+                  |/ DHCPREQUEST  |  DHCPREQUEST\ |
+                  |               |               |
+                  |               |     Commits configuration
+                  |               |               |
+                  |               | _____________/|
+                  |               |/ DHCPACK      |
+                  |               |               |
+                  |    Initialization complete    |
+                  |               |               |
+                  .               .               .
+                  .               .               .
+                  |               |               |
+                  |      Graceful shutdown        |
+                  |               |               |
+                  |               |\ ____________ |
+                  |               | DHCPRELEASE  \|
+                  |               |               |
+                  |               |        Discards lease
+                  |               |               |
+                  v               v               v
+     Figure 3: Timeline diagram of messages exchanged between DHCP
+               client and servers when allocating a new network address
+
+</pre>
+
+<br />
+
+
+
+
+Script server:<br />
+<pre>
+#!/usr/bin/perl
+use strict;
+
+use IO::Socket;
+use Net::DHCP::Packet;
+use Net::DHCP::Constants;
+
+######## La ip del server:
+my $server_ip = "10.10.10.176";
+my $gateway = "10.10.10.1";
+my $dnserver = "8.8.8.8";
+my $subnet_mask = "255.255.255.255";
+
+my %mac_a_ip = ();
+
+# Decodificador
+$mac_a_ip{"b0b88f232fc900000000000000000000"} = "10.10.10.4";
+# VM 
+$mac_a_ip{"080997ddbbf100000000000000000000"} = "10.10.10.5";
+
+my $socket_in = IO::Socket::INET->new(
+	LocalPort => 67,
+	LocalAddr => "255.255.255.255",
+	Proto    => 'udp') or die $@;
+
+while(1) {
+	my $buf;
+	print "Waiting...";
+	$socket_in->recv($buf,4096);
+	my $packet = new Net::DHCP::Packet($buf);
+	my $messagetype = $packet->getOptionValue(DHO_DHCP_MESSAGE_TYPE());
+	print "Received:\n";
+	print $packet->toString();
+
+	if ($messagetype eq DHCPDISCOVER()) {
+		send_offer($packet);
+	} elsif ($messagetype eq DHCPREQUEST()) {
+		$packet->comment(1);
+		send_ack($packet);
+	}
+}
+
+sub send_offer {
+	my($request)=@_;
+	print "-------- Envio mi oferta ---------\n";
+	my $which_machine = $request->chaddr;
+	my $client_ip = $mac_a_ip{"$which_machine"};
+	print "A $which_machine Ofrezco IP: $client_ip [Servidor: $server_ip:67]\n";
+	my $socket_out = IO::Socket::INET->new(
+		PeerPort => 68,
+		PeerAddr => "255.255.255.255",
+		LocalAddr => "$server_ip:67",
+		Broadcast => 1,
+		Proto    => 'udp') or die $@;
+
+	my $offer = new Net::DHCP::Packet(
+                                     Op => BOOTREPLY(),
+                                     Xid => $request->xid(),
+                                     Flags => $request->flags(),
+                                     Ciaddr => $request->ciaddr(),
+                                     Yiaddr => $client_ip,
+                                     Siaddr => $server_ip,
+                                     Giaddr => $request->giaddr(),
+                                     Chaddr => $request->chaddr(),
+                                     DHO_DHCP_MESSAGE_TYPE() => DHCPOFFER(),
+                                   );
+	$offer->addOptionValue(DHO_DHCP_LEASE_TIME, 84600);
+	$offer->addOptionValue(DHO_DOMAIN_NAME_SERVERS, $dnserver);
+	$offer->addOptionValue(DHO_ROUTERS, $gateway);
+	$offer->addOptionValue(DHO_SUBNET_MASK(), $subnet_mask);
+	$offer->addOptionValue(DHO_NAME_SERVERS, $server_ip);
+	$offer->addOptionValue(DHO_DHCP_LEASE_TIME, 100);
+	print $offer->toString();
+	$socket_out->send($offer->serialize()) or die $!;
+}
+
+sub send_ack {
+	my ($request) = @_;
+	print "-------- Envio ACK ---------\n";
+	my $which_machine = $request->chaddr;
+	my $client_ip = $mac_a_ip{"$which_machine"};
+	print "A $which_machine ACK de IP: $client_ip [Servidor: $server_ip:67]\n";
+	my $socket_out = IO::Socket::INET->new(
+		PeerPort => 68,
+		PeerAddr => "255.255.255.255",
+		LocalAddr => "$server_ip:67",
+		Broadcast => 1,
+		Proto    => 'udp') or die $@;
+
+	$request = Net::DHCP::Packet->new(
+            Comment                 => $request->comment(),
+            Op                      => BOOTREPLY(),
+            Hops                    => $request->hops(),
+            Xid                     => $request->xid(),
+            Flags                   => $request->flags(),
+            Ciaddr                  => $request->ciaddr(),
+            Yiaddr                  => $client_ip,
+            Siaddr                  => $request->siaddr(),
+            Giaddr                  => $request->giaddr(),
+            Chaddr                  => $request->chaddr(),
+            DHO_DHCP_MESSAGE_TYPE() => DHCPACK(),
+        );
+
+	$request->addOptionValue(DHO_DHCP_LEASE_TIME, 84600);
+	$request->addOptionValue(DHO_DOMAIN_NAME_SERVERS, $dnserver);
+	$request->addOptionValue(DHO_SUBNET_MASK(), $subnet_mask);
+	$request->addOptionValue(DHO_ROUTERS, $gateway);
+	$socket_out->send($request->serialize()) or die $!;
+	print STDERR "send ack\n";
+}
+
+</pre>
+<br /><br />
+Ahora revisando el funcionamiento del programa:
+<br /><br />
+Ejecutamos el servidorcito dhcpd.pl<br />
+
+<pre>
+Waiting...Received:
+op = BOOTREQUEST
+htype = HTYPE_ETHER
+hlen = 6
+hops = 0
+xid = 829e755
+secs = 2816
+flags = 0
+ciaddr = 10.10.10.55
+yiaddr = 0.0.0.0
+siaddr = 0.0.0.0
+giaddr = 0.0.0.0
+chaddr = 080027ddbbf1
+sname = 
+file = 
+Options : 
+ DHO_DHCP_MESSAGE_TYPE(53) = DHCPRELEASE
+ DHO_DHCP_SERVER_IDENTIFIER(54) = 255.255.255.255
+ DHO_DHCP_CLIENT_IDENTIFIER(61) = \x01\x08\x00'\xDD\xBB\xF1
+padding [41] = 0000000000000000000000000000000000000000000000000000000000000000000000000000000000
+Waiting...Received:
+op = BOOTREQUEST
+htype = HTYPE_ETHER
+hlen = 6
+hops = 0
+xid = f32fb34e
+secs = 0
+flags = 8000
+ciaddr = 0.0.0.0
+yiaddr = 0.0.0.0
+siaddr = 0.0.0.0
+giaddr = 0.0.0.0
+chaddr = 080027ddbbf1
+sname = 
+file = 
+Options : 
+ DHO_DHCP_MESSAGE_TYPE(53) = DHCPDISCOVER
+ DHO_DHCP_CLIENT_IDENTIFIER(61) = \x01\x08\x00'\xDD\xBB\xF1
+ DHO_DHCP_REQUESTED_ADDRESS(50) = 10.10.10.55
+ DHO_HOST_NAME(12) = IBM620-0
+ DHO_VENDOR_CLASS_IDENTIFIER(60) = MSFT 5.0
+ DHO_DHCP_PARAMETER_REQUEST_LIST(55) = 1 15 3 6 44 46 47 31 33 121 249 43
+padding [7] = 00000000000000
+</pre>
+
+<br />
+Aca le envio la IP ofrecida, por la MAC en el script se programa una IP.
+<br />
+
+<pre>
+-------- Envio mi oferta ---------
+A 080027ddbbf100000000000000000000 Ofrezco IP: 10.10.10.55 [Servidor: 10.10.10.176:67]
+op = BOOTREPLY
+htype = HTYPE_ETHER
+hlen = 6
+hops = 0
+xid = f32fb34e
+secs = 0
+flags = 8000
+ciaddr = 0.0.0.0
+yiaddr = 10.10.10.55
+siaddr = 10.10.10.176
+giaddr = 0.0.0.0
+chaddr = 080027ddbbf1
+sname = 
+file = 
+Options : 
+ DHO_DHCP_MESSAGE_TYPE(53) = DHCPOFFER
+ DHO_DHCP_LEASE_TIME(51) = 100
+ DHO_DOMAIN_NAME_SERVERS(6) = 8.8.8.8
+ DHO_ROUTERS(3) = 10.10.10.1
+ DHO_SUBNET_MASK(1) = 255.255.255.255
+ DHO_NAME_SERVERS(5) = 10.10.10.176
+ DHO_DHCP_LEASE_TIME(51) = 100
+padding [0] = 
+Waiting...Received:
+op = BOOTREQUEST
+htype = HTYPE_ETHER
+hlen = 6
+hops = 0
+xid = f32fb34e
+secs = 0
+flags = 8000
+ciaddr = 0.0.0.0
+yiaddr = 0.0.0.0
+siaddr = 0.0.0.0
+giaddr = 0.0.0.0
+chaddr = 080027ddbbf1
+sname = 
+file = 
+Options : 
+ DHO_DHCP_MESSAGE_TYPE(53) = DHCPREQUEST
+ DHO_DHCP_CLIENT_IDENTIFIER(61) = \x01\x08\x00'\xDD\xBB\xF1
+ DHO_DHCP_REQUESTED_ADDRESS(50) = 10.10.10.55
+ DHO_HOST_NAME(12) = IBM620-0
+ DHO_FQDN(81) = \x00\x00\x00IBM620-0
+ DHO_VENDOR_CLASS_IDENTIFIER(60) = MSFT 5.0
+ DHO_DHCP_PARAMETER_REQUEST_LIST(55) = 1 15 3 6 44 46 47 31 33 121 249 43
+padding [0] = 
+</pre>
+
+<br />
+Aca se le envia un "ACK" para finalizar la transacción.
+<br />
+<br />
+<pre>
+-------- Envio ACK ---------
+A 080027ddbbf100000000000000000000 ACK de IP: 10.10.10.55 [Servidor: 10.10.10.176:67]
+send ack
+Waiting...Received:
+op = BOOTREQUEST
+htype = HTYPE_ETHER
+hlen = 6
+hops = 0
+xid = 1973a052
+secs = 0
+flags = 8000
+ciaddr = 10.10.10.55
+yiaddr = 0.0.0.0
+siaddr = 0.0.0.0
+giaddr = 0.0.0.0
+chaddr = 080027ddbbf1
+sname = 
+file = 
+Options : 
+ DHO_DHCP_MESSAGE_TYPE(53) = DHCPINFORM
+ DHO_DHCP_CLIENT_IDENTIFIER(61) = \x01\x08\x00'\xDD\xBB\xF1
+ DHO_HOST_NAME(12) = IBM620-0
+ DHO_VENDOR_CLASS_IDENTIFIER(60) = MSFT 5.0
+ DHO_DHCP_PARAMETER_REQUEST_LIST(55) = 1 15 3 6 44 46 47 31 33 121 249 43 252
+padding [12] = 000000000000000000000000
+Waiting...Received:
+op = BOOTREQUEST
+htype = HTYPE_ETHER
+hlen = 6
+hops = 0
+xid = 1973a052
+secs = 768
+flags = 8000
+ciaddr = 10.10.10.55
+yiaddr = 0.0.0.0
+siaddr = 0.0.0.0
+giaddr = 0.0.0.0
+chaddr = 080027ddbbf1
+sname = 
+file = 
+Options : 
+ DHO_DHCP_MESSAGE_TYPE(53) = DHCPINFORM
+ DHO_DHCP_CLIENT_IDENTIFIER(61) = \x01\x08\x00'\xDD\xBB\xF1
+ DHO_HOST_NAME(12) = IBM620-0
+ DHO_VENDOR_CLASS_IDENTIFIER(60) = MSFT 5.0
+ DHO_DHCP_PARAMETER_REQUEST_LIST(55) = 1 15 3 6 44 46 47 31 33 121 249 43 252
+padding [12] = 000000000000000000000000
+</pre>
+<br />
+
+<a href="https://github.com/walt3rminer/perl/tree/master/dhcpserver">Fuente de este post</a><br />
+
+
+<b>Published: Thursday, December 29, 2016</b>
+<a href="tag_security">security</a>&nbsp;<a href="tag_linux">linux</a>&nbsp;<a href="tag_perl">perl</a>&nbsp;
+</div>
+
+<hr>
+<div id="section">
+
+
+
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="7HY2N4VFEWYCL">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+¿ Te sirvió la data ? ¿ Te pareció interesante ? Con tu aporte puedo continuar. <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+<hr>
+<p id="postTitle"><a href="Tirando%20el%20blog%20por%20la%20ventana.html" id="alink">Tirando el blog por la ventana</a></p>
+
+<b>Recalculando</b><br />
+Llegó ese momento en el que uno hace click.  Años escribiendo en inglés y porqué ?
+Es hora de revisar premisas y sofismas.
+<br /><br />
+Este año incluyo un ícono para donaciones, también acepto hardware en lo posible
+que funcione como notebooks ó dispositivos de almacenamiento.<br /><br />
+<b>Bienvenidos.</b>
+<br />
+
+
+<b>Published: Tuesday, December 27, 2016</b>
+<a href="tag_security">security</a>&nbsp;<a href="tag_datamining">datamining</a>&nbsp;<a href="tag_apache">apache</a>&nbsp;<a href="tag_linux">linux</a>&nbsp;<a href="tag_privacy">privacy</a>&nbsp;
+</div>
+
+<hr>
+<div id="section">
+
+
+
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="7HY2N4VFEWYCL">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+¿ Te sirvió la data ? ¿ Te pareció interesante ? Con tu aporte puedo continuar. <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+<hr>
 <p id="postTitle"><a href="Analizando%20datos%20abiertos%20de%20peajes%20AUSA%20en%20autopistas.html" id="alink">Analizando datos abiertos de peajes AUSA en autopistas</a></p>
 
 <b>This article is in spanish because the open data obtained is from Argentina</b><br /><br />
@@ -283,153 +704,23 @@ text(x=tlab, y=par()$usr[3]-.14*(par()$usr[4]),labels=lab, adj=1, xpd=TRUE, cex=
 <br />
 
 
-<b>Published: Friday, December 15, 2016</b>
+<b>Published: Thursday, December 15, 2016</b>
 <a href="tag_datamining">datamining</a>&nbsp;
 </div>
 
 <hr>
 <div id="section">
-<p id="postTitle"><a href="Check%20the%20battery%20power%20from%20command%20line%20on%20linux.html" id="alink">Check the battery power from command line on linux</a></p>
-
-<br />
-<pre>
-fallocate -l 4G diskimagefile.img
-</pre>
-<br /><br />
 
 
-<pre>
-cryptsetup -y -v luksFormat diskimagefile.img
 
-WARNING!
-========
-This will overwrite data on diskimagefile.img irrevocably.
-
-Are you sure? (Type uppercase yes): YES
-Enter passphrase: 
-Verify passphrase: 
-Command successful.
-</pre>
-<br /><br />
-
-Mount the virtual device that manages:
-<pre>
-cryptsetup luksOpen diskimagefile.img backup1
-</pre>
-
-<br /><br />
-
-If you have not done it yet, and it is a new disk, you can give the
-disk a format:
-<br />
-<pre>
-mkfs.ext3 /dev/mapper/backup1
-</pre>
-
-Mount:
-<pre>
-mount /dev/mapper/backup1 /mnt/secure
-</pre>
-
-Modify the password:
-<pre>
-sudo cryptsetup luksChangeKey diskimagefile.img
-Enter passphrase to be changed: 
-Enter new passphrase: 
-Verify passphrase: 
-</pre>
-
-Unmount and close the secure disk:<br />
-<pre>
-umount /mnt/secure
-cryptsetup luksClose backup1
-</pre>
-
-
- 
-<b>Published: Friday, December 09, 2016</b>
-<a href="tag_admin">admin</a>&nbsp;
-</div>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="7HY2N4VFEWYCL">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+¿ Te sirvió la data ? ¿ Te pareció interesante ? Con tu aporte puedo continuar. <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
 
 <hr>
-<div id="section">
-<p id="postTitle"><a href="Compile%20keepass%202.0.3%20on%20Linux.html" id="alink">Compile keepass 2.0.3 on Linux</a></p>
-
-KeepassX is a graphical password management system, the webpage is <a href="https://www.keepassx.org/" target="_new">www.keepassx.org</a>
-<br />
-KeepassX webpage states: "KeePassX is an application for people with extremly high demands on secure personal data management. It has a light interface, is cross platform and published under the terms of the GNU General Public License."<br /><br />
-These steps have been executed on a Debian 
-Linux 8.6.0 but for an experienced System 
-Administrator/Hacker this should be trivial.<br /><br />
-You can look at older related posts:<br />
-<ul>
-<li><a href="Compile%20keepass%200.4.3%20on%20Debian%20Linux%20wheezy.html">how to install KeepassX 0.4.3</a></li>
-<li><a href="http://www.wallves.com/blog/Compile%20keepass%202.0.2%20on%20Debian%20Linux%20Jeesie.html">how to install KeepassX 2.0.2</a></li>
-</ul><br />
-
-First you should have these packages installed:<br />
-<pre>
-apt-get install cmake g++ libqt4-core libqt4-dev libgcrypt-dev zlib1g zlib1g-dev
-
-</pre>
-<br />
-Now you can download the latest keepassX package and compile it:<br />
-<pre>
-wget https://www.keepassx.org/releases/2.0.3/keepassx-2.0.3.tar.gz
-tar zxvf keepassx-2.0.3.tar.gz
-cd keepassx-2.0.3/
-mkdir build
-cd build
-cmake -DCMAKE_INSTALL_PREFIX=/usr/local ..
-</pre>
-<br />As root:<br />
-<pre>
-make install
-</pre>
-<br />
-
-Now you could for example, add the access on a fluxbox window manager:
-
-
-<br />
-It works.<br />
-<img src="images/keepass3.png" />
-<br />
- 
-<b>Published: Saturday, December 09, 2016</b>
-<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;
-</div>
-
-<hr>
-<div id="section">
-<p id="postTitle"><a href="Check%20the%20battery%20power%20from%20command%20line%20on%20linux.html" id="alink">Check the battery power from command line on linux</a></p>
-
-If you want to check from a script the state from the battery on the linux operating
-system, it is as easy as looking this file:
-<br /><br />
-<pre>
-cat /sys/class/power_supply/BAT0/capacity_level
-Normal
-</pre>
-
-<br />
-And this file gives the percentage of charge, in this example 97%:
-<br /><br />
-<pre>
-cat /sys/class/power_supply/BAT0/capacity
-97
-</pre>
-
-<br />
-
-
- 
-<b>Published: Friday, December 09, 2016</b>
-<a href="tag_admin">admin</a>&nbsp;
-</div>
-
-<hr>
-<div id="section">
 <p id="postTitle"><a href="An%20additional%20LCD%20notebook%20monitor.html" id="alink">An additional LCD notebook monitor</a></p>
 
 Once i had a notebook, it was red, lenovo, z80... rest in peace.  One day, after using
@@ -494,12 +785,197 @@ fi;
 
 
  
-<b>Published: Saturday, December 09, 2016</b>
+<b>Published: Friday, December 09, 2016</b>
 <a href="tag_admin">admin</a>&nbsp;
 </div>
 
 <hr>
 <div id="section">
+
+
+
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="7HY2N4VFEWYCL">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+¿ Te sirvió la data ? ¿ Te pareció interesante ? Con tu aporte puedo continuar. <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+<hr>
+<p id="postTitle"><a href="Check%20the%20battery%20power%20from%20command%20line%20on%20linux.html" id="alink">Check the battery power from command line on linux</a></p>
+
+<br />
+<pre>
+fallocate -l 4G diskimagefile.img
+</pre>
+<br /><br />
+
+
+<pre>
+cryptsetup -y -v luksFormat diskimagefile.img
+
+WARNING!
+========
+This will overwrite data on diskimagefile.img irrevocably.
+
+Are you sure? (Type uppercase yes): YES
+Enter passphrase: 
+Verify passphrase: 
+Command successful.
+</pre>
+<br /><br />
+
+Mount the virtual device that manages:
+<pre>
+cryptsetup luksOpen diskimagefile.img backup1
+</pre>
+
+<br /><br />
+
+If you have not done it yet, and it is a new disk, you can give the
+disk a format:
+<br />
+<pre>
+mkfs.ext3 /dev/mapper/backup1
+</pre>
+
+Mount:
+<pre>
+mount /dev/mapper/backup1 /mnt/secure
+</pre>
+
+Modify the password:
+<pre>
+sudo cryptsetup luksChangeKey diskimagefile.img
+Enter passphrase to be changed: 
+Enter new passphrase: 
+Verify passphrase: 
+</pre>
+
+Unmount and close the secure disk:<br />
+<pre>
+umount /mnt/secure
+cryptsetup luksClose backup1
+</pre>
+
+
+ 
+<b>Published: Friday, December 09, 2016</b>
+<a href="tag_admin">admin</a>&nbsp;
+</div>
+
+<hr>
+<div id="section">
+
+
+
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="7HY2N4VFEWYCL">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+¿ Te sirvió la data ? ¿ Te pareció interesante ? Con tu aporte puedo continuar. <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+<hr>
+<p id="postTitle"><a href="Compile%20keepass%202.0.3%20on%20Linux.html" id="alink">Compile keepass 2.0.3 on Linux</a></p>
+
+KeepassX is a graphical password management system, the webpage is <a href="https://www.keepassx.org/" target="_new">www.keepassx.org</a>
+<br />
+KeepassX webpage states: "KeePassX is an application for people with extremly high demands on secure personal data management. It has a light interface, is cross platform and published under the terms of the GNU General Public License."<br /><br />
+These steps have been executed on a Debian 
+Linux 8.6.0 but for an experienced System 
+Administrator/Hacker this should be trivial.<br /><br />
+You can look at older related posts:<br />
+<ul>
+<li><a href="Compile%20keepass%200.4.3%20on%20Debian%20Linux%20wheezy.html">how to install KeepassX 0.4.3</a></li>
+<li><a href="http://www.wallves.com/blog/Compile%20keepass%202.0.2%20on%20Debian%20Linux%20Jeesie.html">how to install KeepassX 2.0.2</a></li>
+</ul><br />
+
+First you should have these packages installed:<br />
+<pre>
+apt-get install cmake g++ libqt4-core libqt4-dev libgcrypt-dev zlib1g zlib1g-dev
+
+</pre>
+<br />
+Now you can download the latest keepassX package and compile it:<br />
+<pre>
+wget https://www.keepassx.org/releases/2.0.3/keepassx-2.0.3.tar.gz
+tar zxvf keepassx-2.0.3.tar.gz
+cd keepassx-2.0.3/
+mkdir build
+cd build
+cmake -DCMAKE_INSTALL_PREFIX=/usr/local ..
+</pre>
+<br />As root:<br />
+<pre>
+make install
+</pre>
+<br />
+
+Now you could for example, add the access on a fluxbox window manager:
+
+
+<br />
+It works.<br />
+<img src="images/keepass3.png" />
+<br />
+ 
+<b>Published: Friday, December 09, 2016</b>
+<a href="tag_admin">admin</a>&nbsp;<a href="tag_security">security</a>&nbsp;
+</div>
+
+<hr>
+<div id="section">
+
+
+
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="7HY2N4VFEWYCL">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+¿ Te sirvió la data ? ¿ Te pareció interesante ? Con tu aporte puedo continuar. <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+<hr>
+<p id="postTitle"><a href="Check%20the%20battery%20power%20from%20command%20line%20on%20linux.html" id="alink">Check the battery power from command line on linux</a></p>
+
+If you want to check from a script the state from the battery on the linux operating
+system, it is as easy as looking this file:
+<br /><br />
+<pre>
+cat /sys/class/power_supply/BAT0/capacity_level
+Normal
+</pre>
+
+<br />
+And this file gives the percentage of charge, in this example 97%:
+<br /><br />
+<pre>
+cat /sys/class/power_supply/BAT0/capacity
+97
+</pre>
+
+<br />
+
+
+ 
+<b>Published: Friday, December 09, 2016</b>
+<a href="tag_admin">admin</a>&nbsp;
+</div>
+
+<hr>
+<div id="section">
+
+
+
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="7HY2N4VFEWYCL">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+¿ Te sirvió la data ? ¿ Te pareció interesante ? Con tu aporte puedo continuar. <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+<hr>
 <p id="postTitle"><a href="Installing%20tor%20on%20linux.html" id="alink">Installing tor on linux</a></p>
 
 Obtain the download link from the <a href="https://www.torproject.org/download/download.html.en">
@@ -527,6 +1003,17 @@ cp src/or/config/torrc /usr/local/etc/tor/
 
 <hr>
 <div id="section">
+
+
+
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="7HY2N4VFEWYCL">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+¿ Te sirvió la data ? ¿ Te pareció interesante ? Con tu aporte puedo continuar. <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+<hr>
 <p id="postTitle"><a href="Installing%20latex%20with%20some%20usefull%20complements%20in%20Debian%20Linux.html" id="alink">Installing latex with some usefull complements in Debian Linux</a></p>
 <pre>
 apt-get install texlive texlive-math-extra texlive-science
@@ -543,38 +1030,17 @@ apt-get install texlive-latex-extra
 
 <hr>
 <div id="section">
-<p id="postTitle"><a href="Unziping%20large%20files%20in%20linux%20copied%20from%20windows.html" id="alink">Unziping large files in linux copied from windows</a></p>
 
-In Windows 7 i created a large ZIP file (around 15 Gigas). I wanted to
-move it to a linux machine and unzip it there.  But once in the linux 
-machine, it produced this error:
 
-<pre>
-unzip Windows\ 7\ Clone.zip                          
-Archive:  Windows 7 Clone.zip
-warning [Windows 7 Clone.zip]:  15415149290 extra bytes at beginning or within zipfile
-  (attempting to process anyway)
-error [Windows 7 Clone.zip]:  start of central directory not found;
-  zipfile corrupt.
-  (please check that you have transferred or created the zipfile in the
-  appropriate BINARY mode and that you have compiled UnZip properly)
-</pre>
-After trying some things i resolved it like this:<br />
-<pre>
-7za x Windows\ 7\ Clone.zip
-7-Zip (A) [64] 9.20  Copyright (c) 1999-2010 Igor Pavlov  2010-11-18
-p7zip Version 9.20 (locale=en_US.UTF-8,Utf16=on,HugeFiles=on,4 CPUs)
-Processing archive: Windows 7 Clone.zip
-Extracting  Windows 7 Clone/Windows 7 Clone.vbox
-</pre>
 
-<div style="clear: both;"></div>
-<b>Published: Thursday, August 25, 2016</b>
-<a href="tag_admin">admin</a>&nbsp;
-</div>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="7HY2N4VFEWYCL">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+¿ Te sirvió la data ? ¿ Te pareció interesante ? Con tu aporte puedo continuar. <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
 
 <hr>
-<div id="section">
 <p id="postTitle"><a href="Installing%20Apache%20from%20scratch.html" id="alink">Installing Apache from scratch</a></p>
 
 <u>1) A required library:</u><br />
@@ -610,48 +1076,60 @@ make
 
 <hr>
 <div id="section">
-<p id="postTitle"><a href="Headless%20Linux%20Server%20with%20X%20Fluxbox%20and%20Lightdm.html" id="alink">Headless Linux Server with X Fluxbox and Lightdm</a></p>
 
-Hi, here is a very short list telling about how you can have
-very easily a server withoug a monitor connected and manage it
-with just few resources... a short post but without waste!<br /><br />
 
-<b>Install headless lightdm with fluxbox and vnc</b><br />
+
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="7HY2N4VFEWYCL">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+¿ Te sirvió la data ? ¿ Te pareció interesante ? Con tu aporte puedo continuar. <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+<hr>
+<p id="postTitle"><a href="Unziping%20large%20files%20in%20linux%20copied%20from%20windows.html" id="alink">Unziping large files in linux copied from windows</a></p>
+
+In Windows 7 i created a large ZIP file (around 15 Gigas). I wanted to
+move it to a linux machine and unzip it there.  But once in the linux 
+machine, it produced this error:
+
 <pre>
-apt-get install lightdm
-apt-get install fluxbox
-apt-get install x11vnc
-apt-get install xvfb
-apt-get remove xserver-xorg-video*
+unzip Windows\ 7\ Clone.zip                          
+Archive:  Windows 7 Clone.zip
+warning [Windows 7 Clone.zip]:  15415149290 extra bytes at beginning or within zipfile
+  (attempting to process anyway)
+error [Windows 7 Clone.zip]:  start of central directory not found;
+  zipfile corrupt.
+  (please check that you have transferred or created the zipfile in the
+  appropriate BINARY mode and that you have compiled UnZip properly)
+</pre>
+After trying some things i resolved it like this:<br />
+<pre>
+7za x Windows\ 7\ Clone.zip
+7-Zip (A) [64] 9.20  Copyright (c) 1999-2010 Igor Pavlov  2010-11-18
+p7zip Version 9.20 (locale=en_US.UTF-8,Utf16=on,HugeFiles=on,4 CPUs)
+Processing archive: Windows 7 Clone.zip
+Extracting  Windows 7 Clone/Windows 7 Clone.vbox
 </pre>
 
-Now, you setup the SSH Server and connect creating a tunnel.<br /><br />
-
-Once connected, in the Headless Server you type:
-<br /><br />
-<pre>
-x11vnc -localhost -create -env FD_PROG=/usr/bin/fluxbox \
-        -env X11VNC_FINDDISPLAY_ALWAYS_FAILS=1 \
-        -env X11VNC_CREATE_GEOM=${1:-1024x768x16} \
-        -gone 'killall Xvfb' \
-        -bg -nopw
-</pre>
-<br />
-And once the vnc server starts, you connect from your client through
-a tunnel.<br /><br />
-<pre>
-vncviewer localhost:5900
-</pre>
-
-These steps have worked in Debian 8.0 Jessie.
-<br />
- 
-<b>Published: Thuesday, February 23, 2016</b>
-<a href="tag_headless">headless</a>&nbsp;<a href="tag_fluxbox">fluxbox</a>&nbsp;<a href="tag_lightdm">lightdm</a>&nbsp;
+<div style="clear: both;"></div>
+<b>Published: Thursday, August 25, 2016</b>
+<a href="tag_admin">admin</a>&nbsp;
 </div>
 
 <hr>
 <div id="section">
+
+
+
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="7HY2N4VFEWYCL">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+¿ Te sirvió la data ? ¿ Te pareció interesante ? Con tu aporte puedo continuar. <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+<hr>
 <p id="postTitle"><a href="Installing%20Matlab%20R2013%208.01%20on%20Linux%20Headless%20Xvfb%20using%20lightdm%20and%20fluxbox.html" id="alink">Installing Matlab R2013 8.01 on Linux Headless Xvfb using lightdm and fluxbox</a></p>
 
 Good, you are a Matlab user like me, but.. why are you willing to install it on a 
@@ -757,12 +1235,76 @@ Finished
 
 
  
-<b>Published: Thuesday, February 23, 2016</b>
+<b>Published: Tuesday, February 23, 2016</b>
 <a href="tag_headless">headless</a>&nbsp;<a href="tag_lightdm">lightdm</a>&nbsp;<a href="tag_fluxbox">fluxbox</a>&nbsp;
 </div>
 
 <hr>
 <div id="section">
+
+
+
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="7HY2N4VFEWYCL">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+¿ Te sirvió la data ? ¿ Te pareció interesante ? Con tu aporte puedo continuar. <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+<hr>
+<p id="postTitle"><a href="Headless%20Linux%20Server%20with%20X%20Fluxbox%20and%20Lightdm.html" id="alink">Headless Linux Server with X Fluxbox and Lightdm</a></p>
+
+Hi, here is a very short list telling about how you can have
+very easily a server withoug a monitor connected and manage it
+with just few resources... a short post but without waste!<br /><br />
+
+<b>Install headless lightdm with fluxbox and vnc</b><br />
+<pre>
+apt-get install lightdm
+apt-get install fluxbox
+apt-get install x11vnc
+apt-get install xvfb
+apt-get remove xserver-xorg-video*
+</pre>
+
+Now, you setup the SSH Server and connect creating a tunnel.<br /><br />
+
+Once connected, in the Headless Server you type:
+<br /><br />
+<pre>
+x11vnc -localhost -create -env FD_PROG=/usr/bin/fluxbox \
+        -env X11VNC_FINDDISPLAY_ALWAYS_FAILS=1 \
+        -env X11VNC_CREATE_GEOM=${1:-1024x768x16} \
+        -gone 'killall Xvfb' \
+        -bg -nopw
+</pre>
+<br />
+And once the vnc server starts, you connect from your client through
+a tunnel.<br /><br />
+<pre>
+vncviewer localhost:5900
+</pre>
+
+These steps have worked in Debian 8.0 Jessie.
+<br />
+ 
+<b>Published: Tuesday, February 23, 2016</b>
+<a href="tag_headless">headless</a>&nbsp;<a href="tag_fluxbox">fluxbox</a>&nbsp;<a href="tag_lightdm">lightdm</a>&nbsp;
+</div>
+
+<hr>
+<div id="section">
+
+
+
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="7HY2N4VFEWYCL">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+¿ Te sirvió la data ? ¿ Te pareció interesante ? Con tu aporte puedo continuar. <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+<hr>
 <p id="postTitle"><a href="Compile%20keepass%202.0.2%20on%20Debian%20Linux%20Jeesie.html" id="alink">Compile keepass 2.0.2 on Debian Linux Jeesie</a></p>
 
 KeepassX webpage states: "KeePassX is an application for people with extremly high demands on secure personal data management. It has a light interface, is cross platform and published under the terms of the GNU General Public License."<br /><br />
@@ -802,6 +1344,17 @@ make install
 
 <hr>
 <div id="section">
+
+
+
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="7HY2N4VFEWYCL">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+¿ Te sirvió la data ? ¿ Te pareció interesante ? Con tu aporte puedo continuar. <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+<hr>
 <p id="postTitle"><a href="Install%20Libreoffice%20on%20Debian.html" id="alink">Install Libreoffice on Debian</a></p>
 
 Go to <a href="http://www.libreoffice.org/" target="_new">Libreoffice Webpage</a> and download

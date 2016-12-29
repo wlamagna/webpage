@@ -8,6 +8,17 @@
 window.parent.document.title = "How to resume a download in Linux";
 </script>
 <div id="section">
+
+
+
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="7HY2N4VFEWYCL">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+¿ Te sirvió la data ? ¿ Te pareció interesante ? Con tu aporte puedo continuar. <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+<hr>
 <p id="postTitle"><a href="How%20to%20resume%20a%20download%20in%20Linux.html" id="alink">How to resume a download in Linux</a></p>
  If you are downloading a large file, of several Gigas and your, or the orthers connection gets lost, and you think that you have to download it again from the beginning, dont worry, it is possible to resume the download with some tools.<br /><br />If the file is not so big, (less than 2 Gigas), you can use &quot;wget&quot;<br /><span style="font-size:85%;"><span style="font-family: courier new;"># wget -c ftp://user:password@ftp.serverlinux.blogspot.com/incoming/*</span></span><br /><br />But, as i said, you could be downloading the DVD from Solaris o Centos 5, in this cases wget it is not usefull because it has a limit of the file size. In this cases use Curl:<br /><br /><span style="font-size:85%;"><span style="font-family: courier new;"># curl -C - -O --disable-epsv -u user:password ftp://ftp.usf.edu/pub/centos/5.0/isos/x86_64/CentOS-5.0-x86_64-bin-DVD.iso</span><br /></span><br />Let your opinion ! ;-) <div style="clear: both;"></div>
 <b>Published: Wednesday, October 31, 2007</b>

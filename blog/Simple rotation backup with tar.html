@@ -8,6 +8,17 @@
 window.parent.document.title = "Simple rotation backup with tar";
 </script>
 <div id="section">
+
+
+
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="7HY2N4VFEWYCL">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+¿ Te sirvió la data ? ¿ Te pareció interesante ? Con tu aporte puedo continuar. <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+<hr>
 <p id="postTitle"><a href="Simple%20rotation%20backup%20with%20tar.html" id="alink">Simple rotation backup with tar</a></p>
  To do a simple backup in a few lines, that mantains a history of the past 7 days, you can use this simple script:<br /><br /><span style="font-size:85%;"><span style="font-family: courier new;">#!/bin/bash</span><br /><span style="font-family: courier new;"># fecha has a formated date</span><br /><span style="font-family: courier new;">fecha=`date +&quot;%d-%m-%Y&quot;`</span><br /><span style="font-family: courier new;"># Backup and gzip the directory</span><br /><span style="font-family: courier new;">tar zcvf /backups/trunk-$fecha.tgz /var/www/repository</span><br /><span style="font-family: courier new;"># Rotate the logs, delete older than 7 days</span><br /><span style="font-family: courier new;">find /backups/ -mtime +7 -exec rm {} \; </span></span><br /><br />You are invited to post your little, simple though usefull scripts. <div style="clear: both;"></div>
 <b>Published: Saturday, August 26, 2006</b>
