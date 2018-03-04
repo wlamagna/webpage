@@ -1,0 +1,3 @@
+[submodule "od/boletinoficial"]
+	path = od/boletinoficial
+	url = https://github.com/datoslibres/boletinoficial
