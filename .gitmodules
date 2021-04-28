@@ -1,3 +1,6 @@
 [submodule "od/boletinoficial"]
 	path = od/boletinoficial
 	url = https://github.com/datoslibres/boletinoficial
+[submodule "od/datamining"]
+	path = od/datamining
+	url = https://github.com/wlamagna/datamining
